@@ -1,0 +1,95 @@
+/**
+ *------------------------------------------------------------------------------
+ *	CSS	iCagenda - Global
+ *------------------------------------------------------------------------------
+ * @package     com_icagenda
+ * @copyright   Copyright (c)2012-2015 Cyril Rezé, Jooml!C - All rights reserved
+ *
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
+ * @author      Cyril Rezé (Lyr!C)
+ * @link        http://www.joomlic.com
+ *
+ * @version     3.3.3 2014-04-15
+ * @since       3.0
+ *------------------------------------------------------------------------------
+*/
+
+
+/**
+ *	GENERAL
+ **/
+
+/* Clear a div float */
+.ic-clearfix {
+	*zoom: 1;
+}
+.ic-clearfix:before,
+.ic-clearfix:after {
+	display: table;
+	content: "";
+	line-height: 0;
+}
+.ic-clearfix:after {
+	clear: both;
+}
+
+/* Fixed Known conflict Bootstrap/Google Maps (joomla 3.2) */
+.icagenda_map img {
+	max-width: none;
+}
+
+
+/**
+ *	ICONS
+ **/
+
+/* Hide old class used before in theme pack, to prevent double display of the back button */
+#icagenda .back {
+	display:none;
+}
+
+/* Style top buttons line (core file views/tmpl/event.php */
+.ic-top-buttons {
+	display: block;
+	height: 35px;
+}
+
+/* iCicon size 16px (approval) */
+.iCicon-16 {
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+}
+
+/* Approval Icon */
+.iCicon-16.approval {
+	background-image: url(../../../../media/com_icagenda/images/manager/approval_16.png);
+	background-position: -16px 0;
+}
+
+a div.iCicon-16.approval:hover {
+	background-image: url(../../../../media/com_icagenda/images/manager/approval_16.png);
+	background-position: 16px 0;
+}
+
+
+/*
+ * STYLES for classes not presents in Theme Pack files, but in iCagenda core files
+ */
+
+/** map autocomplete **/
+.ui-autocomplete {
+	background-color: white;
+	width: 300px;
+	border: 1px solid #cfcfcf;
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+/** calendar **/
+fieldset.adminform textarea.date {height: 130px; }
+#add {line-height: 28px; margin-left:145px;}
+table#dTable {width: 113px; border:1px solid #cdcec9;}
+table#dTable th {padding:5px;}
+table#dTable td {padding:5px;}
+#ui-datepicker-div{font-size:12px; padding:15px;}

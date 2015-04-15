@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/administrator/components/com_icagenda/models/fields">
+		<field
+			name="id"
+			type="text"
+			class="readonly"
+			label="JGLOBAL_FIELD_ID_LABEL"
+			description ="JGLOBAL_FIELD_ID_DESC"
+			size="10"
+			default="0"
+			readonly="true"
+		/>
+
+		<field
+			name="state"
+			type="list"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC"
+			class="span12 small"
+			filter="intval"
+			size="1"
+			default="1">
+				<option value="1">JPUBLISHED</option>
+				<option value="0">JUNPUBLISHED</option>
+		</field>
+
+		<field name="checked_out" type="hidden" filter="unset" />
+		<field name="checked_out_time" type="hidden" filter="unset" />
+
+		<field
+			name="userid"
+			type="user"
+			label="COM_ICAGENDA_REGISTRATION_USERID"
+			description =" "
+			size="10"
+			default="0"
+		/>
+
+		<!--field
+			name="itemid"
+			type="text"
+			label="ITEMID"
+			description =" "
+			size="10"
+			default="0"
+			readonly="true"
+		/-->
+
+		<field
+			name="eventid"
+			type="modal_evt"
+			label="ICEVENT"
+			description =" "
+			size="10"
+			default="0"
+			readonly="true"
+		/>
+
+		<field
+ 			name="name"
+ 			type="text"
+ 			label="COM_ICAGENDA_REGISTRATION_USER"
+			description=" "
+			size="30"
+			required="true"
+		/>
+
+		<field
+			name="email"
+			type="email"
+			size="30"
+			class="inputbox"
+			label="COM_ICAGENDA_REGISTRATION_EMAIL"
+			description=" "
+			filter="safehtml"
+		/>
+
+		<field
+			name="phone"
+			type="text"
+			size="30"
+			class="inputbox"
+			label="COM_ICAGENDA_REGISTRATION_PHONE"
+			description=" "
+			filter="safehtml"
+		/>
+
+		<field
+			name="date"
+			type="modal_evt_date"
+			size="30"
+			class="inputbox"
+			label="COM_ICAGENDA_REGISTRATION_DATE"
+			description=" "
+			filter="safehtml"
+		/>
+
+		<field
+			name="period"
+			type="radio"
+			class="btn-group"
+			default="0"
+			label="COM_ICAGENDA_REGISTRATION_ALL_DATES"
+			description=" "
+			labelclass="control-label"
+			>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+		</field>
+
+		<field
+			name="people"
+			type="text"
+			size="30"
+			class="inputbox input-mini"
+			label="COM_ICAGENDA_REGISTRATION_NUMBER_PLACES"
+			default="1"
+			description=" "
+			filter="safehtml"
+		/>
+
+		<field
+			name="notes"
+			type="editor"
+			buttons="readmore,pagebreak"
+			class="inputbox"
+			filter="JComponentHelper::filterText"
+			label="COM_ICAGENDA_REGISTRATION_NOTES_DISPLAY_LABEL"
+			description=" "
+		/>
+
+		<field
+			name="custom_fields"
+			type="hidden"
+			class="inputbox"
+			default=""
+		/>
+
+	</fieldset>
+</form>

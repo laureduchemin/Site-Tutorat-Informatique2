@@ -1,0 +1,75 @@
+/**
+ *------------------------------------------------------------------------------
+ *	CSS Backend - iCagenda v3 by Jooml!C
+ *------------------------------------------------------------------------------
+ * @package     com_icagenda
+ * @copyright   Copyright (c)2012-2015 Cyril Rezé, Jooml!C - All rights reserved
+ *
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
+ * @author      Cyril Rezé (Lyr!C)
+ * @link        http://www.joomlic.com
+ *
+ * @version 	3.5.0 2015-02-16
+ * @since       3.4.0
+ *------------------------------------------------------------------------------
+*/
+
+
+/* -- GOOGLE MAPS FIELDS ---------------------------- */
+.icmap-label {
+	float: left;
+	width: 140px;
+	padding-top: 5px;
+	padding-right: 5px;
+	text-align: left;
+}
+.icmap-field {
+	margin: 5px;
+}
+.form-validate .icmap-field input,
+.icagenda_form .icmap-field input {
+	background-color: #eee;
+/*	width: auto; */
+	color: #777;
+}
+
+/* -- FORM FIELD INVALID ---------------------------- */
+.ic-field-invalid label{
+/*	color: #9D261D; */
+	color: red !important;
+	font-weight: bold;
+}
+.ic-field-invalid input{
+	border: 1px solid red !important;
+}
+
+.ic-field-invalid-lbl{
+/*	color: #9D261D; */
+	color: red !important;
+	font-weight: bold;
+}
+.ic-field-invalid-input{
+	border: 1px solid red !important;
+}
+
+.ic-date-invalid {
+	color: red !important;
+}
+.ic-date-invalid input{
+	color: red !important;
+}
+
+/* -- ALERT MESSAGES AND NOTICES -------------------- */
+.ic-alert {
+	padding: 8px 14px 8px 14px;
+	margin-bottom: 18px;
+	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+	background-color: #FCF8E3;
+	border: 1px solid #FBEED5;
+	border-radius: 4px;
+}
+.ic-alert-note {
+    background-color: #FAFAFA;
+    border-color: #CCC;
+	color: #777;
+}

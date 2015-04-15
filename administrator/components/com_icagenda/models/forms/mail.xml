@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+
+       <field name="list" type="modal_mailinglist" size="40" class="inputbox"
+                 label="COM_ICAGENDA_FORM_LBL_NEWSLETTER_LIST" description="COM_ICAGENDA_FORM_DESC_NEWSLETTER_LIST"                 				
+                filter="safehtml" /> 
+				
+		 <field name="subject" type="text" size="40" class="inputbox"
+                 label="COM_ICAGENDA_FORM_LBL_NEWSLETTER_OBJ" description="COM_ICAGENDA_FORM_DESC_NEWSLETTER_OBJ"                                
+
+                 /> 
+
+       <field name="message" type="editor" class="inputbox"  buttons="readmore,pagebreak"
+                label="COM_ICAGENDA_FORM_LBL_NEWSLETTER_BODY"
+                description="COM_ICAGENDA_FORM_DESC_NEWSLETTER_BODY"                 
+				cols="70"
+				rows="20"
+                filter="safehtml" /> 
+				
+	</fieldset>
+
+</form>
