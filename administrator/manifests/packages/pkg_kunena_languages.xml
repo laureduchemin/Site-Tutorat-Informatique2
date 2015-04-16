@@ -3,8 +3,8 @@
 <extension type="package" version="2.5" method="upgrade">
 	<name>Kunena Language Pack</name>
 	<packagename>kunena_languages</packagename>
-	<version>3.0.7</version>
-	<creationDate>2015-02-01</creationDate>
+	<version>3.0.8</version>
+	<creationDate>2015-04-05</creationDate>
 	<build>@kunenaversionbuild@</build>
 	<author>Kunena Team</author>
 	<authorEmail>kunena@kunena.org</authorEmail>

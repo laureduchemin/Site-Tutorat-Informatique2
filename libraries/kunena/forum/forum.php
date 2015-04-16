@@ -191,7 +191,7 @@ abstract class KunenaForum {
 	 * @return boolean True if Git repository is detected.
 	 */
 	public static function isDev() {
-		if ('3.0.7' == '@' . 'kunenaversion' . '@') {
+		if ('3.0.8' == '@' . 'kunenaversion' . '@') {
 			return true;
 		}
 		return false;
@@ -336,15 +336,15 @@ abstract class KunenaForum {
 	// Internal functions
 
 	protected static function buildVersion() {
-		if ('3.0.7' == '@' . 'kunenaversion' . '@') {
+		if ('3.0.8' == '@' . 'kunenaversion' . '@') {
 			$file = JPATH_MANIFESTS . '/packages/pkg_kunena.xml';
 			$manifest = simplexml_load_file($file);
 			self::$version = (string) $manifest->version . '-GIT';
 		} else {
-			self::$version = strtoupper ( '3.0.7' );
+			self::$version = strtoupper ( '3.0.8' );
 		}
 		self::$version_major = substr(self::$version, 0, 3);
-		self::$version_date = ('2015-02-01' == '@' . 'kunenaversiondate' . '@') ? JFactory::getDate()->format('Y-m-d') : '2015-02-01';
-		self::$version_name = ('Galah' == '@' . 'kunenaversionname' . '@') ? 'Git Repository' : 'Galah';
+		self::$version_date = ('2015-04-05' == '@' . 'kunenaversiondate' . '@') ? JFactory::getDate()->format('Y-m-d') : '2015-04-05';
+		self::$version_name = ('Imperium' == '@' . 'kunenaversionname' . '@') ? 'Git Repository' : 'Imperium';
 	}
 }

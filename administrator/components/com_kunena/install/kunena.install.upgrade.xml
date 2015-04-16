@@ -405,7 +405,7 @@
 			<query mode="silenterror">ALTER TABLE `#__kunena_messages` ADD INDEX `time_hold` ( `time` , `hold` );</query>
 			<query mode="silenterror">ALTER TABLE `#__kunena_messages` ADD INDEX `hold` ( `hold` );</query>
 		</version>
-		<version version="3.0.7" versiondate="2015-02-01" versionname="Galah">
+		<version version="3.0.8" versiondate="2015-04-05" versionname="Imperium">
 		 </version>
 	</upgrade>
 </comupgrade>

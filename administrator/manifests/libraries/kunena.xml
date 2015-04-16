@@ -3,9 +3,9 @@
 <extension type="library" version="2.5" method="upgrade">
 	<name>Kunena Framework</name>
 	<libraryname>kunena</libraryname>
-	<version>3.0.7</version>
-	<versionname>Galah</versionname>
-	<creationDate>2015-02-01</creationDate>
+	<version>3.0.8</version>
+	<versionname>Imperium</versionname>
+	<creationDate>2015-04-05</creationDate>
 	<author>Kunena Team</author>
 	<authorEmail>kunena@kunena.org</authorEmail>
 	<authorUrl>http://www.kunena.org</authorUrl>
