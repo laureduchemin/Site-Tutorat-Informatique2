@@ -10,7 +10,7 @@
  * @author      Cyril Rezé (Lyr!C)
  * @link        http://www.joomlic.com
  *
- * @version     3.5.2 2015-03-13
+ * @version     3.5.3 2015-03-24
  * @since       1.0
  *------------------------------------------------------------------------------
 */
@@ -156,15 +156,17 @@ class iCModelItem extends JModelItem
 			$nd_enddate		= $nd->tEnddate;
 			$nd_weekdays	= $nd->tWeekdays;
 
-			$dates = unserialize($nd_dates);
+			// If Single Dates, added to all dates for this event (ADD FIX 3.1.11 !)
+//			$singledates = unserialize($nd_dates);
+			$singledates = iCString::isSerialized($nd_dates) ? unserialize($nd_dates) : array();
+
+//			$dates = unserialize($nd_dates);
+			$dates = $singledates;
 
 			$AllDates = array();
 
 			// Get WeekDays Array
 			$WeeksDays = iCDatePeriod::weekdaysToArray($nd_weekdays);
-
-			// If Single Dates, added to all dates for this event (ADD FIX 3.1.11 !)
-			$singledates = unserialize($nd_dates);
 
 			if (isset ($dates)
 				&& $dates != NULL
@@ -676,7 +678,7 @@ class iCModelItem extends JModelItem
 	 * ALL DATES - iCmodel
 	 *
 	 */
-	protected function AllDates($i)
+	protected function eventAllDates($i)
 	{
 		// Set vars
 		$nodate = '0000-00-00 00:00:00';
@@ -692,14 +694,15 @@ class iCModelItem extends JModelItem
 		$tStartdate		= $i->startdate;
 		$tWeekdays		= $i->weekdays;
 
-		// Declare AllDates array
-		$AllDates = array();
+		// Declare eventAllDates array
+		$eventAllDates = array();
 
 		// Get WeekDays Array
 		$WeeksDays = iCDatePeriod::weekdaysToArray($tWeekdays);
 
 		// If Single Dates, added each one to All Dates for this event
-		$singledates = unserialize($tDates);
+//		$singledates = unserialize($tDates);
+		$singledates = iCString::isSerialized($tDates) ? unserialize($tDates) : array();
 
 		foreach ($singledates as $sd)
 		{
@@ -707,7 +710,7 @@ class iCModelItem extends JModelItem
 
 			if ( $isValid )
 			{
-				array_push($AllDates, $sd);
+				array_push($eventAllDates, $sd);
 			}
 		}
 
@@ -730,13 +733,13 @@ class iCModelItem extends JModelItem
 					{
 						$SingleDate = JHtml::date($Dat, 'Y-m-d H:i', $eventTimeZone);
 
-						array_push($AllDates, $SingleDate);
+						array_push($eventAllDates, $SingleDate);
 					}
 				}
 			}
 		}
 
-		return $AllDates;
+		return $eventAllDates;
 	}
 
 	/**
@@ -745,10 +748,6 @@ class iCModelItem extends JModelItem
 	 *
 	 */
 
-	protected function access_event($i)
-	{
-		return $i->access;
-	}
 	protected function startdatetime($i)
 	{
 		return $i->startdate;
@@ -774,23 +773,24 @@ class iCModelItem extends JModelItem
 		return $i->email;
 	}
 
-	protected function state($i){return $i->state;}
-	protected function approval($i){return $i->approval;}
-	protected function displaytime($i){return $i->displaytime;}
-	protected function cat_desc($i){return $i->cat_desc;}
-	protected function period($i){return $i->period;}
 	protected function access($i){return $i->access;}
-	protected function place_name($i){return $i->place_name;}
 	protected function address($i){return $i->address;}
-	protected function phone($i){return $i->phone;}
-	protected function dates($i){return $i->dates;}
-	protected function weekdays($i){return $i->weekdays;}
-	protected function email($i){return $i->email;}
-	protected function website($i){return $i->website;}
+	protected function approval($i){return $i->approval;}
 	protected function city($i){return $i->city;}
 	protected function country($i){return $i->country;}
-	protected function file($i){return $i->file;}
 	protected function customfields($i){return $i->customfields;}
+	protected function dates($i){return $i->dates;}
+	protected function displaytime($i){return $i->displaytime;}
+	protected function email($i){return $i->email;}
+	protected function file($i){return $i->file;}
+	protected function period($i){return $i->period;}
+	protected function phone($i){return $i->phone;}
+	protected function state($i){return $i->state;}
+	protected function website($i){return $i->website;}
+	protected function weekdays($i){return $i->weekdays;}
+
+	protected function cat_desc($i){return $i->cat_desc;}
+	protected function place_name($i){return $i->place_name;}
 
 
 	// Set Meta-title for an event
@@ -1548,35 +1548,6 @@ class iCModelItem extends JModelItem
 	}
 
 
-	// TO DEPRECATE
-	protected function pastDates($i)
-	{
-		$dates			= unserialize($i->dates);
-		$period			= unserialize($i->period);
-		$eventTimeZone	= null;
-		$datetime_today	= JHtml::date('now', 'Y-m-d H:i'); // Joomla Time Zone
-		$date_today		= JHtml::date('now', 'Y-m-d'); // Joomla Time Zone
-
-		$alldates	= ($period != NULL) ? array_merge($dates, $period) : $dates;
-
-		rsort($alldates);
-
-		$lastDate	= JHtml::date($alldates[0], 'Y-m-d H:i', $eventTimeZone);
-
-		if (strtotime($lastDate) < strtotime($datetime_today))
-		{
-			$pastDates = '0';
-		}
-		else
-		{
-			$pastDates = '1';
-		}
-
-		return $pastDates;
-	}
-
-
-
 	/**
 	 * TIME
 	 */
@@ -1697,8 +1668,10 @@ class iCModelItem extends JModelItem
 	{
 		$eventTimeZone = null;
 
-		$dates		= unserialize($i->dates); // returns array
-		$period		= unserialize($i->period); // returns array
+//		$dates		= unserialize($i->dates); // returns array
+		$dates		= iCString::isSerialized($i->dates) ? unserialize($i->dates) : array(); // returns array
+//		$period		= unserialize($i->period); // returns array
+		$period		= iCString::isSerialized($i->period) ? unserialize($i->period) : array(); // returns array
 		$weekdays	= $i->weekdays;
 
 		$site_today_date	= JHtml::date('now', 'Y-m-d');
@@ -1964,7 +1937,7 @@ class iCModelItem extends JModelItem
 	{
 		$eventTimeZone		= null;
 		$date_today			= JHtml::date('now', 'Y-m-d');
-		$allDates			= $this->AllDates($i);
+		$allDates			= $this->eventAllDates($i);
 		$typeReg			= $this->evtParams($i)->get('typeReg', '');
 		$perioddates		= iCDatePeriod::listDates($i->startdate, $i->enddate, $eventTimeZone);
 
@@ -2059,7 +2032,7 @@ class iCModelItem extends JModelItem
 	{
 		$eventTimeZone		= null;
 		$date_today			= JHtml::date('now', 'Y-m-d');
-		$allDates			= $this->AllDates($i);
+		$allDates			= $this->eventAllDates($i);
 		$max_tickets		= $this->evtParams($i)->get('maxReg', '1000000');
 		$perioddates		= iCDatePeriod::listDates($i->startdate, $i->enddate, $eventTimeZone);
 
@@ -2118,7 +2091,7 @@ class iCModelItem extends JModelItem
 		$eventTimeZone		= null;
 		$date_today			= JHtml::date('now', 'Y-m-d');
 		$date_time_today	= JHtml::date('now', 'Y-m-d H:i');
-		$allDates			= $this->AllDates($i);
+		$allDates			= $this->eventAllDates($i);
 		$timeformat			= $this->options['timeformat'];
 		$max_tickets		= $this->evtParams($i)->get('maxReg', '1000000');
 		$perioddates		= iCDatePeriod::listDates($i->startdate, $i->enddate, $eventTimeZone);
@@ -2185,6 +2158,17 @@ class iCModelItem extends JModelItem
 		}
 	}
 
+	// Function return true if upcoming dates for Booking
+	protected function upcomingDatesBooking($i)
+	{
+		if (count($this->datelistMkt($i)) > 0)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 	// All Single Dates in Event Details Page
 	protected function datelistUl ($i)
 	{
@@ -2207,7 +2191,8 @@ class iCModelItem extends JModelItem
 		{
 //			if ($this->accessLevels($accessSingleDates))
 //			{
-				$days = unserialize($i->dates);
+//				$days = unserialize($i->dates);
+				$days = iCString::isSerialized($i->dates) ? unserialize($i->dates) : array(); // returns array
 
 				if ($SingleDatesOrder == 1)
 				{
@@ -2314,7 +2299,7 @@ class iCModelItem extends JModelItem
 	// Function Period Display in Registration
 	protected function periodDisplay($i)
 	{
-		if ($this->periodTest($i))
+		if ($this->eventHasPeriod($i))
 		{
 			if (iCDate::isDate($i->startdate) || iCDate::isDate($i->enddate))
 			{
@@ -2573,7 +2558,7 @@ class iCModelItem extends JModelItem
 					$period.= '</li></ul>';
 				}
 
-				if ($this->periodTest($i))
+				if ($this->eventHasPeriod($i))
 				{
 					if (($i->startdate!='0000-00-00 00:00:00') AND ($i->enddate!='0000-00-00 00:00:00'))
 					{
@@ -3275,7 +3260,7 @@ class iCModelItem extends JModelItem
 		return $evtParams;
 	}
 
-	// Function if Period Dates exist
+	// Function if Period Dates exist // DEPRECATED
 	protected function periodTest($i)
 	{
 		$daysp = unserialize($i->period);
@@ -3288,25 +3273,38 @@ class iCModelItem extends JModelItem
 		return false;
 	}
 
+	/*
+	 * Function if Period Dates exist for this event
+	 */
+	protected function eventHasPeriod($i)
+	{
+		$period_dates = iCString::isSerialized($i->period) ? unserialize($i->period) : array(); // returns array
 
-	// Function to check if user has access rights to defined function
-	protected function accessLevels($accessSet)
+		if (count($period_dates) > 0)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/* TO BE MOVED TO UTILITIES LIBRARY
+	 * Function to check if user has access rights to defined access
+	 *
+	 * $accessLevel		Access level of the item to check User Permissions
+	 *
+	 * If in super user group, always allowed
+	 */
+	protected function accessLevels($accessLevel)
 	{
 		// Get User Access Levels
 		$user		= JFactory::getUser();
 		$userLevels	= $user->getAuthorisedViewLevels();
-
-		if (version_compare(JVERSION, '3.0', 'lt'))
-		{
-			$userGroups = $user->getAuthorisedGroups();
-		}
-		else
-		{
-			$userGroups = $user->groups;
-		}
+		$userGroups = version_compare(JVERSION, '3.0', 'ge') ? $user->groups : $user->getAuthorisedGroups();
 
 		// Control: if access level, or Super User
-		if (in_array($accessSet, $userLevels)
+		if (in_array($accessLevel, $userLevels)
 			|| in_array('8', $userGroups))
 		{
 			return true;
@@ -3316,37 +3314,29 @@ class iCModelItem extends JModelItem
 	}
 
 
-	// function to detect if info details exist in an event, and to hide or show it depending of Options (display and access levels)
+	/*
+	 * Function to detect if info details exist in an event,
+	 * and to hide or show it depending of Options (display and access levels)
+	 */
 	protected function infoDetails($i)
 	{
 		// Hide/Show Option
 		$infoDetails		= JComponentHelper::getParams('com_icagenda')->get('infoDetails', 1);
-		//if (!isset($infoDetails)) $infoDetails='1';
 
 		// Access Levels Option
 		$accessInfoDetails	= JComponentHelper::getParams('com_icagenda')->get('accessInfoDetails', 1);
 
-		if ($infoDetails == 1
-			&& $this->accessLevels($accessInfoDetails))
-		{
-			if (
-//				!$this->ticketsCouldBeBooked($i)
-//				&&
-				! $i->place_name
-				&& ! $i->phone
-				&& ! $i->email
-				&& ! $i->website
-				&& ! $i->address
-				&& ! $i->file
-//				&& !$this->loadEventCustomFields($i)
+		if ( ($infoDetails == 1 && $this->accessLevels($accessInfoDetails))
+			&& (($this->statutReg($i) == '1' && $this->maxNbTickets($i))
+				|| $i->phone
+				|| $i->email
+				|| $i->website
+				|| $i->address
+				|| $i->file
 				)
-			{
-				return false;
-			}
-			else
-			{
-				return true;
-			}
+			)
+		{
+			return true;
 		}
 
 		return false;
@@ -3505,7 +3495,9 @@ class iCModelItem extends JModelItem
 		return $regUrl;
 	}
 
-	// function Registration statut
+	/*
+	 * Function to return Registration Status for this event
+	 */
 	protected function statutReg($i)
 	{
 		$gstatutReg		= $this->options['statutReg'];
@@ -3524,7 +3516,9 @@ class iCModelItem extends JModelItem
 		return $statutReg;
 	}
 
-	// function Registration Access
+	/*
+	 * Function to return Registration Access Level for this event
+	 */
 	protected function accessReg($i)
 	{
 		$reg_form_access	= JComponentHelper::getParams('com_icagenda')->get('reg_form_access', 1);
@@ -3534,7 +3528,7 @@ class iCModelItem extends JModelItem
 		return $accessReg;
 	}
 
-	// function Registration Type
+	// function Registration Type TO BE CHECKED IF USED AS FUNCTION
 	protected function typeReg($i)
 	{
 		$evtParams	= $this->evtParams($i);
@@ -3588,28 +3582,12 @@ class iCModelItem extends JModelItem
 	// function Max Nb Tickets (Control if set)
 	protected function maxNbTickets($i)
 	{
-		$maxNbTickets = '1000000';
-
-		$evtParams = $this->evtParams($i);
 		$maxNbTickets = $this->evtParams($i)->get('maxReg', '1000000');
 
 		if ($maxNbTickets != '1000000'
 			&& ($this->statutReg($i) == '1'))
 		{
 			return $maxNbTickets;
-		}
-	}
-
-	// function Number of places left
-	protected function placeLeft($i)
-	{
-		$maxReg			= $this->maxReg($i);
-		$registered		= $this->totalRegistered($i);
-
-		if ($maxReg != '1000000'
-			&& ($this->statutReg($i) == '1'))
-		{
-//			return ($maxReg - $registered);
 		}
 	}
 
@@ -3628,11 +3606,12 @@ class iCModelItem extends JModelItem
 	// function pre-formated to display Register button and registered bubble
 	protected function reg($i)
 	{
-		$reg		= $this->statutReg($i);
-		$accessreg	= $this->accessReg($i);
-		$nbreg		= $this->totalRegistered($i);
-		$maxreg		= $this->maxReg($i);
-		$pastDates	= $this->pastDates($i);
+		$reg					= $this->statutReg($i);
+		$accessreg				= $this->accessReg($i);
+		$nbreg					= $this->totalRegistered($i);
+		$maxreg					= $this->maxReg($i);
+		$upcomingDatesBooking	= $this->upcomingDatesBooking($i);
+		$ticketsCouldBeBooked	= $this->ticketsCouldBeBooked($i);
 
 		// Initialize controls
 		$date_today			= JHtml::date('now', 'Y-m-d');
@@ -3660,7 +3639,8 @@ class iCModelItem extends JModelItem
 			$only_startdate		= ($i->weekdays || $i->weekdays == '0') ? false : true;
 			$datetime_startdate	= JHtml::date($i->startdate, 'Y-m-d H:i', null);
 
-			if ($only_startdate
+			if (count($period) > 0
+				&& $only_startdate
 				&& (strtotime($datetime_startdate) < strtotime($date_time_today))
 				)
 			{
@@ -3692,9 +3672,9 @@ class iCModelItem extends JModelItem
 			$TextRegBt = JText::_( 'COM_ICAGENDA_REGISTRATION_REGISTER');
 		}
 
-		$regButton_type = ''; // DEV.
+		$regButton_type = ''; // DEV. NOT IN USE
 
-		if ($regButton_type == 'button') // DEV.
+		if ($regButton_type == 'button') // DEV. NOT IN USE
 		{
 			$doc = JFactory::getDocument();
 			$style = '.regis_button {'
@@ -3749,7 +3729,7 @@ class iCModelItem extends JModelItem
 			$isSef = JFactory::getApplication()->getCfg( 'sef' );
 			$date_var = ($isSef == 1) ? '?date=' :'&amp;date=';
 
-			$select_date = '';
+			$select_date = '<div style="display: block; max-height: 130px; width: 180px; overflow-y: auto;">';
 
 			foreach ($dates_bookable AS $d)
 			{
@@ -3762,19 +3742,19 @@ class iCModelItem extends JModelItem
 				$select_date.= '</div>';
 			}
 
+			$select_date.= '</div>';
+
 			$reg_button = '<div class="ic-registration-box">';
 
-			if ($pastDates == 1
-//				&& $nbreg < $maxreg
-				&& $this->ticketsCouldBeBooked($i)
-//				&& in_array($accessreg, $userLevels)
+			if ($upcomingDatesBooking
+				&& $ticketsCouldBeBooked
 				)
 			{
 				if (in_array($accessreg, $userLevels))
 				{
 					if ($this->totalRegistered($i) == $this->maxReg($i))
 					{
-						$reg_button.= '<a class="ic-addtocal" title="' . htmlspecialchars($select_date) . '">';
+						$reg_button.= '<a class="ic-addtocal" title="' . htmlspecialchars($select_date) . '" rel="nofollow">';
 						$reg_button.= '<div class="ic-btn ic-btn-info ic-btn-small ic-event-full">';
 						$reg_button.= '<i class="iCicon iCicon-people"></i>&nbsp;' . JText::_('COM_ICAGENDA_REGISTRATION_DATE_NO_TICKETS_LEFT');
 						$reg_button.= '</div>';
@@ -3784,7 +3764,7 @@ class iCModelItem extends JModelItem
 					}
 					elseif ($date_is_upcoming)
 					{
-						$reg_button.= '<a href="' . $this->regUrl($i) . '">';
+						$reg_button.= '<a href="' . $this->regUrl($i) . '" rel="nofollow">';
 						$reg_button.= '<div class="ic-btn ic-btn-success ic-btn-small ic-event-register regis_button">';
 						$reg_button.= '<i class="iCicon iCicon-register"></i>&nbsp;' . $TextRegBt;
 						$reg_button.= '</div>';
@@ -3792,7 +3772,7 @@ class iCModelItem extends JModelItem
 					}
 					else
 					{
-						$reg_button.= '<a class="ic-addtocal" title="' . htmlspecialchars($select_date) . '">';
+						$reg_button.= '<a class="ic-addtocal" title="' . htmlspecialchars($select_date) . '" rel="nofollow">';
 						$reg_button.= '<div class="ic-btn ic-btn-info ic-btn-small ic-event-finished">';
 						$reg_button.= '<i class="iCicon iCicon-people"></i>&nbsp;' . JText::_('COM_ICAGENDA_REGISTRATION_DATE_NO_TICKETS_LEFT');
 						$reg_button.= '</div>';
@@ -3803,39 +3783,15 @@ class iCModelItem extends JModelItem
 				}
 				else
 				{
-					$reg_button.= '<a href="' . $this->regUrl($i) . '">';
+					$reg_button.= '<a href="' . $this->regUrl($i) . '" rel="nofollow">';
 					$reg_button.= '<div class="ic-btn ic-btn-danger ic-btn-small ic-event-register regis_button">';
 					$reg_button.= '<i class="iCicon iCicon-private"></i>&nbsp;' . $TextRegBt;
 					$reg_button.= '</div>';
 					$reg_button.= '</a>';
 				}
 			}
-
-//				$accessInfo = 'alert( \'' . JText::_( 'JERROR_ALERTNOAUTHOR' ) . ' \n\n ' . JText::_( 'JGLOBAL_YOU_MUST_LOGIN_FIRST' ) . '\' )';
-
-				// Redirect to login page if no access to registration form
-//				$uri = JFactory::getURI();
-//				$urlregistration = $this->iCagendaRegForm($i);
-
-//				$return     = base64_encode($urlregistration.'?tmpl=component');
-//				$return     = base64_encode($urlregistration);
-//				$rlink = "index.php?option=com_users&view=login&tmpl=component&return=$return";
-//				$rlink = "index.php?option=com_users&view=login&return=$return";
-//				$msg = JText::_("COM_ICAGENDA_LOGIN_TO_ACCESS_REGISTRATION_FORM");
-
-
-//				$reg_button.= '<script type="text/javascript">';
-//				$reg_button.= '		window.setTimeout(\'closeme();\', 300);';
-//				$reg_button.= '		function closeme()';
-//				$reg_button.= '		{';
-//				$reg_button.= '			parent.SqueezeBox.close();';
-//				$reg_button.= '		}';
-//				$reg_button.= '	</script>';
-//				$reg_button.= '<a href="'.$rlink.'" class="modal" rel="{size: {x: 500, y: 400}, handler:\'iframe\'}">';
-
-			elseif ($pastDates == 1
-//				&& $nbreg >= $maxreg
-				&& ! $this->ticketsCouldBeBooked($i)
+			elseif ($upcomingDatesBooking
+				&& ! $ticketsCouldBeBooked
 				)
 			{
 				if ( ! $date_is_upcoming)
@@ -3851,7 +3807,7 @@ class iCModelItem extends JModelItem
 					$reg_button.= '</div>';
 				}
 			}
-			elseif ($pastDates == 0)
+			elseif ( ! $upcomingDatesBooking)
 			{
 				$reg_button.= '<div class="ic-btn ic-btn-default ic-btn-small ic-event-finished">';
 				$reg_button.= '<i class="iCicon iCicon-blocked"></i>&nbsp;' . JText::_('COM_ICAGENDA_REGISTRATION_CLOSED');
@@ -3876,46 +3832,6 @@ class iCModelItem extends JModelItem
 		}
 
 		return $reg_button;
-	}
-
-
-	// function to get number of registered people to an event
-//	protected function registered($i)
-//	{
-//		$reg	= $this->statutReg($i);
-//		$nbreg	= $i->registered;
-//
-//		if ($reg == 1 && $nbreg == NULL)
-//		{
-//			$nbreg = '0';
-//		}
-//
-//		return $nbreg;
-//	}
-
-	// url to return event details after registration (changed in 2.1.14 not in use; see $urlist)
-	protected function urlList($i)
-	{
-		$db	= JFactory::getDbo();
-		$query = $db->getQuery(true);
-		$query->select(' r.eventId AS idevt')->from('#__icagenda_registration AS r');
-		$db->setQuery($query);
-		$idevt = $db->loadObjectList();
-
-		$link		= $this->options['Itemid'];
-		$urllist	= JROUTE::_('index.php?option=com_icagenda&view=list&layout=event&id='.(int)$idevt.'&Itemid='.(int)$link);
-		$url		= $urllist;
-
-		if (is_numeric($link) && !is_array($link))
-		{
-			return $url;
-		}
-		else
-		{
-			$url = JROUTE::_('index.php');
-
-			return $url;
-		}
 	}
 
 	/**
@@ -4004,6 +3920,7 @@ class iCModelItem extends JModelItem
 			$tos				= isset($array['tos']) ? 'checked' : '';
 			$custom_fields		= isset($array['custom_fields']) ? $array['custom_fields'] : false;
 //			$tickets_left		= isset($array['tickets_left']) ? $array['tickets_left'] : '1000000';
+			$email2				= isset($array['email2']) ? $array['email2'] : false;
 
 			// Filter Name
 			$array['name'] = str_replace("'", '’', $array['name']);
@@ -4012,9 +3929,10 @@ class iCModelItem extends JModelItem
 			// Set Form Data to Session
 			$session = JFactory::getSession();
 			$session->set('ic_registration', $array);
+			$session->set('ic_submit_tos', $tos);
 			$custom_fields_array = isset($array['custom_fields']) ? (array) $array['custom_fields'] : array();
 			$session->set('custom_fields', $custom_fields_array);
-			$session->set('ic_submit_tos', $tos);
+			$session->set('email2', $email2);
 
 			// Control if still ticket left
 			$db		= JFactory::getDbo();
@@ -4028,67 +3946,59 @@ class iCModelItem extends JModelItem
 			$db->setQuery($query);
 			$registered = $db->loadObject()->registered;
 
-			$date_in_url = $data->date ? iCDate::dateToAlias(date('Y-m-d H:i', strtotime($data->date))) : false;
-
 			$data->checked_out_time = date('Y-m-d H:i:s');
+
+			// Set Date in url
+			$datesDisplay	= $params->get('datesDisplay', 1);
+
+			$date_alias		= $data->date ? iCDate::dateToAlias(date('Y-m-d H:i', strtotime($data->date))) : false;
+			$date_var		= ($isSef == 1) ? '?date=' :'&amp;date=';
+
+			$this_date		= $date_alias ? $date_var . $date_alias : '';
+			$dateInUrl	= ($datesDisplay === 1) ? $this_date : '';
 
 			// Get the "event" URL
 			$baseURL = JURI::base();
 			$subpathURL = JURI::base(true);
 
-			// To be tested
-//			$temp = str_replace('http://', '', $baseURL);
-//			$temp = str_replace('https://', '', $temp);
-//			$parts = explode($temp, '/', 2);
-//			$subpathURL = count($parts) > 1 ? $parts[1] : '';
-
 			$baseURL	= str_replace('/administrator', '', $baseURL);
 			$subpathURL	= str_replace('/administrator', '', $subpathURL);
-
-			if ($isSef == '1')
-			{
-				$this_date = $date_in_url ? '?date=' . $date_in_url : '';
-			}
-			else
-			{
-				$this_date = $date_in_url ? '&amp;date=' . $date_in_url : '';
-			}
 
 			// Sub Path filtering
 			$subpathURL = ltrim($subpathURL, '/');
 
 			// URL Event Details filtering
-			$urlevent	= str_replace('&amp;', '&', JRoute::_('index.php?option=com_icagenda&view=list&layout=event&Itemid=' . (int) $data->itemid . '&id=' . (int) $data->eventid)) . $this_date;
-			$urlevent	= ltrim($urlevent, '/');
+			$urlEvent	= str_replace('&amp;', '&', JRoute::_('index.php?option=com_icagenda&view=list&layout=event&Itemid=' . (int) $data->itemid . '&id=' . (int) $data->eventid)) . $dateInUrl;
+			$urlEvent	= ltrim($urlEvent, '/');
 
-			if (substr($urlevent, 0, strlen($subpathURL) + 1) == "$subpathURL/")
+			if (substr($urlEvent, 0, strlen($subpathURL) + 1) == "$subpathURL/")
 			{
-				$urlevent = substr($urlevent, strlen($subpathURL) + 1);
+				$urlEvent = substr($urlEvent, strlen($subpathURL) + 1);
 			}
 
-			$urlevent	= rtrim($baseURL, '/') . '/' . ltrim($urlevent, '/');
+			$urlEvent	= rtrim($baseURL, '/') . '/' . ltrim($urlEvent, '/');
 
 			// URL List filtering
-			$urllist	= str_replace('&amp;', '&', JRoute::_('index.php?option=com_icagenda&view=list&Itemid=' . (int) $data->itemid));
-			$urllist	= ltrim($urllist, '/');
+			$urlList	= str_replace('&amp;', '&', JRoute::_('index.php?option=com_icagenda&view=list&Itemid=' . (int) $data->itemid));
+			$urlList	= ltrim($urlList, '/');
 
-			if (substr($urllist, 0, strlen($subpathURL)+1) == "$subpathURL/")
+			if (substr($urlList, 0, strlen($subpathURL)+1) == "$subpathURL/")
 			{
-				$urllist = substr($urllist, strlen($subpathURL)+1);
+				$urlList = substr($urlList, strlen($subpathURL)+1);
 			}
 
-			$urllist	= rtrim($baseURL, '/') . '/' . ltrim($urllist, '/');
+			$urlList	= rtrim($baseURL, '/') . '/' . ltrim($urlList, '/');
 
-			// URL Registration filtering
-			$urlregistration	= str_replace('&amp;','&', JRoute::_('index.php?option=com_icagenda&view=list&layout=registration&Itemid=' . (int) $data->itemid . '&id=' . (int) $data->eventid));
-			$urlregistration	= ltrim($urlregistration, '/');
+			// URL Registration filtering // NOT USED
+			$urlRegistration	= str_replace('&amp;','&', JRoute::_('index.php?option=com_icagenda&view=list&layout=registration&Itemid=' . (int) $data->itemid . '&id=' . (int) $data->eventid));
+			$urlRegistration	= ltrim($urlRegistration, '/');
 
-			if (substr($urlregistration, 0, strlen($subpathURL)+1) == "$subpathURL/")
+			if (substr($urlRegistration, 0, strlen($subpathURL)+1) == "$subpathURL/")
 			{
-				$urlregistration = substr($urlregistration, strlen($subpathURL)+1);
+				$urlRegistration = substr($urlRegistration, strlen($subpathURL)+1);
 			}
 
-			$urlregistration	= rtrim($baseURL, '/') . '/' . ltrim($urlregistration, '/');
+			$urlRegistration	= rtrim($baseURL, '/') . '/' . ltrim($urlRegistration, '/');
 
 
 
@@ -4100,7 +4010,7 @@ class iCModelItem extends JModelItem
 			{
 				$app->enqueueMessage(JText::_('COM_ICAGENDA_ALERT_NO_TICKETS_AVAILABLE'), 'warning');
 
-				$app->redirect(htmlspecialchars_decode($urlevent));
+				$app->redirect(htmlspecialchars_decode($urlEvent));
 			}
 
 			// IF NOT ENOUGH TICKETS LEFT
@@ -4149,12 +4059,21 @@ class iCModelItem extends JModelItem
 
 			// CONTROL EMAIL VALUE
 			$emailRequired	= $params->get('emailRequired', 1);
+			$emailConfirm	= $params->get('emailConfirm', 1);
 
 			// Check if Email not empty
 			if ($emailRequired
 				&& ! $data->email)
 			{
 				$app->enqueueMessage(JText::_( 'COM_ICAGENDA_FORM_VALIDATE_FIELD_REQUIRED' ) . ' ' . JText::_( 'ICAGENDA_REGISTRATION_FORM_EMAIL' ), 'error');
+			}
+
+			// Check if Confirm Email equals Email
+			if ($emailConfirm
+				&& empty($data->userid)
+				&& $data->email != $email2)
+			{
+				$app->enqueueMessage(JText::_( 'COM_ICAGENDA_FORM_VALIDATE_FIELD_INVALID' ) . ' ' . JText::_( 'IC_FORM_EMAIL_CONFIRM_LBL' ) . '<br />' . JText::_( 'COM_ICAGENDA_FORM_VALIDATE_FIELD_EMAIL2_MESSAGE' ), 'error');
 			}
 
 			// Advanced Checkdnsrr email
@@ -4530,7 +4449,7 @@ class iCModelItem extends JModelItem
 				'[CONTACTEMAIL]'	=> $contactemail,
 				'[TITLE]'			=> $title,
 //				'[EVENTID]'			=> is_numeric($data->eventid) ? (int) $data->eventid : null,
-				'[EVENTURL]'		=> $urlevent,
+				'[EVENTURL]'		=> $urlEvent,
 				'[NAME]'			=> $name,
 				'[EMAIL]'			=> $email,
 				'[PHONE]'			=> $phone,
@@ -4664,11 +4583,11 @@ class iCModelItem extends JModelItem
 			{
 				$thank_you = JText::_( 'COM_ICAGENDA_REGISTRATION_TY' ) . ' ' . $data->name;
 				$thank_you.= ', ' . JText::sprintf( 'COM_ICAGENDA_REGISTRATION', $title );
-				$thank_you.= '<br />' . $periodd . ' (<a href="' . $urlevent . '">'. JText::_( 'COM_ICAGENDA_REGISTRATION_EVENT_LINK' ) . '</a>)';
+				$thank_you.= '<br />' . $periodd . ' (<a href="' . $urlEvent . '">'. JText::_( 'COM_ICAGENDA_REGISTRATION_EVENT_LINK' ) . '</a>)';
 
 				// redirect after successful registration
 				$app->enqueueMessage($thank_you, 'message');
-				$app->redirect(htmlspecialchars_decode($urllist));
+				$app->redirect(htmlspecialchars_decode($urlList));
 			}
 		}
 		else
@@ -4683,12 +4602,6 @@ class iCModelItem extends JModelItem
 	/**
 	 * ESSENTIAL FUNCTIONS
 	 */
-
-	// FUNCTION TO CHECK IF NEXT MOVE (to be moved!)
-	protected function ctrlNext ($i)
-	{
-		return $i;
-	}
 
 	// Function to convert font color, depending on category color
 	function fontColor($i)
@@ -4820,7 +4733,8 @@ class iCModelItem extends JModelItem
 		$details		= $i->desc;
 		$venue			= $i->place_name;
 		$s_dates		= $i->dates;
-		$single_dates	= unserialize($s_dates);
+//		$single_dates	= unserialize($s_dates);
+		$single_dates	= iCString::isSerialized($i->dates) ? unserialize($i->dates) : array(); // returns array
 		$website		= $this->Event_Link($i);
 
 		$location	= $venue ? $venue.' - '.$i->address : $i->address;
@@ -4844,7 +4758,7 @@ class iCModelItem extends JModelItem
 		$startdate	= date('Y-m-d-H-i', strtotime($i->startdate));
 		$enddate	= date('Y-m-d-H-i', strtotime($i->enddate));
 
-		if ($this->periodTest($i)
+		if ($this->eventHasPeriod($i)
 			&& ($get_date >= $startdate)
 			&& ($get_date <= $enddate)
 			&& (!in_array($this_date, $single_dates))
@@ -4909,7 +4823,8 @@ class iCModelItem extends JModelItem
 		$details		= $i->desc;
 		$venue			= $i->place_name;
 		$s_dates		= $i->dates;
-		$single_dates	= unserialize($s_dates);
+//		$single_dates	= unserialize($s_dates);
+		$single_dates	= iCString::isSerialized($i->dates) ? unserialize($i->dates) : array(); // returns array
 		$website		= $this->Event_Link($i);
 
 		$location	= $venue ? $venue.' - '.$i->address : $i->address;
@@ -4933,7 +4848,7 @@ class iCModelItem extends JModelItem
 		$startdate	= date('Y-m-d-H-i', strtotime($i->startdate));
 		$enddate	= date('Y-m-d-H-i', strtotime($i->enddate));
 
-		if ($this->periodTest($i)
+		if ($this->eventHasPeriod($i)
 			&& $get_date >= $startdate
 			&& $get_date <= $enddate
 			&& !in_array($this_date, $single_dates)
@@ -4994,7 +4909,8 @@ class iCModelItem extends JModelItem
 		$details		= $i->desc;
 		$venue			= $i->place_name;
 		$s_dates		= $i->dates;
-		$single_dates	= unserialize($s_dates);
+//		$single_dates	= unserialize($s_dates);
+		$single_dates	= iCString::isSerialized($i->dates) ? unserialize($i->dates) : array(); // returns array
 		$website		= $this->Event_Link($i);
 
 		$location	= $venue ? $venue . ' - ' . $i->address : $i->address;
@@ -5018,7 +4934,7 @@ class iCModelItem extends JModelItem
 		$startdate	= date('Y-m-d-H-i', strtotime($i->startdate));
 		$enddate	= date('Y-m-d-H-i', strtotime($i->enddate));
 
-		if ( $this->periodTest($i)
+		if ( $this->eventHasPeriod($i)
 			&& $get_date >= $startdate
 			&& $get_date <= $enddate
 			&& !in_array($this_date, $single_dates)
@@ -5042,12 +4958,5 @@ class iCModelItem extends JModelItem
 		$href.= "&location=" . urlencode($location);
 
 		return $href;
-	}
-
-
-	// Display a link to add to Google Calendar - Not in Use in Official Theme Packs (default and ic_rounded)
-	protected function gcalendarLink ($i)
-	{
-		return '<a class="iCtip" href="' . $this->gcalendarUrl($i) . '" title="Add to Google Calendar"><img src="media/com_icagenda/images/cal/google_cal-16.png" alt="" /></a>';
 	}
 }

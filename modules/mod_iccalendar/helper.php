@@ -10,7 +10,7 @@
  * @author      Cyril Rezé (Lyr!C) - doorknob
  * @link        http://www.joomlic.com
  *
- * @version 	3.5.1 2015-03-01
+ * @version 	3.5.3 2015-03-23
  * @since       3.1.9 (1.0)
  *------------------------------------------------------------------------------
 */
@@ -55,6 +55,7 @@ class modiCcalendarHelper
 		// Features Options
 		$this->features_icon_size = $params->get('features_icon_size');
 		$this->show_icon_title = $params->get('show_icon_title');
+
 		// Get media path
 		$params_media = JComponentHelper::getParams('com_media');
 		$image_path = $params_media->get('image_path', 'images');
@@ -63,8 +64,8 @@ class modiCcalendarHelper
 		// First day of the current month
 		$this_month = $this->firstMonth ? date("Y-m-d", strtotime("+1 month", strtotime($this->firstMonth))) : date("Y-m-01");
 
-		if ( isset($iccaldate)
-			&& !empty($iccaldate) )
+		if (isset($iccaldate)
+			&& ! empty($iccaldate))
 		{
 			// This should be the first day of a month
 			$this->date_start = date('Y-m-01', strtotime($iccaldate));
@@ -97,8 +98,8 @@ class modiCcalendarHelper
 
 
 		// Get Array of categories to be displayed
-		if ( isset($this->catid)
-			&& !empty($this->catid) )
+		if (isset($this->catid)
+			&& ! empty($this->catid))
 		{
 			$cat_filter_param = $this->catid;
 
@@ -126,10 +127,10 @@ class modiCcalendarHelper
 	}
 
 
-	function addFilter($key, $var, $for=NULL)
+	function addFilter($key, $var, $for = NULL)
 	{
-		if($for==NULL) $for='=';
-		$this->filter[]=' AND '.$key.$for.$var;
+		if ($for == NULL) $for = '=';
+		$this->filter[] = $key.$for.$var;
 	}
 
 
@@ -166,10 +167,12 @@ class modiCcalendarHelper
 		// Check if fopen is allowed
 		$fopen = true;
 		$result = ini_get('allow_url_fopen');
+
 		if (empty($result))
 		{
 			$fopen = false;
 		}
+
 		$this->start($params);
 
 		// Get the database
@@ -191,17 +194,17 @@ class modiCcalendarHelper
 		$query->where('c.state = 1');
 
 		// Where State is Published
-		$where = $db->qn('e.state').' = '.$db->q('1');
+		$query->where('e.state = 1');
 
 		// Where event is Approved
-		$where.= ' AND '.$db->qn('e.approval').' = '.$db->q('0');
+		$query->where('e.approval = 0');
 
 		// Add filters
 		if (isset($this->filter))
 		{
 			foreach ($this->filter as $filter)
 			{
-				$where.= $filter;
+				$query->where($filter);
 			}
 		}
 
@@ -223,11 +226,8 @@ class modiCcalendarHelper
 
 		if (!in_array('8', $userGroups))
 		{
-			$where.= ' AND '.$db->qn('e.access').' IN ('.$userAccess.')';
+			$query->where('e.access IN (' . $userAccess . ')');
 		}
-
-		// Where
-		$query->where($where);
 
 		// Features - extract the number of displayable icons per event
 		$query->select('feat.count AS features');
@@ -259,26 +259,19 @@ class modiCcalendarHelper
 
 		foreach ($res AS $record)
 		{
-//			if (is_null($record->registered))
-//			{
-//				$record->registered = array();
-//			}
-//			else
-//			{
-				$record_registered = array();
+			$record_registered = array();
 
-				foreach ($registrations AS $reg_by_event)
+			foreach ($registrations AS $reg_by_event)
+			{
+				$ex_reg_by_event = explode('@@', $reg_by_event);
+
+				if ($ex_reg_by_event[0] == $record->id)
 				{
-					$ex_reg_by_event = explode('@@', $reg_by_event);
-
-					if ($ex_reg_by_event[0] == $record->id)
-					{
-						$record_registered[] = $ex_reg_by_event[0] . '@@' . $ex_reg_by_event[1] . '@@' . $ex_reg_by_event[2];
-					}
+					$record_registered[] = $ex_reg_by_event[0] . '@@' . $ex_reg_by_event[1] . '@@' . $ex_reg_by_event[2];
 				}
+			}
 
-				$record->registered = $record_registered;
-//			}
+			$record->registered = $record_registered;
 		}
 
 		$days = $this->getDays($this->date_start, 'Y-m-d H:i');
@@ -306,13 +299,13 @@ class modiCcalendarHelper
 			}
 
 			// list calendar dates
-			if (isset($next)) {$next=$next;} else {$next='';}
+			$next = isset($next) ? $next : '';
 
-			$datemultiplelist=$this->getDatelist($r->dates, $next);
-			$datelist=$datemultiplelist;
+			$datemultiplelist	= $this->getDatelist($r->dates, $next);
+			$datelist			= $datemultiplelist;
 
 			$AllDates = array();
-			if (isset($r->weekdays)) {$weekdays = $r->weekdays;} else {$weekdays = '';}
+			$weekdays = isset($r->weekdays) ? $r->weekdays : '';
 
 			$weekdays = explode (',', $weekdays);
 			$weekdaysarray = array();
@@ -341,19 +334,15 @@ class modiCcalendarHelper
 			$WeeksDays = $arrayWeekDays;
 
 			// If Single Dates, added to all dates for this event
-			$singledates = unserialize($r->dates);
+			$singledates = iCString::isSerialized($r->dates) ? unserialize($r->dates) : array();
 
 			if ((isset ($datemultiplelist)) AND ($datemultiplelist!=NULL) AND (!in_array('0000-00-00 00:00:00', $singledates)))
 			{
 				$AllDates = array_merge($AllDates, $datemultiplelist);
 			}
 
-//			$StDate = date('Y-m-d H:i', $this->mkttime($r->startdate));
-//			$EnDate = date('Y-m-d H:i', $this->mkttime($r->enddate));
-
 			$StDate			= JHtml::date($r->startdate, 'Y-m-d H:i', $eventTimeZone);
 			$EnDate			= JHtml::date($r->enddate, 'Y-m-d H:i', $eventTimeZone);
-//			$perioddates	= $this->getDatesPeriod($StDate, $EnDate);
 			$perioddates	= iCDatePeriod::listDates($r->startdate, $r->enddate, $eventTimeZone);
 
 			$onlyStDate = isset($this->onlyStDate) ? $this->onlyStDate : '';
@@ -373,7 +362,6 @@ class modiCcalendarHelper
 					{
 						if (in_array(date('w', strtotime($Dat)), $WeeksDays))
 						{
-//							$SingleDate = date('Y-m-d H:i', $this->mkttime($Dat));
 							$SingleDate = JHtml::date($Dat, 'Y-m-d H:i', $eventTimeZone);
 
 							array_push($AllDates, $SingleDate);
@@ -385,16 +373,16 @@ class modiCcalendarHelper
 			rsort($AllDates);
 
 			//liste dates next
-			$datemlist=$this->getmlist($r->dates, $next);
-			$dateplist=$this->getplist($r->period, $next);
+			$datemlist = $this->getmlist($r->dates, $next);
+			$dateplist = $this->getplist($r->period, $next);
 
 			if ($dateplist)
 			{
-				$datelistcal=array_merge($datemlist, $dateplist);
+				$datelistcal = array_merge($datemlist, $dateplist);
 			}
 			else
 			{
-				$datelistcal=$datemlist;
+				$datelistcal = $datemlist;
 			}
 
 			$todaytime = time();
@@ -567,7 +555,7 @@ class modiCcalendarHelper
 			// Replaces all spaces with a single +
 			$desc_nohtml	= str_replace(' ', '+', $desc_nohtml);
 
-			if(strlen($desc_nohtml) > $limit_short)
+			if (strlen($desc_nohtml) > $limit_short)
 			{
 				// Cuts full description, to get short description
 				$string_cut	= substr($desc_nohtml, 0, $limit_short);
@@ -770,8 +758,8 @@ class modiCcalendarHelper
 			$control='';
 
 			// Access Control
-			$access=$r->access;
-			if ($access == '0') { $access='1'; }
+			$access = $r->access;
+			if ($access == '0') $access='1';
 
 			if ( in_array($access, $userLevels) OR in_array('8', $userGroups) )
 			{
@@ -880,33 +868,6 @@ class modiCcalendarHelper
 		}
 
 		$i='';
-
-// 		$lang = JFactory::getLanguage();
-//		$langcur = $lang->getTag();
-//		$langcurrent = $langcur;
-
-//		$db = JFactory::getDbo();
-//		$query	= $db->getQuery(true);
-//		$query->select('id AS idm')->from('#__menu')->where( "(link = 'index.php?option=com_icagenda&view=list') AND (published > 0) AND (language = '$langcurrent')" );
-//		$db->setQuery($query);
-//		$idm=$db->loadResult();
-//		$linkid=$idm;
-
-//		$noidm = '';
-
-//		if ($linkid == NULL)
-//		{
-//			$db = JFactory::getDbo();
-//			$query	= $db->getQuery(true);
-//			$query->select('id AS noidm')->from('#__menu')->where( "(link = 'index.php?option=com_icagenda&view=list') AND (published > 0) AND (language = '*')" );
-//			$db->setQuery($query);
-//			$noidm = $db->loadResult();
-//			$noidm = $noidm;
-//		}
-//		$nolink = '';
-//		if ($noidm == NULL && $linkid == NULL) {
-//			$nolink = 1;
-//		}
 
 		if ($nolink || !JComponentHelper::getComponent('com_icagenda', true)->enabled)
 		{
@@ -1318,7 +1279,8 @@ class modiCcalendarHelper
 	 */
 	private function getDatelist($dates, $next)
 	{
-		$dates	= unserialize($dates);
+//		$dates	= unserialize($dates);
+		$dates = iCString::isSerialized($dates) ? unserialize($dates) : array();
 		$da		= array();
 
 		foreach ($dates as $d)
@@ -1339,7 +1301,8 @@ class modiCcalendarHelper
 	{
 		if ($period)
 		{
-			$period	= unserialize($period);
+//			$period	= unserialize($period);
+			$period = iCString::isSerialized($period) ? unserialize($period) : array();
 			$da		= array();
 
 			foreach ($period as $d)
@@ -1363,7 +1326,8 @@ class modiCcalendarHelper
 
 	private function getmlist($dates, $next)
 	{
-		$dates	= unserialize($dates);
+//		$dates	= unserialize($dates);
+		$dates = iCString::isSerialized($dates) ? unserialize($dates) : array();
 		$da		= array();
 
 		foreach($dates as $d)

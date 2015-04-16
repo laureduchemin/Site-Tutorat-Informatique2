@@ -10,7 +10,7 @@
  * @author      Cyril Rezé (Lyr!C)
  * @link        http://www.joomlic.com
  *
- * @version 	3.5.1 2015-02-28
+ * @version 	3.5.3 2015-03-24
  * @since       1.0
  *------------------------------------------------------------------------------
 */
@@ -21,7 +21,7 @@ defined('_JEXEC') or die();
 ?>
 <!--
  * - - - - - - - - - - - - - -
- * iCagenda 3.5.2 by Jooml!C
+ * iCagenda 3.5.3 by Jooml!C
  * - - - - - - - - - - - - - -
  * @copyright	Copyright (c)2012-2015 JOOMLIC - All rights reserved.
  *
@@ -209,6 +209,7 @@ else
 		$icTip_userID	= htmlspecialchars('<strong>' . JText::_( 'ICAGENDA_REGISTRATION_FORM_USERID' ) . '</strong><br />' . JText::_( 'ICAGENDA_REGISTRATION_FORM_USERID_DESC' ) . '');
 		$icTip_name		= htmlspecialchars('<strong>' . JText::_( 'ICAGENDA_REGISTRATION_FORM_NAME' ) . '</strong><br />' . JText::_( 'ICAGENDA_REGISTRATION_FORM_NAME_DESC' ) . '');
 		$icTip_email	= htmlspecialchars('<strong>' . JText::_( 'ICAGENDA_REGISTRATION_FORM_EMAIL' ) . '</strong><br />' . JText::_( 'ICAGENDA_REGISTRATION_FORM_EMAIL_DESC' ) . '');
+		$icTip_email2	= htmlspecialchars('<strong>' . JText::_( 'IC_FORM_EMAIL_CONFIRM_LBL' ) . '</strong><br />' . JText::_( 'IC_FORM_EMAIL_CONFIRM_DESC' ) . '');
 		$icTip_phone	= htmlspecialchars('<strong>' . JText::_( 'ICAGENDA_REGISTRATION_FORM_PHONE' ) . '</strong><br />' . JText::_( 'ICAGENDA_REGISTRATION_FORM_PHONE_DESC' ) . '');
 		$icTip_date		= htmlspecialchars('<strong>' . JText::_( 'ICAGENDA_REGISTRATION_FORM_DATE' ) . '</strong><br />' . JText::_( 'ICAGENDA_REGISTRATION_FORM_DATE_DESC' ) . '');
 		$icTip_period	= htmlspecialchars('<strong>' . JText::_( 'ICAGENDA_REGISTRATION_FORM_PERIOD' ) . '</strong><br />' . JText::_( 'ICAGENDA_REGISTRATION_FORM_PERIOD_DESC' ) . '');
@@ -221,6 +222,7 @@ else
 
 		$session		= JFactory::getSession();
 		$ic_submit_tos	= $session->get('ic_submit_tos', '');
+		$post_email2	= $session->get('email2', '');
 		$post			= $session->get('ic_registration', '');
 
 		$post_name		= isset($post['name']) ? $post['name'] : '';
@@ -260,13 +262,13 @@ else
 		<form name="registration" action="<?php echo JRoute::_('index.php?option=com_icagenda'); ?>" class="icagenda_form<?php echo $form_validate; ?>" method="post" enctype="multipart/form-data"<?php echo $iCheckForm . $novalidate; ?>>
 			<fieldset>
 			<div class="fieldset">
-				<?php if (($u_id) AND ($autofilluser == 1)) : ?>
+				<?php if (($u_id) && ($autofilluser == 1)) : ?>
 					<?php echo '<input type="hidden" name="uid" value="'.$u_id.'" />'; ?>
 				<?php else : ?>
 					<?php echo '<input type="hidden" name="uid" value="" disabled="disabled" size="2" />'; ?>
 				<?php endif; ?>
 
-				<?php // Name Field ?>
+				<?php // NAME FIELD ?>
 					<?php
 					$name_option = !empty($u_name) ? $ic_readonly : $ic_required;
 					?>
@@ -284,7 +286,7 @@ else
 						</div>
 					</div>
 
-				<?php // Email Field ?>
+				<?php // EMAIL FIELD ?>
 					<?php
 					$email_class = ' class="input-large required validate-email"';
 					$email_required = !empty($item->emailRequired) ? $ic_required : '';
@@ -296,16 +298,28 @@ else
 							<label id="reg_email-lbl" for="reg_email"><?php echo JText::_( 'ICAGENDA_REGISTRATION_FORM_EMAIL' ) . ' ' . $email_required_icon; ?></label>
 						</div>
 						<div class="ic-controls">
-							<?php if (!$post_email) : ?>
-								<?php echo '<input type="email" id="reg_email" name="email" value="' . $u_mail . '"' . $email_class . $email_required . $email_readonly . ' />'; ?>
+							<?php if ( ! $post_email) : ?>
+								<?php echo '<input type="email" field="id" id="reg_email" name="email" value="' . $u_mail . '"' . $email_class . $email_required . $email_readonly . ' />'; ?>
 							<?php else : ?>
 								<?php echo '<input type="email" id="reg_email" name="email" value="' . $post_email . '"' . $email_class . $email_required . $email_readonly . ' />'; ?>
 							<?php endif; ?>
 							<?php echo '<span class="iCFormTip iCicon iCicon-info-circle" title="' . $icTip_email . '"></span>'; ?>
 						</div>
 					</div>
+					<?php // Confirm Email (if not logged-in user) ?>
+					<?php if ( ! $u_mail && $this->params->get('emailConfirm', 1)) : ?>
+					<div class="ic-control-group ic-clearfix">
+						<div class="ic-control-label">
+							<label id="reg_email2-lbl" for="reg_email2"><?php echo JText::_( 'IC_FORM_EMAIL_CONFIRM_LBL' ) . ' ' . $email_required_icon; ?></label>
+						</div>
+						<div class="ic-controls">
+							<?php echo '<input type="email" field="email" id="reg_email2" name="email2" value="' . $post_email2 . '" class="input-large required validate-emailverify" ' . $email_required . ' placeholder="' . JText::_( 'IC_FORM_EMAIL_CONFIRM_HINT' ) . '" />'; ?>
+							<?php echo '<span class="iCFormTip iCicon iCicon-info-circle" title="' . $icTip_email2 . '"></span>'; ?>
+						</div>
+					</div>
+					<?php endif; ?>
 
-				<?php // Phone Field ?>
+				<?php // PHONE FIELD ?>
 				<?php if ($phoneDisplay == 1) : ?>
 					<?php
 					$phone_required = !empty($item->phoneRequired) ? $ic_required : '';
@@ -327,174 +341,95 @@ else
 				<?php endif; ?>
 
 
-				<?php
-				/**
-				 * Field Date
-				 */
+				<?php // DATE FIELD ?>
+				<?php $typeReg = $item->typeReg; ?>
 
-				$typeReg = $item->typeReg;
+				<?php // Dates List ?>
+				<?php if ($typeReg == 1) : ?>
+					<div class="ic-control-group ic-clearfix">
+						<div class="ic-control-label">
+							<label><?php echo JText::_( 'ICAGENDA_REGISTRATION_FORM_DATE' ); ?></label>
+						</div>
+						<div class="ic-controls ic-select">
+							<select type="list" class="select-large" name="date">
+								<?php
+								foreach ($item->datelistMkt as $date)
+								{
+									$date_get = explode('@@', $date);
+									$date_value = $date_get[0];
+									$date_label = $date_get[1];
 
-					//
-					// All Options (Option removed in 3.3.2)
-					//
-					if ($typeReg == 0)
-					{
-						?>
+									$selected = ($post_date == $date_value) ? ' selected' : '';
+
+									echo '<option value="' . $date_value . '"' . $selected . '>' . $date_label . '</option>';
+								}
+								?>
+							</select>
+							<?php echo '<span class="iCFormTip iCicon iCicon-info-circle" title="' . $icTip_date . '"></span>'; ?>
+						</div>
+					</div>
+				<?php // Only Period ?>
+				<?php else : ?>
+					<?php if ($item->periodDisplay && ($item->periodControl == 1)) : ?>
 						<div class="ic-control-group ic-clearfix">
-							<div class="ic-control-label">
-								<label><?php echo JText::_( 'ICAGENDA_REGISTRATION_FORM_DATE' ); ?></label>
+							<div>
+								<label><?php echo JText::_( 'ICAGENDA_REGISTRATION_FORM_PERIOD' ); ?></label>
 							</div>
 							<div class="ic-controls">
-								<select type="list" class="select-large" name="date">
-									<?php
-									foreach ($item->datelistMkt as $date)
-									{
-										$date_get = explode('@@', $date);
-										$date_value = $date_get[0];
-										$date_label = $date_get[1];
-
-										$selected = ($post_date == $date_value) ? ' selected' : '';
-
-										echo '<option value="' . $date_value . '"' . $selected . '>' . $date_label . '</option>';
-									}
-									?>
-								</select>
-								<?php echo '<span class="iCFormTip iCicon iCicon-info-circle" title="' . $icTip_date . '"></span>'; ?>
-							</div>
-						</div>
-
-						<?php if ($item->periodDisplay && ($item->periodControl == 1)) : ?>
-							<div class="ic-control-group ic-clearfix">
-								<div class="ic-control-label">
-									<label><?php echo JText::_( 'ICAGENDA_REGISTRATION_FORM_PERIOD' ); ?></label>
-								</div>
-								<div class="ic-controls">
-									<?php
-										$start = $item->startDate.' <span class="evttime">'.$item->startTime.'</span>';
-										$end = $item->endDate.' <span class="evttime">'.$item->endTime.'</span>';
-										echo $start.' - '.$end;
-									?>
-									<div>
-										<label>&nbsp;</label>
-										<?php echo JText::_( 'JYES' );?> <input type="radio" name="period" value="1" />
-										<?php echo JText::_( 'JNO' );?> <input type="radio" name="period" value="0" CHECKED />
-										<?php echo '<span class="iCFormTip iCicon iCicon-info-circle" title="' . $icTip_period . '"></span>'; ?>
-									</div>
-								</div>
-							</div>
-						<?php endif; ?>
-
-					<?php
-					//
-					// Dates List
-					//
-					}
-					elseif ($typeReg == 1)
-					{
-						?>
-						<div class="ic-control-group ic-clearfix">
-							<div class="ic-control-label">
-								<label><?php echo JText::_( 'ICAGENDA_REGISTRATION_FORM_DATE' ); ?></label>
-							</div>
-							<div class="ic-controls ic-select">
-								<select type="list" class="select-large" name="date">
-									<?php
-									foreach ($item->datelistMkt as $date)
-									{
-										$date_get = explode('@@', $date);
-										$date_value = $date_get[0];
-										$date_label = $date_get[1];
-
-										$selected = ($post_date == $date_value) ? ' selected' : '';
-
-										echo '<option value="' . $date_value . '"' . $selected . '>' . $date_label . '</option>';
-									}
-									?>
-								</select>
-								<?php echo '<span class="iCFormTip iCicon iCicon-info-circle" title="' . $icTip_date . '"></span>'; ?>
-							</div>
-						</div>
-
-					<?php
-					//
-					// Only Period
-					//
-					}
-					else
-					{
-					?>
-						<?php if ($item->periodDisplay && ($item->periodControl == 1)) : ?>
-							<div class="ic-control-group ic-clearfix">
-								<div>
-									<label><?php echo JText::_( 'ICAGENDA_REGISTRATION_FORM_PERIOD' ); ?></label>
-								</div>
-								<div class="ic-controls">
-									<input type="hidden" name="period" value="1" />
-									<?php
-										$start = $item->startDate.' <span class="evttime">'.$item->startTime.'</span>';
-										$end = $item->endDate.' <span class="evttime">'.$item->endTime.'</span>';
-										echo $start.' - '.$end;
-									?>
-								</div>
-							</div>
-						<?php else : ?>
-							<input type="hidden" name="period" value="1" />
-						<?php endif; ?>
-					<?php
-					}
-
-				/**
-				 * Field Number of People
-				 */
-
-				$maxRlist = $item->maxRlist;
-
-					if ($maxRlist > 1) : ?>
-						<div class="ic-control-group ic-clearfix">
-							<div class="ic-control-label">
-								<label><?php echo JText::_( 'ICAGENDA_REGISTRATION_FORM_PEOPLE' ); ?></label>
-							</div>
-							<div class="ic-controls ic-select">
-							<select type="list" class="select-large" name="people">
+								<input type="hidden" name="period" value="1" />
 								<?php
+									$start = $item->startDate.' <span class="evttime">'.$item->startTime.'</span>';
+									$end = $item->endDate.' <span class="evttime">'.$item->endTime.'</span>';
+									echo $start.' - '.$end;
+								?>
+							</div>
+						</div>
+					<?php else : ?>
+						<input type="hidden" name="period" value="1" />
+					<?php endif; ?>
+				<?php endif; ?>
+
+				<?php // NUMBER OF PEOPLE FIELD ?>
+				<?php $maxRlist = $item->maxRlist; ?>
+
+				<?php if ($maxRlist > 1) : ?>
+					<div class="ic-control-group ic-clearfix">
+						<div class="ic-control-label">
+							<label><?php echo JText::_( 'ICAGENDA_REGISTRATION_FORM_PEOPLE' ); ?></label>
+						</div>
+						<div class="ic-controls ic-select">
+							<select type="list" class="select-large" name="people">
+							<?php
 								$maxRlist		= $item->maxRlist;
 								$maxReg			= $item->maxReg;
 								$registered		= $item->registered;
-//								$placeRemain	= ($maxReg - $registered);
 								$placeRemain	= ($maxReg - 0);
 
-//								if ($placeRemain < $maxRlist)
-//								{
-//									$maxRlist = $placeRemain;
-//								}
 								for ($i=1; $i <= $maxRlist; $i++)
 								{
 									$selected = ($post_people == $i) ? ' selected' : '';
 
 									echo '<option value="'.$i.'"' . $selected . '>'.$i.'</option>';
 								}
-								?>
+							?>
 							</select>
-							<?php echo '<span class="iCFormTip iCicon iCicon-info-circle" title="' . $icTip_people . '"></span>'; ?>
-							</div>
+						<?php echo '<span class="iCFormTip iCicon iCicon-info-circle" title="' . $icTip_people . '"></span>'; ?>
 						</div>
-					<?php else : ?>
-						<input type="hidden" name="people" value="1" />
-					<?php endif; ?>
-				<?php
+					</div>
+				<?php else : ?>
+					<input type="hidden" name="people" value="1" />
+				<?php endif; ?>
 
 
-				/**
-				 * Custom Fields
-				 */
-				// Load Custom fields - Registration form (1)
-				echo icagendaCustomfields::loader(1);
+				<?php // CUSTOM FIELDS ?>
+					<?php
+						// Load Custom fields - Registration form (1)
+						echo icagendaCustomfields::loader(1);
+					?>
 
 
-				/**
-				 * Field Notes
-				 */
-				if ($notesDisplay == 1) : ?>
+				<?php // NOTES FIELD ?>
+				<?php if ($notesDisplay == 1) : ?>
 					<div class="ic-control-group ic-clearfix">
 						<div class="ic-control-label">
 							<label><?php echo JText::_( 'ICAGENDA_REGISTRATION_FORM_NOTES' ); ?></label>
@@ -628,9 +563,10 @@ else
 	$session->clear('ic_registration');
 	$session->clear('custom_fields');
 	$session->clear('ic_submit_tos');
+	$session->clear('email2');
 
 	// iCagenda Script validation for Registration form (1)
-	if (!$this->reg_form_validation)
+	if ( ! $this->reg_form_validation)
 	{
 		$iCheckForm = icagendaForm::submit(1);
 		JFactory::getDocument()->addScriptDeclaration($iCheckForm);
@@ -657,4 +593,13 @@ else
 
 	// Add the script to the document head.
 	JFactory::getDocument()->addScriptDeclaration(implode("\n", $iCtip));
+
+	// Add custom handler to check both the emails (Email and Confirm Email) are same
+	JFactory::getDocument()->addScriptDeclaration('jQuery(document).ready(function(){
+		document.formvalidator.setHandler("emailverify", function (value) {
+			var email = document.getElementById("reg_email");
+			var email2 = document.getElementById("reg_email2");
+			return (email.value === email2.value);
+		});
+	});');
 }

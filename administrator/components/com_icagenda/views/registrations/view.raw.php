@@ -10,7 +10,7 @@
  * @author      Cyril Rezé (Lyr!C)
  * @link        http://www.joomlic.com
  *
- * @version     3.5.0 2015-02-05
+ * @version     3.5.3 2015-03-23
  * @since       3.5.0
  *------------------------------------------------------------------------------
 */
@@ -63,8 +63,16 @@ class icagendaViewRegistrations extends JViewLegacy
 		// Joomla 2.5
 		else
 		{
-			JResponse::setHeader('Content-disposition', 'attachment; filename="'.$basename.'.'.$filetype.'"; creation-date="'.JFactory::getDate()->toRFC822().'"', true);
+			JResponse::setHeader('Content-disposition', 'attachment; filename="' . $basename . '.' . $filetype . '"; creation-date="' . JFactory::getDate()->toRFC822() . '"', true);
 		}
+
+		// Open file pointer to standard output
+//		$fp = fopen('php://output', 'w');
+
+		// Add BOM to fix UTF-8 in Excel
+//		fputs($fp, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
+
+//		fclose($fp);
 
 		echo $content;
 	}

@@ -526,11 +526,13 @@ class iCModeliChelper extends JModelItem
 	{
 		$eventTimeZone = null;
 
-		$period			= unserialize($i->period); // returns array
+//		$singledates	= unserialize($i->dates); // returns array
+		$singledates	= iCString::isSerialized($i->dates) ? unserialize($i->dates) : array(); // returns array
+//		$period			= unserialize($i->period); // returns array
+		$period			= iCString::isSerialized($i->period) ? unserialize($i->period) : array(); // returns array
 		$startdatetime	= $i->startdatetime;
 		$enddatetime	= $i->enddatetime;
 		$weekdays		= $i->weekdays;
-		$singledates	= unserialize($i->dates); // returns array
 
 		$site_today_date	= JHtml::date('now', 'Y-m-d');
 		$UTC_today_date		= JHtml::date('now', 'Y-m-d', $eventTimeZone);

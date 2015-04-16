@@ -11,7 +11,7 @@
  * @author      Cyril Rezé (Lyr!C)
  * @link        http://www.joomlic.com
  *
- * @version     3.5.1 2015-02-27
+ * @version     3.5.3 2015-03-18
  * @since       3.5.0
  *------------------------------------------------------------------------------
 */
@@ -125,7 +125,8 @@ class icagendaEventsData
 			$WeeksDays			= iCDatePeriod::weekdaysToArray($i_weekdays);
 
 			// If Single Dates, added each one to All Dates for this event
-			$singledates		= unserialize($i_dates);
+//			$singledates		= unserialize($i_dates);
+			$singledates 		= iCString::isSerialized($i_dates) ? unserialize($i_dates) : array();
 			$singleDatesArray	= array();
 
 			$no_filtering = '0';

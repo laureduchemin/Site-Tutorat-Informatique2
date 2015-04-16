@@ -10,7 +10,7 @@
  * @author      Cyril Rezé (Lyr!C)
  * @link        http://www.joomlic.com
  *
- * @version     3.4.1 2015-01-25
+ * @version     3.5.3 2015-03-18
  * @since       1.0
  *------------------------------------------------------------------------------
 */
@@ -21,13 +21,13 @@ defined('_JEXEC') or die();
 /**
  * event Table class
  */
-class iCagendaTableevent extends JTable
+class iCagendaTableEvent extends JTable
 {
 	/**
-	 * @var string $features  Property for the comma separated list of feature IDs. This needs to be specified because
-	 *                        there is no column for features in the events table
+	 * @var array $custom_fields  Property for the array of custom fields.
+	 * This needs to be specified because there is no column for features in the events table
 	 */
-	protected $features = null;
+	protected $custom_fields = array();
 
 	/**
 	 * Constructor
@@ -82,6 +82,7 @@ class iCagendaTableevent extends JTable
 		{
 			$array['dates']	= serialize($dates);
 		}
+
 
 		/**
 		 * Set Week Days
@@ -250,64 +251,14 @@ class iCagendaTableevent extends JTable
 			}
 		}
 
-		// Set Creator infos
-		$user = JFactory::getUser();
-		$userId	= $user->get('id');
-
-		if ($array['created_by'] == '0')
-		{
-			$array['created_by'] = (int)$userId;
-		}
-
-		// Save Custom Fields to database
-		if ( isset($array['custom_fields'])
-			&& is_array($array['custom_fields']) )
-		{
-			icagendaCustomfields::saveToData($array['custom_fields'], $array['id'], 2);
-		}
-
-		// Set Features
-		$array['features'] = $this->getFeatures($array['id']);
-
-		// Set Params
-		if ( isset($array['params'])
-			&& is_array($array['params']) )
-		{
-			// Convert the params field to a string.
-			$parameter = new JRegistry;
-			$parameter->loadArray($array['params']);
-			$array['params'] = (string)$parameter;
-		}
-
-		// Set Username
-		$username = $user->get('name');
-		$array['username'] = $username;
-
-		// Set File upload
-		if (!isset($array['file']))
-		{
-			$file = JRequest::getVar('jform', null, 'files', 'array');
-			$fileUrl = $this->upload($file);
-			$array['file'] = $fileUrl;
-		}
-
-		// Set Meta data
-		if (isset($array['metadata']) && is_array($array['metadata']))
-		{
-			$registry = new JRegistry();
-			$registry->loadArray($array['metadata']);
-			$array['metadata'] = (string)$registry;
-		}
-
 		$return[] = parent::bind($array, $ignore);
 
 
 		// ====================================
 		// START : HACK FOR A FEW PRO USERS !!!
 		// ====================================
-		$mail_new_event = '0';
-		$mail_new_event = JComponentHelper::getParams('com_icagenda')->get('mail_new_event', '0');
 
+		$mail_new_event = JComponentHelper::getParams('com_icagenda')->get('mail_new_event', '0');
 		if ($mail_new_event == 1)
 		{
 			$title = $array['title'];
@@ -316,13 +267,10 @@ class iCagendaTableevent extends JTable
 			$query	= $db->getQuery(true);
 			$query->select('id AS eventID')
 					->from('#__icagenda_events')
-//					->where(" id = '$id_event'")
 					->order('id DESC');
 			$db->setQuery($query);
 			$eventID = $db->loadResult();
-
 			$new_event = JRequest::getVar('new_event');
-
 			$title = $array['title'];
 			$description = $array['desc'];
 			$venue = '';
@@ -330,7 +278,6 @@ class iCagendaTableevent extends JTable
 			if ($array['city']) $venue.= $array['city'];
 			if ($array['city'] && $array['country']) $venue.= ', ';
 			if ($array['country']) $venue.= $array['country'];
-
 			if (strtotime($array['startdate']))
 			{
 				$date = 'Du '.$array['startdate'].' au '.$array['startdate'];
@@ -339,67 +286,28 @@ class iCagendaTableevent extends JTable
 			{
 				$date = $array['next'];
 			}
-
 			$baseURL = JURI::base();
 			$baseURL = str_replace('/administrator', '', $baseURL);
 			$baseURL = ltrim($baseURL, '/');
-
 			if ($array['image']) $image = '<img src="'.$baseURL.'/'.$array['image'].'" />';
-
-
 			if ($new_event == '1' && $eventID && $array['state'] == '1' && $array['approval'] == '0')
 			{
 					$return[] = self::notificationNewEvent(($eventID+1), $title, $description, $venue, $date, $image, $new_event);
 			}
-//			elseif ($new_event == '0')
-//			{
-//					$return[] = self::notificationNewEvent($array['id'], 'Edited Event', $new_event);
-//			}
 		}
+
 		// ====================================
 		// END : HACK FOR A FEW PRO USERS !!!
 		// ====================================
+
 
 		return $return;
 
 	}
 
 	/**
-	 * Extracts the list of Feature IDs linked to the event and returns an array
-	 *
-	 * @param	integer  $event_id
-	 *
-	 * @return	array/integer  Set of Feature IDs
-	 * @since	3.4.0
+	 * DEV.
 	 */
-	protected function getFeatures($event_id)
-	{
-		// Write any new feature records to the icagenda_feature_xref table
-		if (empty($event_id))
-		{
-			return '';
-		}
-		else
-		{
-			$db = JFactory::getDbo();
-
-			// Get a comma separated list of the ids of features present for this event
-			// Note: Direct extraction of a comma separated list is avoided because each db type uses proprietary syntax
-			$query = $db->getQuery(true)
-				->select('fx.feature_id')
-				->from('#__icagenda_events AS e')
-				->innerJoin('#__icagenda_feature_xref AS fx ON e.id=fx.event_id')
-				->innerJoin('#__icagenda_feature AS f ON fx.feature_id=f.id AND f.state=1')
-				->where("e.id=$event_id");//$dump=$db->replacePrefix((string)$query);dump($dump,'sql query');
-			$db->setQuery($query);
-			$features = $db->loadColumn(0);
-
-			// return $features;
-			// Return a comma separated list
-			return implode(',', $features);
-		}
-	}
-
 	function setDatesOptions($dates) // DEV.
 	{
 		$dates	= str_replace('day=', '', $dates);
@@ -424,6 +332,9 @@ class iCagendaTableevent extends JTable
 		return $singles_dates;
 	}
 
+	/**
+	 * Get Dates for Single Dates Script Input
+	 */
 	function getDates($dates)
 	{
 		$dates		= str_replace('d=', '', $dates);
@@ -434,6 +345,9 @@ class iCagendaTableevent extends JTable
 		return $ex_dates;
 	}
 
+	/**
+	 * Get Dates for Period Script Input
+	 */
 	function getPeriod($period)
 	{
 		$period		= str_replace('d=', '', $period);
@@ -444,7 +358,9 @@ class iCagendaTableevent extends JTable
 		return $ex_period;
 	}
 
-
+	/**
+	 * Get Next Date from Single Dates
+	 */
 	function getNextDates($dates)
 	{
 		// Set Vars
@@ -473,7 +389,9 @@ class iCagendaTableevent extends JTable
 		}
 	}
 
-
+	/**
+	 * Get Next Date from Period
+	 */
 	function getNextPeriod($period, $i_weekdays)
 	{
 		// Set Vars
@@ -503,52 +421,11 @@ class iCagendaTableevent extends JTable
 	}
 
 	/**
-	 * upload
-	 */
-
-	function upload($file)
-	{
-		jimport('joomla.filesystem.file');
-		jimport('joomla.filesystem.folder');
-
-		$filename = JFile::makeSafe($file['name']['file']);
-
-		// Get media path
-		$params_media	= JComponentHelper::getParams('com_media');
-		$image_path		= $params_media->get('image_path', 'images');
-
-		// Paths to thumbs folder
-		$thumbsPath		= $image_path . '/icagenda/thumbs';
-
-		if ($filename!='')
-		{
-			$src = $file['tmp_name']['file'];
-			$dest =  JPATH_SITE . '/' . $image_path . '/icagenda/files/' . $filename;
-
-			if(!is_dir($dest))
-			{
-				mkdir($intDir, 0755);
-			}
-
-			if ( JFile::upload($src, $dest, false) )
-			{
-				echo 'upload';
-				return $image_path . '/icagenda/files/' . $filename;
-			}
-
-			return $image_path . '/icagenda/files/' . $filename;
-		}
-	}
-
-	/**
 	* Overloaded check function
 	*/
 	public function check()
 	{
-		// Import Joomla 2.5
-//		jimport( 'joomla.filter.output' );
-
-		//If there is an ordering column and this is a new row then get the next ordering value
+		// If there is an ordering column and this is a new row then get the next ordering value
 		if (property_exists($this, 'ordering') && $this->id == 0)
 		{
 			$this->ordering = self::getNextOrder();
@@ -615,12 +492,7 @@ class iCagendaTableevent extends JTable
 			' WHERE ('.$where.')' .
 			$checkin
 		);
-// J2.5 :
 		$this->_db->query();
-
-// J3
-//		$this->_db->setQuery($query);
-//		$this->_db->execute();
 
 		// Check for a database error.
 		if ($this->_db->getErrorNum())
@@ -651,40 +523,6 @@ class iCagendaTableevent extends JTable
 	}
 
 
-		/**
-		* Overloaded load function
-		*
-		* @param       int $pk primary key
-		* @param       boolean $reset reset data
-		* @return      boolean
-		* @see JTable:load
-		*/
-		public function load($pk = null, $reset = true)
-		{
-			if (parent::load($pk, $reset))
-			{
-			// Convert the params field to a registry.
-				$params = new JRegistry;
-				// loadJSON is @deprecated    12.1  Use loadString passing JSON as the format instead.
-				// $params->loadString($this->item->params, 'JSON');
-				// "item" should not be present.
-				if(version_compare(JVERSION, '3.0', 'lt'))
-				{
-					$params->loadJSON($this->params);
-				}
-				else
-				{
-					$params->loadString($this->params);
-				}
-				$this->params = $params;
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
 	/**
 	 * HACK FOR A FEW PRO USERS !!!
 	 *
@@ -702,27 +540,27 @@ class iCagendaTableevent extends JTable
 		// Switch Joomla 3.x / 2.5
 		if (version_compare(JVERSION, '3.0', 'ge'))
 		{
-				// Get the site name
-				$sitename = $config->get('sitename');
+			// Get the site name
+			$sitename = $config->get('sitename');
 
-				// Get Global Joomla Contact Infos
-				$mailfrom = $config->get('mailfrom');
-				$fromname = $config->get('fromname');
+			// Get Global Joomla Contact Infos
+			$mailfrom = $config->get('mailfrom');
+			$fromname = $config->get('fromname');
 
-				// Get default language
-				$langdefault = $config->get('language');
+			// Get default language
+			$langdefault = $config->get('language');
 		}
 		else
 		{
-				// Get the site name
-				$sitename = $config->getValue('config.sitename');
+			// Get the site name
+			$sitename = $config->getValue('config.sitename');
 
-				// Get Global Joomla Contact Infos
-				$mailfrom = $config->getValue('config.mailfrom');
-				$fromname = $config->getValue('config.fromname');
+			// Get Global Joomla Contact Infos
+			$mailfrom = $config->getValue('config.mailfrom');
+			$fromname = $config->getValue('config.fromname');
 
-				// Get default language
-				$langdefault = $config->getValue('config.language');
+			// Get default language
+			$langdefault = $config->getValue('config.language');
 		}
 
 		$siteURL = JURI::base();
@@ -779,9 +617,6 @@ class iCagendaTableevent extends JTable
 		// Set Notification Email to each User groups allowed to receive a notification email when a new event created
 		$groupid = $iCparams->get('newevent_Groups', array("8"));
 
-		// Load Global Option for Autologin
-//		$autologin = $iCparams->get('auto_login', 1);
-
 		jimport( 'joomla.access.access' );
 		$newevent_Groups_Array = array();
 		foreach ($groupid AS $gp) {
@@ -789,56 +624,15 @@ class iCagendaTableevent extends JTable
 			$newevent_Groups_Array = array_merge($newevent_Groups_Array, $GroupUsers);
 		}
 
-//		if ($u_id == NULL) {
-//				$u_id = 0;
-//		}
-
 		$db = JFactory::getDbo();
 		$query	= $db->getQuery(true);
 
-//		if (!in_array($u_id, $newevent_Groups_Array)) {
-
-//			$matches = implode(',', $adminUsersArray);
-//			$query->select('ui.username AS username, ui.email AS email, ui.password AS passw, ui.block AS block, ui.activation AS activation')
-//					->from('#__users AS ui')
-//					->where( "ui.id IN ($matches) ");
-
-//		} else {
-
-//			$matches = $u_id;
-			$matches = implode(',', $newevent_Groups_Array);
-			$query->select('ui.username AS username, ui.email AS email, ui.password AS passw, ui.block AS block, ui.activation AS activation')
-					->from('#__users AS ui')
-					->where( "ui.id IN ($matches) ");
-//					->where( "ui.id = $matches ");
-
-//		}
-
+		$matches = implode(',', $newevent_Groups_Array);
+		$query->select('ui.username AS username, ui.email AS email, ui.password AS passw, ui.block AS block, ui.activation AS activation')
+			->from('#__users AS ui')
+			->where( "ui.id IN ($matches) ");
 		$db->setQuery($query);
 		$users = $db->loadObjectList();
-
-		// Get all users email and group except for senders
-//		$db = JFactory::getDbo();
-//		$query	= $db->getQuery(true)
-//			->select('email')
-//			->from('#__users');
-//			->where('id != '.(int) $user->get('id'));
-//		if ($grp !== 0)
-//		{
-//			if (empty($to))
-//			{
-//				$query->where('0');
-//			} else {
-//				$query->where('id IN (' . implode(',', $to) . ')');
-//			}
-//		}
-
-//		if ($disabled == 0){
-//			$query->where("block = 0");
-//		}
-
-//		$db->setQuery($query);
-//		$rows = $db->loadColumn();
 
 		foreach ($users AS $user)
 		{
@@ -857,41 +651,18 @@ class iCagendaTableevent extends JTable
 			$new_mailer->addRecipient($email);
 
 			// Set Subject of New Event Notification Email
-//			$new_subject = JText::sprintf('COM_ICAGENDA_MAIL_NEW_EVENT_SUBJECT', $sitename);
 			$new_subject = 'Nouvel évènement, '.$sitename;
 			$new_mailer->setSubject($new_subject);
 
-
-
 			// Set Url to preview new event
 			$baseURL = JURI::base();
-//			$subpathURL = JURI::base(true);
-
 			$baseURL = str_replace('/administrator', '', $baseURL);
-//			$subpathURL = str_replace('/administrator', '', $subpathURL);
 
 			$urlpreview = str_replace('&amp;','&', JRoute::_($baseURL.'index.php?option=com_icagenda&view=list&layout=event&id='.(int)$eventid.'&Itemid='.(int)$lien));
 
-			// Sub Path filtering
-//			$subpathURL = ltrim($subpathURL, '/');
-
-			// URL Event Preview filtering
-//			$urlpreview = ltrim($urlpreview, '/');
-//			if(substr($urlpreview,0,strlen($subpathURL)+1) == "$subpathURL/") $urlpreview = substr($urlpreview,strlen($subpathURL)+1);
-//			$urlpreview = rtrim($baseURL,'/').'/'.ltrim($urlpreview,'/');
-
-
-			/**
-			 * Set Body of User Notification Email
-			 */
-
-			// Hello
-//			$new_body_hello = JText::sprintf( 'COM_ICAGENDA_MAIL_NEW_EVENT_BODY_HELLO', $username);
+			// Set Body of User Notification Email
 			$new_body_hello = 'Bonjour,';
 			$new_bodycontent = $new_body_hello.'<br /><br />';
-
-			// Text
-//			$new_body_text = JText::sprintf( 'COM_ICAGENDA_MAIL_NEW_EVENT_BODY_TEXT', $sitename);
 			$new_body_text = $sitename.' vous propose un nouvel évènement :';
 			$new_bodycontent.= $new_body_text.'<br /><br />';
 

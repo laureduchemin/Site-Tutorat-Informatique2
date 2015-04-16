@@ -22,7 +22,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 ?>
 <!--
  * - - - - - - - - - - - - - -
- * iCagenda 3.5.2 by Jooml!C
+ * iCagenda 3.5.3 by Jooml!C
  * - - - - - - - - - - - - - -
  * @copyright	Copyright (c)2012-2015 JOOMLIC - All rights reserved.
  *

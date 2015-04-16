@@ -2,10 +2,44 @@
 
 <div style="text-align:center"><img src='../media/com_icagenda/images/iconicagenda48.png' alt='' /><br/><big style="color:#555">ChangeLog</big></div>
 ================================================================================
-? <center><strong><big>Welcome to iCagenda 3.5.2 release!</big></strong></center><br />This is a maintenance release.<br />We recommend every user to update, to take advantage of all the enhancement done in 3.5.2 (see Release Notes)<br /><br /><center><strong><big>Enjoy!</big></strong></center>
+? <center><strong><big>Welcome to iCagenda 3.5.3 release!</big></strong></center><br />This is a maintenance release. One feature was added to registration form: Confirm Email field (this one is enabled by default, but you can turn it off in global options of component)<br />We recommend every user to update, to take advantage of all the enhancement done in 3.5.3 (see Release Notes)<br /><br /><center><strong><big>Enjoy!</big></strong></center>
 ================================================================================
 : <span class="ic-box-important ic-box-12">!</span><span class="ic-important">important</span>&nbsp;<span class="ic-box-added ic-box-12">+</span><span class="ic-added">added</span>&nbsp;<span class="ic-box-removed ic-box-12">-</span><span class="ic-removed">removed</span>&nbsp;<span class="ic-box-changed ic-box-12">~</span><span class="ic-changed">changed</span>&nbsp;<span class="ic-box-fixed ic-box-12">#</span><span class="ic-fixed">fixed</span><br/><i>Info: access to the beta versions and pre-releases are reserved to users with a valid pro subscription.</i><br/>iCagenda™ is distributed under the terms of the GNU General Public License version 3 or later; see LICENSE.txt.
 ================================================================================
+
+
+iCagenda 3.5.3 <small style="font-weight:normal;">(2015.03.25)</small>
+================================================================================
++ Added : Confirm Email field in frontend Registration form, for not logged-in user.
++ Added : BOM utf-8 to csv export file (special characters).
+~ Changed : improvement of the model for admin event edition.
+~ Changed : postal code is now displayed (if available) in frontend address field.
+# [MEDIUM] Fixed : saving of custom fields and features when new event (with not yet an ID) was broken (no data saved).
+# [THEME PACKS][LOW] Fixed : display of empty participants list when registration not enabled.
+# [LOW] Fixed : display of information details in event details view, was not always displayed depending of options and data filled.
+# [LOW] Fixed : register button when only a single date, and the list display type is not set to display all dates.
+# [LOW] Fixed : added back the alert message on Joomla 2.5 about the impossibility of trashing frontend submitted events if not edited (the issue with trash and empty asset_id is fixed in latest version of Joomla 3).
+
+* Changed files in 3.5.3
+~ admin/config.xml
+~ admin/models/event.php
+~ admin/models/fields/modal/ictext_placeholder.php
+~ admin/models/forms/event.xml
+~ admin/models/registrations.php
+~ admin/tables/event.php
+~ admin/utilities/events/data.php
+~ admin/views/events/tmpl/default.php
+~ admin/views/registrations/view.raw.php
+~ [MODULE] modules/mod_iccalendar/helper.php
+~ site/add/elements/icsetvar.php
+~ site/helpers/ichelper.php
+~ site/helpers/icmodel.php
+~ site/models/list.php
+~ [THEME PACKS] site/themes/packs/default/default_event.php
+~ [THEME PACKS] site/themes/packs/ic_rounded/ic_rounded_event.php
+~ site/views/list/tmpl/event.php
+~ site/views/list/tmpl/registration.php
+~ site/views/list/view.html.php
 
 
 iCagenda 3.5.2 <small style="font-weight:normal;">(2015.03.13)</small>
@@ -22,7 +56,7 @@ iCagenda 3.5.2 <small style="font-weight:normal;">(2015.03.13)</small>
 # [LOW] Fixed : a few date format buggy depending of your settings, and the current language used.
 # [LOW] Fixed : notice error $translator not defined in control panel (language issue) only on free version.
 # [LOW] Fixed : filters display issue in registration admin list on Joomla 2.5 when event title length too high.
-# [MODULE iC Event List][LOW] Fixed : blur xsmall thumbs when created in admin.
+# [MODULE iC Event List][LOW] Fixed : blur x-small thumbs when created in admin.
 
 * Changed files in 3.5.2
 ~ admin/add/css/icagenda.j25.css
@@ -42,8 +76,8 @@ iCagenda 3.5.2 <small style="font-weight:normal;">(2015.03.13)</small>
 ~ site/helpers/icmodel.php
 ~ site/models/forms/submit.xml
 ~ site/models/list.php
-~ site/themes/packs/default/css/default_component.css
-~ site/themes/packs/ic_rounded/css/ic_rounded_component.css
+~ [THEME PACKS] site/themes/packs/default/css/default_component.css
+~ [THEME PACKS] site/themes/packs/ic_rounded/css/ic_rounded_component.css
 ~ site/views/list/tmpl/registration.php
 ~ site/views/list/view.html.php
 ~ site/views/submit/tmpl/default.php

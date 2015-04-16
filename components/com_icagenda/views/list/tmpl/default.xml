@@ -19,7 +19,6 @@
 					default="default"
 			/>
 
-
 			<field type="Title" label="COM_MENUS_FILTER_FIELDSET_LABEL"  class="stylebox lead input-xxlarge"/>
 			<field
 					name="mcatid"
@@ -104,7 +103,6 @@
 						<option value="1">COM_ICAGENDA_MENU_EVENT_FEATURES_ANY_ONE_FEATURE</option>
 						<option value="2">COM_ICAGENDA_MENU_EVENT_FEATURES_ALL_FEATURES_REQUIRED</option>
 			</field>
-
 
 			<field type="Title" label=" " class="stylenote" />
 			<field type="Title" label="COM_MENUS_VIEW_FIELDSET_LABEL"  class="stylebox lead input-xxlarge"/>
