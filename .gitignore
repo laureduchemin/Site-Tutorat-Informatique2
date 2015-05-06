@@ -1,0 +1,4 @@
+#Ce fichier contient le chemin de tous les fichiers qui doivent etre ignores
+cache/*
+configuration.php
+logs/*
