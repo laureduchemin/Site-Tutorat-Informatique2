@@ -5,7 +5,7 @@
 		<fieldset name="params" label="COM_USERS_SETTINGS_FIELDSET_LABEL">
 			<field
 				name="editor"
-				type="plugins"
+				type="hidden"
 				folder="editors"
 				description="COM_USERS_USER_FIELD_EDITOR_DESC"
 				label="COM_USERS_USER_FIELD_EDITOR_LABEL"
@@ -15,7 +15,7 @@
 
 			<field
 				name="timezone"
-				type="timezone"
+				type="hidden"
 				label="COM_USERS_USER_FIELD_TIMEZONE_LABEL"
 				description="COM_USERS_USER_FIELD_TIMEZONE_DESC"
 			>
@@ -24,7 +24,7 @@
 
 			<field
 				name="language"
-				type="language"
+				type="hidden"
 				client="site"
 				description="COM_USERS_USER_FIELD_FRONTEND_LANGUAGE_DESC"
 				label="COM_USERS_USER_FIELD_FRONTEND_LANGUAGE_LABEL"
