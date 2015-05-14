@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+ <name>UserProfile</name>
+ <creationDate>2011-12-30</creationDate>
+ <author>Mathias Hortig</author>
+ <authorUrl>http://tuts4you.de/</authorUrl>
+ <copyright>Copyright 2012 by Mathias Hortig</copyright>
+ <license>GNU GPL</license>
+ <version>1.7</version>
+
+ <description>
+Lists all Users with Userinformation
+</description>
+ 
+ <files folder="site">
+  <filename>controller.php</filename>
+  <filename>router.php</filename>
+  <filename>userprofile.php</filename>
+  <filename>index.html</filename>
+  <folder>models</folder>
+  <folder>views</folder>
+  <folder>css</folder>
+ </files>
+ <languages folder="site">
+	<language tag="en-GB">languages/en-GB.com_userprofile.ini</language>
+	<language tag="de-DE">languages/de-DE.com_userprofile.ini</language>
+ </languages>
+ 
+ 
+ <administration>
+  <menu>UserProfile</menu>
+   <files folder="admin">
+     <filename>controller.php</filename>
+     <filename>userprofile.php</filename>
+     <filename>index.html</filename>
+     <folder>views</folder>
+   </files> 
+   <languages folder="admin">
+	<language tag="en-GB">languages/en-GB.com_userprofile.ini</language>
+	<language tag="de-DE">languages/de-DE.com_userprofile.ini</language>
+   </languages>
+
+ </administration>
+</extension>
