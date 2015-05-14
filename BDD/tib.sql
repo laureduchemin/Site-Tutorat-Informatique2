@@ -5304,11 +5304,20 @@ INSERT INTO `qfupd_usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUES
 
 CREATE TABLE IF NOT EXISTS `qfupd_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) NOT NULL DEFAULT '',
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `username` varchar(150) NOT NULL DEFAULT '',
+  `avatar` varchar(500) NOT NULL DEFAULT '',
+  `first_name` varchar(100) NOT NULL DEFAULT '',
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `birthday` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `username` varchar(100) NOT NULL DEFAULT '',
   `email` varchar(100) NOT NULL DEFAULT '',
   `password` varchar(100) NOT NULL DEFAULT '',
+  `promotion` varchar(2) NOT NULL DEFAULT '',
+  `role` varchar(12) NOT NULL DEFAULT '',
+  `helped_subject_1` varchar(14) NOT NULL DEFAULT '',
+  `helped_subject_2` varchar(14) NOT NULL DEFAULT '',
+  `need_help_subject_1` varchar(14) NOT NULL DEFAULT '',
+  `need_help_subject_2` varchar(14) NOT NULL DEFAULT '',
+  `about` varchar(1000) NOT NULL DEFAULT '',
   `block` tinyint(4) NOT NULL DEFAULT '0',
   `sendEmail` tinyint(4) DEFAULT '0',
   `registerDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -5331,15 +5340,15 @@ CREATE TABLE IF NOT EXISTS `qfupd_users` (
 -- Contenu de la table `qfupd_users`
 --
 
-INSERT INTO `qfupd_users` (`id`, `first_name`, `name`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(802, 'Laure', 'DUCHEMIN', 'laureduchemin', 'duchemin_laure@yahoo.fr', '$2y$10$JOWpQBYl7/cFc3OiU4PJHuL8SDggXyRfPV4r/kOVUM/T6Tp9ff0Uu', 0, 1, '2015-03-28 15:59:50', '2015-05-14 14:37:50', '0', '{"editor":"","timezone":"","language":"","admin_style":"","admin_language":"","helpsite":""}', '0000-00-00 00:00:00', 0, '', '', 0),
-(803, 'Ophélie', 'MARINIER', 'opheliemarinier', 'ophelie.marinier@gmail.com', '$2y$10$B00aknAyqpndfIxbv7YSQOPDVeRKHTR2tmIPb9w1Qz8Q93rIWm9AW', 0, 0, '2015-05-12 12:36:55', '2015-05-14 18:27:57', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
-(804, 'Tristan', 'HUART', 'tristanhuart', 'letudianteninfo@gmail.com', '$2y$10$wNIV1ZFTrhihFfCrFJ/UZedqFNHuqfAedZjo8Ml372mJKNFuFWIZy', 0, 0, '2015-05-12 12:48:57', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
-(805, 'Alexandre', 'BRIZION', 'alexandrebrizion', 'harleq1.private@gmail.com', '$2y$10$RwwUko4yl.mGuEO0oORDpeTrECyli1i.OfbG3s7BilgzvPTs9o2HW', 0, 0, '2015-05-12 13:08:32', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
-(806, 'Theotime', 'GAYAT', 'theotimegayat', 'theotime.gayat@gmail.com', '$2y$10$441D.1nLxtSW.F4uox/YPOJeHO7qMiiK5ay3YJIAqXrvUx4z2ce6q', 0, 0, '2015-05-12 13:11:03', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
-(807, 'Jean', 'JOGUET', 'jeanjoguet', 'j3.joguet@gmail.com', '$2y$10$rfxj4hrDIetahZMMdtOOOOcEts7VoLvyXM/1UwsK8U42EGbtePc12', 0, 0, '2015-05-12 13:12:48', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
-(808, 'Salim', 'IGUE', 'salimigue', 'limsamohamed@gmail.com', '$2y$10$SF0MGtO.47Lql.r63Qmqj./okVxcoEpR4GPg0qEd6zflCHrvwPxiK', 0, 0, '2015-05-12 13:14:11', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
-(809, 'tutu', 'test', 'test', 'test@test.com', '$2y$10$OzEM9neTrRgmZmS6RdPEiOPJ0peiaGyjAF0zdotyfCRFxpuH8YjQi', 0, 0, '2015-05-14 14:39:24', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
+INSERT INTO `qfupd_users` (`id`, `avatar`, `first_name`, `name`, `birthday`, `username`, `email`, `password`, `promotion`, `role`, `helped_subject_1`, `helped_subject_2`, `need_help_subject_1`, `need_help_subject_2`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
+(802, '', 'Laure', 'DUCHEMIN', '2015-03-28 15:59:50', 'laureduchemin', 'duchemin_laure@yahoo.fr', '$2y$10$JOWpQBYl7/cFc3OiU4PJHuL8SDggXyRfPV4r/kOVUM/T6Tp9ff0Uu', 'L2', '', '', '', '', '', 0, 1, '2015-03-28 15:59:50', '2015-05-14 14:37:50', '0', '{"editor":"","timezone":"","language":"","admin_style":"","admin_language":"","helpsite":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(803, '', 'Ophélie', 'MARINIER', '2015-03-28 15:59:50', 'opheliemarinier', 'ophelie.marinier@gmail.com', '$2y$10$B00aknAyqpndfIxbv7YSQOPDVeRKHTR2tmIPb9w1Qz8Q93rIWm9AW', 'L1', 'tutore', 'rien', 'rien', 'mathematiques', 'informatique', 0, 0, '2015-05-12 12:36:55', '2015-05-14 18:27:57', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(804, '', 'Tristan', 'HUART', '2015-03-28 15:59:50', 'tristanhuart', 'letudianteninfo@gmail.com', '$2y$10$wNIV1ZFTrhihFfCrFJ/UZedqFNHuqfAedZjo8Ml372mJKNFuFWIZy', 'L2', '', '', '', '', '', 0, 0, '2015-05-12 12:48:57', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(805, '', 'Alexandre', 'BRIZION', '2015-03-28 15:59:50', 'alexandrebrizion', 'harleq1.private@gmail.com', '$2y$10$RwwUko4yl.mGuEO0oORDpeTrECyli1i.OfbG3s7BilgzvPTs9o2HW', 'L1', '', '', '', '', '', 0, 0, '2015-05-12 13:08:32', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(806, '', 'Theotime', 'GAYAT', '2015-03-28 15:59:50', 'theotimegayat', 'theotime.gayat@gmail.com', '$2y$10$441D.1nLxtSW.F4uox/YPOJeHO7qMiiK5ay3YJIAqXrvUx4z2ce6q', 'L1', '', '', '', '', '', 0, 0, '2015-05-12 13:11:03', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(807, '', 'Jean', 'JOGUET', '2015-03-28 15:59:50', 'jeanjoguet', 'j3.joguet@gmail.com', '$2y$10$rfxj4hrDIetahZMMdtOOOOcEts7VoLvyXM/1UwsK8U42EGbtePc12', 'L1', '', '', '', '', '', 0, 0, '2015-05-12 13:12:48', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(808, '', 'Salim', 'IGUE', '2015-03-28 15:59:50', 'salimigue', 'limsamohamed@gmail.com', '$2y$10$SF0MGtO.47Lql.r63Qmqj./okVxcoEpR4GPg0qEd6zflCHrvwPxiK', 'L2', '', '', '', '', '', 0, 0, '2015-05-12 13:14:11', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(809, '', 'tutu', 'test', 'test', '2015-03-28 15:59:50', 'test@test.com', '$2y$10$OzEM9neTrRgmZmS6RdPEiOPJ0peiaGyjAF0zdotyfCRFxpuH8YjQi', '', '', '', '', '', '', 0, 0, '2015-05-14 14:39:24', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
