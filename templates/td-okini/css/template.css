@@ -358,7 +358,7 @@ hr {
 
 #search {
 	float:right;
-	margin-top: 20px;
+	margin-top: 50px;
 	height: 63px;
 }
 
@@ -1534,7 +1534,7 @@ address span {
 
 #jform_contact_email_copy-lbl {
 	float: left;
-	padding-right: 6px;
+	padding-right: 600px;
 }
 
 #jform_contact_email_copy {
@@ -1769,14 +1769,14 @@ a.feed-link {
 }
 
 #copyright_wrap {
-	min-width: 1068px;
+	min-width: 1200px;
 }
 
 #copyright {
 	clear: both;
 	width: 1000px;
 	margin: auto;
-	padding-top: 15px;
+	padding-top: 70px;
 	font-size: 0.86em;
 	text-align: center; 
 	color: #555555;
@@ -1918,7 +1918,7 @@ a.feed-link {
 	padding-left: 6px;
 	color: #666666;
 	text-decoration: underline;
-	background-color: #f3f3f3;
+	background-color: #F3F3F3;
 }
 
 #editor-xtd-buttons div.button2-left div.readmore a:hover {
