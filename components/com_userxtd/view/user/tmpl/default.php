@@ -71,7 +71,7 @@ $show_cats = $data->params->get('show_categories', '*') ;
 
 							<div class="profile-avatar-inner">
 								<?php $avatar = $this->escape($item->get($avatar_field)); ?>
-								<img src="<?php echo $avatar ? $avatar : \Userxtd\Avatar\Avatar::getDefaultAvatar(); ?>" class="img-polaroid" alt="UserXTD Avatar <?php echo $this->escape($user->username); ?>" />
+								<img src="<?php echo $avatar ? $avatar : \Userxtd\Avatar\Avatar::getDefaultAvatar(); ?>" width="100" height="100" class="img-polaroid" alt="UserXTD Avatar <?php echo $this->escape($user->username); ?>" />
 							</div>
 
 						</div>
@@ -104,10 +104,20 @@ $show_cats = $data->params->get('show_categories', '*') ;
 
 
 								<div class="heading">
-									<h2><?php echo $item->get('link_titles') ? JHtml::_('link', $item->link, $this->escape($item->name)) : $this->escape($item->name) ?></h2>
+									<h2>
+									<?php 
+									
+								foreach($fieldsets as $fieldset)
+								{
+									$temp[] = $this->loadTemplate('profile', array('fieldset' => $fieldset));
+								}
+									$temp2=substr($temp[4], 0, mb_strpos($temp[4], '</dd>'));
+									$prenom=substr($temp2, mb_strpos($temp2, '<dd>'));
+									
+									echo $prenom, $item->get('link_titles') ? JHtml::_('link', $item->link, $this->escape($item->name)) : $this->escape($item->name);
+								?></h2>
 									<div class="user-name">( <?php echo $this->escape($item->username); ?> )</div>
 								</div>
-
 								<hr />
 
 								<div class="about">
@@ -137,8 +147,12 @@ $show_cats = $data->params->get('show_categories', '*') ;
 										continue;
 									}
 
-									echo $this->loadTemplate('profile', array('fieldset' => $fieldset));
+									$test5[]=$this->loadTemplate('profile', array('fieldset' => $fieldset));
 								}
+								echo $test5[0];
+								echo $test5[1];
+								echo $test5[2];
+								echo $test5[3];
 								?>
 							</div>
 
