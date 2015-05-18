@@ -25,7 +25,9 @@ jimport('joomla.application.component.helper');
  */
 class icagendaViewList extends JViewLegacy
 {
-	protected $params;
+	// TODO: check and remove
+	protected $return_page;
+
 	protected $data;
 	protected $getAllDates;
 	protected $form;

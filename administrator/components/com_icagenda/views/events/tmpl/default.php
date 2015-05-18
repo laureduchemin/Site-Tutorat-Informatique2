@@ -10,7 +10,7 @@
  * @author      Cyril Rezé (Lyr!C)
  * @link        http://www.joomlic.com
  *
- * @version     3.5.3 2015-03-19
+ * @version     3.5.2 2015-03-13
  * @since       1.0
  *------------------------------------------------------------------------------
 */
@@ -33,7 +33,7 @@ if (JFactory::getUser()->authorise('icagenda.access.events', 'com_icagenda') && 
 	$canOrder	= $user->authorise('core.edit.state', 'com_icagenda');
 	$saveOrder	= $listOrder == 'a.ordering';
 
-	if (version_compare(JVERSION, '3.0', 'lt'))
+	if(version_compare(JVERSION, '3.0', 'lt'))
 	{
 		JHtml::_('behavior.tooltip');
 	}
@@ -680,21 +680,23 @@ if (JFactory::getUser()->authorise('icagenda.access.events', 'com_icagenda') && 
 			</tr>
 			<?php endforeach;
 
-			// Old Joomla versions asset_id issue. (all Joomla 2.5.x versions, and Joomla 3 NOT updated!)
-			$asset_issue = version_compare(JVERSION, '3.0', 'lt') ? true : false;
+			// Old Joomla versions asset issue.
+			$asset_issue = '';
 
 			if ($asset_issue)
 			{
 				$ia = '0';
 				unset($msg);
 				unset($type);
-				$msg = $type = $front_submit = '';
-				$edittx = '<b>' . JText::_( 'JACTION_EDIT' ) . '</b>';
-				$savetx = '<b>' . JText::_( 'JSAVE' ) . '</b>';
+				$msg			= '';
+				$type			= '';
+				$front_submit	= '';
+				$edittx = '<b>'.JText::_( 'JACTION_EDIT' ).'</b>';
+				$savetx = '<b>'.JText::_( 'JSAVE' ).'</b>';
 
             	foreach ($this->items as $i => $item)
             	{
-                	if (($item->asset_id == '0') && ($item->state == '-2'))
+                	if(($item->asset_id == '0') AND ($item->state == '-2'))
                 	{
                 		$ia = $ia+1;
                 		$front_submit = '1';
@@ -714,8 +716,8 @@ if (JFactory::getUser()->authorise('icagenda.access.events', 'com_icagenda') && 
             	{
                 	if (($item->asset_id == '0') AND ($item->state == '-2'))
                 	{
-						$editLink = 'index.php?option=com_icagenda&task=event.edit&id=' . $item->id;
-                		$msg	= '- ' . $item->title . ' [' . $item->id . '] : <a href="' . $editLink . '"><b>'.JText::_( 'JACTION_EDIT' ).'</b></a>';
+						$editLink = 'index.php?option=com_icagenda&task=event.edit&id='.$item->id;
+                		$msg	= '- '.$item->title.' ['.$item->id.'] : <a href="'.$editLink.'"><b>'.JText::_( 'JACTION_EDIT' ).'</b></a>';
                 		$type	= JText::_( 'JGLOBAL_LIST' ).' :';
                 	}
             		if (!empty($msg))

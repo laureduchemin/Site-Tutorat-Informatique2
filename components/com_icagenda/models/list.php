@@ -10,7 +10,7 @@
  * @author      Cyril Rezé (Lyr!C)
  * @link        http://www.joomlic.com
  *
- * @version     3.5.3 2015-03-20
+ * @version     3.5.0 2015-02-23
  * @since       1.0
  *------------------------------------------------------------------------------
 */
@@ -149,23 +149,20 @@ class icagendaModelList extends iCModelItem
 //			),
 			'items' => array(
 				'item' => array(
-					'accessReg'=>'',
-					'approval'=>'',
-					'eventAllDates'=>'',
-					'eventHasPeriod'=>'',
-					'infoDetails'=>'',
-					'statutReg'=>'',
-
-					'BackArrow'=>'',
-					'BackURL'=>'',
-					'id'=>'',
-					'Itemid'=>'',
 					'metaTitle'=>'',
 					'metaDesc'=>'',
 					'metaAsShortDesc'=>'',
-					'state'=>'',
+					'BackArrow'=>'',
+					'AllDates'=>'',
+					'AllDatesDisplay'=>'',
 					'weekday'=>'',
 					'weekdayShort'=>'',
+					'id'=>'',
+					'state'=>'',
+					'access_event'=>'',
+					'approval'=>'',
+					'Itemid'=>'',
+					'BackURL'=>'',
 					'timeformat'=>'',
 					'participantList'=>'',
 					'participantSlide'=>'',
@@ -180,6 +177,7 @@ class icagendaModelList extends iCModelItem
 					'ManagerIcons'=>'',
 					'url'=>NULL,
 					'Event_Link'=>'',
+					'titleLink'=>'', // DEPRECATED
 					'cat_id'=>'',
 					'cat_title'=>'',
 					'cat_color'=>'',
@@ -192,6 +190,7 @@ class icagendaModelList extends iCModelItem
 					'descShort'=>'',
 					'image'=>'',
 					'imageTag'=>'',
+					'infoDetails'=>'',
 					'file'=>'',
 					'fileTag'=>'',
 
@@ -223,6 +222,7 @@ class icagendaModelList extends iCModelItem
 					'dateText'=>'',
 					'periodDisplay'=>'',
 					'periodControl'=>'',
+					'periodTest'=>'',
 					'weekdays'=>'',
 					'day'=>'',
 					'maxNbTickets'=>'',
@@ -256,6 +256,7 @@ class icagendaModelList extends iCModelItem
 					'targetLink'=>'',
 					'place_name'=>'',
 					'place_desc'=>'',
+					'placeLeft'=>'',
 					'city'=>'',
 					'country'=>'',
 					'coordinate'=>'',
@@ -264,6 +265,8 @@ class icagendaModelList extends iCModelItem
 					'map'=>'',
 					'share'=>'',
 					'share_event'=>'',
+					'statutReg'=>'',
+					'accessReg'=>'',
 					'limitRegEmail'=>'',
 					'limitRegDate'=>'',
 
@@ -291,10 +294,6 @@ class icagendaModelList extends iCModelItem
 					'gcalendarLink'=>'',
 					'loadEventCustomFields'=>'',
 					'features'=>'',
-
-					'periodTest'=>'', // DEPRECATED
-					'titleLink'=>'', // DEPRECATED
-// REMOVED 3.5.3	'placeLeft'=>'',
 				)
 			)
 		);

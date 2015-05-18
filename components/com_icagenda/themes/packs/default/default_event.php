@@ -12,7 +12,7 @@
  *
  * @themepack	default
  * @template	event_details
- * @version 	3.5.3 2015-03-22
+ * @version 	3.4.1 2015-01-03
  * @since       1.0
  *------------------------------------------------------------------------------
 */
@@ -26,7 +26,7 @@ defined('_JEXEC') or die(); ?>
  * default Official Theme Pack
  *
  * @template	event_details
- * @version 	3.5.3
+ * @version 	3.5.2
  *
 -->
 
@@ -224,7 +224,7 @@ defined('_JEXEC') or die(); ?>
 	</div><?php // end div.info ?>
 
 	<?php // List of Participants ?>
-	<?php if ($PARTICIPANTS_DISPLAY == 1 && $EVENT_PARTICIPANTS) : ?>
+	<?php if ($PARTICIPANTS_DISPLAY == 1) : ?>
 		<div id="ic-list-of-participants" class="ic-participants">
 			<?php // Display header title 'List of Participants' if slide effect is disabled ?>
 			<?php if ($PARTICIPANTS_HEADER) : ?>

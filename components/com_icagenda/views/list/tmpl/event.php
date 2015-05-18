@@ -21,7 +21,7 @@ defined('_JEXEC') or die();
 ?>
 <!--
  * - - - - - - - - - - - - - -
- * iCagenda 3.5.3 by Jooml!C
+ * iCagenda 3.5.2 by Jooml!C
  * - - - - - - - - - - - - - -
  * @copyright	Copyright (c)2012-2015 JOOMLIC - All rights reserved.
  *
@@ -314,7 +314,7 @@ if (!empty($item->lng) && !empty($item->lat)
 $iCAddToCal = array();
 
 $iCAddToCal[] = '	jQuery(document).ready(function(){';
-$iCAddToCal[] = '		jQuery(".ic-addtocal").tipTip({maxWidth: "200px", defaultPosition: "bottom", edgeOffset: 1, activation:"hover", keepAlive: true});';
+$iCAddToCal[] = '		jQuery(".ic-addtocal").tipTip({maxWidth: "200", defaultPosition: "bottom", edgeOffset: 1, activation:"hover", keepAlive: true});';
 $iCAddToCal[] = '	});';
 
 // Add the script to the document head.

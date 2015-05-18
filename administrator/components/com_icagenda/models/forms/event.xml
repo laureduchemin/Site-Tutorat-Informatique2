@@ -265,20 +265,6 @@
 			multiple="true"
 			class="inputbox"
 			/>
-		<!--field
-			name="features"
-			type="modal_features"
-			label="COM_ICAGENDA_FORM_LBL_EVENT_FEATURES"
-			description="COM_ICAGENDA_FORM_DESC_EVENT_FEATURES"
-			multiple="true"
-			class="inputbox"
-			/-->
-		<field
-			name="custom_fields"
-			type="hidden"
-			class="inputbox"
-			default=""
-			/>
 		<field
 			name="place"
 			type="text"
@@ -361,6 +347,12 @@
 			class="span-12"
 			row="3"
 			cols="80"
+			/>
+		<field
+			name="custom_fields"
+			type="hidden"
+			class="inputbox"
+			default=""
 			/>
 	</fieldset>
 	<fields name="params">

@@ -10,7 +10,7 @@
  * @author      Cyril Rezé (Lyr!C)
  * @link        http://www.joomlic.com
  *
- * @version     3.5.3 2015-03-23
+ * @version     3.5.0 2015-02-20
  * @since		2.0
  *------------------------------------------------------------------------------
 */
@@ -580,11 +580,7 @@ class iCagendaModelregistrations extends JModelList
 				}
 			}
 
-			// Add BOM UTF-8 to csv content
-			$this->content	= chr(239) . chr(187) . chr(191);
-
-			$this->content .= '';
-
+			$this->content	= '';
 			$this->content .=
 				'"' .
 				str_replace('"', '""', JText::_('COM_ICAGENDA_REGISTRATION_EVENTID')) . '","' .

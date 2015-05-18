@@ -12,7 +12,7 @@
  *
  * @themepack	ic_rounded
  * @template	event_details
- * @version 	3.5.3 2015-03-22
+ * @version		3.5.0 2015-02-03
  * @since       1.0
  *------------------------------------------------------------------------------
 */
@@ -26,7 +26,7 @@ defined('_JEXEC') or die(); ?>
  * ic_rounded Theme Pack
  *
  * @template	event_details
- * @version 	3.5.3
+ * @version 	3.5.2
  *
 -->
 
@@ -252,7 +252,7 @@ defined('_JEXEC') or die(); ?>
 	<?php endif; ?>
 
 	<?php // List of Participants ?>
-	<?php if ($PARTICIPANTS_DISPLAY == 1 && $EVENT_PARTICIPANTS) : ?>
+	<?php if ($PARTICIPANTS_DISPLAY == 1) : ?>
 	<p>&nbsp;</p>
 	<div class="ic-participants ic-rounded-10">
 		<h3><?php echo $PARTICIPANTS_HEADER; ?></h3>

@@ -10,7 +10,7 @@
  * @author      Cyril Rezé (Lyr!C)
  * @link        http://www.joomlic.com
  *
- * @version     3.5.3 2014-03-24
+ * @version     3.2.10 2013-12-30
  * @since       3.2.10
  *------------------------------------------------------------------------------
 */
@@ -35,12 +35,12 @@ class JFormFieldModal_ictext_Placeholder extends JFormField
 		$replace = array("jform", "[", "]", "_Placeholder");
 		$name = str_replace($replace, "", $this->name);
 
-		$Type = $name . '_Placeholder';
+		$Type = $name.'_Placeholder';
 		$tos_Type = $icagendaParams->get($Type);
 
-		$placeholder = ( ! isset($tos_Type)) ? JText::_( 'COM_ICAGENDA_' . strtoupper($name) . '_PLACEHOLDER') : '';
+		if (!isset($tos_Type)) { $placeholder = JText::_( 'COM_ICAGENDA_'.strtoupper($name).'_PLACEHOLDER'); }
 
-		$html ='<input type="text" id="' . $this->id . '" class="' . $class . ' input-xxlarge" name="' . $this->name . '" value="' . $this->value . '" placeholder="' . $placeholder . '"/>';
+		$html ='<input type="text" id="'.$this->id.'" class="'.$class.' input-xxlarge" name="'.$this->name.'" value="'.$this->value.'" placeholder="'.$placeholder.'"/>';
 
 		return $html;
 	}

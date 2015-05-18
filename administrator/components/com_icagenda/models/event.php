@@ -10,7 +10,7 @@
  * @author      Cyril Rezé (Lyr!C)
  * @link        http://www.joomlic.com
  *
- * @version     3.5.3 2015-03-19
+ * @version     3.5.1 2015-02-28
  * @since       1.0
  *------------------------------------------------------------------------------
 */
@@ -33,13 +33,113 @@ class iCagendaModelEvent extends JModelAdmin
 	protected $text_prefix = 'COM_ICAGENDA';
 
 	/**
+	 * Returns a reference to the a Table object, always creating it.
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	 * @since	1.0
+	 */
+	public function getTable($type = 'Event', $prefix = 'iCagendaTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
+
+	/**
+	 * Method to get the record form.
+	 *
+	 * @param	array	$data		An optional array of data for the form to interogate.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	JForm	A JForm object on success, false on failure
+	 * @since	1.0
+	 */
+	public function getForm($data = array(), $loadData = true)
+	{
+		// Get the form.
+		$form = $this->loadForm('com_icagenda.event', 'event',
+								array('control' => 'jform', 'load_data' => $loadData));
+		if (empty($form))
+		{
+			return false;
+		}
+
+		return $form;
+	}
+
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.0
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data_array = JFactory::getApplication()->getUserState('com_icagenda.edit.event.data', array());
+
+		if (empty($data_array))
+		{
+			$data = $this->getItem();
+		}
+		else
+		{
+			$data = new JObject;
+			$data->setProperties($data_array);
+		}
+
+		// If not array, creates array with week days data
+		if (!is_array($data->weekdays))
+		{
+			$data->weekdays = explode(',', $data->weekdays);
+		}
+
+		// Retrieves data, to display selected week days
+		$arrayWeekDays = $data->weekdays;
+		foreach ($arrayWeekDays as $allTest)
+		{
+			if ($allTest == '')
+			{
+				$data->weekdays = '0,1,2,3,4,5,6';
+			}
+		}
+
+		// Convert features into an array so that the form control can be set
+		if (!isset($data->features))
+		{
+			$data->features = array();
+		}
+
+		if (!is_array($data->features))
+		{
+			$data->features = explode(',', $data->features);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Method to get a single record.
+	 *
+	 * @param	integer	The id of the primary key.
+	 *
+	 * @return	mixed	Object on success, false on failure.
+	 * @since	1.0
+	 */
+	public function getItem($pk = null)
+	{
+		if ($item = parent::getItem($pk))
+		{
+			//Do any procesing on fields here if needed
+		}
+
+		return $item;
+	}
+
+	/**
 	 * Prepare and sanitise the table prior to saving.
 	 *
-	 * @param   JTable  $table  A JTable object.
-	 *
-	 * @return  void
-	 *
-	 * @since	1.0
+	 * @since	1.0.0
 	 */
 	protected function prepareTable( $table )
 	{
@@ -75,139 +175,44 @@ class iCagendaModelEvent extends JModelAdmin
 	}
 
 	/**
-	 * Returns a Table object, always creating it.
+	 * Approve Function.
 	 *
-	 * @param   string  $type    The table type to instantiate
-	 * @param   string  $prefix  A prefix for the table class name. Optional.
-	 * @param   array   $config  Configuration array for model. Optional.
-	 *
-	 * @return  JTable    A database object
-	 *
-	 * @since	1.0
+	 * *** Not used ***
 	 */
-	public function getTable($type = 'Event', $prefix = 'iCagendaTable', $config = array())
+	function approve($cid, $publish)
 	{
-		return JTable::getInstance($type, $prefix, $config);
-	}
-
-	/**
-	 * Method to get a single record.
-	 *
-	 * @param   integer $pk The id of the primary key.
-	 *
-	 * @return  mixed   Object on success, false on failure.
-	 *
-	 * @since	1.0
-	 */
-	public function getItem($pk = null)
-	{
-		if ($item = parent::getItem($pk))
+		if (count( $cid ))
 		{
-			// Do any procesing on fields here if needed
-		}
-
-		return $item;
-	}
-
-	/**
-	 * Method to get the record form.
-	 *
-	 * @param   array    $data      Data for the form.
-	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
-	 *
-	 * @return  mixed  A JForm object on success, false on failure
-	 *
-	 * @since	1.0
-	 */
-	public function getForm($data = array(), $loadData = true)
-	{
-		// Get the form.
-		$form = $this->loadForm('com_icagenda.event', 'event',
-								array('control' => 'jform', 'load_data' => $loadData));
-		if (empty($form))
-		{
-			return false;
-		}
-
-		return $form;
-	}
-
-	/**
-	 * Method to get the data that should be injected in the form.
-	 *
-	 * @return  mixed  The data for the form.
-	 *
-	 * @since	1.0
-	 */
-	protected function loadFormData()
-	{
-		// Check the session for previously entered form data.
-		$app = JFactory::getApplication();
-		$data_array = $app->getUserState('com_icagenda.edit.event.data', array());
-
-		if (empty($data_array))
-		{
-			$data = $this->getItem();
-		}
-		else
-		{
-			$data = new JObject;
-			$data->setProperties($data_array);
-		}
-
-		// If not array, creates array with week days data
-		if ( ! is_array($data->weekdays))
-		{
-			$data->weekdays = explode(',', $data->weekdays);
-		}
-
-		// Retrieves data, to display selected week days
-		$arrayWeekDays = $data->weekdays;
-
-		foreach ($arrayWeekDays as $allTest)
-		{
-			if ($allTest == '')
+			JArrayHelper::toInteger($cid);
+			$cids = implode( ',', $cid );
+			$query = 'UPDATE #__icagenda_events'
+					. ' SET approval = '.(int) $publish
+					. ' WHERE id IN ( '.$cids.' )';
+					$this->_db->setQuery( $query );
+			if (!$this->_db->query())
 			{
-				$data->weekdays = '0,1,2,3,4,5,6';
+				$this->setError($this->_db->getErrorMsg());
+				return false;
 			}
 		}
-
-		// Set Features
-		$data->features = $this->getFeatures($data->id);
-
-		// Convert features into an array so that the form control can be set
-		if ( ! isset($data->features))
-		{
-			$data->features = array();
-		}
-
-		if ( ! is_array($data->features))
-		{
-			$data->features = explode(',', $data->features);
-		}
-
-		return $data;
+		return true;
 	}
 
 	/**
-	 * Method to save the form data.
-	 *
-	 * @param   array  $data  The form data.
-	 *
-	 * @return  boolean  True on success.
+	 * Save form
+	 * @Author	doorknob
 	 *
 	 * @since	3.4.0
 	 */
 	public function save($data)
 	{
-		$input	= JFactory::getApplication()->input;
-		$date	= JFactory::getDate();
-		$user	= JFactory::getUser();
+		$input = JFactory::getApplication()->input;
+		$date = JFactory::getDate();
 
 		// Fix version before 3.4.0 to set a created date (will use last modified date if exists, or current date)
 		if (empty($data['created']))
 		{
-			$data['created'] = ( ! empty($data['modified'])) ? $data['modified'] : $date->toSql();
+			$data['created'] = !empty($data['modified']) ? $data['modified'] : $date->toSql();
 		}
 
 		// Alter the title for save as copy
@@ -281,104 +286,19 @@ class iCagendaModelEvent extends JModelAdmin
 			}
 		}
 
-		// Set File Uploaded
-		if ( ! isset($data['file']))
+		$return = parent::save($data);
+
+		if ($return === true)
 		{
-			$file = JRequest::getVar('jform', null, 'files', 'array');
-			$fileUrl = $this->upload($file);
-			$data['file'] = $fileUrl;
+			$return = $this->maintainFeatures($data);
 		}
 
-		// Set Creator infos
-		$userId	= $user->get('id');
-		$userName = $user->get('name');
-
-		if (empty($data['created_by']))
-		{
-			$data['created_by'] = (int) $userId;
-		}
-
-		$data['username'] = $userName;
-
-		// Set Params
-		if (isset($data['params']) && is_array($data['params']))
-		{
-			// Convert the params field to a string.
-			$parameter = new JRegistry;
-			$parameter->loadArray($data['params']);
-			$data['params'] = (string)$parameter;
-		}
-
-		// Get Event ID from the result back to the Table after saving.
-		$table = $this->getTable();
-
-		if ($table->save($data) === true)
-		{
-			$data['id'] = $table->id;
-		}
-		else
-		{
-			$data['id'] = null;
-		}
-
-		if (parent::save($data))
-		{
-			// Save Features to database
-			$this->maintainFeatures($data);
-
-			// Save Custom Fields to database
-			if (isset($data['custom_fields']) && is_array($data['custom_fields']))
-			{
-				icagendaCustomfields::saveToData($data['custom_fields'], $data['id'], 2);
-			}
-
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Upload
-	 *
-	 * @since	3.5.3
-	 */
-	function upload($file)
-	{
-		jimport('joomla.filesystem.file');
-		jimport('joomla.filesystem.folder');
-
-		$filename = JFile::makeSafe($file['name']['file']);
-
-		// Get media path
-		$params_media	= JComponentHelper::getParams('com_media');
-		$image_path		= $params_media->get('image_path', 'images');
-
-		// Paths to thumbs folder
-		$thumbsPath		= $image_path . '/icagenda/thumbs';
-
-		if ($filename != '')
-		{
-			$src = $file['tmp_name']['file'];
-			$dest =  JPATH_SITE . '/' . $image_path . '/icagenda/files/' . $filename;
-
-			if ( ! is_dir($dest))
-			{
-				mkdir($intDir, 0755);
-			}
-
-			if (JFile::upload($src, $dest, false))
-			{
-				echo 'upload';
-				return $image_path . '/icagenda/files/' . $filename;
-			}
-
-			return $image_path . '/icagenda/files/' . $filename;
-		}
+		return $return;
 	}
 
 	/**
 	 * Maintain features to data
+	 * @Author	doorknob
 	 *
 	 * @since	3.4.0
 	 */
@@ -390,19 +310,15 @@ class iCagendaModelEvent extends JModelAdmin
 		$db = JFactory::getDbo();
 
 		// Write any new feature records to the icagenda_feature_xref table
-		if ( ! empty($features))
+		if (!empty($features))
 		{
 			// Get a list of the valid features already present for this event
-			$query = $db->getQuery(true);
-
-			$query->select('feature_id')
-				->from($db->qn('#__icagenda_feature_xref'));
-
-			$query->where('event_id = ' . (int) $data['id']);
-			$query->where('feature_id IN (' . $features . ')');
-
+			$query = $db->getQuery(true)
+				->select('feature_id')
+				->from($db->quoteName('#__icagenda_feature_xref'))
+				->where("event_id={$data['id']}")
+				->where("feature_id IN($features)");
 			$db->setQuery($query);
-
 			$existing_features = $db->loadColumn(0);
 
 			// Identify the insert list
@@ -416,14 +332,14 @@ class iCagendaModelEvent extends JModelAdmin
 
 				foreach ($data['features'] as $feature)
 				{
-					if ( ! in_array($feature, $existing_features))
+					if (!in_array($feature, $existing_features))
 					{
 						$new_features[] = $feature;
 					}
 				}
 			}
 			// Write the needed xref records
-			if ( ! empty($new_features))
+			if (!empty($new_features))
 			{
 				$xref = new JObject;
 				$xref->set('event_id', $data['id']);
@@ -434,7 +350,7 @@ class iCagendaModelEvent extends JModelAdmin
 					$db->insertObject('#__icagenda_feature_xref', $xref);
 					$db->setQuery($query);
 
-					if ( ! $db->execute())
+					if (!$db->execute())
 					{
 						return false;
 					}
@@ -443,116 +359,24 @@ class iCagendaModelEvent extends JModelAdmin
 		}
 
 		// Delete any unwanted feature records from the icagenda_feature_xref table
-		$query = $db->getQuery(true);
-		$query->delete($db->qn('#__icagenda_feature_xref'));
-		$query->where('event_id = ' . (int) $data['id']);
+		$query = $db->getQuery(true)
+			->delete('#__icagenda_feature_xref')
+			->where("event_id={$data['id']}");
 
-		if ( ! empty($features))
+		if (!empty($features))
 		{
 			// Delete only unwanted features
-			$query->where('feature_id NOT IN (' . $features . ')');
+			$query->where("feature_id NOT IN($features)");//$dump=$db->replacePrefix((string)$query);dump($dump,'sql query');
 		}
 
 		$db->setQuery($query);
 		$db->execute($query);
 
-		if ( ! $db->execute())
+		if (!$db->execute())
 		{
 			return false;
 		}
 
 		return true;
 	}
-
-	/**
-	 * Extracts the list of Feature IDs linked to the event and returns an array
-	 *
-	 * @param	integer  $event_id
-	 *
-	 * @return	array/integer  Set of Feature IDs
-	 *
-	 * @since	3.5.3
-	 */
-	protected function getFeatures($event_id)
-	{
-		// Write any new feature records to the icagenda_feature_xref table
-		if (empty($event_id))
-		{
-			return '';
-		}
-		else
-		{
-			$db = JFactory::getDbo();
-
-			// Get a comma separated list of the ids of features present for this event
-			// Note: Direct extraction of a comma separated list is avoided because each db type uses proprietary syntax
-			$query = $db->getQuery(true);
-			$query->select('fx.feature_id')
-				->from($db->qn('#__icagenda_events', 'e'))
-				->innerJoin('#__icagenda_feature_xref AS fx ON e.id=fx.event_id')
-				->innerJoin('#__icagenda_feature AS f ON fx.feature_id=f.id AND f.state=1');
-			$query->where('e.id = ' . (int) $event_id);
-			$db->setQuery($query);
-			$features = $db->loadColumn(0);
-
-			// Return a comma separated list
-			return implode(',', $features);
-		}
-	}
-
-	/**
-	 * Method to test whether a record can be deleted.
-	 *
-	 * @param   object  $record  A record object.
-	 *
-	 * @return  boolean  True if allowed to delete the record. Defaults to the permission set in the component.
-	 *
-	 * @since   3.6.0
-	 */
-//	protected function canDelete($record)
-//	{
-//		if ( ! empty($record->id))
-//		{
-//			if ($record->state != -2)
-//			{
-//				return false;
-//			}
-
-//			$user = JFactory::getUser();
-
-//			return $user->authorise('core.delete', 'com_icagenda.event.' . (int) $record->id);
-//		}
-
-//		return false;
-//	}
-
-	/**
-	 * Method to test whether a record can have its state edited.
-	 *
-	 * @param   object  $record  A record object.
-	 *
-	 * @return  boolean  True if allowed to change the state of the record. Defaults to the permission set in the component.
-	 *
-	 * @since   3.6.0
-	 */
-//	protected function canEditState($record)
-//	{
-//		$user = JFactory::getUser();
-
-		// Check for existing event.
-//		if (!empty($record->id))
-//		{
-//			return $user->authorise('core.edit.state', 'com_icagenda.event.' . (int) $record->id);
-//		}
-		// New event, so check against the category.
-//		elseif (!empty($record->catid))
-//		{
-//			return $user->authorise('core.edit.state', 'com_icagenda.event.' . (int) $record->catid);
-//		}
-		// Default to component settings if neither event nor category known.
-//		else
-//		{
-//			return parent::canEditState('com_icagenda');
-//		}
-//	}
 }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5.6" method="upgrade">
 	<name>iCagenda</name>
-	<creationDate>2015-03-25</creationDate>
+	<creationDate>2015-03-13</creationDate>
 	<copyright>Copyright (c)2012-2015 Cyril Rezé, Jooml!C - All rights reserved</copyright>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<author>Jooml!C</author>
 	<authorEmail>info@joomlic.com</authorEmail>
 	<authorUrl>www.joomlic.com</authorUrl>
-	<version>3.5.3</version>
+	<version>3.5.2</version>
 	<description>COM_ICAGENDA_DESC</description>
 
 	<scriptfile>script.icagenda.php</scriptfile>

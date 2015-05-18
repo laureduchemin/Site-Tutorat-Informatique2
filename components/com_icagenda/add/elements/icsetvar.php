@@ -10,7 +10,7 @@
  * @author      Cyril Rezé (Lyr!C)
  * @link        http://www.joomlic.com
  *
- * @version 	3.5.3 2015-03-18
+ * @version 	3.5.2 2015-03-12
  * @since       3.2.8
  *------------------------------------------------------------------------------
 */
@@ -352,30 +352,26 @@ $only_startdate	= ($item->weekdays || $item->weekdays == '0') ? false : true;
 	 *	Event Information
 	 */
 	$EVENT_INFOS			= $item->infoDetails;
+//	$SEATS_AVAILABLE		= $item->placeLeft;
 
 	// All Dates ON
-	if (
-//		$get_date
-//		&&
-		$item->maxNbTickets
+	if ($get_date
+		&& $item->maxNbTickets
 		&& $item->maxNbTickets != '1000000'
 		)
 	{
-//		$SEATS_AVAILABLE	= (isset($dateday) && isset($item->totalRegistered))
-		$SEATS_AVAILABLE	= isset($item->totalRegistered)
+		$SEATS_AVAILABLE	= (isset($dateday) && isset($item->totalRegistered))
 							? ($item->maxNbTickets - $item->totalRegistered)
 							: '';
 
-//		if (isset($dateday) && $SEATS_AVAILABLE === 0)
-		if ($SEATS_AVAILABLE === 0)
+		if (isset($dateday) && $SEATS_AVAILABLE === 0)
 		{
 			$SEATS_AVAILABLE	= JText::_('COM_ICAGENDA_REGISTRATION_DATE_NO_TICKETS_LEFT');
 		}
 
-//		$MAX_NB_OF_SEATS	= (isset($dateday))
-//							? $item->maxNbTickets
-//							: false;
-		$MAX_NB_OF_SEATS	= $item->maxNbTickets;
+		$MAX_NB_OF_SEATS	= (isset($dateday))
+							? $item->maxNbTickets
+							: false;
 	}
 	// All Dates ON
 	else
@@ -387,7 +383,6 @@ $only_startdate	= ($item->weekdays || $item->weekdays == '0') ? false : true;
 	$EVENT_VENUE			= $params->get('venue_display_global') ? $item->place_name : false;
 	$EVENT_CITY				= $params->get('city_display_global') ? $item->city : false;
 	$EVENT_COUNTRY			= $params->get('country_display_global') ? $item->country : false;
-	$EVENT_POSTAL_CODE		= $params->get('city_display_global') ? $item->city : false;
 
 	$EVENT_PHONE			= $item->phone;
 	$EVENT_EMAIL			= $item->email;
@@ -414,8 +409,6 @@ $only_startdate	= ($item->weekdays || $item->weekdays == '0') ? false : true;
 			$END_VALUE = prev($ADDRESS_EX);
 			// Remove last value, if country is inside
 			$EVENT_STREET = substr( $EVENT_STREET, 0, strripos( $EVENT_STREET, ',' ) );
-			$add_ex = explode(',', $EVENT_STREET);
-			$EVENT_POSTAL_CODE = end($add_ex);
 		}
 		else
 		{
@@ -451,11 +444,11 @@ $only_startdate	= ($item->weekdays || $item->weekdays == '0') ? false : true;
 
 		if ($EVENT_CITY && $EVENT_COUNTRY)
 		{
-			$EVENT_ADDRESS.= $EVENT_POSTAL_CODE.', '.$EVENT_COUNTRY.'<br />';
+			$EVENT_ADDRESS.= $EVENT_CITY.', '.$EVENT_COUNTRY.'<br />';
 		}
 		elseif ($EVENT_CITY && !$EVENT_COUNTRY)
 		{
-			$EVENT_ADDRESS.= $EVENT_POSTAL_CODE.'<br />';
+			$EVENT_ADDRESS.= $EVENT_CITY.'<br />';
 		}
 		elseif (!$EVENT_CITY && $EVENT_COUNTRY)
 		{
