@@ -12,3 +12,4 @@
 2015-05-14T19:57:54+00:00	INFO ::1	joomlafailure	Le nom d'utilisateur ne correspond pas au mot de passe, ou vous n'avez pas encore de compte.
 2015-05-15T21:46:49+00:00	INFO ::1	joomlafailure	Vous devez indiquer un mot de passe!
 2015-05-16T13:22:05+00:00	INFO ::1	joomlafailure	Vous devez indiquer un mot de passe!
+2015-05-19T23:00:30+00:00	INFO ::1	joomlafailure	Mot de passe invalide
