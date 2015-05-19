@@ -1,23 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.2.10
 -- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Mar 19 Mai 2015 à 12:13
--- Version du serveur :  5.6.17
--- Version de PHP :  5.5.12
+-- Client :  localhost:8889
+-- Généré le :  Mar 19 Mai 2015 à 15:43
+-- Version du serveur :  5.5.38
+-- Version de PHP :  5.6.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- Base de données :  `tib`
+-- Base de données :  `TIB`
 --
 
 -- --------------------------------------------------------
@@ -26,20 +20,16 @@ SET time_zone = "+00:00";
 -- Structure de la table `qfupd_assets`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_assets` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `qfupd_assets` (
+`id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
   `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set parent.',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
   `level` int(10) unsigned NOT NULL COMMENT 'The cached level in the nested tree.',
   `name` varchar(50) NOT NULL COMMENT 'The unique name for the asset.\n',
   `title` varchar(100) NOT NULL COMMENT 'The descriptive title for the asset.',
-  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_asset_name` (`name`),
-  KEY `idx_lft_rgt` (`lft`,`rgt`),
-  KEY `idx_parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=220 ;
+  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.'
+) ENGINE=InnoDB AUTO_INCREMENT=220 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_assets`
@@ -209,12 +199,10 @@ INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 -- Structure de la table `qfupd_associations`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_associations` (
+CREATE TABLE `qfupd_associations` (
   `id` int(11) NOT NULL COMMENT 'A reference to the associated item.',
   `context` varchar(50) NOT NULL COMMENT 'The context of the associated item.',
-  `key` char(32) NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.',
-  PRIMARY KEY (`context`,`id`),
-  KEY `idx_key` (`key`)
+  `key` char(32) NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -223,8 +211,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_associations` (
 -- Structure de la table `qfupd_banners`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_banners` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_banners` (
+`id` int(11) NOT NULL,
   `cid` int(11) NOT NULL DEFAULT '0',
   `type` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL DEFAULT '',
@@ -257,14 +245,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_banners` (
   `created_by_alias` varchar(255) NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
-  `version` int(10) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `idx_state` (`state`),
-  KEY `idx_own_prefix` (`own_prefix`),
-  KEY `idx_metakey_prefix` (`metakey_prefix`),
-  KEY `idx_banner_catid` (`catid`),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `version` int(10) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -272,8 +254,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_banners` (
 -- Structure de la table `qfupd_banner_clients`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_banner_clients` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_banner_clients` (
+`id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
   `contact` varchar(255) NOT NULL DEFAULT '',
   `email` varchar(255) NOT NULL DEFAULT '',
@@ -286,11 +268,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_banner_clients` (
   `metakey_prefix` varchar(255) NOT NULL DEFAULT '',
   `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
   `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
-  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
-  PRIMARY KEY (`id`),
-  KEY `idx_own_prefix` (`own_prefix`),
-  KEY `idx_metakey_prefix` (`metakey_prefix`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -298,15 +277,11 @@ CREATE TABLE IF NOT EXISTS `qfupd_banner_clients` (
 -- Structure de la table `qfupd_banner_tracks`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_banner_tracks` (
+CREATE TABLE `qfupd_banner_tracks` (
   `track_date` datetime NOT NULL,
   `track_type` int(10) unsigned NOT NULL,
   `banner_id` int(10) unsigned NOT NULL,
-  `count` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`track_date`,`track_type`,`banner_id`),
-  KEY `idx_track_date` (`track_date`),
-  KEY `idx_track_type` (`track_type`),
-  KEY `idx_banner_id` (`banner_id`)
+  `count` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -315,8 +290,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_banner_tracks` (
 -- Structure de la table `qfupd_categories`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_categories` (
+`id` int(11) NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
@@ -342,16 +317,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_categories` (
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `language` char(7) NOT NULL,
-  `version` int(10) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `cat_idx` (`extension`,`published`,`access`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_path` (`path`),
-  KEY `idx_left_right` (`lft`,`rgt`),
-  KEY `idx_alias` (`alias`),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+  `version` int(10) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_categories`
@@ -378,8 +345,8 @@ INSERT INTO `qfupd_categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `le
 -- Structure de la table `qfupd_cck_core`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core` (
+`id` int(11) NOT NULL,
   `cck` varchar(50) NOT NULL,
   `pk` int(11) NOT NULL,
   `pkb` int(11) NOT NULL,
@@ -389,11 +356,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core` (
   `parent_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `date_time` datetime NOT NULL,
-  `app` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_cck` (`cck`),
-  KEY `idx_pk` (`pk`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+  `app` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core`
@@ -424,18 +388,15 @@ INSERT INTO `qfupd_cck_core` (`id`, `cck`, `pk`, `pkb`, `storage_location`, `sto
 -- Structure de la table `qfupd_cck_core_activities`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_activities` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_activities` (
+`id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
   `description` text NOT NULL,
-  `published` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_category` (`folder`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `published` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -443,15 +404,12 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_activities` (
 -- Structure de la table `qfupd_cck_core_downloads`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_downloads` (
+CREATE TABLE `qfupd_cck_core_downloads` (
   `id` int(11) NOT NULL,
   `field` varchar(50) NOT NULL,
   `collection` varchar(50) NOT NULL,
   `x` int(11) NOT NULL,
-  `hits` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`field`,`collection`,`x`),
-  KEY `idx_contentid` (`id`),
-  KEY `idx_item` (`field`)
+  `hits` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -460,8 +418,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_downloads` (
 -- Structure de la table `qfupd_cck_core_fields`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_fields` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_fields` (
+`id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
@@ -506,12 +464,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_fields` (
   `storage_params` varchar(2048) NOT NULL,
   `storages` varchar(2048) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_type` (`type`),
-  KEY `idx_folder` (`folder`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=100535 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=100535 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_fields`
@@ -1053,8 +1007,8 @@ INSERT INTO `qfupd_cck_core_fields` (`id`, `title`, `name`, `folder`, `type`, `d
 -- Structure de la table `qfupd_cck_core_folders`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_folders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_folders` (
+`id` int(11) NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `path` varchar(1024) NOT NULL,
@@ -1074,10 +1028,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_folders` (
   `home` tinyint(3) NOT NULL DEFAULT '0',
   `published` tinyint(4) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_folders`
@@ -1115,20 +1067,16 @@ INSERT INTO `qfupd_cck_core_folders` (`id`, `asset_id`, `parent_id`, `path`, `ti
 -- Structure de la table `qfupd_cck_core_objects`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_objects` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_objects` (
+`id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `component` varchar(50) NOT NULL,
   `context` varchar(50) NOT NULL,
   `options` text NOT NULL,
   `vars` varchar(255) NOT NULL,
-  `view` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_component` (`component`),
-  KEY `idx_view` (`view`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+  `view` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_objects`
@@ -1146,10 +1094,9 @@ INSERT INTO `qfupd_cck_core_objects` (`id`, `title`, `name`, `component`, `conte
 -- Structure de la table `qfupd_cck_core_preferences`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_preferences` (
+CREATE TABLE `qfupd_cck_core_preferences` (
   `userid` int(11) NOT NULL,
-  `options` text NOT NULL,
-  PRIMARY KEY (`userid`)
+  `options` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1158,8 +1105,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_preferences` (
 -- Structure de la table `qfupd_cck_core_searchs`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_searchs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_searchs` (
+`id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `alias` varchar(50) NOT NULL,
@@ -1179,15 +1126,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_searchs` (
   `stylesheets` varchar(5) NOT NULL,
   `version` int(11) NOT NULL DEFAULT '1',
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_folder` (`folder`),
-  KEY `idx_template_search` (`template_search`),
-  KEY `idx_template_filter` (`template_filter`),
-  KEY `idx_template_list` (`template_list`),
-  KEY `idx_template_item` (`template_item`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_searchs`
@@ -1204,7 +1144,7 @@ INSERT INTO `qfupd_cck_core_searchs` (`id`, `title`, `name`, `alias`, `folder`, 
 -- Structure de la table `qfupd_cck_core_search_field`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_search_field` (
+CREATE TABLE `qfupd_cck_core_search_field` (
   `searchid` int(11) NOT NULL,
   `fieldid` int(11) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1238,10 +1178,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_search_field` (
   `computation_options` varchar(1024) NOT NULL COMMENT 'search',
   `conditional` varchar(2048) NOT NULL COMMENT 'search',
   `conditional_options` text NOT NULL COMMENT 'search',
-  `position` varchar(50) NOT NULL COMMENT 'search,list,item',
-  PRIMARY KEY (`searchid`,`fieldid`,`client`),
-  KEY `searchid` (`searchid`),
-  KEY `fieldid` (`fieldid`)
+  `position` varchar(50) NOT NULL COMMENT 'search,list,item'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1276,7 +1213,7 @@ INSERT INTO `qfupd_cck_core_search_field` (`searchid`, `fieldid`, `client`, `ord
 -- Structure de la table `qfupd_cck_core_search_position`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_search_position` (
+CREATE TABLE `qfupd_cck_core_search_position` (
   `searchid` int(11) NOT NULL,
   `position` varchar(50) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1285,10 +1222,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_search_position` (
   `variation_options` text NOT NULL,
   `width` varchar(50) NOT NULL,
   `height` varchar(50) NOT NULL,
-  `css` varchar(255) NOT NULL,
-  PRIMARY KEY (`searchid`,`position`,`client`),
-  KEY `position` (`position`),
-  KEY `searchid` (`searchid`)
+  `css` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1316,8 +1250,8 @@ INSERT INTO `qfupd_cck_core_search_position` (`searchid`, `position`, `client`, 
 -- Structure de la table `qfupd_cck_core_sites`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_sites` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_sites` (
+`id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
   `aliases` varchar(512) NOT NULL,
@@ -1331,10 +1265,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_sites` (
   `description` varchar(5120) NOT NULL,
   `published` tinyint(4) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1342,8 +1274,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_sites` (
 -- Structure de la table `qfupd_cck_core_templates`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_templates` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_templates` (
+`id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
@@ -1352,11 +1284,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_templates` (
   `featured` tinyint(4) NOT NULL DEFAULT '0',
   `published` tinyint(4) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_folder` (`folder`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_templates`
@@ -1373,8 +1302,8 @@ INSERT INTO `qfupd_cck_core_templates` (`id`, `title`, `name`, `folder`, `mode`,
 -- Structure de la table `qfupd_cck_core_types`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_types` (
+`id` int(11) NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -1402,15 +1331,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_types` (
   `created_date` datetime NOT NULL,
   `created_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `modified_date` datetime NOT NULL,
-  `modified_user_id` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_folder` (`folder`),
-  KEY `idx_template_admin` (`template_admin`),
-  KEY `idx_template_site` (`template_site`),
-  KEY `idx_template_content` (`template_content`),
-  KEY `idx_template_intro` (`template_intro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
+  `modified_user_id` int(10) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_types`
@@ -1437,7 +1359,7 @@ INSERT INTO `qfupd_cck_core_types` (`id`, `asset_id`, `title`, `name`, `alias`, 
 -- Structure de la table `qfupd_cck_core_type_field`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_type_field` (
+CREATE TABLE `qfupd_cck_core_type_field` (
   `typeid` int(11) NOT NULL,
   `fieldid` int(11) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1467,10 +1389,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_type_field` (
   `computation_options` varchar(1024) NOT NULL COMMENT 'admin,site',
   `conditional` varchar(2048) NOT NULL COMMENT 'admin,site',
   `conditional_options` text NOT NULL COMMENT 'admin,site',
-  `position` varchar(50) NOT NULL COMMENT 'admin,site,intro,content',
-  PRIMARY KEY (`typeid`,`fieldid`,`client`),
-  KEY `typeid` (`typeid`),
-  KEY `fieldid` (`fieldid`)
+  `position` varchar(50) NOT NULL COMMENT 'admin,site,intro,content'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1834,7 +1753,7 @@ INSERT INTO `qfupd_cck_core_type_field` (`typeid`, `fieldid`, `client`, `orderin
 -- Structure de la table `qfupd_cck_core_type_position`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_type_position` (
+CREATE TABLE `qfupd_cck_core_type_position` (
   `typeid` int(11) NOT NULL,
   `position` varchar(50) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1843,10 +1762,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_type_position` (
   `variation_options` text NOT NULL,
   `width` varchar(50) NOT NULL,
   `height` varchar(50) NOT NULL,
-  `css` varchar(255) NOT NULL,
-  PRIMARY KEY (`typeid`,`position`,`client`),
-  KEY `typeid` (`typeid`),
-  KEY `position` (`position`)
+  `css` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1922,8 +1838,8 @@ INSERT INTO `qfupd_cck_core_type_position` (`typeid`, `position`, `client`, `leg
 -- Structure de la table `qfupd_cck_core_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_versions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_versions` (
+`id` int(11) NOT NULL,
   `e_id` int(11) NOT NULL DEFAULT '0',
   `e_title` varchar(50) NOT NULL,
   `e_name` varchar(50) NOT NULL,
@@ -1940,10 +1856,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_versions` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `note` varchar(255) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `type_id_version` (`e_id`,`e_type`,`e_version`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=510 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=510 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_versions`
@@ -1994,14 +1908,13 @@ INSERT INTO `qfupd_cck_core_versions` (`id`, `e_id`, `e_title`, `e_name`, `e_typ
 -- Structure de la table `qfupd_cck_more_countries`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_more_countries` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_more_countries` (
+`id` int(11) NOT NULL,
   `name_en` varchar(255) NOT NULL,
   `name_fr` varchar(255) NOT NULL,
   `code2` varchar(5) NOT NULL,
-  `code3` varchar(5) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=247 ;
+  `code3` varchar(5) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_more_countries`
@@ -2261,8 +2174,8 @@ INSERT INTO `qfupd_cck_more_countries` (`id`, `name_en`, `name_fr`, `code2`, `co
 -- Structure de la table `qfupd_cck_more_processings`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_more_processings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_more_processings` (
+`id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL DEFAULT '1',
@@ -2272,9 +2185,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_more_processings` (
   `published` tinyint(3) NOT NULL DEFAULT '0',
   `scriptfile` text NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2282,16 +2194,14 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_more_processings` (
 -- Structure de la table `qfupd_cck_more_sessions`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_more_sessions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_more_sessions` (
+`id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `extension` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `options` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_extension` (`extension`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `options` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2299,7 +2209,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_more_sessions` (
 -- Structure de la table `qfupd_cck_store_item_users`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_store_item_users` (
+CREATE TABLE `qfupd_cck_store_item_users` (
   `id` int(11) NOT NULL,
   `cck` varchar(50) NOT NULL,
   `gender` varchar(255) NOT NULL,
@@ -2316,8 +2226,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_store_item_users` (
   `phone` varchar(255) NOT NULL,
   `website` varchar(255) NOT NULL,
   `birthdate` datetime NOT NULL,
-  `birthplace` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `birthplace` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2339,8 +2248,8 @@ INSERT INTO `qfupd_cck_store_item_users` (`id`, `cck`, `gender`, `last_name`, `f
 -- Structure de la table `qfupd_contact_details`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_contact_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_contact_details` (
+`id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `con_position` varchar(255) DEFAULT NULL,
@@ -2382,17 +2291,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_contact_details` (
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `version` int(10) unsigned NOT NULL DEFAULT '1',
-  `hits` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`published`),
-  KEY `idx_catid` (`catid`),
-  KEY `idx_createdby` (`created_by`),
-  KEY `idx_featured_catid` (`featured`,`catid`),
-  KEY `idx_language` (`language`),
-  KEY `idx_xreference` (`xreference`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `hits` int(10) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2400,8 +2300,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_contact_details` (
 -- Structure de la table `qfupd_content`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_content` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_content` (
+`id` int(10) unsigned NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -2430,17 +2330,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_content` (
   `metadata` text NOT NULL,
   `featured` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
   `language` char(7) NOT NULL COMMENT 'The language code for the article.',
-  `xreference` varchar(50) NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`state`),
-  KEY `idx_catid` (`catid`),
-  KEY `idx_createdby` (`created_by`),
-  KEY `idx_featured_catid` (`featured`,`catid`),
-  KEY `idx_language` (`language`),
-  KEY `idx_xreference` (`xreference`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+  `xreference` varchar(50) NOT NULL COMMENT 'A reference to enable linkages to external data sets.'
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_content`
@@ -2448,7 +2339,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_content` (
 
 INSERT INTO `qfupd_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`) VALUES
 (1, 61, 'Comment débuter ?', 'comment-debuter', '<p style="text-align: justify;">La création d''un site web avec Joomla est simple, le déploiement de ce site exemple vous y aidera. <br />Les quelques principes de base présentés ci-dessous vous guideront dans la compréhension de ce logiciel.</p><h3>Qu''est-ce qu''un Système de Gestion de Contenu ?</h3><p style="text-align: justify;">Un   système de gestion de contenu (SGC ou CMS de l''anglais Content  Management System) est un logiciel qui vous permet de créer  et gérer  des pages Web facilement, séparant la création des contenus de la  gestion technique nécessaire à une diffusion sur le web.</p><p style="text-align: justify;">Le  contenu rédactionnel est stocké et restitué par une base de données, l''aspect (police, taille, couleur, emplacement, etc.) est géré par un  template (habillage du site). Le logiciel Joomla permet d''unir ces deux  structures de manière conviviale et de les rendre accessibles au plus  grand nombre d''utilisateurs.</p><h3>Deux interfaces</h3><p>Un site Joomla est structuré en deux parties distinctes : la partie visible du site appelée «Frontal» de <em>Frontend</em> en anglais et, la partie d''administration pure appelée «Administration» de <em>Administrator</em>.</p><h3 style="text-align: justify;">Administration</h3><p style="text-align: justify;">Vous pouvez accéder à l''administration en cliquant sur le sur le lien «Administration» présent dans le module de menu «Menu membre» visible après vous être connecté sur le site ou, en  ajoutant  <em>/administrator</em> dans l''URL après le nom de domaine (exemple : www.mon-domaine.com/administrator).</p><p style="text-align: justify;">Utilisez le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Frontal</h3><p style="text-align: justify;">Si votre profil possède les droits suffisants, vous pouvez créer des articles et les éditer depuis l''interface frontale du site.</p><p style="text-align: justify;">Connectez-vous par le module «Connexion» en utilisant le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Créer un article en frontal</h3><p style="text-align: justify;">Lorsque vous êtes connecté, un nouveau menu nommé «Menu Membres» apparaît. Cliquez sur le lien  «Créer un article» pour afficher l''éditeur de texte et d''insertion de médias.</p><p style="text-align: justify;">Pour enregistrer l''article, vous devez spécifier à quelle catégorie il appartient ainsi que son statut de publication. Pour le modifier, cliquez sur l''icône d''édition <img src="media/system/images/edit.png" border="0" alt="Editer un article" width="18" height="18" style="vertical-align: middle;" />.</p><p style="text-align: justify;">Vous pouvez travailler sur des articles non publiés ou de publication programmée dans le temps et, dans le cadre d''un travail collaboratif, ne les rendre visibles qu''à un groupe d''utilisateurs donnés avant de les rendre publics.</p><h3>En savoir plus</h3><p>Une pleine utilisation de Joomla requiert certaines connaissances approfondies que vous pourrez acquérir dans la <a href="http://docs.joomla.org/" target="_blank">documentation officielle de Joomla</a> ou sur le <a href="http://aide.joomla.fr/" target="_blank">site d''aide francophone</a> et dans le <a href="http://forum.joomla.org/" target="_blank">forum officiel</a> ou le <a href="http://forum.joomla.fr/" target="_blank">forum francophone</a>.</p>', '', 1, 2, '2013-11-16 00:00:00', 802, '', '0000-00-00 00:00:00', 0, 803, '2015-05-17 15:19:39', '2013-11-16 00:00:00', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 6, '', '', 1, 134, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(2, 75, 'Présentation du Tutorat', 'presentation-du-tutorat', '<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial;">Bienvenue sur le site du tutorat informatique de l’Université François Rabelais de Blois. </h1>\r\n<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial; min-height: 14px;"> </h1>\r\n<p>Le tutorat a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.</p>\r\n<p>Le tutorat propose un agenda en ligne pour rencontrer les tuteurs afin de s’inscrire aux différents cours proposés. Un forum et une bibliothèque sont à disposition pour chaque étudiant inscrit. Dès votre connexion, vous pourrez de plus, accéder à une page statistique ainsi qu’une page bilan.</p>\r\n<p>Ce soutien est destiné à toutes personnes voulant aider ou qui ressentent le besoin d’être aidé dans sa scolarité en Informatique et Mathématiques. </p>\r\n<p>Si vous avez des questions ou pour plus d’informations, vous pouvez toujours nous contacter via les liens prévus à cet effet.</p>\r\n<h2> </h2>', '', 1, 2, '2015-04-15 18:51:20', 802, '', '2015-04-15 18:57:39', 802, 0, '0000-00-00 00:00:00', '2015-04-15 18:51:20', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 7, 5, '', '', 1, 278, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(2, 75, 'Présentation du Tutorat', 'presentation-du-tutorat', '<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial;">Bienvenue sur le site du tutorat informatique de l’Université François Rabelais de Blois. </h1>\r\n<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial; min-height: 14px;"> </h1>\r\n<p>Le tutorat a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.</p>\r\n<p>Le tutorat propose un agenda en ligne pour rencontrer les tuteurs afin de s’inscrire aux différents cours proposés. Un forum et une bibliothèque sont à disposition pour chaque étudiant inscrit. Dès votre connexion, vous pourrez de plus, accéder à une page statistique ainsi qu’une page bilan.</p>\r\n<p>Ce soutien est destiné à toutes personnes voulant aider ou qui ressentent le besoin d’être aidé dans sa scolarité en Informatique et Mathématiques. </p>\r\n<p>Si vous avez des questions ou pour plus d’informations, vous pouvez toujours nous contacter via les liens prévus à cet effet.</p>\r\n<h2> </h2>', '', 1, 2, '2015-04-15 18:51:20', 802, '', '2015-04-15 18:57:39', 802, 0, '0000-00-00 00:00:00', '2015-04-15 18:51:20', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 7, 5, '', '', 1, 284, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 (3, 76, 'Confirmation d''ajout cours', 'confirmation-d-ajout-cours', '<h2> </h2>', '', 1, 2, '2015-04-16 13:41:18', 802, '', '2015-04-16 13:45:34', 802, 0, '0000-00-00 00:00:00', '2015-04-16 13:41:18', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 2, 4, '', '', 1, 7, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 (4, 77, 'Confirmation inscription cours :', 'confirmation-inscription-cours', '<p>Votre inscription à bien été prise en compte. Un E-MAIL de confirmation vous a été envoyé.</p>', '', 1, 2, '2015-04-16 13:51:11', 802, '', '2015-04-16 13:51:11', 0, 802, '2015-05-12 10:09:31', '2015-04-16 13:51:11', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 3, '', '', 1, 7, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 (5, 82, 'Mon profil', 'profil', '', '', -2, 2, '2015-05-12 10:14:49', 802, '', '2015-05-12 10:26:51', 802, 0, '0000-00-00 00:00:00', '2015-05-12 10:14:49', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 2, 2, '', '', 1, 1, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
@@ -2467,19 +2358,13 @@ INSERT INTO `qfupd_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `f
 -- Structure de la table `qfupd_contentitem_tag_map`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_contentitem_tag_map` (
+CREATE TABLE `qfupd_contentitem_tag_map` (
   `type_alias` varchar(255) NOT NULL DEFAULT '',
   `core_content_id` int(10) unsigned NOT NULL COMMENT 'PK from the core content table',
   `content_item_id` int(11) NOT NULL COMMENT 'PK from the content type table',
   `tag_id` int(10) unsigned NOT NULL COMMENT 'PK from the tag table',
   `tag_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Date of most recent save for this tag-item',
-  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table',
-  UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`),
-  KEY `idx_tag_type` (`tag_id`,`type_id`),
-  KEY `idx_date_id` (`tag_date`,`tag_id`),
-  KEY `idx_tag` (`tag_id`),
-  KEY `idx_type` (`type_id`),
-  KEY `idx_core_content_id` (`core_content_id`)
+  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Maps items from content tables to tags';
 
 --
@@ -2495,10 +2380,9 @@ INSERT INTO `qfupd_contentitem_tag_map` (`type_alias`, `core_content_id`, `conte
 -- Structure de la table `qfupd_content_frontpage`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_content_frontpage` (
+CREATE TABLE `qfupd_content_frontpage` (
   `content_id` int(11) NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`content_id`)
+  `ordering` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2507,12 +2391,11 @@ CREATE TABLE IF NOT EXISTS `qfupd_content_frontpage` (
 -- Structure de la table `qfupd_content_rating`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_content_rating` (
+CREATE TABLE `qfupd_content_rating` (
   `content_id` int(11) NOT NULL DEFAULT '0',
   `rating_sum` int(10) unsigned NOT NULL DEFAULT '0',
   `rating_count` int(10) unsigned NOT NULL DEFAULT '0',
-  `lastip` varchar(50) NOT NULL DEFAULT '',
-  PRIMARY KEY (`content_id`)
+  `lastip` varchar(50) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2521,18 +2404,16 @@ CREATE TABLE IF NOT EXISTS `qfupd_content_rating` (
 -- Structure de la table `qfupd_content_types`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_content_types` (
-  `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_content_types` (
+`type_id` int(10) unsigned NOT NULL,
   `type_title` varchar(255) NOT NULL DEFAULT '',
   `type_alias` varchar(255) NOT NULL DEFAULT '',
   `table` varchar(255) NOT NULL DEFAULT '',
   `rules` text NOT NULL,
   `field_mappings` text NOT NULL,
   `router` varchar(255) NOT NULL DEFAULT '',
-  `content_history_options` varchar(5120) DEFAULT NULL COMMENT 'JSON string for com_contenthistory options',
-  PRIMARY KEY (`type_id`),
-  KEY `idx_alias` (`type_alias`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+  `content_history_options` varchar(5120) DEFAULT NULL COMMENT 'JSON string for com_contenthistory options'
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_content_types`
@@ -2559,7 +2440,7 @@ INSERT INTO `qfupd_content_types` (`type_id`, `type_title`, `type_alias`, `table
 -- Structure de la table `qfupd_core_log_searches`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_core_log_searches` (
+CREATE TABLE `qfupd_core_log_searches` (
   `search_term` varchar(128) NOT NULL DEFAULT '',
   `hits` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2570,8 +2451,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_core_log_searches` (
 -- Structure de la table `qfupd_extensions`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_extensions` (
-  `extension_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_extensions` (
+`extension_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `type` varchar(20) NOT NULL,
   `element` varchar(100) NOT NULL,
@@ -2587,12 +2468,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_extensions` (
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ordering` int(11) DEFAULT '0',
-  `state` int(11) DEFAULT '0',
-  PRIMARY KEY (`extension_id`),
-  KEY `element_clientid` (`element`,`client_id`),
-  KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
-  KEY `extension` (`type`,`element`,`folder`,`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10234 ;
+  `state` int(11) DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=10234 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_extensions`
@@ -2866,8 +2743,8 @@ INSERT INTO `qfupd_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 -- Structure de la table `qfupd_finder_filters`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_filters` (
-  `filter_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_finder_filters` (
+`filter_id` int(10) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
@@ -2880,9 +2757,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_filters` (
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `map_count` int(10) unsigned NOT NULL DEFAULT '0',
   `data` text NOT NULL,
-  `params` mediumtext,
-  PRIMARY KEY (`filter_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `params` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2890,8 +2766,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_filters` (
 -- Structure de la table `qfupd_finder_links`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links` (
-  `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_finder_links` (
+`link_id` int(10) unsigned NOT NULL,
   `url` varchar(255) NOT NULL,
   `route` varchar(255) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -2909,15 +2785,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links` (
   `list_price` double unsigned NOT NULL DEFAULT '0',
   `sale_price` double unsigned NOT NULL DEFAULT '0',
   `type_id` int(11) NOT NULL,
-  `object` mediumblob NOT NULL,
-  PRIMARY KEY (`link_id`),
-  KEY `idx_type` (`type_id`),
-  KEY `idx_title` (`title`),
-  KEY `idx_md5` (`md5sum`),
-  KEY `idx_url` (`url`(75)),
-  KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`),
-  KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `object` mediumblob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2925,13 +2794,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links` (
 -- Structure de la table `qfupd_finder_links_terms0`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms0` (
+CREATE TABLE `qfupd_finder_links_terms0` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2940,13 +2806,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms0` (
 -- Structure de la table `qfupd_finder_links_terms1`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms1` (
+CREATE TABLE `qfupd_finder_links_terms1` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2955,13 +2818,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms1` (
 -- Structure de la table `qfupd_finder_links_terms2`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms2` (
+CREATE TABLE `qfupd_finder_links_terms2` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2970,13 +2830,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms2` (
 -- Structure de la table `qfupd_finder_links_terms3`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms3` (
+CREATE TABLE `qfupd_finder_links_terms3` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2985,13 +2842,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms3` (
 -- Structure de la table `qfupd_finder_links_terms4`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms4` (
+CREATE TABLE `qfupd_finder_links_terms4` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3000,13 +2854,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms4` (
 -- Structure de la table `qfupd_finder_links_terms5`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms5` (
+CREATE TABLE `qfupd_finder_links_terms5` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3015,13 +2866,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms5` (
 -- Structure de la table `qfupd_finder_links_terms6`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms6` (
+CREATE TABLE `qfupd_finder_links_terms6` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3030,13 +2878,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms6` (
 -- Structure de la table `qfupd_finder_links_terms7`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms7` (
+CREATE TABLE `qfupd_finder_links_terms7` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3045,13 +2890,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms7` (
 -- Structure de la table `qfupd_finder_links_terms8`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms8` (
+CREATE TABLE `qfupd_finder_links_terms8` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3060,13 +2902,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms8` (
 -- Structure de la table `qfupd_finder_links_terms9`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms9` (
+CREATE TABLE `qfupd_finder_links_terms9` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3075,13 +2914,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms9` (
 -- Structure de la table `qfupd_finder_links_termsa`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsa` (
+CREATE TABLE `qfupd_finder_links_termsa` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3090,13 +2926,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsa` (
 -- Structure de la table `qfupd_finder_links_termsb`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsb` (
+CREATE TABLE `qfupd_finder_links_termsb` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3105,13 +2938,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsb` (
 -- Structure de la table `qfupd_finder_links_termsc`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsc` (
+CREATE TABLE `qfupd_finder_links_termsc` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3120,13 +2950,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsc` (
 -- Structure de la table `qfupd_finder_links_termsd`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsd` (
+CREATE TABLE `qfupd_finder_links_termsd` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3135,13 +2962,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsd` (
 -- Structure de la table `qfupd_finder_links_termse`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termse` (
+CREATE TABLE `qfupd_finder_links_termse` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3150,13 +2974,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termse` (
 -- Structure de la table `qfupd_finder_links_termsf`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsf` (
+CREATE TABLE `qfupd_finder_links_termsf` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3165,20 +2986,14 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsf` (
 -- Structure de la table `qfupd_finder_taxonomy`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_taxonomy` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_finder_taxonomy` (
+`id` int(10) unsigned NOT NULL,
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   `state` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `access` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ordering` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `parent_id` (`parent_id`),
-  KEY `state` (`state`),
-  KEY `ordering` (`ordering`),
-  KEY `access` (`access`),
-  KEY `idx_parent_published` (`parent_id`,`state`,`access`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `ordering` tinyint(1) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_finder_taxonomy`
@@ -3193,12 +3008,9 @@ INSERT INTO `qfupd_finder_taxonomy` (`id`, `parent_id`, `title`, `state`, `acces
 -- Structure de la table `qfupd_finder_taxonomy_map`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_taxonomy_map` (
+CREATE TABLE `qfupd_finder_taxonomy_map` (
   `link_id` int(10) unsigned NOT NULL,
-  `node_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`node_id`),
-  KEY `link_id` (`link_id`),
-  KEY `node_id` (`node_id`)
+  `node_id` int(10) unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3207,8 +3019,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_taxonomy_map` (
 -- Structure de la table `qfupd_finder_terms`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_terms` (
-  `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_finder_terms` (
+`term_id` int(10) unsigned NOT NULL,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
   `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -3216,13 +3028,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_terms` (
   `weight` float unsigned NOT NULL DEFAULT '0',
   `soundex` varchar(75) NOT NULL,
   `links` int(10) NOT NULL DEFAULT '0',
-  `language` char(3) NOT NULL DEFAULT '',
-  PRIMARY KEY (`term_id`),
-  UNIQUE KEY `idx_term` (`term`),
-  KEY `idx_term_phrase` (`term`,`phrase`),
-  KEY `idx_stem_phrase` (`stem`,`phrase`),
-  KEY `idx_soundex_phrase` (`soundex`,`phrase`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `language` char(3) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3230,11 +3037,9 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_terms` (
 -- Structure de la table `qfupd_finder_terms_common`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_terms_common` (
+CREATE TABLE `qfupd_finder_terms_common` (
   `term` varchar(75) NOT NULL,
-  `language` varchar(3) NOT NULL,
-  KEY `idx_word_lang` (`term`,`language`),
-  KEY `idx_lang` (`language`)
+  `language` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3464,16 +3269,14 @@ INSERT INTO `qfupd_finder_terms_common` (`term`, `language`) VALUES
 -- Structure de la table `qfupd_finder_tokens`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens` (
+CREATE TABLE `qfupd_finder_tokens` (
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
   `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `phrase` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `weight` float unsigned NOT NULL DEFAULT '1',
   `context` tinyint(1) unsigned NOT NULL DEFAULT '2',
-  `language` char(3) NOT NULL DEFAULT '',
-  KEY `idx_word` (`term`),
-  KEY `idx_context` (`context`)
+  `language` char(3) NOT NULL DEFAULT ''
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3482,7 +3285,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens` (
 -- Structure de la table `qfupd_finder_tokens_aggregate`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens_aggregate` (
+CREATE TABLE `qfupd_finder_tokens_aggregate` (
   `term_id` int(10) unsigned NOT NULL,
   `map_suffix` char(1) NOT NULL,
   `term` varchar(75) NOT NULL,
@@ -3493,9 +3296,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens_aggregate` (
   `context` tinyint(1) unsigned NOT NULL DEFAULT '2',
   `context_weight` float unsigned NOT NULL,
   `total_weight` float unsigned NOT NULL,
-  `language` char(3) NOT NULL DEFAULT '',
-  KEY `token` (`term`),
-  KEY `keyword_id` (`term_id`)
+  `language` char(3) NOT NULL DEFAULT ''
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3504,13 +3305,11 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens_aggregate` (
 -- Structure de la table `qfupd_finder_types`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_types` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_finder_types` (
+`id` int(10) unsigned NOT NULL,
   `title` varchar(100) NOT NULL,
-  `mime` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `title` (`title`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  `mime` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_finder_types`
@@ -3529,13 +3328,12 @@ INSERT INTO `qfupd_finder_types` (`id`, `title`, `mime`) VALUES
 -- Structure de la table `qfupd_icagenda`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda` (
+`id` int(10) unsigned NOT NULL,
   `version` varchar(255) DEFAULT NULL,
   `releasedate` varchar(255) DEFAULT NULL,
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_icagenda`
@@ -3550,8 +3348,8 @@ INSERT INTO `qfupd_icagenda` (`id`, `version`, `releasedate`, `params`) VALUES
 -- Structure de la table `qfupd_icagenda_category`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_category` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_category` (
+`id` int(11) unsigned NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3559,9 +3357,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_category` (
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
-  `desc` mediumtext NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `desc` mediumtext NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_icagenda_category`
@@ -3577,8 +3374,8 @@ INSERT INTO `qfupd_icagenda_category` (`id`, `ordering`, `state`, `checked_out`,
 -- Structure de la table `qfupd_icagenda_customfields`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_customfields` (
+`id` int(11) unsigned NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3598,9 +3395,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields` (
   `created_by` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_alias` varchar(255) NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3608,16 +3404,15 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields` (
 -- Structure de la table `qfupd_icagenda_customfields_data`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields_data` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_customfields_data` (
+`id` int(11) unsigned NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `slug` varchar(255) NOT NULL,
   `parent_form` int(11) NOT NULL DEFAULT '0',
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `value` varchar(255) NOT NULL,
-  `language` varchar(10) NOT NULL DEFAULT '*',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `language` varchar(10) NOT NULL DEFAULT '*'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3625,8 +3420,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields_data` (
 -- Structure de la table `qfupd_icagenda_events`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_events` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_events` (
+`id` int(11) unsigned NOT NULL,
   `asset_id` int(10) NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
@@ -3671,9 +3466,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_events` (
   `shortdesc` text NOT NULL,
   `desc` mediumtext NOT NULL,
   `metadesc` text NOT NULL,
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+  `params` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_icagenda_events`
@@ -3702,8 +3496,8 @@ INSERT INTO `qfupd_icagenda_events` (`id`, `asset_id`, `ordering`, `state`, `app
 -- Structure de la table `qfupd_icagenda_feature`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_feature` (
+`id` int(11) unsigned NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3713,9 +3507,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature` (
   `desc` mediumtext NOT NULL,
   `icon` varchar(255) NOT NULL,
   `icon_alt` varchar(255) NOT NULL,
-  `show_filter` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `show_filter` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3723,12 +3516,11 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature` (
 -- Structure de la table `qfupd_icagenda_feature_xref`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature_xref` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_feature_xref` (
+`id` int(11) unsigned NOT NULL,
   `event_id` int(11) NOT NULL,
-  `feature_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `feature_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3736,8 +3528,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature_xref` (
 -- Structure de la table `qfupd_icagenda_registration`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_registration` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_registration` (
+`id` int(11) unsigned NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3752,9 +3544,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_registration` (
   `period` tinyint(1) NOT NULL DEFAULT '0',
   `people` int(2) NOT NULL,
   `notes` mediumtext NOT NULL,
-  `custom_fields` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `custom_fields` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_icagenda_registration`
@@ -3774,15 +3565,11 @@ INSERT INTO `qfupd_icagenda_registration` (`id`, `ordering`, `state`, `checked_o
 -- Structure de la table `qfupd_kunena_aliases`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_aliases` (
+CREATE TABLE `qfupd_kunena_aliases` (
   `alias` varchar(255) NOT NULL,
   `type` varchar(10) NOT NULL,
   `item` varchar(32) NOT NULL,
-  `state` tinyint(4) NOT NULL DEFAULT '0',
-  UNIQUE KEY `alias` (`alias`),
-  KEY `state` (`state`),
-  KEY `item` (`item`),
-  KEY `type` (`type`)
+  `state` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3822,8 +3609,8 @@ INSERT INTO `qfupd_kunena_aliases` (`alias`, `type`, `item`, `state`) VALUES
 -- Structure de la table `qfupd_kunena_announcement`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_announcement` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_announcement` (
+`id` int(3) NOT NULL,
   `title` tinytext NOT NULL,
   `created_by` int(11) NOT NULL DEFAULT '0',
   `sdescription` text NOT NULL,
@@ -3831,9 +3618,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_announcement` (
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `published` tinyint(1) NOT NULL DEFAULT '0',
   `ordering` tinyint(4) NOT NULL DEFAULT '0',
-  `showdate` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `showdate` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3841,21 +3627,16 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_announcement` (
 -- Structure de la table `qfupd_kunena_attachments`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_attachments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_attachments` (
+`id` int(11) NOT NULL,
   `mesid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
   `hash` char(32) DEFAULT NULL,
   `size` int(11) DEFAULT NULL,
   `folder` varchar(255) NOT NULL,
   `filetype` varchar(20) NOT NULL,
-  `filename` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mesid` (`mesid`),
-  KEY `userid` (`userid`),
-  KEY `hash` (`hash`),
-  KEY `filename` (`filename`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `filename` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3863,8 +3644,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_attachments` (
 -- Structure de la table `qfupd_kunena_categories`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_categories` (
+`id` int(11) NOT NULL,
   `parent_id` int(11) DEFAULT '0',
   `name` tinytext,
   `alias` varchar(255) NOT NULL,
@@ -3895,12 +3676,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_categories` (
   `last_topic_id` int(11) NOT NULL DEFAULT '0',
   `last_post_id` int(11) NOT NULL DEFAULT '0',
   `last_post_time` int(11) NOT NULL DEFAULT '0',
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `parent_id` (`parent_id`),
-  KEY `category_access` (`accesstype`,`access`),
-  KEY `published_pubaccess_id` (`published`,`pub_access`,`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_categories`
@@ -3917,10 +3694,9 @@ INSERT INTO `qfupd_kunena_categories` (`id`, `parent_id`, `name`, `alias`, `icon
 -- Structure de la table `qfupd_kunena_configuration`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_configuration` (
+CREATE TABLE `qfupd_kunena_configuration` (
   `id` int(11) NOT NULL DEFAULT '0',
-  `params` text,
-  PRIMARY KEY (`id`)
+  `params` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3936,16 +3712,12 @@ INSERT INTO `qfupd_kunena_configuration` (`id`, `params`) VALUES
 -- Structure de la table `qfupd_kunena_keywords`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_keywords` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_keywords` (
+`id` int(11) NOT NULL,
   `name` varchar(40) NOT NULL,
   `public_count` int(11) NOT NULL,
-  `total_count` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `public_count` (`public_count`),
-  KEY `total_count` (`total_count`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `total_count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3953,13 +3725,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_keywords` (
 -- Structure de la table `qfupd_kunena_keywords_map`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_keywords_map` (
+CREATE TABLE `qfupd_kunena_keywords_map` (
   `keyword_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `topic_id` int(11) NOT NULL,
-  UNIQUE KEY `keyword_user_topic` (`keyword_id`,`user_id`,`topic_id`),
-  KEY `user_id` (`user_id`),
-  KEY `topic_user` (`topic_id`,`user_id`)
+  `topic_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3968,8 +3737,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_keywords_map` (
 -- Structure de la table `qfupd_kunena_messages`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_messages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_messages` (
+`id` int(11) NOT NULL,
   `parent` int(11) DEFAULT '0',
   `thread` int(11) DEFAULT '0',
   `catid` int(11) NOT NULL DEFAULT '0',
@@ -3987,17 +3756,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_messages` (
   `moved` tinyint(4) DEFAULT '0',
   `modified_by` int(7) DEFAULT NULL,
   `modified_time` int(11) DEFAULT NULL,
-  `modified_reason` tinytext,
-  PRIMARY KEY (`id`),
-  KEY `thread` (`thread`),
-  KEY `ip` (`ip`),
-  KEY `userid` (`userid`),
-  KEY `time` (`time`),
-  KEY `locked` (`locked`),
-  KEY `hold_time` (`hold`,`time`),
-  KEY `parent_hits` (`parent`,`hits`),
-  KEY `catid_parent` (`catid`,`parent`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `modified_reason` tinytext
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_messages`
@@ -4013,10 +3773,9 @@ INSERT INTO `qfupd_kunena_messages` (`id`, `parent`, `thread`, `catid`, `name`, 
 -- Structure de la table `qfupd_kunena_messages_text`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_messages_text` (
+CREATE TABLE `qfupd_kunena_messages_text` (
   `mesid` int(11) NOT NULL DEFAULT '0',
-  `message` text NOT NULL,
-  PRIMARY KEY (`mesid`)
+  `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4033,14 +3792,12 @@ INSERT INTO `qfupd_kunena_messages_text` (`mesid`, `message`) VALUES
 -- Structure de la table `qfupd_kunena_polls`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_polls` (
+`id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `threadid` int(11) NOT NULL,
-  `polltimetolive` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `threadid` (`threadid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `polltimetolive` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4048,14 +3805,12 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls` (
 -- Structure de la table `qfupd_kunena_polls_options`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls_options` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_polls_options` (
+`id` int(11) NOT NULL,
   `pollid` int(11) DEFAULT NULL,
   `text` varchar(100) DEFAULT NULL,
-  `votes` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pollid` (`pollid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `votes` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4063,13 +3818,12 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls_options` (
 -- Structure de la table `qfupd_kunena_polls_users`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls_users` (
+CREATE TABLE `qfupd_kunena_polls_users` (
   `pollid` int(11) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
   `votes` int(11) DEFAULT NULL,
   `lasttime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `lastvote` int(11) DEFAULT NULL,
-  UNIQUE KEY `pollid` (`pollid`,`userid`)
+  `lastvote` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4078,14 +3832,13 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls_users` (
 -- Structure de la table `qfupd_kunena_ranks`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_ranks` (
-  `rank_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_ranks` (
+`rank_id` mediumint(8) unsigned NOT NULL,
   `rank_title` varchar(255) NOT NULL DEFAULT '',
   `rank_min` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `rank_special` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `rank_image` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`rank_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `rank_image` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_ranks`
@@ -4109,14 +3862,12 @@ INSERT INTO `qfupd_kunena_ranks` (`rank_id`, `rank_title`, `rank_min`, `rank_spe
 -- Structure de la table `qfupd_kunena_sessions`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_sessions` (
+CREATE TABLE `qfupd_kunena_sessions` (
   `userid` int(11) NOT NULL DEFAULT '0',
   `allowed` text,
   `lasttime` int(11) NOT NULL DEFAULT '0',
   `readtopics` text,
-  `currvisit` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`userid`),
-  KEY `currvisit` (`currvisit`)
+  `currvisit` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4133,14 +3884,13 @@ INSERT INTO `qfupd_kunena_sessions` (`userid`, `allowed`, `lasttime`, `readtopic
 -- Structure de la table `qfupd_kunena_smileys`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_smileys` (
-  `id` int(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_smileys` (
+`id` int(4) NOT NULL,
   `code` varchar(12) NOT NULL DEFAULT '',
   `location` varchar(50) NOT NULL DEFAULT '',
   `greylocation` varchar(60) NOT NULL DEFAULT '',
-  `emoticonbar` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
+  `emoticonbar` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_smileys`
@@ -4220,14 +3970,11 @@ INSERT INTO `qfupd_kunena_smileys` (`id`, `code`, `location`, `greylocation`, `e
 -- Structure de la table `qfupd_kunena_thankyou`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_thankyou` (
+CREATE TABLE `qfupd_kunena_thankyou` (
   `postid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `targetuserid` int(11) NOT NULL,
-  `time` datetime NOT NULL,
-  UNIQUE KEY `postid` (`postid`,`userid`),
-  KEY `userid` (`userid`),
-  KEY `targetuserid` (`targetuserid`)
+  `time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4236,8 +3983,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_thankyou` (
 -- Structure de la table `qfupd_kunena_topics`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_topics` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_topics` (
+`id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL DEFAULT '0',
   `subject` tinytext,
   `icon_id` int(11) NOT NULL DEFAULT '0',
@@ -4259,18 +4006,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_topics` (
   `last_post_userid` int(11) NOT NULL DEFAULT '0',
   `last_post_message` text,
   `last_post_guest_name` tinytext,
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `category_id` (`category_id`),
-  KEY `locked` (`locked`),
-  KEY `hold` (`hold`),
-  KEY `posts` (`posts`),
-  KEY `hits` (`hits`),
-  KEY `first_post_userid` (`first_post_userid`),
-  KEY `last_post_userid` (`last_post_userid`),
-  KEY `first_post_time` (`first_post_time`),
-  KEY `last_post_time` (`last_post_time`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_topics`
@@ -4286,7 +4023,7 @@ INSERT INTO `qfupd_kunena_topics` (`id`, `category_id`, `subject`, `icon_id`, `l
 -- Structure de la table `qfupd_kunena_users`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_users` (
+CREATE TABLE `qfupd_kunena_users` (
   `userid` int(11) NOT NULL DEFAULT '0',
   `view` varchar(8) NOT NULL DEFAULT '',
   `signature` text,
@@ -4324,13 +4061,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_users` (
   `rank` tinyint(4) NOT NULL DEFAULT '0',
   `hideEmail` tinyint(1) NOT NULL DEFAULT '1',
   `showOnline` tinyint(1) NOT NULL DEFAULT '1',
-  `thankyou` int(11) DEFAULT '0',
-  PRIMARY KEY (`userid`),
-  KEY `group_id` (`group_id`),
-  KEY `posts` (`posts`),
-  KEY `uhits` (`uhits`),
-  KEY `banned` (`banned`),
-  KEY `moderator` (`moderator`)
+  `thankyou` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4364,8 +4095,8 @@ INSERT INTO `qfupd_kunena_users` (`userid`, `view`, `signature`, `moderator`, `b
 -- Structure de la table `qfupd_kunena_users_banned`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_users_banned` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_users_banned` (
+`id` int(11) NOT NULL,
   `userid` int(11) DEFAULT NULL,
   `ip` varchar(128) DEFAULT NULL,
   `blocked` tinyint(4) NOT NULL DEFAULT '0',
@@ -4377,13 +4108,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_users_banned` (
   `modified_by` int(11) DEFAULT NULL,
   `modified_time` datetime DEFAULT NULL,
   `comments` text,
-  `params` text,
-  PRIMARY KEY (`id`),
-  KEY `userid` (`userid`),
-  KEY `ip` (`ip`),
-  KEY `expiration` (`expiration`),
-  KEY `created_time` (`created_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `params` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4391,16 +4117,13 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_users_banned` (
 -- Structure de la table `qfupd_kunena_user_categories`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_categories` (
+CREATE TABLE `qfupd_kunena_user_categories` (
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `role` tinyint(4) NOT NULL DEFAULT '0',
   `allreadtime` datetime DEFAULT NULL,
   `subscribed` tinyint(4) NOT NULL DEFAULT '0',
-  `params` text NOT NULL,
-  PRIMARY KEY (`user_id`,`category_id`),
-  KEY `category_subscribed` (`category_id`,`subscribed`),
-  KEY `role` (`role`)
+  `params` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4409,15 +4132,12 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_categories` (
 -- Structure de la table `qfupd_kunena_user_read`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_read` (
+CREATE TABLE `qfupd_kunena_user_read` (
   `user_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `message_id` int(11) NOT NULL,
-  `time` int(11) NOT NULL,
-  UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`),
-  KEY `category_user_id` (`category_id`,`user_id`),
-  KEY `time` (`time`)
+  `time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4434,7 +4154,7 @@ INSERT INTO `qfupd_kunena_user_read` (`user_id`, `topic_id`, `category_id`, `mes
 -- Structure de la table `qfupd_kunena_user_topics`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_topics` (
+CREATE TABLE `qfupd_kunena_user_topics` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `topic_id` int(11) NOT NULL DEFAULT '0',
   `category_id` int(11) NOT NULL,
@@ -4443,13 +4163,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_topics` (
   `owner` tinyint(4) NOT NULL DEFAULT '0',
   `favorite` tinyint(4) NOT NULL DEFAULT '0',
   `subscribed` tinyint(4) NOT NULL DEFAULT '0',
-  `params` text NOT NULL,
-  UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`),
-  KEY `topic_id` (`topic_id`),
-  KEY `posts` (`posts`),
-  KEY `owner` (`owner`),
-  KEY `favorite` (`favorite`),
-  KEY `subscribed` (`subscribed`)
+  `params` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4466,16 +4180,15 @@ INSERT INTO `qfupd_kunena_user_topics` (`user_id`, `topic_id`, `category_id`, `p
 -- Structure de la table `qfupd_kunena_version`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_version` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_version` (
+`id` int(11) NOT NULL,
   `version` varchar(20) NOT NULL,
   `versiondate` date NOT NULL,
   `installdate` date NOT NULL,
   `build` varchar(20) NOT NULL,
   `versionname` varchar(40) DEFAULT NULL,
-  `state` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `state` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_version`
@@ -4491,8 +4204,8 @@ INSERT INTO `qfupd_kunena_version` (`id`, `version`, `versiondate`, `installdate
 -- Structure de la table `qfupd_languages`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_languages` (
-  `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_languages` (
+`lang_id` int(11) unsigned NOT NULL,
   `lang_code` char(7) NOT NULL,
   `title` varchar(50) NOT NULL,
   `title_native` varchar(50) NOT NULL,
@@ -4504,14 +4217,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_languages` (
   `sitename` varchar(1024) NOT NULL DEFAULT '',
   `published` int(11) NOT NULL DEFAULT '0',
   `access` int(10) unsigned NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`lang_id`),
-  UNIQUE KEY `idx_sef` (`sef`),
-  UNIQUE KEY `idx_image` (`image`),
-  UNIQUE KEY `idx_langcode` (`lang_code`),
-  KEY `idx_access` (`access`),
-  KEY `idx_ordering` (`ordering`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `ordering` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_languages`
@@ -4527,8 +4234,8 @@ INSERT INTO `qfupd_languages` (`lang_id`, `lang_code`, `title`, `title_native`, 
 -- Structure de la table `qfupd_menu`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_menu` (
+`id` int(11) NOT NULL,
   `menutype` varchar(24) NOT NULL COMMENT 'The type of menu this item belongs to. FK to #__menu_types.menutype',
   `title` varchar(255) NOT NULL COMMENT 'The display title of the menu item.',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'The SEF alias of the menu item.',
@@ -4551,16 +4258,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_menu` (
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
   `home` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Indicates if this menu item is the home or default page.',
   `language` char(7) NOT NULL DEFAULT '',
-  `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`,`language`),
-  KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
-  KEY `idx_menutype` (`menutype`),
-  KEY `idx_left_right` (`lft`,`rgt`),
-  KEY `idx_alias` (`alias`),
-  KEY `idx_path` (`path`(255)),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=225 ;
+  `client_id` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=225 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_menu`
@@ -4656,14 +4355,12 @@ INSERT INTO `qfupd_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 -- Structure de la table `qfupd_menu_types`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_menu_types` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_menu_types` (
+`id` int(10) unsigned NOT NULL,
   `menutype` varchar(24) NOT NULL,
   `title` varchar(48) NOT NULL,
-  `description` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_menutype` (`menutype`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+  `description` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_menu_types`
@@ -4681,8 +4378,8 @@ INSERT INTO `qfupd_menu_types` (`id`, `menutype`, `title`, `description`) VALUES
 -- Structure de la table `qfupd_messages`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_messages` (
-  `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_messages` (
+`message_id` int(10) unsigned NOT NULL,
   `user_id_from` int(10) unsigned NOT NULL DEFAULT '0',
   `user_id_to` int(10) unsigned NOT NULL DEFAULT '0',
   `folder_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -4690,10 +4387,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_messages` (
   `state` tinyint(1) NOT NULL DEFAULT '0',
   `priority` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `subject` varchar(255) NOT NULL DEFAULT '',
-  `message` text NOT NULL,
-  PRIMARY KEY (`message_id`),
-  KEY `useridto_state` (`user_id_to`,`state`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `message` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4701,11 +4396,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_messages` (
 -- Structure de la table `qfupd_messages_cfg`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_messages_cfg` (
+CREATE TABLE `qfupd_messages_cfg` (
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `cfg_name` varchar(100) NOT NULL DEFAULT '',
-  `cfg_value` varchar(255) NOT NULL DEFAULT '',
-  UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`)
+  `cfg_value` varchar(255) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4714,8 +4408,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_messages_cfg` (
 -- Structure de la table `qfupd_modules`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_modules` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_modules` (
+`id` int(11) NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(100) NOT NULL DEFAULT '',
   `note` varchar(255) NOT NULL DEFAULT '',
@@ -4732,12 +4426,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_modules` (
   `showtitle` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `params` text NOT NULL,
   `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  `language` char(7) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `published` (`published`,`access`),
-  KEY `newsfeeds` (`module`,`published`),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=104 ;
+  `language` char(7) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_modules`
@@ -4783,10 +4473,9 @@ INSERT INTO `qfupd_modules` (`id`, `asset_id`, `title`, `note`, `content`, `orde
 -- Structure de la table `qfupd_modules_menu`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_modules_menu` (
+CREATE TABLE `qfupd_modules_menu` (
   `moduleid` int(11) NOT NULL DEFAULT '0',
-  `menuid` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`moduleid`,`menuid`)
+  `menuid` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4835,9 +4524,9 @@ INSERT INTO `qfupd_modules_menu` (`moduleid`, `menuid`) VALUES
 -- Structure de la table `qfupd_newsfeeds`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_newsfeeds` (
+CREATE TABLE `qfupd_newsfeeds` (
   `catid` int(11) NOT NULL DEFAULT '0',
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`id` int(10) unsigned NOT NULL,
   `name` varchar(100) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `link` varchar(200) NOT NULL DEFAULT '',
@@ -4865,16 +4554,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_newsfeeds` (
   `description` text NOT NULL,
   `version` int(10) unsigned NOT NULL DEFAULT '1',
   `hits` int(10) unsigned NOT NULL DEFAULT '0',
-  `images` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`published`),
-  KEY `idx_catid` (`catid`),
-  KEY `idx_createdby` (`created_by`),
-  KEY `idx_language` (`language`),
-  KEY `idx_xreference` (`xreference`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `images` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4882,13 +4563,12 @@ CREATE TABLE IF NOT EXISTS `qfupd_newsfeeds` (
 -- Structure de la table `qfupd_overrider`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_overrider` (
-  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `qfupd_overrider` (
+`id` int(10) NOT NULL COMMENT 'Primary Key',
   `constant` varchar(255) NOT NULL,
   `string` text NOT NULL,
-  `file` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `file` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4896,8 +4576,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_overrider` (
 -- Structure de la table `qfupd_postinstall_messages`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_postinstall_messages` (
-  `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_postinstall_messages` (
+`postinstall_message_id` bigint(20) unsigned NOT NULL,
   `extension_id` bigint(20) NOT NULL DEFAULT '700' COMMENT 'FK to #__extensions',
   `title_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for the title',
   `description_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for description',
@@ -4910,9 +4590,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_postinstall_messages` (
   `condition_file` varchar(255) DEFAULT NULL COMMENT 'RAD URI to file holding display condition method',
   `condition_method` varchar(255) DEFAULT NULL COMMENT 'Display condition method, must return boolean',
   `version_introduced` varchar(50) NOT NULL DEFAULT '3.2.0' COMMENT 'Version when this message was introduced',
-  `enabled` tinyint(3) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`postinstall_message_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+  `enabled` tinyint(3) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_postinstall_messages`
@@ -4935,8 +4614,8 @@ INSERT INTO `qfupd_postinstall_messages` (`postinstall_message_id`, `extension_i
 -- Structure de la table `qfupd_redirect_links`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_redirect_links` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_redirect_links` (
+`id` int(10) unsigned NOT NULL,
   `old_url` varchar(255) NOT NULL,
   `new_url` varchar(255) DEFAULT NULL,
   `referer` varchar(150) NOT NULL,
@@ -4945,11 +4624,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_redirect_links` (
   `published` tinyint(4) NOT NULL,
   `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `header` smallint(3) NOT NULL DEFAULT '301',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_link_old` (`old_url`),
-  KEY `idx_link_modifed` (`modified_date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+  `header` smallint(3) NOT NULL DEFAULT '301'
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_redirect_links`
@@ -4962,7 +4638,9 @@ INSERT INTO `qfupd_redirect_links` (`id`, `old_url`, `new_url`, `referer`, `comm
 (4, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/pkg-profiler3-1-11', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/', '', 2, 0, '2015-05-11 20:45:53', '0000-00-00 00:00:00', 301),
 (5, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/votre-profil/profile?layout=edit', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/profil', '', 1, 0, '2015-05-12 11:42:05', '0000-00-00 00:00:00', 301),
 (6, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/profil', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/', '', 2, 0, '2015-05-12 11:42:27', '0000-00-00 00:00:00', 301),
-(7, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/inscription?view=login', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/', '', 3, 0, '2015-05-14 21:47:56', '0000-00-00 00:00:00', 301);
+(7, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/inscription?view=login', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/', '', 3, 0, '2015-05-14 21:47:56', '0000-00-00 00:00:00', 301),
+(8, 'http://localhost:8888/Site-Tutorat-Informatique2-master-2/', '', 'http://localhost:8888/Site-Tutorat-Informatique2-master-2/', '', 1, 0, '2015-05-19 13:23:40', '0000-00-00 00:00:00', 301),
+(9, 'http://localhost:8888/Site-Tutorat-Informatique2-master-2/index.php', '', 'http://localhost:8888/Site-Tutorat-Informatique2-master-2/index.php', '', 1, 0, '2015-05-19 13:23:56', '0000-00-00 00:00:00', 301);
 
 -- --------------------------------------------------------
 
@@ -4970,10 +4648,9 @@ INSERT INTO `qfupd_redirect_links` (`id`, `old_url`, `new_url`, `referer`, `comm
 -- Structure de la table `qfupd_schemas`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_schemas` (
+CREATE TABLE `qfupd_schemas` (
   `extension_id` int(11) NOT NULL,
-  `version_id` varchar(20) NOT NULL,
-  PRIMARY KEY (`extension_id`,`version_id`)
+  `version_id` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4991,17 +4668,14 @@ INSERT INTO `qfupd_schemas` (`extension_id`, `version_id`) VALUES
 -- Structure de la table `qfupd_session`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_session` (
+CREATE TABLE `qfupd_session` (
   `session_id` varchar(200) NOT NULL DEFAULT '',
   `client_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `guest` tinyint(4) unsigned DEFAULT '1',
   `time` varchar(14) DEFAULT '',
   `data` mediumtext,
   `userid` int(11) DEFAULT '0',
-  `username` varchar(150) DEFAULT '',
-  PRIMARY KEY (`session_id`),
-  KEY `userid` (`userid`),
-  KEY `time` (`time`)
+  `username` varchar(150) DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5009,8 +4683,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_session` (
 --
 
 INSERT INTO `qfupd_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('ai9m43fa8svu5lfq8uno1a97o2', 0, 0, '1432030133', '__default|a:8:{s:15:"session.counter";i:3;s:19:"session.timer.start";i:1432030108;s:18:"session.timer.last";i:1432030126;s:17:"session.timer.now";i:1432030128;s:22:"session.client.browser";s:109:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.152 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":1:{s:5:"users";O:8:"stdClass":1:{s:5:"login";O:8:"stdClass":1:{s:4:"form";O:8:"stdClass":2:{s:6:"return";s:66:"index.php?Itemid=101&option=com_content&view=article&catid=8&id=17";s:4:"data";a:0:{}}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":52:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"820";s:4:"name";s:8:"MARINIER";s:8:"username";s:15:"opheliemarinier";s:5:"email";s:26:"ophelie.marinier@gmail.com";s:8:"password";s:60:"$2y$10$vjoKE71aLqzDKBCWaG5.YOjgVyl88L.4gxhaM6VSk5APwGWNoudGu";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:41:34";s:13:"lastvisitDate";s:19:"2015-05-19 09:32:53";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:0:"";s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";s:10:"session_id";N;s:12:"where_clause";s:11:"user_id=820";s:2:"ip";s:3:"::1";s:3:"cck";s:4:"user";s:6:"gender";s:1:"F";s:9:"last_name";s:0:"";s:10:"first_name";s:8:"Ophélie";s:8:"about_me";s:0:"";s:6:"avatar";s:0:"";s:8:"address1";s:0:"";s:8:"address2";s:0:"";s:4:"city";s:0:"";s:11:"postal_code";s:0:"";s:6:"region";s:0:"";s:7:"country";s:0:"";s:5:"phone";s:0:"";s:7:"website";s:0:"";s:9:"birthdate";s:19:"0000-00-00 00:00:00";s:10:"birthplace";s:0:"";}s:13:"session.token";s:32:"677751c99574ed7b98f1a8e9f78c9b65";}', 820, 'opheliemarinier'),
-('vggcitrmeihl6opu1mj5705jo3', 1, 0, '1432030261', '__default|a:9:{s:15:"session.counter";i:83;s:19:"session.timer.start";i:1432025775;s:18:"session.timer.last";i:1432030255;s:17:"session.timer.now";i:1432030258;s:22:"session.client.browser";s:109:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.152 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":4:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:0:"";}s:13:"com_installer";O:8:"stdClass":2:{s:7:"message";s:0:"";s:17:"extension_message";s:0:"";}s:7:"com_cck";O:8:"stdClass":3:{s:4:"edit";O:8:"stdClass":3:{s:4:"type";O:8:"stdClass":3:{s:2:"id";a:0:{}s:4:"data";N;s:6:"client";N;}s:5:"field";O:8:"stdClass":2:{s:4:"data";N;s:9:"ajax_type";N;}s:3:"box";O:8:"stdClass":1:{s:4:"data";N;}}s:6:"fields";O:8:"stdClass":4:{s:6:"filter";O:8:"stdClass":5:{s:6:"search";s:7:"diplome";s:8:"location";s:5:"title";s:6:"folder";s:0:"";s:5:"state";s:1:"1";s:4:"type";s:0:"";}s:8:"ordercol";s:5:"title";s:9:"orderdirn";s:3:"asc";s:10:"limitstart";s:1:"0";}s:3:"add";O:8:"stdClass":2:{s:5:"field";O:8:"stdClass":1:{s:10:"ajax_state";N;}s:3:"box";O:8:"stdClass":5:{s:3:"alt";i:0;s:10:"validation";i:0;s:4:"file";s:63:"administrator/components/com_cck/views/field/tmpl/selection.php";s:8:"function";s:0:"";s:2:"bx";O:8:"stdClass":5:{s:2:"id";s:11:"content_map";s:5:"title";s:11:"joomla_user";s:4:"name";s:3:"map";s:4:"type";s:13:"storage_field";s:6:"params";s:0:"";}}}}s:6:"global";O:8:"stdClass":1:{s:4:"list";O:8:"stdClass":1:{s:5:"limit";i:20;}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":51:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"820";s:4:"name";s:8:"MARINIER";s:8:"username";s:15:"opheliemarinier";s:5:"email";s:26:"ophelie.marinier@gmail.com";s:8:"password";s:60:"$2y$10$vjoKE71aLqzDKBCWaG5.YOjgVyl88L.4gxhaM6VSk5APwGWNoudGu";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:41:34";s:13:"lastvisitDate";s:19:"2015-05-19 08:55:30";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";s:10:"session_id";N;s:12:"where_clause";s:11:"user_id=820";s:2:"ip";s:3:"::1";s:3:"cck";s:4:"user";s:6:"gender";s:1:"F";s:9:"last_name";s:0:"";s:10:"first_name";s:8:"Ophélie";s:8:"about_me";s:0:"";s:6:"avatar";s:0:"";s:8:"address1";s:0:"";s:8:"address2";s:0:"";s:4:"city";s:0:"";s:11:"postal_code";s:0:"";s:6:"region";s:0:"";s:7:"country";s:0:"";s:5:"phone";s:0:"";s:7:"website";s:0:"";s:9:"birthdate";s:19:"0000-00-00 00:00:00";s:10:"birthplace";s:0:"";}s:13:"session.token";s:32:"2788b37baeb0ddc99e579b1d7a96d8bd";s:20:"cck_hash_seblod_form";s:32:"82ec0c7061563f8bd13323ac66eff75b";}', 820, 'opheliemarinier');
+('2cad81ea11d16b684227764623cc7087', 0, 1, '1432042101', '__default|a:7:{s:15:"session.counter";i:6;s:19:"session.timer.start";i:1432041804;s:18:"session.timer.last";i:1432042063;s:17:"session.timer.now";i:1432042101;s:22:"session.client.browser";s:83:"com.apple.Safari.SearchHelper/10600.4.10.5 CFNetwork/720.2.4 Darwin/14.1.0 (x86_64)";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":26:{s:9:"\\0\\0\\0isRoot";N;s:2:"id";i:0;s:4:"name";N;s:8:"username";N;s:5:"email";N;s:8:"password";N;s:14:"password_clear";s:0:"";s:5:"block";N;s:9:"sendEmail";i:0;s:12:"registerDate";N;s:13:"lastvisitDate";N;s:10:"activation";N;s:6:"params";N;s:6:"groups";a:1:{i:0;s:1:"9";}s:5:"guest";i:1;s:13:"lastResetTime";N;s:10:"resetCount";N;s:12:"requireReset";N;s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";N;s:14:"\\0\\0\\0_authLevels";a:3:{i:0;i:1;i:1;i:1;i:2;i:5;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;}}', 0, ''),
+('e254824ffd077ab29dd5568cf031663d', 0, 0, '1432042101', '__default|a:8:{s:15:"session.counter";i:9;s:19:"session.timer.start";i:1432041800;s:18:"session.timer.last";i:1432042061;s:17:"session.timer.now";i:1432042099;s:22:"session.client.browser";s:118:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/600.4.10 (KHTML, like Gecko) Version/8.0.4 Safari/600.4.10";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":1:{s:5:"users";O:8:"stdClass":1:{s:5:"login";O:8:"stdClass":1:{s:4:"form";O:8:"stdClass":2:{s:6:"return";s:57:"index.php?option=com_content&view=article&id=2&Itemid=101";s:4:"data";a:0:{}}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":33:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"818";s:4:"name";s:8:"DUCHEMIN";s:8:"username";s:13:"laureduchemin";s:5:"email";s:24:"duchemin_laure@gmail.com";s:8:"password";s:60:"$2y$10$fEtZDBctT8s7dZTSm.lr2.nXDqL3MDdN9EeygQhOp/dRAhY8J/zGC";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:02:06";s:13:"lastvisitDate";s:19:"2015-05-19 00:39:56";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:0:"";s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";}s:13:"session.token";s:32:"95a82afb9a49533970f9890b9d5a14ac";}', 818, 'laureduchemin');
 
 -- --------------------------------------------------------
 
@@ -5018,8 +4692,8 @@ INSERT INTO `qfupd_session` (`session_id`, `client_id`, `guest`, `time`, `data`,
 -- Structure de la table `qfupd_tags`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_tags` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_tags` (
+`id` int(10) unsigned NOT NULL,
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
   `rgt` int(11) NOT NULL DEFAULT '0',
@@ -5048,16 +4722,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_tags` (
   `language` char(7) NOT NULL,
   `version` int(10) unsigned NOT NULL DEFAULT '1',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `tag_idx` (`published`,`access`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_path` (`path`),
-  KEY `idx_left_right` (`lft`,`rgt`),
-  KEY `idx_alias` (`alias`),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_tags`
@@ -5073,17 +4739,14 @@ INSERT INTO `qfupd_tags` (`id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `tit
 -- Structure de la table `qfupd_template_styles`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_template_styles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_template_styles` (
+`id` int(10) unsigned NOT NULL,
   `template` varchar(50) NOT NULL DEFAULT '',
   `client_id` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `home` char(7) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL DEFAULT '',
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_template` (`template`),
-  KEY `idx_home` (`home`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_template_styles`
@@ -5116,15 +4779,11 @@ INSERT INTO `qfupd_template_styles` (`id`, `template`, `client_id`, `home`, `tit
 -- Structure de la table `qfupd_ucm_base`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_ucm_base` (
+CREATE TABLE `qfupd_ucm_base` (
   `ucm_id` int(10) unsigned NOT NULL,
   `ucm_item_id` int(10) NOT NULL,
   `ucm_type_id` int(11) NOT NULL,
-  `ucm_language_id` int(11) NOT NULL,
-  PRIMARY KEY (`ucm_id`),
-  KEY `idx_ucm_item_id` (`ucm_item_id`),
-  KEY `idx_ucm_type_id` (`ucm_type_id`),
-  KEY `idx_ucm_language_id` (`ucm_language_id`)
+  `ucm_language_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -5133,8 +4792,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_ucm_base` (
 -- Structure de la table `qfupd_ucm_content`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_ucm_content` (
-  `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_ucm_content` (
+`core_content_id` int(10) unsigned NOT NULL,
   `core_type_alias` varchar(255) NOT NULL DEFAULT '' COMMENT 'FK to the content types table',
   `core_title` varchar(255) NOT NULL,
   `core_alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -5165,21 +4824,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_ucm_content` (
   `core_metadesc` text NOT NULL,
   `core_catid` int(10) unsigned NOT NULL DEFAULT '0',
   `core_xreference` varchar(50) NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
-  `core_type_id` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`core_content_id`),
-  KEY `tag_idx` (`core_state`,`core_access`),
-  KEY `idx_access` (`core_access`),
-  KEY `idx_alias` (`core_alias`),
-  KEY `idx_language` (`core_language`),
-  KEY `idx_title` (`core_title`),
-  KEY `idx_modified_time` (`core_modified_time`),
-  KEY `idx_created_time` (`core_created_time`),
-  KEY `idx_content_type` (`core_type_alias`),
-  KEY `idx_core_modified_user_id` (`core_modified_user_id`),
-  KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`),
-  KEY `idx_core_created_user_id` (`core_created_user_id`),
-  KEY `idx_core_type_id` (`core_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contains core content data in name spaced fields' AUTO_INCREMENT=2 ;
+  `core_type_id` int(10) unsigned DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Contains core content data in name spaced fields';
 
 -- --------------------------------------------------------
 
@@ -5187,8 +4833,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_ucm_content` (
 -- Structure de la table `qfupd_ucm_history`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_ucm_history` (
-  `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_ucm_history` (
+`version_id` int(10) unsigned NOT NULL,
   `ucm_item_id` int(10) unsigned NOT NULL,
   `ucm_type_id` int(10) unsigned NOT NULL,
   `version_note` varchar(255) NOT NULL DEFAULT '' COMMENT 'Optional version name',
@@ -5197,11 +4843,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_ucm_history` (
   `character_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Number of characters in this version.',
   `sha1_hash` varchar(50) NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
   `version_data` mediumtext NOT NULL COMMENT 'json-encoded string of version data',
-  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep',
-  PRIMARY KEY (`version_id`),
-  KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
-  KEY `idx_save_date` (`save_date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep'
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_ucm_history`
@@ -5244,8 +4887,8 @@ INSERT INTO `qfupd_ucm_history` (`version_id`, `ucm_item_id`, `ucm_type_id`, `ve
 -- Structure de la table `qfupd_updates`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_updates` (
-  `update_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_updates` (
+`update_id` int(11) NOT NULL,
   `update_site_id` int(11) DEFAULT '0',
   `extension_id` int(11) DEFAULT '0',
   `name` varchar(100) DEFAULT '',
@@ -5258,9 +4901,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_updates` (
   `data` text NOT NULL,
   `detailsurl` text NOT NULL,
   `infourl` text NOT NULL,
-  `extra_query` varchar(1000) DEFAULT '',
-  PRIMARY KEY (`update_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Available Updates' AUTO_INCREMENT=55 ;
+  `extra_query` varchar(1000) DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COMMENT='Available Updates';
 
 --
 -- Contenu de la table `qfupd_updates`
@@ -5328,16 +4970,15 @@ INSERT INTO `qfupd_updates` (`update_id`, `update_site_id`, `extension_id`, `nam
 -- Structure de la table `qfupd_update_sites`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_update_sites` (
-  `update_site_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_update_sites` (
+`update_site_id` int(11) NOT NULL,
   `name` varchar(100) DEFAULT '',
   `type` varchar(20) DEFAULT '',
   `location` text NOT NULL,
   `enabled` int(11) DEFAULT '0',
   `last_check_timestamp` bigint(20) DEFAULT '0',
-  `extra_query` varchar(1000) DEFAULT '',
-  PRIMARY KEY (`update_site_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Update Sites' AUTO_INCREMENT=12 ;
+  `extra_query` varchar(1000) DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='Update Sites';
 
 --
 -- Contenu de la table `qfupd_update_sites`
@@ -5359,10 +5000,9 @@ INSERT INTO `qfupd_update_sites` (`update_site_id`, `name`, `type`, `location`, 
 -- Structure de la table `qfupd_update_sites_extensions`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_update_sites_extensions` (
+CREATE TABLE `qfupd_update_sites_extensions` (
   `update_site_id` int(11) NOT NULL DEFAULT '0',
-  `extension_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`update_site_id`,`extension_id`)
+  `extension_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Links extensions to update sites';
 
 --
@@ -5386,18 +5026,13 @@ INSERT INTO `qfupd_update_sites_extensions` (`update_site_id`, `extension_id`) V
 -- Structure de la table `qfupd_usergroups`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_usergroups` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `qfupd_usergroups` (
+`id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Adjacency List Reference Id',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `title` varchar(100) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`),
-  KEY `idx_usergroup_title_lookup` (`title`),
-  KEY `idx_usergroup_adjacency_lookup` (`parent_id`),
-  KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+  `title` varchar(100) NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_usergroups`
@@ -5420,8 +5055,8 @@ INSERT INTO `qfupd_usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUES
 -- Structure de la table `qfupd_users`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_users` (
+`id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL DEFAULT '',
   `username` varchar(100) NOT NULL DEFAULT '',
   `email` varchar(100) NOT NULL DEFAULT '',
@@ -5441,13 +5076,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_users` (
   `resetCount` int(11) NOT NULL DEFAULT '0' COMMENT 'Count of password resets since lastResetTime',
   `otpKey` varchar(1000) NOT NULL DEFAULT '' COMMENT 'Two factor authentication encrypted keys',
   `otep` varchar(1000) NOT NULL DEFAULT '' COMMENT 'One time emergency passwords',
-  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login',
-  PRIMARY KEY (`id`),
-  KEY `idx_name` (`name`),
-  KEY `idx_block` (`block`),
-  KEY `username` (`username`),
-  KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=821 ;
+  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login'
+) ENGINE=InnoDB AUTO_INCREMENT=821 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_users`
@@ -5458,7 +5088,7 @@ INSERT INTO `qfupd_users` (`id`, `name`, `username`, `email`, `password`, `diplo
 (815, 'IGUE', 'salimigue', 'limsamohamed@gmail.com', '$2y$10$Pb53xAib/vilP/K5K8F8We1k.ddRcbnQ2k7.1MfsibtJDY6C1SWwm', '', '', '', '', '', 0, 0, '2015-05-18 23:44:53', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (816, 'HUART', 'tristanhuart', 'letudianteninfo@gmail.com', '$2y$10$iTn7jeeUDb6T89J.ieMMWu.2ZBYV/mdayYJXAEvyX315OaoMd7sd6', '', '', '', '', '', 0, 0, '2015-05-18 23:57:38', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (817, 'GAYAT', 'theotimegayat', 'theotime.gayat@gmail.com', '$2y$10$X6fGl4E3V0T1Lm0PBFDu2OUPpHmTo4nT1ShXCLz08883M7DYOWu6.', '', '', '', '', '', 0, 0, '2015-05-18 23:59:47', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
-(818, 'DUCHEMIN', 'laureduchemin', 'duchemin_laure@gmail.com', '$2y$10$fEtZDBctT8s7dZTSm.lr2.nXDqL3MDdN9EeygQhOp/dRAhY8J/zGC', '', '', '', '', '', 0, 0, '2015-05-19 00:02:06', '2015-05-19 00:39:56', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
+(818, 'DUCHEMIN', 'laureduchemin', 'duchemin_laure@gmail.com', '$2y$10$fEtZDBctT8s7dZTSm.lr2.nXDqL3MDdN9EeygQhOp/dRAhY8J/zGC', '', '', '', '', '', 0, 0, '2015-05-19 00:02:06', '2015-05-19 13:25:10', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (819, 'BRIZION', 'alexandrebrizion', 'harleq1.private@gmail.com', '$2y$10$bbIzyjOLCLgWFC6X/i0u4OiQLLFTMT2GOxNDx6dB4FOVWeDjXskxC', '', '', '', '', '', 0, 0, '2015-05-19 00:39:25', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (820, 'MARINIER', 'opheliemarinier', 'ophelie.marinier@gmail.com', '$2y$10$vjoKE71aLqzDKBCWaG5.YOjgVyl88L.4gxhaM6VSk5APwGWNoudGu', '', '', '', '', '', 0, 0, '2015-05-19 00:41:34', '2015-05-19 10:08:48', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
 
@@ -5468,8 +5098,8 @@ INSERT INTO `qfupd_users` (`id`, `name`, `username`, `email`, `password`, `diplo
 -- Structure de la table `qfupd_userxtd_fields`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_userxtd_fields` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_userxtd_fields` (
+`id` int(11) unsigned NOT NULL,
   `asset_id` int(11) NOT NULL,
   `catid` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -5491,14 +5121,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_userxtd_fields` (
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `access` int(10) unsigned NOT NULL,
   `language` char(7) NOT NULL,
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_createdby` (`catid`),
-  KEY `idx_language` (`language`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `cat_index` (`published`,`access`,`catid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_userxtd_fields`
@@ -5531,8 +5155,8 @@ INSERT INTO `qfupd_userxtd_fields` (`id`, `asset_id`, `catid`, `title`, `label`,
 -- Structure de la table `qfupd_userxtd_profiles`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_userxtd_profiles` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_userxtd_profiles` (
+`id` int(11) unsigned NOT NULL,
   `user_id` int(11) NOT NULL,
   `key` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,
@@ -5541,15 +5165,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_userxtd_profiles` (
   `ordering` int(11) NOT NULL,
   `access` int(10) unsigned NOT NULL,
   `language` char(7) NOT NULL,
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_language` (`language`),
-  KEY `cat_index` (`access`),
-  KEY `idx_value` (`value`),
-  KEY `user_id` (`user_id`),
-  KEY `key` (`key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=151 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_userxtd_profiles`
@@ -5593,20 +5210,15 @@ INSERT INTO `qfupd_userxtd_profiles` (`id`, `user_id`, `key`, `value`, `created`
 -- Structure de la table `qfupd_user_keys`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_user_keys` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_user_keys` (
+`id` int(10) unsigned NOT NULL,
   `user_id` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `series` varchar(255) NOT NULL,
   `invalid` tinyint(4) NOT NULL,
   `time` varchar(200) NOT NULL,
-  `uastring` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `series` (`series`),
-  UNIQUE KEY `series_2` (`series`),
-  UNIQUE KEY `series_3` (`series`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `uastring` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -5614,8 +5226,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_user_keys` (
 -- Structure de la table `qfupd_user_notes`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_user_notes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_user_notes` (
+`id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `subject` varchar(100) NOT NULL DEFAULT '',
@@ -5629,11 +5241,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_user_notes` (
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `review_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `idx_user_id` (`user_id`),
-  KEY `idx_category_id` (`catid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -5641,12 +5250,11 @@ CREATE TABLE IF NOT EXISTS `qfupd_user_notes` (
 -- Structure de la table `qfupd_user_profiles`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_user_profiles` (
+CREATE TABLE `qfupd_user_profiles` (
   `user_id` int(11) NOT NULL,
   `profile_key` varchar(100) NOT NULL,
   `profile_value` text NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`)
+  `ordering` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Simple user profile storage table';
 
 -- --------------------------------------------------------
@@ -5655,10 +5263,9 @@ CREATE TABLE IF NOT EXISTS `qfupd_user_profiles` (
 -- Structure de la table `qfupd_user_usergroup_map`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_user_usergroup_map` (
+CREATE TABLE `qfupd_user_usergroup_map` (
   `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__users.id',
-  `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__usergroups.id',
-  PRIMARY KEY (`user_id`,`group_id`)
+  `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__usergroups.id'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5680,14 +5287,12 @@ INSERT INTO `qfupd_user_usergroup_map` (`user_id`, `group_id`) VALUES
 -- Structure de la table `qfupd_viewlevels`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_viewlevels` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `qfupd_viewlevels` (
+`id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
   `title` varchar(100) NOT NULL DEFAULT '',
   `ordering` int(11) NOT NULL DEFAULT '0',
-  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_assetgroup_title_lookup` (`title`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.'
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_viewlevels`
@@ -5700,6 +5305,1065 @@ INSERT INTO `qfupd_viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 (5, 'Accès invité', 0, '[9]'),
 (6, 'Accès super utilisateur', 0, '[8]');
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `qfupd_assets`
+--
+ALTER TABLE `qfupd_assets`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_asset_name` (`name`), ADD KEY `idx_lft_rgt` (`lft`,`rgt`), ADD KEY `idx_parent_id` (`parent_id`);
+
+--
+-- Index pour la table `qfupd_associations`
+--
+ALTER TABLE `qfupd_associations`
+ ADD PRIMARY KEY (`context`,`id`), ADD KEY `idx_key` (`key`);
+
+--
+-- Index pour la table `qfupd_banners`
+--
+ALTER TABLE `qfupd_banners`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_state` (`state`), ADD KEY `idx_own_prefix` (`own_prefix`), ADD KEY `idx_metakey_prefix` (`metakey_prefix`), ADD KEY `idx_banner_catid` (`catid`), ADD KEY `idx_language` (`language`);
+
+--
+-- Index pour la table `qfupd_banner_clients`
+--
+ALTER TABLE `qfupd_banner_clients`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_own_prefix` (`own_prefix`), ADD KEY `idx_metakey_prefix` (`metakey_prefix`);
+
+--
+-- Index pour la table `qfupd_banner_tracks`
+--
+ALTER TABLE `qfupd_banner_tracks`
+ ADD PRIMARY KEY (`track_date`,`track_type`,`banner_id`), ADD KEY `idx_track_date` (`track_date`), ADD KEY `idx_track_type` (`track_type`), ADD KEY `idx_banner_id` (`banner_id`);
+
+--
+-- Index pour la table `qfupd_categories`
+--
+ALTER TABLE `qfupd_categories`
+ ADD PRIMARY KEY (`id`), ADD KEY `cat_idx` (`extension`,`published`,`access`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_path` (`path`), ADD KEY `idx_left_right` (`lft`,`rgt`), ADD KEY `idx_alias` (`alias`), ADD KEY `idx_language` (`language`);
+
+--
+-- Index pour la table `qfupd_cck_core`
+--
+ALTER TABLE `qfupd_cck_core`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_cck` (`cck`), ADD KEY `idx_pk` (`pk`);
+
+--
+-- Index pour la table `qfupd_cck_core_activities`
+--
+ALTER TABLE `qfupd_cck_core_activities`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`), ADD KEY `idx_category` (`folder`);
+
+--
+-- Index pour la table `qfupd_cck_core_downloads`
+--
+ALTER TABLE `qfupd_cck_core_downloads`
+ ADD PRIMARY KEY (`id`,`field`,`collection`,`x`), ADD KEY `idx_contentid` (`id`), ADD KEY `idx_item` (`field`);
+
+--
+-- Index pour la table `qfupd_cck_core_fields`
+--
+ALTER TABLE `qfupd_cck_core_fields`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`), ADD KEY `idx_type` (`type`), ADD KEY `idx_folder` (`folder`);
+
+--
+-- Index pour la table `qfupd_cck_core_folders`
+--
+ALTER TABLE `qfupd_cck_core_folders`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_parent_id` (`parent_id`);
+
+--
+-- Index pour la table `qfupd_cck_core_objects`
+--
+ALTER TABLE `qfupd_cck_core_objects`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`), ADD KEY `idx_component` (`component`), ADD KEY `idx_view` (`view`);
+
+--
+-- Index pour la table `qfupd_cck_core_preferences`
+--
+ALTER TABLE `qfupd_cck_core_preferences`
+ ADD PRIMARY KEY (`userid`);
+
+--
+-- Index pour la table `qfupd_cck_core_searchs`
+--
+ALTER TABLE `qfupd_cck_core_searchs`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`), ADD KEY `idx_folder` (`folder`), ADD KEY `idx_template_search` (`template_search`), ADD KEY `idx_template_filter` (`template_filter`), ADD KEY `idx_template_list` (`template_list`), ADD KEY `idx_template_item` (`template_item`);
+
+--
+-- Index pour la table `qfupd_cck_core_search_field`
+--
+ALTER TABLE `qfupd_cck_core_search_field`
+ ADD PRIMARY KEY (`searchid`,`fieldid`,`client`), ADD KEY `searchid` (`searchid`), ADD KEY `fieldid` (`fieldid`);
+
+--
+-- Index pour la table `qfupd_cck_core_search_position`
+--
+ALTER TABLE `qfupd_cck_core_search_position`
+ ADD PRIMARY KEY (`searchid`,`position`,`client`), ADD KEY `position` (`position`), ADD KEY `searchid` (`searchid`);
+
+--
+-- Index pour la table `qfupd_cck_core_sites`
+--
+ALTER TABLE `qfupd_cck_core_sites`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Index pour la table `qfupd_cck_core_templates`
+--
+ALTER TABLE `qfupd_cck_core_templates`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`), ADD KEY `idx_folder` (`folder`);
+
+--
+-- Index pour la table `qfupd_cck_core_types`
+--
+ALTER TABLE `qfupd_cck_core_types`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`), ADD KEY `idx_folder` (`folder`), ADD KEY `idx_template_admin` (`template_admin`), ADD KEY `idx_template_site` (`template_site`), ADD KEY `idx_template_content` (`template_content`), ADD KEY `idx_template_intro` (`template_intro`);
+
+--
+-- Index pour la table `qfupd_cck_core_type_field`
+--
+ALTER TABLE `qfupd_cck_core_type_field`
+ ADD PRIMARY KEY (`typeid`,`fieldid`,`client`), ADD KEY `typeid` (`typeid`), ADD KEY `fieldid` (`fieldid`);
+
+--
+-- Index pour la table `qfupd_cck_core_type_position`
+--
+ALTER TABLE `qfupd_cck_core_type_position`
+ ADD PRIMARY KEY (`typeid`,`position`,`client`), ADD KEY `typeid` (`typeid`), ADD KEY `position` (`position`);
+
+--
+-- Index pour la table `qfupd_cck_core_versions`
+--
+ALTER TABLE `qfupd_cck_core_versions`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `type_id_version` (`e_id`,`e_type`,`e_version`);
+
+--
+-- Index pour la table `qfupd_cck_more_countries`
+--
+ALTER TABLE `qfupd_cck_more_countries`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_cck_more_processings`
+--
+ALTER TABLE `qfupd_cck_more_processings`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_cck_more_sessions`
+--
+ALTER TABLE `qfupd_cck_more_sessions`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_extension` (`extension`);
+
+--
+-- Index pour la table `qfupd_cck_store_item_users`
+--
+ALTER TABLE `qfupd_cck_store_item_users`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_contact_details`
+--
+ALTER TABLE `qfupd_contact_details`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_state` (`published`), ADD KEY `idx_catid` (`catid`), ADD KEY `idx_createdby` (`created_by`), ADD KEY `idx_featured_catid` (`featured`,`catid`), ADD KEY `idx_language` (`language`), ADD KEY `idx_xreference` (`xreference`);
+
+--
+-- Index pour la table `qfupd_content`
+--
+ALTER TABLE `qfupd_content`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_state` (`state`), ADD KEY `idx_catid` (`catid`), ADD KEY `idx_createdby` (`created_by`), ADD KEY `idx_featured_catid` (`featured`,`catid`), ADD KEY `idx_language` (`language`), ADD KEY `idx_xreference` (`xreference`);
+
+--
+-- Index pour la table `qfupd_contentitem_tag_map`
+--
+ALTER TABLE `qfupd_contentitem_tag_map`
+ ADD UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`), ADD KEY `idx_tag_type` (`tag_id`,`type_id`), ADD KEY `idx_date_id` (`tag_date`,`tag_id`), ADD KEY `idx_tag` (`tag_id`), ADD KEY `idx_type` (`type_id`), ADD KEY `idx_core_content_id` (`core_content_id`);
+
+--
+-- Index pour la table `qfupd_content_frontpage`
+--
+ALTER TABLE `qfupd_content_frontpage`
+ ADD PRIMARY KEY (`content_id`);
+
+--
+-- Index pour la table `qfupd_content_rating`
+--
+ALTER TABLE `qfupd_content_rating`
+ ADD PRIMARY KEY (`content_id`);
+
+--
+-- Index pour la table `qfupd_content_types`
+--
+ALTER TABLE `qfupd_content_types`
+ ADD PRIMARY KEY (`type_id`), ADD KEY `idx_alias` (`type_alias`);
+
+--
+-- Index pour la table `qfupd_extensions`
+--
+ALTER TABLE `qfupd_extensions`
+ ADD PRIMARY KEY (`extension_id`), ADD KEY `element_clientid` (`element`,`client_id`), ADD KEY `element_folder_clientid` (`element`,`folder`,`client_id`), ADD KEY `extension` (`type`,`element`,`folder`,`client_id`);
+
+--
+-- Index pour la table `qfupd_finder_filters`
+--
+ALTER TABLE `qfupd_finder_filters`
+ ADD PRIMARY KEY (`filter_id`);
+
+--
+-- Index pour la table `qfupd_finder_links`
+--
+ALTER TABLE `qfupd_finder_links`
+ ADD PRIMARY KEY (`link_id`), ADD KEY `idx_type` (`type_id`), ADD KEY `idx_title` (`title`), ADD KEY `idx_md5` (`md5sum`), ADD KEY `idx_url` (`url`(75)), ADD KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`), ADD KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms0`
+--
+ALTER TABLE `qfupd_finder_links_terms0`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms1`
+--
+ALTER TABLE `qfupd_finder_links_terms1`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms2`
+--
+ALTER TABLE `qfupd_finder_links_terms2`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms3`
+--
+ALTER TABLE `qfupd_finder_links_terms3`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms4`
+--
+ALTER TABLE `qfupd_finder_links_terms4`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms5`
+--
+ALTER TABLE `qfupd_finder_links_terms5`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms6`
+--
+ALTER TABLE `qfupd_finder_links_terms6`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms7`
+--
+ALTER TABLE `qfupd_finder_links_terms7`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms8`
+--
+ALTER TABLE `qfupd_finder_links_terms8`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms9`
+--
+ALTER TABLE `qfupd_finder_links_terms9`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termsa`
+--
+ALTER TABLE `qfupd_finder_links_termsa`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termsb`
+--
+ALTER TABLE `qfupd_finder_links_termsb`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termsc`
+--
+ALTER TABLE `qfupd_finder_links_termsc`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termsd`
+--
+ALTER TABLE `qfupd_finder_links_termsd`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termse`
+--
+ALTER TABLE `qfupd_finder_links_termse`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termsf`
+--
+ALTER TABLE `qfupd_finder_links_termsf`
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_taxonomy`
+--
+ALTER TABLE `qfupd_finder_taxonomy`
+ ADD PRIMARY KEY (`id`), ADD KEY `parent_id` (`parent_id`), ADD KEY `state` (`state`), ADD KEY `ordering` (`ordering`), ADD KEY `access` (`access`), ADD KEY `idx_parent_published` (`parent_id`,`state`,`access`);
+
+--
+-- Index pour la table `qfupd_finder_taxonomy_map`
+--
+ALTER TABLE `qfupd_finder_taxonomy_map`
+ ADD PRIMARY KEY (`link_id`,`node_id`), ADD KEY `link_id` (`link_id`), ADD KEY `node_id` (`node_id`);
+
+--
+-- Index pour la table `qfupd_finder_terms`
+--
+ALTER TABLE `qfupd_finder_terms`
+ ADD PRIMARY KEY (`term_id`), ADD UNIQUE KEY `idx_term` (`term`), ADD KEY `idx_term_phrase` (`term`,`phrase`), ADD KEY `idx_stem_phrase` (`stem`,`phrase`), ADD KEY `idx_soundex_phrase` (`soundex`,`phrase`);
+
+--
+-- Index pour la table `qfupd_finder_terms_common`
+--
+ALTER TABLE `qfupd_finder_terms_common`
+ ADD KEY `idx_word_lang` (`term`,`language`), ADD KEY `idx_lang` (`language`);
+
+--
+-- Index pour la table `qfupd_finder_tokens`
+--
+ALTER TABLE `qfupd_finder_tokens`
+ ADD KEY `idx_word` (`term`), ADD KEY `idx_context` (`context`);
+
+--
+-- Index pour la table `qfupd_finder_tokens_aggregate`
+--
+ALTER TABLE `qfupd_finder_tokens_aggregate`
+ ADD KEY `token` (`term`), ADD KEY `keyword_id` (`term_id`);
+
+--
+-- Index pour la table `qfupd_finder_types`
+--
+ALTER TABLE `qfupd_finder_types`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `title` (`title`);
+
+--
+-- Index pour la table `qfupd_icagenda`
+--
+ALTER TABLE `qfupd_icagenda`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_category`
+--
+ALTER TABLE `qfupd_icagenda_category`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_customfields`
+--
+ALTER TABLE `qfupd_icagenda_customfields`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_customfields_data`
+--
+ALTER TABLE `qfupd_icagenda_customfields_data`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_events`
+--
+ALTER TABLE `qfupd_icagenda_events`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_feature`
+--
+ALTER TABLE `qfupd_icagenda_feature`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_feature_xref`
+--
+ALTER TABLE `qfupd_icagenda_feature_xref`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_registration`
+--
+ALTER TABLE `qfupd_icagenda_registration`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_kunena_aliases`
+--
+ALTER TABLE `qfupd_kunena_aliases`
+ ADD UNIQUE KEY `alias` (`alias`), ADD KEY `state` (`state`), ADD KEY `item` (`item`), ADD KEY `type` (`type`);
+
+--
+-- Index pour la table `qfupd_kunena_announcement`
+--
+ALTER TABLE `qfupd_kunena_announcement`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_kunena_attachments`
+--
+ALTER TABLE `qfupd_kunena_attachments`
+ ADD PRIMARY KEY (`id`), ADD KEY `mesid` (`mesid`), ADD KEY `userid` (`userid`), ADD KEY `hash` (`hash`), ADD KEY `filename` (`filename`);
+
+--
+-- Index pour la table `qfupd_kunena_categories`
+--
+ALTER TABLE `qfupd_kunena_categories`
+ ADD PRIMARY KEY (`id`), ADD KEY `parent_id` (`parent_id`), ADD KEY `category_access` (`accesstype`,`access`), ADD KEY `published_pubaccess_id` (`published`,`pub_access`,`id`);
+
+--
+-- Index pour la table `qfupd_kunena_configuration`
+--
+ALTER TABLE `qfupd_kunena_configuration`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_kunena_keywords`
+--
+ALTER TABLE `qfupd_kunena_keywords`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`), ADD KEY `public_count` (`public_count`), ADD KEY `total_count` (`total_count`);
+
+--
+-- Index pour la table `qfupd_kunena_keywords_map`
+--
+ALTER TABLE `qfupd_kunena_keywords_map`
+ ADD UNIQUE KEY `keyword_user_topic` (`keyword_id`,`user_id`,`topic_id`), ADD KEY `user_id` (`user_id`), ADD KEY `topic_user` (`topic_id`,`user_id`);
+
+--
+-- Index pour la table `qfupd_kunena_messages`
+--
+ALTER TABLE `qfupd_kunena_messages`
+ ADD PRIMARY KEY (`id`), ADD KEY `thread` (`thread`), ADD KEY `ip` (`ip`), ADD KEY `userid` (`userid`), ADD KEY `time` (`time`), ADD KEY `locked` (`locked`), ADD KEY `hold_time` (`hold`,`time`), ADD KEY `parent_hits` (`parent`,`hits`), ADD KEY `catid_parent` (`catid`,`parent`);
+
+--
+-- Index pour la table `qfupd_kunena_messages_text`
+--
+ALTER TABLE `qfupd_kunena_messages_text`
+ ADD PRIMARY KEY (`mesid`);
+
+--
+-- Index pour la table `qfupd_kunena_polls`
+--
+ALTER TABLE `qfupd_kunena_polls`
+ ADD PRIMARY KEY (`id`), ADD KEY `threadid` (`threadid`);
+
+--
+-- Index pour la table `qfupd_kunena_polls_options`
+--
+ALTER TABLE `qfupd_kunena_polls_options`
+ ADD PRIMARY KEY (`id`), ADD KEY `pollid` (`pollid`);
+
+--
+-- Index pour la table `qfupd_kunena_polls_users`
+--
+ALTER TABLE `qfupd_kunena_polls_users`
+ ADD UNIQUE KEY `pollid` (`pollid`,`userid`);
+
+--
+-- Index pour la table `qfupd_kunena_ranks`
+--
+ALTER TABLE `qfupd_kunena_ranks`
+ ADD PRIMARY KEY (`rank_id`);
+
+--
+-- Index pour la table `qfupd_kunena_sessions`
+--
+ALTER TABLE `qfupd_kunena_sessions`
+ ADD PRIMARY KEY (`userid`), ADD KEY `currvisit` (`currvisit`);
+
+--
+-- Index pour la table `qfupd_kunena_smileys`
+--
+ALTER TABLE `qfupd_kunena_smileys`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_kunena_thankyou`
+--
+ALTER TABLE `qfupd_kunena_thankyou`
+ ADD UNIQUE KEY `postid` (`postid`,`userid`), ADD KEY `userid` (`userid`), ADD KEY `targetuserid` (`targetuserid`);
+
+--
+-- Index pour la table `qfupd_kunena_topics`
+--
+ALTER TABLE `qfupd_kunena_topics`
+ ADD PRIMARY KEY (`id`), ADD KEY `category_id` (`category_id`), ADD KEY `locked` (`locked`), ADD KEY `hold` (`hold`), ADD KEY `posts` (`posts`), ADD KEY `hits` (`hits`), ADD KEY `first_post_userid` (`first_post_userid`), ADD KEY `last_post_userid` (`last_post_userid`), ADD KEY `first_post_time` (`first_post_time`), ADD KEY `last_post_time` (`last_post_time`);
+
+--
+-- Index pour la table `qfupd_kunena_users`
+--
+ALTER TABLE `qfupd_kunena_users`
+ ADD PRIMARY KEY (`userid`), ADD KEY `group_id` (`group_id`), ADD KEY `posts` (`posts`), ADD KEY `uhits` (`uhits`), ADD KEY `banned` (`banned`), ADD KEY `moderator` (`moderator`);
+
+--
+-- Index pour la table `qfupd_kunena_users_banned`
+--
+ALTER TABLE `qfupd_kunena_users_banned`
+ ADD PRIMARY KEY (`id`), ADD KEY `userid` (`userid`), ADD KEY `ip` (`ip`), ADD KEY `expiration` (`expiration`), ADD KEY `created_time` (`created_time`);
+
+--
+-- Index pour la table `qfupd_kunena_user_categories`
+--
+ALTER TABLE `qfupd_kunena_user_categories`
+ ADD PRIMARY KEY (`user_id`,`category_id`), ADD KEY `category_subscribed` (`category_id`,`subscribed`), ADD KEY `role` (`role`);
+
+--
+-- Index pour la table `qfupd_kunena_user_read`
+--
+ALTER TABLE `qfupd_kunena_user_read`
+ ADD UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`), ADD KEY `category_user_id` (`category_id`,`user_id`), ADD KEY `time` (`time`);
+
+--
+-- Index pour la table `qfupd_kunena_user_topics`
+--
+ALTER TABLE `qfupd_kunena_user_topics`
+ ADD UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`), ADD KEY `topic_id` (`topic_id`), ADD KEY `posts` (`posts`), ADD KEY `owner` (`owner`), ADD KEY `favorite` (`favorite`), ADD KEY `subscribed` (`subscribed`);
+
+--
+-- Index pour la table `qfupd_kunena_version`
+--
+ALTER TABLE `qfupd_kunena_version`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_languages`
+--
+ALTER TABLE `qfupd_languages`
+ ADD PRIMARY KEY (`lang_id`), ADD UNIQUE KEY `idx_sef` (`sef`), ADD UNIQUE KEY `idx_image` (`image`), ADD UNIQUE KEY `idx_langcode` (`lang_code`), ADD KEY `idx_access` (`access`), ADD KEY `idx_ordering` (`ordering`);
+
+--
+-- Index pour la table `qfupd_menu`
+--
+ALTER TABLE `qfupd_menu`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`,`language`), ADD KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`), ADD KEY `idx_menutype` (`menutype`), ADD KEY `idx_left_right` (`lft`,`rgt`), ADD KEY `idx_alias` (`alias`), ADD KEY `idx_path` (`path`(255)), ADD KEY `idx_language` (`language`);
+
+--
+-- Index pour la table `qfupd_menu_types`
+--
+ALTER TABLE `qfupd_menu_types`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_menutype` (`menutype`);
+
+--
+-- Index pour la table `qfupd_messages`
+--
+ALTER TABLE `qfupd_messages`
+ ADD PRIMARY KEY (`message_id`), ADD KEY `useridto_state` (`user_id_to`,`state`);
+
+--
+-- Index pour la table `qfupd_messages_cfg`
+--
+ALTER TABLE `qfupd_messages_cfg`
+ ADD UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`);
+
+--
+-- Index pour la table `qfupd_modules`
+--
+ALTER TABLE `qfupd_modules`
+ ADD PRIMARY KEY (`id`), ADD KEY `published` (`published`,`access`), ADD KEY `newsfeeds` (`module`,`published`), ADD KEY `idx_language` (`language`);
+
+--
+-- Index pour la table `qfupd_modules_menu`
+--
+ALTER TABLE `qfupd_modules_menu`
+ ADD PRIMARY KEY (`moduleid`,`menuid`);
+
+--
+-- Index pour la table `qfupd_newsfeeds`
+--
+ALTER TABLE `qfupd_newsfeeds`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_state` (`published`), ADD KEY `idx_catid` (`catid`), ADD KEY `idx_createdby` (`created_by`), ADD KEY `idx_language` (`language`), ADD KEY `idx_xreference` (`xreference`);
+
+--
+-- Index pour la table `qfupd_overrider`
+--
+ALTER TABLE `qfupd_overrider`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_postinstall_messages`
+--
+ALTER TABLE `qfupd_postinstall_messages`
+ ADD PRIMARY KEY (`postinstall_message_id`);
+
+--
+-- Index pour la table `qfupd_redirect_links`
+--
+ALTER TABLE `qfupd_redirect_links`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_link_old` (`old_url`), ADD KEY `idx_link_modifed` (`modified_date`);
+
+--
+-- Index pour la table `qfupd_schemas`
+--
+ALTER TABLE `qfupd_schemas`
+ ADD PRIMARY KEY (`extension_id`,`version_id`);
+
+--
+-- Index pour la table `qfupd_session`
+--
+ALTER TABLE `qfupd_session`
+ ADD PRIMARY KEY (`session_id`), ADD KEY `userid` (`userid`), ADD KEY `time` (`time`);
+
+--
+-- Index pour la table `qfupd_tags`
+--
+ALTER TABLE `qfupd_tags`
+ ADD PRIMARY KEY (`id`), ADD KEY `tag_idx` (`published`,`access`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_path` (`path`), ADD KEY `idx_left_right` (`lft`,`rgt`), ADD KEY `idx_alias` (`alias`), ADD KEY `idx_language` (`language`);
+
+--
+-- Index pour la table `qfupd_template_styles`
+--
+ALTER TABLE `qfupd_template_styles`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_template` (`template`), ADD KEY `idx_home` (`home`);
+
+--
+-- Index pour la table `qfupd_ucm_base`
+--
+ALTER TABLE `qfupd_ucm_base`
+ ADD PRIMARY KEY (`ucm_id`), ADD KEY `idx_ucm_item_id` (`ucm_item_id`), ADD KEY `idx_ucm_type_id` (`ucm_type_id`), ADD KEY `idx_ucm_language_id` (`ucm_language_id`);
+
+--
+-- Index pour la table `qfupd_ucm_content`
+--
+ALTER TABLE `qfupd_ucm_content`
+ ADD PRIMARY KEY (`core_content_id`), ADD KEY `tag_idx` (`core_state`,`core_access`), ADD KEY `idx_access` (`core_access`), ADD KEY `idx_alias` (`core_alias`), ADD KEY `idx_language` (`core_language`), ADD KEY `idx_title` (`core_title`), ADD KEY `idx_modified_time` (`core_modified_time`), ADD KEY `idx_created_time` (`core_created_time`), ADD KEY `idx_content_type` (`core_type_alias`), ADD KEY `idx_core_modified_user_id` (`core_modified_user_id`), ADD KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`), ADD KEY `idx_core_created_user_id` (`core_created_user_id`), ADD KEY `idx_core_type_id` (`core_type_id`);
+
+--
+-- Index pour la table `qfupd_ucm_history`
+--
+ALTER TABLE `qfupd_ucm_history`
+ ADD PRIMARY KEY (`version_id`), ADD KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`), ADD KEY `idx_save_date` (`save_date`);
+
+--
+-- Index pour la table `qfupd_updates`
+--
+ALTER TABLE `qfupd_updates`
+ ADD PRIMARY KEY (`update_id`);
+
+--
+-- Index pour la table `qfupd_update_sites`
+--
+ALTER TABLE `qfupd_update_sites`
+ ADD PRIMARY KEY (`update_site_id`);
+
+--
+-- Index pour la table `qfupd_update_sites_extensions`
+--
+ALTER TABLE `qfupd_update_sites_extensions`
+ ADD PRIMARY KEY (`update_site_id`,`extension_id`);
+
+--
+-- Index pour la table `qfupd_usergroups`
+--
+ALTER TABLE `qfupd_usergroups`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`), ADD KEY `idx_usergroup_title_lookup` (`title`), ADD KEY `idx_usergroup_adjacency_lookup` (`parent_id`), ADD KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE;
+
+--
+-- Index pour la table `qfupd_users`
+--
+ALTER TABLE `qfupd_users`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_name` (`name`), ADD KEY `idx_block` (`block`), ADD KEY `username` (`username`), ADD KEY `email` (`email`);
+
+--
+-- Index pour la table `qfupd_userxtd_fields`
+--
+ALTER TABLE `qfupd_userxtd_fields`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_access` (`access`), ADD KEY `idx_createdby` (`catid`), ADD KEY `idx_language` (`language`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `cat_index` (`published`,`access`,`catid`);
+
+--
+-- Index pour la table `qfupd_userxtd_profiles`
+--
+ALTER TABLE `qfupd_userxtd_profiles`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_access` (`access`), ADD KEY `idx_language` (`language`), ADD KEY `cat_index` (`access`), ADD KEY `idx_value` (`value`), ADD KEY `user_id` (`user_id`), ADD KEY `key` (`key`);
+
+--
+-- Index pour la table `qfupd_user_keys`
+--
+ALTER TABLE `qfupd_user_keys`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `series` (`series`), ADD UNIQUE KEY `series_2` (`series`), ADD UNIQUE KEY `series_3` (`series`), ADD KEY `user_id` (`user_id`);
+
+--
+-- Index pour la table `qfupd_user_notes`
+--
+ALTER TABLE `qfupd_user_notes`
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_user_id` (`user_id`), ADD KEY `idx_category_id` (`catid`);
+
+--
+-- Index pour la table `qfupd_user_profiles`
+--
+ALTER TABLE `qfupd_user_profiles`
+ ADD UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`);
+
+--
+-- Index pour la table `qfupd_user_usergroup_map`
+--
+ALTER TABLE `qfupd_user_usergroup_map`
+ ADD PRIMARY KEY (`user_id`,`group_id`);
+
+--
+-- Index pour la table `qfupd_viewlevels`
+--
+ALTER TABLE `qfupd_viewlevels`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_assetgroup_title_lookup` (`title`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `qfupd_assets`
+--
+ALTER TABLE `qfupd_assets`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=220;
+--
+-- AUTO_INCREMENT pour la table `qfupd_banners`
+--
+ALTER TABLE `qfupd_banners`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_banner_clients`
+--
+ALTER TABLE `qfupd_banner_clients`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_categories`
+--
+ALTER TABLE `qfupd_categories`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core`
+--
+ALTER TABLE `qfupd_cck_core`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_activities`
+--
+ALTER TABLE `qfupd_cck_core_activities`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_fields`
+--
+ALTER TABLE `qfupd_cck_core_fields`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100535;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_folders`
+--
+ALTER TABLE `qfupd_cck_core_folders`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_objects`
+--
+ALTER TABLE `qfupd_cck_core_objects`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_searchs`
+--
+ALTER TABLE `qfupd_cck_core_searchs`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_sites`
+--
+ALTER TABLE `qfupd_cck_core_sites`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_templates`
+--
+ALTER TABLE `qfupd_cck_core_templates`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_types`
+--
+ALTER TABLE `qfupd_cck_core_types`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_versions`
+--
+ALTER TABLE `qfupd_cck_core_versions`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=510;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_more_countries`
+--
+ALTER TABLE `qfupd_cck_more_countries`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=247;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_more_processings`
+--
+ALTER TABLE `qfupd_cck_more_processings`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_more_sessions`
+--
+ALTER TABLE `qfupd_cck_more_sessions`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_contact_details`
+--
+ALTER TABLE `qfupd_contact_details`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_content`
+--
+ALTER TABLE `qfupd_content`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT pour la table `qfupd_content_types`
+--
+ALTER TABLE `qfupd_content_types`
+MODIFY `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT pour la table `qfupd_extensions`
+--
+ALTER TABLE `qfupd_extensions`
+MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10234;
+--
+-- AUTO_INCREMENT pour la table `qfupd_finder_filters`
+--
+ALTER TABLE `qfupd_finder_filters`
+MODIFY `filter_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_finder_links`
+--
+ALTER TABLE `qfupd_finder_links`
+MODIFY `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_finder_taxonomy`
+--
+ALTER TABLE `qfupd_finder_taxonomy`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `qfupd_finder_terms`
+--
+ALTER TABLE `qfupd_finder_terms`
+MODIFY `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_finder_types`
+--
+ALTER TABLE `qfupd_finder_types`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda`
+--
+ALTER TABLE `qfupd_icagenda`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_category`
+--
+ALTER TABLE `qfupd_icagenda_category`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_customfields`
+--
+ALTER TABLE `qfupd_icagenda_customfields`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_customfields_data`
+--
+ALTER TABLE `qfupd_icagenda_customfields_data`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_events`
+--
+ALTER TABLE `qfupd_icagenda_events`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_feature`
+--
+ALTER TABLE `qfupd_icagenda_feature`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_feature_xref`
+--
+ALTER TABLE `qfupd_icagenda_feature_xref`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_registration`
+--
+ALTER TABLE `qfupd_icagenda_registration`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_announcement`
+--
+ALTER TABLE `qfupd_kunena_announcement`
+MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_attachments`
+--
+ALTER TABLE `qfupd_kunena_attachments`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_categories`
+--
+ALTER TABLE `qfupd_kunena_categories`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_keywords`
+--
+ALTER TABLE `qfupd_kunena_keywords`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_messages`
+--
+ALTER TABLE `qfupd_kunena_messages`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_polls`
+--
+ALTER TABLE `qfupd_kunena_polls`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_polls_options`
+--
+ALTER TABLE `qfupd_kunena_polls_options`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_ranks`
+--
+ALTER TABLE `qfupd_kunena_ranks`
+MODIFY `rank_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_smileys`
+--
+ALTER TABLE `qfupd_kunena_smileys`
+MODIFY `id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=67;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_topics`
+--
+ALTER TABLE `qfupd_kunena_topics`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_users_banned`
+--
+ALTER TABLE `qfupd_kunena_users_banned`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_version`
+--
+ALTER TABLE `qfupd_kunena_version`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_languages`
+--
+ALTER TABLE `qfupd_languages`
+MODIFY `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_menu`
+--
+ALTER TABLE `qfupd_menu`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=225;
+--
+-- AUTO_INCREMENT pour la table `qfupd_menu_types`
+--
+ALTER TABLE `qfupd_menu_types`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `qfupd_messages`
+--
+ALTER TABLE `qfupd_messages`
+MODIFY `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `qfupd_modules`
+--
+ALTER TABLE `qfupd_modules`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=104;
+--
+-- AUTO_INCREMENT pour la table `qfupd_newsfeeds`
+--
+ALTER TABLE `qfupd_newsfeeds`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_overrider`
+--
+ALTER TABLE `qfupd_overrider`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key';
+--
+-- AUTO_INCREMENT pour la table `qfupd_postinstall_messages`
+--
+ALTER TABLE `qfupd_postinstall_messages`
+MODIFY `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT pour la table `qfupd_redirect_links`
+--
+ALTER TABLE `qfupd_redirect_links`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT pour la table `qfupd_tags`
+--
+ALTER TABLE `qfupd_tags`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_template_styles`
+--
+ALTER TABLE `qfupd_template_styles`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT pour la table `qfupd_ucm_content`
+--
+ALTER TABLE `qfupd_ucm_content`
+MODIFY `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `qfupd_ucm_history`
+--
+ALTER TABLE `qfupd_ucm_history`
+MODIFY `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT pour la table `qfupd_updates`
+--
+ALTER TABLE `qfupd_updates`
+MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=55;
+--
+-- AUTO_INCREMENT pour la table `qfupd_update_sites`
+--
+ALTER TABLE `qfupd_update_sites`
+MODIFY `update_site_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT pour la table `qfupd_usergroups`
+--
+ALTER TABLE `qfupd_usergroups`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT pour la table `qfupd_users`
+--
+ALTER TABLE `qfupd_users`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=821;
+--
+-- AUTO_INCREMENT pour la table `qfupd_userxtd_fields`
+--
+ALTER TABLE `qfupd_userxtd_fields`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT pour la table `qfupd_userxtd_profiles`
+--
+ALTER TABLE `qfupd_userxtd_profiles`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=151;
+--
+-- AUTO_INCREMENT pour la table `qfupd_user_keys`
+--
+ALTER TABLE `qfupd_user_keys`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_user_notes`
+--
+ALTER TABLE `qfupd_user_notes`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_viewlevels`
+--
+ALTER TABLE `qfupd_viewlevels`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=7;
