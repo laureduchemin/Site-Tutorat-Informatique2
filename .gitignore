@@ -3,4 +3,3 @@ cache/*
 configuration.php
 logs/*
 logs/error.php
-configuration.php
