@@ -31,18 +31,18 @@ https://github.com/laureduchemin/Site-Tutorat-Informatique2/archive/master.zip
 5. Lancer le logiciel Mamp/Lamp ou Wamp
 
 6. Ouvrir votre navigateur Web préféré, et taper l'adresse suivante "http://localhost/phpmyadmin". 
-**Par défaut: l'identidiant est "root" et  le password est "root"  pour Mac Os X et Linux 
-et aucun password pour Windows**
+**Par défaut: l'identidiant est "root" et  le password est "root"  pour Mac Os X et Linux **
+**et aucun password pour Windows**
 Vous pourrez modifier votre mot de passe une fois connecté.
 
-6. Création d'une base de données "tib" :
+7. Création d'une base de données "tib" :
 Toujours à l'adresse "http://localhost/phpmyadmin" c'est -à- dire sur phpmyadmin
 Cliquer sur nouvelle base de données en haut à gauche
    Il y a deux champs, dans le premier qui est vide écrire "tib"( nommer votre base "tib") 
 Dans le menu déroulant avec écrit "Interclassement" choisir "utf8_general_ci" vers le bas de la liste. 
 Ensuite Valider, la base de données est créée. 
 
-7. Importation de la base de données:
+8. Importation de la base de données:
 Dans la suite vous aurez à importer la base de données du site web.
 
 Cliquer sur le nom de votre base de données tib dans le menu vertical à gauche ensuite cliquez sur le bouton "importer" dans le menu horizontal en haut.
@@ -51,11 +51,11 @@ Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
 
 
 
-8.Ouvrir et modifier le fichier "Site-Tutorat-Informatique2\configuration.php" à l'aide d'un éditeur de texte comme "bloc-note" ou "notepad++" par le fichier configurationMac.php pour les utilisateurs de Mac ou Linux et  par le fichier configurationWindows.php pour les utilisateur de windows
+9.Ouvrir et modifier le fichier "Site-Tutorat-Informatique2\configuration.php" à l'aide d'un éditeur de texte comme "bloc-note" ou "notepad++" par le fichier configurationMac.php pour les utilisateurs de Mac ou Linux et  par le fichier configurationWindows.php pour les utilisateur de windows
 
-     *Pour les utilisateurs de Windows
-    1. Ajouter les paramètres de votre base de données 
-   *Explication :
+   *Pour les utilisateurs de Windows*
+     1. Ajouter les paramètres de votre base de données 
+   *Explication* :
    (Remplacer : localhost, root, mdp et mabd par les paramètres de votre base de données )   
 
    
@@ -65,13 +65,8 @@ Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
          $db_pass = "mdp";         // <--------- Mot de passe de la base de données
          $db =      "mabd";       // <--------- Nom de la base de données (tib) 
 
-       2.  enregistrer le fichier.
+      2.  enregistrer le fichier.
   
-         
-
-
-
-
 
 
 # BESOIN D'AIDE 
@@ -80,7 +75,7 @@ responsable.tutorat@gmail.com'
 
 
 Copyright: 
- * Copyright (C) 2015. Tous droits réservés.
+ * Copyright (C) 2015. Tous droits réservés *
 
 
 
