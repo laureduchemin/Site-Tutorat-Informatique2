@@ -1,71 +1,87 @@
-1- What is this?
-	* This is a Joomla! installation/upgrade package to version 3.x
-	* Joomla! Official site: http://www.joomla.org
-	* Joomla! 3.4 version history - https://docs.joomla.org/Joomla_3.4_version_history
-	* Detailed changes in the Changelog: https://github.com/joomla/joomla-cms/commits/master
+Ce site web a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.
 
-2- What is Joomla?
-	* Joomla is a Content Management System (CMS) which enables you to build Web sites and powerful online applications.
-	* It's a free and OpenSource software, distributed under the GNU General Public License version 2 or later
-	* This is a simple and powerful web server application and it requires a server with PHP and either MySQL, PostgreSQL, or SQL Server to run it.
-	More details here: http://www.joomla.org/about-joomla.html
 
-3- Is Joomla for you?
-	* Joomla is the right solution for any content web project: https://docs.joomla.org/Joomla_Is_it_for_me%3F
-	* See Features - http://www.joomla.org/core-features.html
-	* Try out our online demo: https://demo.joomla.org/
+*Pour prendre notre site Web et le mettre sur votre serveur, voici comment procéder* 
 
-4- How to find a Joomla! translation?
-	* Repository of accredited language packs: http://community.joomla.org/translations.html
-	* You can also add languages directly to your website via your Joomla! administration panel.
 
-5- Learn Joomla!
-	* Read Getting Started with Joomla to find out the basics: https://docs.joomla.org/Getting_Started_with_Joomla!
-	* Before installing, read the beginners guide: https://docs.joomla.org/Beginners
+#INSTALLATION DES LOGICIELS REQUIS
 
-6- What are the limits of Joomla?
-	* Joomla sites can be extended in functionalities with Extensions that you can create (or download) to suite your needs.
-	* There are lots of ready made extensions that you can download and install.
-	* See the Joomla! Extensions Directory (JED): http://extensions.joomla.org
+1. Pour les utilisateurs de Windows, télécharger Mamp ou Wamp allez sur leur site respectif.
+Télécharger Mamp si vous êtes sur Mac Os X  et Lamp si vous êtes sur Linux.
 
-7- Is it easy to change the layout display?
-	* The layout is controlled by templates that you can edit.
-	* There are lots of ready made templates that you can download.
+2. Installer le logiciel correspondant à votre système d'exploitation.
 
-8- Ready to install Joomla?
-	* See minimum requirements here: http://www.joomla.org/technical-requirements.html
-	* How do you install Joomla! ? - https://docs.joomla.org/Installing_Joomla!
-	* Start your Joomla experience building your site with a local test server.
-	When ready it can be moved to an on-line hosting account of your choice.
-	See the tutorial: https://docs.joomla.org/Tutorial:Joomla_Local_install
 
-9- Updates are free!
-	* Always use the latest version: http://www.joomla.org/download.html
 
-10- Where can you get support and help?
-	* The Joomla! Documentation: https://docs.joomla.org/Main_Page
-	* FAQ Frequently Asked Questions: https://docs.joomla.org/Category:FAQ
-	* Find the information you need: https://docs.joomla.org/Start_here
-	* Find help and other users: http://www.joomla.org/about-joomla/create-and-share.html
-	* Post questions at our forums: http://forum.joomla.org
-	* Joomla Resources Directory (JRD): http://resources.joomla.org/
 
-11- Do you already have a Joomla site that's not built with Joomla 3.x ?
-	* What's new in Joomla 3.x: http://www.joomla.org/3
-	* What are the main differences from 2.5 to 3? Table of contents: https://docs.joomla.org/Differences_from_Joomla_2.5_to_Joomla_3.0
-	* How to migrate from 2.5.x to 3.x? Tutorial: https://docs.joomla.org/Joomla_2.5_to_3.x_Step_by_Step_Migration
-	* How to migrate from 1.5.x to 3.x? Tutorial: https://docs.joomla.org/Joomla_1.5_to_3.x_Step_by_Step_Migration
-	* Convert an existing Web site to Joomla: https://docs.joomla.org/How_to_Convert_an_existing_Web_site_to_a_Joomla!_Web_site
+ #INSTALLATION GENERALE
 
-12- Do you want to improve Joomla?
-	* How do you request a feature? https://docs.joomla.org/How_do_you_request_a_feature%3F
-	* How do you report a bug? https://docs.joomla.org/Filing_bugs_and_issues
-	* Get Involved: Joomla! is a community developed software. Join the community at http://volunteers.joomla.org/
-	* Are you a Developer? https://docs.joomla.org/Developers
-	* Are you a Web designer? https://docs.joomla.org/Web_designers
 
-Copyright:
-	* Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.
-	* Special Thanks: https://docs.joomla.org/Joomla!_Credits_and_Thanks
-	* Distributed under the GNU General Public License version 2 or later
-	* See Licenses details at https://docs.joomla.org/Joomla_Licenses
+1.Télécharger l'archive du site web à l'adresse : 
+
+https://github.com/laureduchemin/Site-Tutorat-Informatique2/archive/master.zip
+
+2.Décompresser l'archive à l'aide de winrar ou winzip
+
+3-Vous obtenez un répertoire nommé "Site-Tutorat-Informatique2". 
+
+4. Récupérer le fichier tib.sql disponible dans le sous repertoire BDD du répertoire nommé "Site-Tutorat-Informatique2".
+ Ce fichier est indispensable au bon fonctionnement du site.
+
+5. Lancer le logiciel Mamp/Lamp ou Wamp
+
+6. Ouvrir votre navigateur Web préféré, et taper l'adresse suivante "http://localhost/phpmyadmin". 
+**Par défaut: l'identidiant est "root" et  le password est "root"  pour Mac Os X et Linux 
+et aucun password pour Windows**
+Vous pourrez modifier votre mot de passe une fois connecté.
+
+6. Création d'une base de données "tib" :
+Toujours à l'adresse "http://localhost/phpmyadmin" c'est -à- dire sur phpmyadmin
+Cliquer sur nouvelle base de données en haut à gauche
+   Il y a deux champs, dans le premier qui est vide écrire "tib"( nommer votre base "tib") 
+Dans le menu déroulant avec écrit "Interclassement" choisir "utf8_general_ci" vers le bas de la liste. 
+Ensuite Valider, la base de données est créée. 
+
+7. Importation de la base de données:
+Dans la suite vous aurez à importer la base de données du site web.
+
+Cliquer sur le nom de votre base de données tib dans le menu vertical à gauche ensuite cliquez sur le bouton "importer" dans le menu horizontal en haut.
+Puis cliquer sur parcourir et aller chercher le fichier tib.sql disponible dans le sous repertoire BDD du répertoire nommé "Site-Tutorat-Informatique2"
+Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
+
+
+
+8.Ouvrir et modifier le fichier "Site-Tutorat-Informatique2\configuration.php" à l'aide d'un éditeur de texte comme "bloc-note" ou "notepad++" par le fichier configurationMac.php pour les utilisateurs de Mac ou Linux et  par le fichier configurationWindows.php pour les utilisateur de windows
+
+     *Pour les utilisateurs de Windows
+    1. Ajouter les paramètres de votre base de données 
+   *Explication :
+   (Remplacer : localhost, root, mdp et mabd par les paramètres de votre base de données )   
+
+   
+   
+         $db_host = "localhost";      // <------ Adresse de la base de données (hote)
+         $db_user = "root";  // <-------------- Utilisateur de la base de données
+         $db_pass = "mdp";         // <--------- Mot de passe de la base de données
+         $db =      "mabd";       // <--------- Nom de la base de données (tib) 
+
+       2.  enregistrer le fichier.
+  
+         
+
+
+
+
+
+
+# BESOIN D'AIDE 
+Si vous avez des questions ou pour plus d’informations, vous pouvez toujours nous contacter à l'adresse suivante:
+responsable.tutorat@gmail.com'
+
+
+Copyright: 
+ * Copyright (C) 2015. Tous droits réservés.
+
+
+
+
