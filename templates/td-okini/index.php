@@ -291,7 +291,7 @@ if ($slideson) {
 
 <div id="copyright_wrap">
 	<div id="copyright">
-		&copy;<?php echo date('Y'); ?> <?php echo $sitename; ?> | Designed by <a href="http://www.tempodesign.dk">Tutorat Informatique Blois</a><br/>&nbsp;
+		&copy;<?php echo date('Y'); ?> <?php echo $sitename; ?> | Designed by Tutorat Informatique Blois</a><br/>&nbsp;
 	</div>
 </div>
 
