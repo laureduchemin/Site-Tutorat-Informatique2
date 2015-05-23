@@ -1,17 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.1.1
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Client :  localhost
--- Généré le :  Sam 23 Mai 2015 à 21:09
--- Version du serveur :  5.5.42
--- Version de PHP :  5.6.7
+-- Client :  127.0.0.1
+-- Généré le :  Sam 23 Mai 2015 à 19:43
+-- Version du serveur :  5.6.17
+-- Version de PHP :  5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
--- Base de données :  `TIB`
+-- Base de données :  `tib`
 --
 
 -- --------------------------------------------------------
@@ -20,181 +26,183 @@ SET time_zone = "+00:00";
 -- Structure de la table `qfupd_assets`
 --
 
-CREATE TABLE `qfupd_assets` (
-  `id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
+CREATE TABLE IF NOT EXISTS `qfupd_assets` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set parent.',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
   `level` int(10) unsigned NOT NULL COMMENT 'The cached level in the nested tree.',
   `name` varchar(50) NOT NULL COMMENT 'The unique name for the asset.\n',
   `title` varchar(100) NOT NULL COMMENT 'The descriptive title for the asset.',
-  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.'
-) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
+  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_asset_name` (`name`),
+  KEY `idx_lft_rgt` (`lft`,`rgt`),
+  KEY `idx_parent_id` (`parent_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=245 ;
 
 --
 -- Contenu de la table `qfupd_assets`
 --
 
 INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
-(1, 0, 0, 321, 0, 'root.1', 'Root Asset', '{"core.login.site":{"2":1},"core.login.admin":[],"core.login.offline":[],"core.admin":{"8":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(1, 0, 0, 317, 0, 'root.1', 'Root Asset', '{"core.login.site":{"2":1},"core.login.admin":[],"core.login.offline":[],"core.admin":{"8":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (2, 1, 1, 2, 1, 'com_admin', 'com_admin', '{}'),
 (3, 1, 3, 6, 1, 'com_banners', 'com_banners', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (4, 1, 7, 8, 1, 'com_cache', 'com_cache', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
 (5, 1, 9, 10, 1, 'com_checkin', 'com_checkin', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
 (6, 1, 11, 12, 1, 'com_config', 'com_config', '{}'),
 (7, 1, 13, 16, 1, 'com_contact', 'com_contact', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(8, 1, 17, 56, 1, 'com_content', 'com_content', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(9, 1, 57, 58, 1, 'com_cpanel', 'com_cpanel', '{}'),
-(10, 1, 59, 60, 1, 'com_installer', 'com_installer', '{"core.admin":[],"core.manage":{"7":0},"core.delete":{"7":0},"core.edit.state":{"7":0}}'),
-(11, 1, 61, 62, 1, 'com_languages', 'com_languages', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(12, 1, 63, 64, 1, 'com_login', 'com_login', '{}'),
-(13, 1, 65, 66, 1, 'com_mailto', 'com_mailto', '{}'),
-(14, 1, 67, 68, 1, 'com_massmail', 'com_massmail', '{}'),
-(15, 1, 69, 70, 1, 'com_media', 'com_media', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":{"5":1}}'),
-(16, 1, 71, 72, 1, 'com_menus', 'com_menus', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(17, 1, 73, 74, 1, 'com_messages', 'com_messages', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
-(18, 1, 75, 140, 1, 'com_modules', 'com_modules', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(19, 1, 141, 144, 1, 'com_newsfeeds', 'com_newsfeeds', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(20, 1, 145, 146, 1, 'com_plugins', 'com_plugins', '{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}'),
-(21, 1, 147, 148, 1, 'com_redirect', 'com_redirect', '{"core.admin":[],"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(22, 1, 149, 150, 1, 'com_search', 'com_search', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
-(23, 1, 151, 152, 1, 'com_templates', 'com_templates', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(24, 1, 153, 156, 1, 'com_users', 'com_users', '{"core.admin":[],"core.manage":[],"core.create":{"10":1},"core.delete":{"10":1},"core.edit":{"10":1},"core.edit.state":[]}'),
-(26, 1, 157, 158, 1, 'com_wrapper', 'com_wrapper', '{}'),
-(27, 8, 18, 35, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(8, 1, 17, 52, 1, 'com_content', 'com_content', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(9, 1, 53, 54, 1, 'com_cpanel', 'com_cpanel', '{}'),
+(10, 1, 55, 56, 1, 'com_installer', 'com_installer', '{"core.admin":[],"core.manage":{"7":0},"core.delete":{"7":0},"core.edit.state":{"7":0}}'),
+(11, 1, 57, 58, 1, 'com_languages', 'com_languages', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(12, 1, 59, 60, 1, 'com_login', 'com_login', '{}'),
+(13, 1, 61, 62, 1, 'com_mailto', 'com_mailto', '{}'),
+(14, 1, 63, 64, 1, 'com_massmail', 'com_massmail', '{}'),
+(15, 1, 65, 66, 1, 'com_media', 'com_media', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":{"5":1}}'),
+(16, 1, 67, 68, 1, 'com_menus', 'com_menus', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(17, 1, 69, 70, 1, 'com_messages', 'com_messages', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
+(18, 1, 71, 136, 1, 'com_modules', 'com_modules', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(19, 1, 137, 140, 1, 'com_newsfeeds', 'com_newsfeeds', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(20, 1, 141, 142, 1, 'com_plugins', 'com_plugins', '{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}'),
+(21, 1, 143, 144, 1, 'com_redirect', 'com_redirect', '{"core.admin":[],"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(22, 1, 145, 146, 1, 'com_search', 'com_search', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
+(23, 1, 147, 148, 1, 'com_templates', 'com_templates', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(24, 1, 149, 152, 1, 'com_users', 'com_users', '{"core.admin":[],"core.manage":[],"core.create":{"10":1},"core.delete":{"10":1},"core.edit":{"10":1},"core.edit.state":[]}'),
+(26, 1, 153, 154, 1, 'com_wrapper', 'com_wrapper', '{}'),
+(27, 8, 18, 33, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (28, 3, 4, 5, 2, 'com_banners.category.3', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (29, 7, 14, 15, 2, 'com_contact.category.4', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(30, 19, 142, 143, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(32, 24, 154, 155, 1, 'com_users.category.7', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(33, 1, 159, 160, 1, 'com_finder', 'com_finder', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
-(34, 1, 161, 162, 1, 'com_joomlaupdate', 'com_joomlaupdate', '{"core.admin":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
-(35, 1, 163, 164, 1, 'com_tags', 'com_tags', '{"core.admin":[],"core.manage":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
-(36, 1, 165, 166, 1, 'com_contenthistory', 'com_contenthistory', '{}'),
-(37, 1, 167, 168, 1, 'com_ajax', 'com_ajax', '{}'),
-(38, 1, 169, 170, 1, 'com_postinstall', 'com_postinstall', '{}'),
-(39, 18, 76, 77, 2, 'com_modules.module.1', 'Menu principal', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(40, 18, 78, 79, 2, 'com_modules.module.2', 'Login', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(41, 18, 80, 81, 2, 'com_modules.module.3', 'Popular Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(42, 18, 82, 83, 2, 'com_modules.module.4', 'Recently Added Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(43, 18, 84, 85, 2, 'com_modules.module.8', 'Toolbar', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(44, 18, 86, 87, 2, 'com_modules.module.9', 'Quick Icons', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(45, 18, 88, 89, 2, 'com_modules.module.10', 'Logged-in Users', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(46, 18, 90, 91, 2, 'com_modules.module.12', 'Admin Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(47, 18, 92, 93, 2, 'com_modules.module.13', 'Admin Submenu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(48, 18, 94, 95, 2, 'com_modules.module.14', 'User Status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(49, 18, 96, 97, 2, 'com_modules.module.15', 'Title', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(50, 18, 98, 99, 2, 'com_modules.module.16', 'Connexion', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
-(51, 18, 100, 101, 2, 'com_modules.module.17', 'Breadcrumbs', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(52, 18, 102, 103, 2, 'com_modules.module.79', 'Multilanguage status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(53, 18, 104, 105, 2, 'com_modules.module.86', 'Joomla Version', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
-(54, 18, 106, 107, 2, 'com_modules.module.87', 'Popular Tags', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
-(55, 18, 108, 109, 2, 'com_modules.module.88', 'Site Information', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
-(56, 18, 110, 111, 2, 'com_modules.module.89', 'Release News', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
-(57, 18, 112, 113, 2, 'com_modules.module.90', 'Latest Articles', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
-(58, 18, 114, 115, 2, 'com_modules.module.91', 'User Menu', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
-(59, 18, 116, 117, 2, 'com_modules.module.92', 'Image Module', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
-(60, 18, 118, 119, 2, 'com_modules.module.93', 'Recherche', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
+(30, 19, 138, 139, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(32, 24, 150, 151, 1, 'com_users.category.7', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(33, 1, 155, 156, 1, 'com_finder', 'com_finder', '{"core.admin":{"7":1},"core.manage":{"6":1}}'),
+(34, 1, 157, 158, 1, 'com_joomlaupdate', 'com_joomlaupdate', '{"core.admin":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
+(35, 1, 159, 160, 1, 'com_tags', 'com_tags', '{"core.admin":[],"core.manage":[],"core.manage":[],"core.delete":[],"core.edit.state":[]}'),
+(36, 1, 161, 162, 1, 'com_contenthistory', 'com_contenthistory', '{}'),
+(37, 1, 163, 164, 1, 'com_ajax', 'com_ajax', '{}'),
+(38, 1, 165, 166, 1, 'com_postinstall', 'com_postinstall', '{}'),
+(39, 18, 72, 73, 2, 'com_modules.module.1', 'Menu principal', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(40, 18, 74, 75, 2, 'com_modules.module.2', 'Login', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(41, 18, 76, 77, 2, 'com_modules.module.3', 'Popular Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(42, 18, 78, 79, 2, 'com_modules.module.4', 'Recently Added Articles', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(43, 18, 80, 81, 2, 'com_modules.module.8', 'Toolbar', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(44, 18, 82, 83, 2, 'com_modules.module.9', 'Quick Icons', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(45, 18, 84, 85, 2, 'com_modules.module.10', 'Logged-in Users', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(46, 18, 86, 87, 2, 'com_modules.module.12', 'Admin Menu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(47, 18, 88, 89, 2, 'com_modules.module.13', 'Admin Submenu', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(48, 18, 90, 91, 2, 'com_modules.module.14', 'User Status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(49, 18, 92, 93, 2, 'com_modules.module.15', 'Title', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(50, 18, 94, 95, 2, 'com_modules.module.16', 'Connexion', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
+(51, 18, 96, 97, 2, 'com_modules.module.17', 'Breadcrumbs', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(52, 18, 98, 99, 2, 'com_modules.module.79', 'Multilanguage status', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(53, 18, 100, 101, 2, 'com_modules.module.86', 'Joomla Version', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
+(54, 18, 102, 103, 2, 'com_modules.module.87', 'Popular Tags', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
+(55, 18, 104, 105, 2, 'com_modules.module.88', 'Site Information', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
+(56, 18, 106, 107, 2, 'com_modules.module.89', 'Release News', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
+(57, 18, 108, 109, 2, 'com_modules.module.90', 'Latest Articles', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
+(58, 18, 110, 111, 2, 'com_modules.module.91', 'User Menu', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
+(59, 18, 112, 113, 2, 'com_modules.module.92', 'Image Module', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
+(60, 18, 114, 115, 2, 'com_modules.module.93', 'Recherche', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
 (61, 27, 19, 20, 3, 'com_content.article.1', 'Getting Started', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
-(63, 18, 120, 121, 2, 'com_modules.module.94', 'Calendrier', '{"core.delete":{"1":0,"9":0},"core.edit":{"1":0,"9":0},"core.edit.state":{"1":0,"9":0},"module.edit.frontend":{"1":0,"9":0}}'),
-(64, 1, 175, 176, 1, 'com_icagenda', 'iCagenda', '{"core.admin":[],"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[],"icagenda.access.categories":{"7":1},"icagenda.access.events":{"6":1},"icagenda.access.registrations":{"7":1},"icagenda.access.newsletter":{"7":1},"icagenda.access.customfields":{"7":1},"icagenda.access.features":{"7":1},"icagenda.access.themes":{"7":1}}'),
-(65, 1, 177, 178, 1, 'com_kunena', 'com_kunena', '{}'),
-(66, 18, 122, 123, 2, 'com_modules.module.95', 'Liens Externes', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"module.edit.frontend":[]}'),
-(67, 1, 179, 180, 1, '#__icagenda_events.3', '#__icagenda_events.3', ''),
-(68, 1, 181, 182, 1, '#__icagenda_events.4', '#__icagenda_events.4', ''),
-(69, 1, 183, 184, 1, '#__icagenda_events.5', '#__icagenda_events.5', ''),
-(70, 1, 185, 186, 1, '#__icagenda_events.6', '#__icagenda_events.6', ''),
-(71, 1, 187, 188, 1, '#__icagenda_events.7', '#__icagenda_events.7', ''),
-(72, 1, 189, 190, 1, '#__icagenda_events.8', '#__icagenda_events.8', ''),
-(73, 1, 191, 192, 1, '#__icagenda_events.9', '#__icagenda_events.9', ''),
-(74, 1, 193, 194, 1, '#__icagenda_events.10', '#__icagenda_events.10', ''),
+(63, 18, 116, 117, 2, 'com_modules.module.94', 'Calendrier', '{"core.delete":{"1":0,"9":0},"core.edit":{"1":0,"9":0},"core.edit.state":{"1":0,"9":0},"module.edit.frontend":{"1":0,"9":0}}'),
+(64, 1, 171, 172, 1, 'com_icagenda', 'iCagenda', '{"core.admin":[],"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[],"icagenda.access.categories":{"7":1},"icagenda.access.events":{"6":1},"icagenda.access.registrations":{"7":1},"icagenda.access.newsletter":{"7":1},"icagenda.access.customfields":{"7":1},"icagenda.access.features":{"7":1},"icagenda.access.themes":{"7":1}}'),
+(65, 1, 173, 174, 1, 'com_kunena', 'com_kunena', '{}'),
+(66, 18, 118, 119, 2, 'com_modules.module.95', 'Liens Externes', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"module.edit.frontend":[]}'),
+(67, 1, 175, 176, 1, '#__icagenda_events.3', '#__icagenda_events.3', ''),
+(68, 1, 177, 178, 1, '#__icagenda_events.4', '#__icagenda_events.4', ''),
+(69, 1, 179, 180, 1, '#__icagenda_events.5', '#__icagenda_events.5', ''),
+(70, 1, 181, 182, 1, '#__icagenda_events.6', '#__icagenda_events.6', ''),
+(71, 1, 183, 184, 1, '#__icagenda_events.7', '#__icagenda_events.7', ''),
+(72, 1, 185, 186, 1, '#__icagenda_events.8', '#__icagenda_events.8', ''),
+(73, 1, 187, 188, 1, '#__icagenda_events.9', '#__icagenda_events.9', ''),
+(74, 1, 189, 190, 1, '#__icagenda_events.10', '#__icagenda_events.10', ''),
 (75, 27, 21, 22, 3, 'com_content.article.2', 'Présentation du Tutorat', '{"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'),
 (76, 27, 23, 24, 3, 'com_content.article.3', 'Confirmation d''ajout cours', '{"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'),
 (77, 27, 25, 26, 3, 'com_content.article.4', 'Confirmation inscription cours :', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
 (82, 27, 27, 28, 3, 'com_content.article.5', 'Mon profil', '{"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'),
-(92, 8, 36, 53, 2, 'com_content.category.8', 'Users', '{"core.create":{"1":0},"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(93, 8, 54, 55, 2, 'com_content.category.9', 'User Groups', '{"core.create":{"1":0},"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(132, 1, 195, 206, 1, 'com_userxtd', 'com_userxtd', '{"core.admin":[],"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(133, 132, 196, 197, 2, 'com_userxtd.category.10', 'Informations générales', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(134, 132, 198, 199, 2, 'com_userxtd.category.11', 'Coordonnées', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(135, 1, 207, 208, 1, '#__userxtd_fields.1', '#__userxtd_fields.1', ''),
-(136, 1, 209, 210, 1, '#__userxtd_fields.2', '#__userxtd_fields.2', ''),
-(137, 1, 211, 212, 1, '#__userxtd_fields.3', '#__userxtd_fields.3', ''),
-(138, 1, 213, 214, 1, '#__userxtd_fields.4', '#__userxtd_fields.4', ''),
-(139, 1, 215, 216, 1, '#__userxtd_fields.5', '#__userxtd_fields.5', ''),
-(140, 1, 217, 218, 1, '#__userxtd_fields.6', '#__userxtd_fields.6', ''),
-(141, 1, 219, 220, 1, '#__userxtd_fields.7', '#__userxtd_fields.7', ''),
-(142, 1, 221, 222, 1, '#__userxtd_fields.8', '#__userxtd_fields.8', ''),
-(143, 1, 223, 224, 1, '#__userxtd_fields.9', '#__userxtd_fields.9', ''),
-(144, 1, 225, 226, 1, '#__userxtd_fields.10', '#__userxtd_fields.10', ''),
-(145, 1, 227, 228, 1, '#__userxtd_fields.11', '#__userxtd_fields.11', ''),
-(146, 1, 229, 230, 1, '#__userxtd_fields.12', '#__userxtd_fields.12', ''),
-(147, 132, 200, 201, 2, 'com_userxtd.category.12', 'Scolarité', '{"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
-(148, 1, 231, 232, 1, '#__userxtd_fields.13', '#__userxtd_fields.13', ''),
-(149, 1, 233, 234, 1, '#__userxtd_fields.14', '#__userxtd_fields.14', ''),
-(150, 132, 202, 203, 2, 'com_userxtd.category.13', 'Tutorat', '{"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
-(151, 1, 235, 236, 1, '#__userxtd_fields.15', '#__userxtd_fields.15', ''),
-(152, 1, 237, 238, 1, '#__userxtd_fields.16', '#__userxtd_fields.16', ''),
-(153, 1, 239, 240, 1, '#__userxtd_fields.17', '#__userxtd_fields.17', ''),
-(154, 1, 241, 242, 1, '#__userxtd_fields.18', '#__userxtd_fields.18', ''),
-(155, 1, 243, 244, 1, '#__userxtd_fields.19', '#__userxtd_fields.19', ''),
-(156, 132, 204, 205, 2, 'com_userxtd.category.14', 'Cacher', '{"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
-(157, 18, 124, 125, 2, 'com_modules.module.96', 'Responsive Contact Form', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
+(92, 8, 34, 49, 2, 'com_content.category.8', 'Users', '{"core.create":{"1":0},"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(93, 8, 50, 51, 2, 'com_content.category.9', 'User Groups', '{"core.create":{"1":0},"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(132, 1, 191, 202, 1, 'com_userxtd', 'com_userxtd', '{"core.admin":[],"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(133, 132, 192, 193, 2, 'com_userxtd.category.10', 'Informations générales', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(134, 132, 194, 195, 2, 'com_userxtd.category.11', 'Coordonnées', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(135, 1, 203, 204, 1, '#__userxtd_fields.1', '#__userxtd_fields.1', ''),
+(136, 1, 205, 206, 1, '#__userxtd_fields.2', '#__userxtd_fields.2', ''),
+(137, 1, 207, 208, 1, '#__userxtd_fields.3', '#__userxtd_fields.3', ''),
+(138, 1, 209, 210, 1, '#__userxtd_fields.4', '#__userxtd_fields.4', ''),
+(139, 1, 211, 212, 1, '#__userxtd_fields.5', '#__userxtd_fields.5', ''),
+(140, 1, 213, 214, 1, '#__userxtd_fields.6', '#__userxtd_fields.6', ''),
+(141, 1, 215, 216, 1, '#__userxtd_fields.7', '#__userxtd_fields.7', ''),
+(142, 1, 217, 218, 1, '#__userxtd_fields.8', '#__userxtd_fields.8', ''),
+(143, 1, 219, 220, 1, '#__userxtd_fields.9', '#__userxtd_fields.9', ''),
+(144, 1, 221, 222, 1, '#__userxtd_fields.10', '#__userxtd_fields.10', ''),
+(145, 1, 223, 224, 1, '#__userxtd_fields.11', '#__userxtd_fields.11', ''),
+(146, 1, 225, 226, 1, '#__userxtd_fields.12', '#__userxtd_fields.12', ''),
+(147, 132, 196, 197, 2, 'com_userxtd.category.12', 'Scolarité', '{"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
+(148, 1, 227, 228, 1, '#__userxtd_fields.13', '#__userxtd_fields.13', ''),
+(149, 1, 229, 230, 1, '#__userxtd_fields.14', '#__userxtd_fields.14', ''),
+(150, 132, 198, 199, 2, 'com_userxtd.category.13', 'Tutorat', '{"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
+(151, 1, 231, 232, 1, '#__userxtd_fields.15', '#__userxtd_fields.15', ''),
+(152, 1, 233, 234, 1, '#__userxtd_fields.16', '#__userxtd_fields.16', ''),
+(153, 1, 235, 236, 1, '#__userxtd_fields.17', '#__userxtd_fields.17', ''),
+(154, 1, 237, 238, 1, '#__userxtd_fields.18', '#__userxtd_fields.18', ''),
+(155, 1, 239, 240, 1, '#__userxtd_fields.19', '#__userxtd_fields.19', ''),
+(156, 132, 200, 201, 2, 'com_userxtd.category.14', 'Cacher', '{"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
+(157, 18, 120, 121, 2, 'com_modules.module.96', 'Responsive Contact Form', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
 (158, 27, 29, 30, 3, 'com_content.article.6', 'Comment devenir tuteur ?', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(159, 1, 245, 320, 1, 'com_cck', 'com_cck', '{"core.admin":[],"core.manage":[],"core.create":{"10":1},"core.delete":{"10":1},"core.delete.own":{"12":1,"11":1,"10":1},"core.edit":[],"core.edit.state":[],"core.edit.own":{"12":1,"11":1,"10":1},"core.export":[],"core.process":[]}'),
-(160, 18, 126, 127, 2, 'com_modules.module.97', 'SEBLOD - Menu d''administration', ''),
-(161, 18, 128, 129, 2, 'com_modules.module.98', 'SEBLOD - Ajout rapide', ''),
-(162, 18, 130, 131, 2, 'com_modules.module.99', 'SEBLOD - Icônes de raccourcis', ''),
-(163, 18, 132, 133, 2, 'com_modules.module.100', 'SEBLOD - Fil de navigation', ''),
-(164, 18, 134, 135, 2, 'com_modules.module.101', 'SEBLOD - Formulaire', ''),
-(165, 18, 136, 137, 2, 'com_modules.module.102', 'SEBLOD - Liste', ''),
-(166, 18, 138, 139, 2, 'com_modules.module.103', 'SEBLOD - Recherche', ''),
-(167, 159, 246, 247, 2, 'com_cck.folder.1', 'Quick Folder', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(168, 159, 248, 319, 2, 'com_cck.folder.2', 'Top', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(169, 168, 249, 252, 3, 'com_cck.folder.3', 'Core', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(170, 168, 253, 312, 3, 'com_cck.folder.5', 'JOOMLA', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(171, 170, 254, 275, 4, 'com_cck.folder.10', 'Article', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(172, 171, 255, 256, 5, 'com_cck.folder.22', 'Base', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(173, 171, 257, 258, 5, 'com_cck.folder.16', 'Basic', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(174, 171, 259, 260, 5, 'com_cck.folder.28', 'Images & Links', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(175, 171, 261, 262, 5, 'com_cck.folder.17', 'Metadata', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(176, 171, 263, 264, 5, 'com_cck.folder.15', 'Publishing', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(177, 170, 276, 293, 4, 'com_cck.folder.11', 'Category', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(178, 177, 277, 278, 5, 'com_cck.folder.23', 'Base', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(179, 177, 279, 280, 5, 'com_cck.folder.19', 'Basic', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(180, 177, 281, 282, 5, 'com_cck.folder.20', 'Metadata', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(181, 177, 283, 284, 5, 'com_cck.folder.18', 'Publishing', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(182, 170, 294, 305, 4, 'com_cck.folder.13', 'User', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(183, 182, 295, 296, 5, 'com_cck.folder.24', 'Base', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(184, 182, 297, 298, 5, 'com_cck.folder.21', 'Basic', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(185, 182, 299, 300, 5, 'com_cck.folder.29', 'Profile', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(186, 170, 306, 311, 4, 'com_cck.folder.14', 'User Group', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(187, 186, 307, 308, 5, 'com_cck.folder.26', 'Base', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(188, 168, 313, 318, 3, 'com_cck.folder.6', 'SEBLOD', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(189, 188, 314, 315, 4, 'com_cck.folder.7', 'Apps', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(190, 188, 316, 317, 4, 'com_cck.folder.8', 'Demo', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
-(191, 171, 265, 266, 5, 'com_cck.form.1', 'Article', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(192, 177, 285, 286, 5, 'com_cck.form.5', 'Category', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(193, 182, 301, 302, 5, 'com_cck.form.8', 'User', '{"core.create":{"1":1,"2":0},"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":{"4":0},"core.edit.own":{"2":1}}'),
-(194, 186, 309, 310, 5, 'com_cck.form.11', 'User Group', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(195, 171, 267, 268, 5, 'com_cck.form.20', 'Article Grp Publishing', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(196, 171, 269, 270, 5, 'com_cck.form.21', 'Article Grp Basic', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(197, 171, 271, 272, 5, 'com_cck.form.22', 'Article Grp Metadata', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(198, 177, 287, 288, 5, 'com_cck.form.25', 'Category Grp Publishing', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(199, 177, 289, 290, 5, 'com_cck.form.26', 'Category Grp Basic', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(200, 177, 291, 292, 5, 'com_cck.form.27', 'Category Grp Metadata', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(201, 182, 303, 304, 5, 'com_cck.form.28', 'User Grp Basic', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(202, 171, 273, 274, 5, 'com_cck.form.30', 'Article Grp Images & Links', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(203, 169, 250, 251, 4, 'com_cck.form.35', 'Button Grp (Form)', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(212, 92, 37, 38, 3, 'com_content.article.11', 'JOGUET', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(213, 92, 39, 40, 3, 'com_content.article.12', 'IGUE', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(214, 92, 41, 42, 3, 'com_content.article.13', 'HUART', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(215, 92, 43, 44, 3, 'com_content.article.14', 'GAYAT', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(216, 92, 45, 46, 3, 'com_content.article.15', 'DUCHEMIN', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(218, 92, 47, 48, 3, 'com_content.article.16', 'BRIZION', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(219, 92, 49, 50, 3, 'com_content.article.17', 'MARINIER', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(241, 27, 31, 32, 3, 'com_content.article.39', 'Présentation des tuteurs', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(245, 92, 51, 52, 3, 'com_content.article.40', 'Test', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(246, 27, 33, 34, 3, 'com_content.article.41', 'Ressources', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}');
+(159, 1, 241, 316, 1, 'com_cck', 'com_cck', '{"core.admin":[],"core.manage":[],"core.create":{"10":1},"core.delete":{"10":1},"core.delete.own":{"12":1,"11":1,"10":1},"core.edit":[],"core.edit.state":[],"core.edit.own":{"12":1,"11":1,"10":1},"core.export":[],"core.process":[]}'),
+(160, 18, 122, 123, 2, 'com_modules.module.97', 'SEBLOD - Menu d''administration', ''),
+(161, 18, 124, 125, 2, 'com_modules.module.98', 'SEBLOD - Ajout rapide', ''),
+(162, 18, 126, 127, 2, 'com_modules.module.99', 'SEBLOD - Icônes de raccourcis', ''),
+(163, 18, 128, 129, 2, 'com_modules.module.100', 'SEBLOD - Fil de navigation', ''),
+(164, 18, 130, 131, 2, 'com_modules.module.101', 'SEBLOD - Formulaire', ''),
+(165, 18, 132, 133, 2, 'com_modules.module.102', 'SEBLOD - Liste', ''),
+(166, 18, 134, 135, 2, 'com_modules.module.103', 'SEBLOD - Recherche', ''),
+(167, 159, 242, 243, 2, 'com_cck.folder.1', 'Quick Folder', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(168, 159, 244, 315, 2, 'com_cck.folder.2', 'Top', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(169, 168, 245, 248, 3, 'com_cck.folder.3', 'Core', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(170, 168, 249, 308, 3, 'com_cck.folder.5', 'JOOMLA', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(171, 170, 250, 271, 4, 'com_cck.folder.10', 'Article', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(172, 171, 251, 252, 5, 'com_cck.folder.22', 'Base', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(173, 171, 253, 254, 5, 'com_cck.folder.16', 'Basic', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(174, 171, 255, 256, 5, 'com_cck.folder.28', 'Images & Links', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(175, 171, 257, 258, 5, 'com_cck.folder.17', 'Metadata', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(176, 171, 259, 260, 5, 'com_cck.folder.15', 'Publishing', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(177, 170, 272, 289, 4, 'com_cck.folder.11', 'Category', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(178, 177, 273, 274, 5, 'com_cck.folder.23', 'Base', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(179, 177, 275, 276, 5, 'com_cck.folder.19', 'Basic', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(180, 177, 277, 278, 5, 'com_cck.folder.20', 'Metadata', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(181, 177, 279, 280, 5, 'com_cck.folder.18', 'Publishing', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(182, 170, 290, 301, 4, 'com_cck.folder.13', 'User', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(183, 182, 291, 292, 5, 'com_cck.folder.24', 'Base', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(184, 182, 293, 294, 5, 'com_cck.folder.21', 'Basic', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(185, 182, 295, 296, 5, 'com_cck.folder.29', 'Profile', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(186, 170, 302, 307, 4, 'com_cck.folder.14', 'User Group', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(187, 186, 303, 304, 5, 'com_cck.folder.26', 'Base', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(188, 168, 309, 314, 3, 'com_cck.folder.6', 'SEBLOD', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(189, 188, 310, 311, 4, 'com_cck.folder.7', 'Apps', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(190, 188, 312, 313, 4, 'com_cck.folder.8', 'Demo', '{"core.create":[],"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(191, 171, 261, 262, 5, 'com_cck.form.1', 'Article', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(192, 177, 281, 282, 5, 'com_cck.form.5', 'Category', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(193, 182, 297, 298, 5, 'com_cck.form.8', 'User', '{"core.create":{"1":1,"2":0},"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":{"4":0},"core.edit.own":{"2":1}}'),
+(194, 186, 305, 306, 5, 'com_cck.form.11', 'User Group', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(195, 171, 263, 264, 5, 'com_cck.form.20', 'Article Grp Publishing', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(196, 171, 265, 266, 5, 'com_cck.form.21', 'Article Grp Basic', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(197, 171, 267, 268, 5, 'com_cck.form.22', 'Article Grp Metadata', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(198, 177, 283, 284, 5, 'com_cck.form.25', 'Category Grp Publishing', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(199, 177, 285, 286, 5, 'com_cck.form.26', 'Category Grp Basic', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(200, 177, 287, 288, 5, 'com_cck.form.27', 'Category Grp Metadata', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(201, 182, 299, 300, 5, 'com_cck.form.28', 'User Grp Basic', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(202, 171, 269, 270, 5, 'com_cck.form.30', 'Article Grp Images & Links', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(203, 169, 246, 247, 4, 'com_cck.form.35', 'Button Grp (Form)', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
+(212, 92, 35, 36, 3, 'com_content.article.11', 'JOGUET', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(213, 92, 37, 38, 3, 'com_content.article.12', 'IGUE', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(214, 92, 39, 40, 3, 'com_content.article.13', 'HUART', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(215, 92, 41, 42, 3, 'com_content.article.14', 'GAYAT', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(216, 92, 43, 44, 3, 'com_content.article.15', 'DUCHEMIN', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(218, 92, 45, 46, 3, 'com_content.article.16', 'BRIZION', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(219, 92, 47, 48, 3, 'com_content.article.17', 'MARINIER', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(241, 27, 31, 32, 3, 'com_content.article.39', 'Présentation des tuteurs', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}');
 
 -- --------------------------------------------------------
 
@@ -202,10 +210,12 @@ INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 -- Structure de la table `qfupd_associations`
 --
 
-CREATE TABLE `qfupd_associations` (
+CREATE TABLE IF NOT EXISTS `qfupd_associations` (
   `id` int(11) NOT NULL COMMENT 'A reference to the associated item.',
   `context` varchar(50) NOT NULL COMMENT 'The context of the associated item.',
-  `key` char(32) NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.'
+  `key` char(32) NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.',
+  PRIMARY KEY (`context`,`id`),
+  KEY `idx_key` (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -214,8 +224,8 @@ CREATE TABLE `qfupd_associations` (
 -- Structure de la table `qfupd_banners`
 --
 
-CREATE TABLE `qfupd_banners` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_banners` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` int(11) NOT NULL DEFAULT '0',
   `type` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL DEFAULT '',
@@ -248,8 +258,14 @@ CREATE TABLE `qfupd_banners` (
   `created_by_alias` varchar(255) NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
-  `version` int(10) unsigned NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `idx_state` (`state`),
+  KEY `idx_own_prefix` (`own_prefix`),
+  KEY `idx_metakey_prefix` (`metakey_prefix`),
+  KEY `idx_banner_catid` (`catid`),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -257,8 +273,8 @@ CREATE TABLE `qfupd_banners` (
 -- Structure de la table `qfupd_banner_clients`
 --
 
-CREATE TABLE `qfupd_banner_clients` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_banner_clients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `contact` varchar(255) NOT NULL DEFAULT '',
   `email` varchar(255) NOT NULL DEFAULT '',
@@ -271,8 +287,11 @@ CREATE TABLE `qfupd_banner_clients` (
   `metakey_prefix` varchar(255) NOT NULL DEFAULT '',
   `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
   `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
-  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
+  PRIMARY KEY (`id`),
+  KEY `idx_own_prefix` (`own_prefix`),
+  KEY `idx_metakey_prefix` (`metakey_prefix`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -280,11 +299,15 @@ CREATE TABLE `qfupd_banner_clients` (
 -- Structure de la table `qfupd_banner_tracks`
 --
 
-CREATE TABLE `qfupd_banner_tracks` (
+CREATE TABLE IF NOT EXISTS `qfupd_banner_tracks` (
   `track_date` datetime NOT NULL,
   `track_type` int(10) unsigned NOT NULL,
   `banner_id` int(10) unsigned NOT NULL,
-  `count` int(10) unsigned NOT NULL DEFAULT '0'
+  `count` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`track_date`,`track_type`,`banner_id`),
+  KEY `idx_track_date` (`track_date`),
+  KEY `idx_track_type` (`track_type`),
+  KEY `idx_banner_id` (`banner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -293,8 +316,8 @@ CREATE TABLE `qfupd_banner_tracks` (
 -- Structure de la table `qfupd_categories`
 --
 
-CREATE TABLE `qfupd_categories` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
@@ -320,8 +343,16 @@ CREATE TABLE `qfupd_categories` (
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `language` char(7) NOT NULL,
-  `version` int(10) unsigned NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  `version` int(10) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `cat_idx` (`extension`,`published`,`access`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_path` (`path`),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Contenu de la table `qfupd_categories`
@@ -348,8 +379,8 @@ INSERT INTO `qfupd_categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `le
 -- Structure de la table `qfupd_cck_core`
 --
 
-CREATE TABLE `qfupd_cck_core` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cck` varchar(50) NOT NULL,
   `pk` int(11) NOT NULL,
   `pkb` int(11) NOT NULL,
@@ -359,8 +390,11 @@ CREATE TABLE `qfupd_cck_core` (
   `parent_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `date_time` datetime NOT NULL,
-  `app` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+  `app` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_cck` (`cck`),
+  KEY `idx_pk` (`pk`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
 --
 -- Contenu de la table `qfupd_cck_core`
@@ -393,8 +427,7 @@ INSERT INTO `qfupd_cck_core` (`id`, `cck`, `pk`, `pkb`, `storage_location`, `sto
 (45, ' ', 0, 0, '', '', 0, 0, 0, '0000-00-00 00:00:00', ''),
 (46, ' ', 0, 0, '', '', 0, 0, 0, '0000-00-00 00:00:00', ''),
 (50, ' ', 0, 0, '', '', 0, 0, 0, '0000-00-00 00:00:00', ''),
-(55, 'article', 39, 0, 'joomla_article', '', 820, 2, 0, '2015-05-22 16:17:19', ''),
-(56, 'user', 821, 40, 'joomla_user', '', 821, 0, 0, '2015-05-23 18:41:19', '');
+(55, 'article', 39, 0, 'joomla_article', '', 820, 2, 0, '2015-05-22 16:17:19', '');
 
 -- --------------------------------------------------------
 
@@ -402,15 +435,18 @@ INSERT INTO `qfupd_cck_core` (`id`, `cck`, `pk`, `pkb`, `storage_location`, `sto
 -- Structure de la table `qfupd_cck_core_activities`
 --
 
-CREATE TABLE `qfupd_cck_core_activities` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_activities` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
   `description` text NOT NULL,
-  `published` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `published` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `idx_category` (`folder`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -418,12 +454,15 @@ CREATE TABLE `qfupd_cck_core_activities` (
 -- Structure de la table `qfupd_cck_core_downloads`
 --
 
-CREATE TABLE `qfupd_cck_core_downloads` (
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_downloads` (
   `id` int(11) NOT NULL,
   `field` varchar(50) NOT NULL,
   `collection` varchar(50) NOT NULL,
   `x` int(11) NOT NULL,
-  `hits` int(11) NOT NULL
+  `hits` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`field`,`collection`,`x`),
+  KEY `idx_contentid` (`id`),
+  KEY `idx_item` (`field`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -432,8 +471,8 @@ CREATE TABLE `qfupd_cck_core_downloads` (
 -- Structure de la table `qfupd_cck_core_fields`
 --
 
-CREATE TABLE `qfupd_cck_core_fields` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_fields` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
@@ -478,8 +517,12 @@ CREATE TABLE `qfupd_cck_core_fields` (
   `storage_params` varchar(2048) NOT NULL,
   `storages` varchar(2048) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=100538 DEFAULT CHARSET=utf8;
+  `checked_out_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `idx_type` (`type`),
+  KEY `idx_folder` (`folder`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=100538 ;
 
 --
 -- Contenu de la table `qfupd_cck_core_fields`
@@ -1023,8 +1066,8 @@ INSERT INTO `qfupd_cck_core_fields` (`id`, `title`, `name`, `folder`, `type`, `d
 -- Structure de la table `qfupd_cck_core_folders`
 --
 
-CREATE TABLE `qfupd_cck_core_folders` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_folders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `path` varchar(1024) NOT NULL,
@@ -1044,8 +1087,10 @@ CREATE TABLE `qfupd_cck_core_folders` (
   `home` tinyint(3) NOT NULL DEFAULT '0',
   `published` tinyint(4) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+  `checked_out_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_parent_id` (`parent_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
 -- Contenu de la table `qfupd_cck_core_folders`
@@ -1083,16 +1128,20 @@ INSERT INTO `qfupd_cck_core_folders` (`id`, `asset_id`, `parent_id`, `path`, `ti
 -- Structure de la table `qfupd_cck_core_objects`
 --
 
-CREATE TABLE `qfupd_cck_core_objects` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_objects` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `component` varchar(50) NOT NULL,
   `context` varchar(50) NOT NULL,
   `options` text NOT NULL,
   `vars` varchar(255) NOT NULL,
-  `view` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `view` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `idx_component` (`component`),
+  KEY `idx_view` (`view`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `qfupd_cck_core_objects`
@@ -1110,9 +1159,10 @@ INSERT INTO `qfupd_cck_core_objects` (`id`, `title`, `name`, `component`, `conte
 -- Structure de la table `qfupd_cck_core_preferences`
 --
 
-CREATE TABLE `qfupd_cck_core_preferences` (
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_preferences` (
   `userid` int(11) NOT NULL,
-  `options` text NOT NULL
+  `options` text NOT NULL,
+  PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1121,8 +1171,8 @@ CREATE TABLE `qfupd_cck_core_preferences` (
 -- Structure de la table `qfupd_cck_core_searchs`
 --
 
-CREATE TABLE `qfupd_cck_core_searchs` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_searchs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `alias` varchar(50) NOT NULL,
@@ -1142,8 +1192,15 @@ CREATE TABLE `qfupd_cck_core_searchs` (
   `stylesheets` varchar(5) NOT NULL,
   `version` int(11) NOT NULL DEFAULT '1',
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `checked_out_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `idx_folder` (`folder`),
+  KEY `idx_template_search` (`template_search`),
+  KEY `idx_template_filter` (`template_filter`),
+  KEY `idx_template_list` (`template_list`),
+  KEY `idx_template_item` (`template_item`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `qfupd_cck_core_searchs`
@@ -1160,7 +1217,7 @@ INSERT INTO `qfupd_cck_core_searchs` (`id`, `title`, `name`, `alias`, `folder`, 
 -- Structure de la table `qfupd_cck_core_search_field`
 --
 
-CREATE TABLE `qfupd_cck_core_search_field` (
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_search_field` (
   `searchid` int(11) NOT NULL,
   `fieldid` int(11) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1194,7 +1251,10 @@ CREATE TABLE `qfupd_cck_core_search_field` (
   `computation_options` varchar(1024) NOT NULL COMMENT 'search',
   `conditional` varchar(2048) NOT NULL COMMENT 'search',
   `conditional_options` text NOT NULL COMMENT 'search',
-  `position` varchar(50) NOT NULL COMMENT 'search,list,item'
+  `position` varchar(50) NOT NULL COMMENT 'search,list,item',
+  PRIMARY KEY (`searchid`,`fieldid`,`client`),
+  KEY `searchid` (`searchid`),
+  KEY `fieldid` (`fieldid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1232,7 +1292,7 @@ INSERT INTO `qfupd_cck_core_search_field` (`searchid`, `fieldid`, `client`, `ord
 -- Structure de la table `qfupd_cck_core_search_position`
 --
 
-CREATE TABLE `qfupd_cck_core_search_position` (
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_search_position` (
   `searchid` int(11) NOT NULL,
   `position` varchar(50) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1241,7 +1301,10 @@ CREATE TABLE `qfupd_cck_core_search_position` (
   `variation_options` text NOT NULL,
   `width` varchar(50) NOT NULL,
   `height` varchar(50) NOT NULL,
-  `css` varchar(255) NOT NULL
+  `css` varchar(255) NOT NULL,
+  PRIMARY KEY (`searchid`,`position`,`client`),
+  KEY `position` (`position`),
+  KEY `searchid` (`searchid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1273,8 +1336,8 @@ INSERT INTO `qfupd_cck_core_search_position` (`searchid`, `position`, `client`, 
 -- Structure de la table `qfupd_cck_core_sites`
 --
 
-CREATE TABLE `qfupd_cck_core_sites` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_sites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
   `aliases` varchar(512) NOT NULL,
@@ -1288,8 +1351,10 @@ CREATE TABLE `qfupd_cck_core_sites` (
   `description` varchar(5120) NOT NULL,
   `published` tinyint(4) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `checked_out_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1297,8 +1362,8 @@ CREATE TABLE `qfupd_cck_core_sites` (
 -- Structure de la table `qfupd_cck_core_templates`
 --
 
-CREATE TABLE `qfupd_cck_core_templates` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_templates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
@@ -1307,8 +1372,11 @@ CREATE TABLE `qfupd_cck_core_templates` (
   `featured` tinyint(4) NOT NULL DEFAULT '0',
   `published` tinyint(4) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `checked_out_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `idx_folder` (`folder`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `qfupd_cck_core_templates`
@@ -1325,8 +1393,8 @@ INSERT INTO `qfupd_cck_core_templates` (`id`, `title`, `name`, `folder`, `mode`,
 -- Structure de la table `qfupd_cck_core_types`
 --
 
-CREATE TABLE `qfupd_cck_core_types` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -1354,8 +1422,15 @@ CREATE TABLE `qfupd_cck_core_types` (
   `created_date` datetime NOT NULL,
   `created_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `modified_date` datetime NOT NULL,
-  `modified_user_id` int(10) unsigned NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+  `modified_user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `idx_folder` (`folder`),
+  KEY `idx_template_admin` (`template_admin`),
+  KEY `idx_template_site` (`template_site`),
+  KEY `idx_template_content` (`template_content`),
+  KEY `idx_template_intro` (`template_intro`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
 
 --
 -- Contenu de la table `qfupd_cck_core_types`
@@ -1382,7 +1457,7 @@ INSERT INTO `qfupd_cck_core_types` (`id`, `asset_id`, `title`, `name`, `alias`, 
 -- Structure de la table `qfupd_cck_core_type_field`
 --
 
-CREATE TABLE `qfupd_cck_core_type_field` (
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_type_field` (
   `typeid` int(11) NOT NULL,
   `fieldid` int(11) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1412,7 +1487,10 @@ CREATE TABLE `qfupd_cck_core_type_field` (
   `computation_options` varchar(1024) NOT NULL COMMENT 'admin,site',
   `conditional` varchar(2048) NOT NULL COMMENT 'admin,site',
   `conditional_options` text NOT NULL COMMENT 'admin,site',
-  `position` varchar(50) NOT NULL COMMENT 'admin,site,intro,content'
+  `position` varchar(50) NOT NULL COMMENT 'admin,site,intro,content',
+  PRIMARY KEY (`typeid`,`fieldid`,`client`),
+  KEY `typeid` (`typeid`),
+  KEY `fieldid` (`fieldid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1786,7 +1864,7 @@ INSERT INTO `qfupd_cck_core_type_field` (`typeid`, `fieldid`, `client`, `orderin
 -- Structure de la table `qfupd_cck_core_type_position`
 --
 
-CREATE TABLE `qfupd_cck_core_type_position` (
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_type_position` (
   `typeid` int(11) NOT NULL,
   `position` varchar(50) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1795,7 +1873,10 @@ CREATE TABLE `qfupd_cck_core_type_position` (
   `variation_options` text NOT NULL,
   `width` varchar(50) NOT NULL,
   `height` varchar(50) NOT NULL,
-  `css` varchar(255) NOT NULL
+  `css` varchar(255) NOT NULL,
+  PRIMARY KEY (`typeid`,`position`,`client`),
+  KEY `typeid` (`typeid`),
+  KEY `position` (`position`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1871,8 +1952,8 @@ INSERT INTO `qfupd_cck_core_type_position` (`typeid`, `position`, `client`, `leg
 -- Structure de la table `qfupd_cck_core_versions`
 --
 
-CREATE TABLE `qfupd_cck_core_versions` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_core_versions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `e_id` int(11) NOT NULL DEFAULT '0',
   `e_title` varchar(50) NOT NULL,
   `e_name` varchar(50) NOT NULL,
@@ -1889,8 +1970,10 @@ CREATE TABLE `qfupd_cck_core_versions` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `note` varchar(255) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=519 DEFAULT CHARSET=utf8;
+  `checked_out_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `type_id_version` (`e_id`,`e_type`,`e_version`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=519 ;
 
 --
 -- Contenu de la table `qfupd_cck_core_versions`
@@ -1958,13 +2041,14 @@ INSERT INTO `qfupd_cck_core_versions` (`id`, `e_id`, `e_title`, `e_name`, `e_typ
 -- Structure de la table `qfupd_cck_more_countries`
 --
 
-CREATE TABLE `qfupd_cck_more_countries` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_more_countries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name_en` varchar(255) NOT NULL,
   `name_fr` varchar(255) NOT NULL,
   `code2` varchar(5) NOT NULL,
-  `code3` varchar(5) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
+  `code3` varchar(5) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=247 ;
 
 --
 -- Contenu de la table `qfupd_cck_more_countries`
@@ -2224,8 +2308,8 @@ INSERT INTO `qfupd_cck_more_countries` (`id`, `name_en`, `name_fr`, `code2`, `co
 -- Structure de la table `qfupd_cck_more_processings`
 --
 
-CREATE TABLE `qfupd_cck_more_processings` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_more_processings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL DEFAULT '1',
@@ -2235,8 +2319,9 @@ CREATE TABLE `qfupd_cck_more_processings` (
   `published` tinyint(3) NOT NULL DEFAULT '0',
   `scriptfile` text NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `checked_out_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2244,14 +2329,16 @@ CREATE TABLE `qfupd_cck_more_processings` (
 -- Structure de la table `qfupd_cck_more_sessions`
 --
 
-CREATE TABLE `qfupd_cck_more_sessions` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_cck_more_sessions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `extension` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `options` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `options` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_extension` (`extension`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2259,7 +2346,7 @@ CREATE TABLE `qfupd_cck_more_sessions` (
 -- Structure de la table `qfupd_cck_store_item_users`
 --
 
-CREATE TABLE `qfupd_cck_store_item_users` (
+CREATE TABLE IF NOT EXISTS `qfupd_cck_store_item_users` (
   `id` int(11) NOT NULL,
   `cck` varchar(50) NOT NULL,
   `gender` varchar(255) NOT NULL,
@@ -2276,7 +2363,8 @@ CREATE TABLE `qfupd_cck_store_item_users` (
   `phone` varchar(255) NOT NULL,
   `website` varchar(255) NOT NULL,
   `birthdate` datetime NOT NULL,
-  `birthplace` varchar(255) NOT NULL
+  `birthplace` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2290,8 +2378,7 @@ INSERT INTO `qfupd_cck_store_item_users` (`id`, `cck`, `gender`, `last_name`, `f
 (817, 'user', 'M', '', 'Théotime', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', ''),
 (818, 'user', 'F', '', 'Laure', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', ''),
 (819, 'user', 'M', '', 'Alexandre', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', ''),
-(820, 'user', 'F', '', 'Ophélie', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', ''),
-(821, 'user', 'H', '', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', '');
+(820, 'user', 'F', '', 'Ophélie', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -2299,8 +2386,8 @@ INSERT INTO `qfupd_cck_store_item_users` (`id`, `cck`, `gender`, `last_name`, `f
 -- Structure de la table `qfupd_contact_details`
 --
 
-CREATE TABLE `qfupd_contact_details` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_contact_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `con_position` varchar(255) DEFAULT NULL,
@@ -2342,8 +2429,17 @@ CREATE TABLE `qfupd_contact_details` (
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `version` int(10) unsigned NOT NULL DEFAULT '1',
-  `hits` int(10) unsigned NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `hits` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`published`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_featured_catid` (`featured`,`catid`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2351,8 +2447,8 @@ CREATE TABLE `qfupd_contact_details` (
 -- Structure de la table `qfupd_content`
 --
 
-CREATE TABLE `qfupd_content` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -2381,20 +2477,29 @@ CREATE TABLE `qfupd_content` (
   `metadata` text NOT NULL,
   `featured` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
   `language` char(7) NOT NULL COMMENT 'The language code for the article.',
-  `xreference` varchar(50) NOT NULL COMMENT 'A reference to enable linkages to external data sets.'
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+  `xreference` varchar(50) NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`state`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_featured_catid` (`featured`,`catid`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
 
 --
 -- Contenu de la table `qfupd_content`
 --
 
 INSERT INTO `qfupd_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`) VALUES
-(1, 61, 'Comment débuter ?', 'comment-debuter', '<p style="text-align: justify;">La création d''un site web avec Joomla est simple, le déploiement de ce site exemple vous y aidera. <br />Les quelques principes de base présentés ci-dessous vous guideront dans la compréhension de ce logiciel.</p><h3>Qu''est-ce qu''un Système de Gestion de Contenu ?</h3><p style="text-align: justify;">Un   système de gestion de contenu (SGC ou CMS de l''anglais Content  Management System) est un logiciel qui vous permet de créer  et gérer  des pages Web facilement, séparant la création des contenus de la  gestion technique nécessaire à une diffusion sur le web.</p><p style="text-align: justify;">Le  contenu rédactionnel est stocké et restitué par une base de données, l''aspect (police, taille, couleur, emplacement, etc.) est géré par un  template (habillage du site). Le logiciel Joomla permet d''unir ces deux  structures de manière conviviale et de les rendre accessibles au plus  grand nombre d''utilisateurs.</p><h3>Deux interfaces</h3><p>Un site Joomla est structuré en deux parties distinctes : la partie visible du site appelée «Frontal» de <em>Frontend</em> en anglais et, la partie d''administration pure appelée «Administration» de <em>Administrator</em>.</p><h3 style="text-align: justify;">Administration</h3><p style="text-align: justify;">Vous pouvez accéder à l''administration en cliquant sur le sur le lien «Administration» présent dans le module de menu «Menu membre» visible après vous être connecté sur le site ou, en  ajoutant  <em>/administrator</em> dans l''URL après le nom de domaine (exemple : www.mon-domaine.com/administrator).</p><p style="text-align: justify;">Utilisez le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Frontal</h3><p style="text-align: justify;">Si votre profil possède les droits suffisants, vous pouvez créer des articles et les éditer depuis l''interface frontale du site.</p><p style="text-align: justify;">Connectez-vous par le module «Connexion» en utilisant le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Créer un article en frontal</h3><p style="text-align: justify;">Lorsque vous êtes connecté, un nouveau menu nommé «Menu Membres» apparaît. Cliquez sur le lien  «Créer un article» pour afficher l''éditeur de texte et d''insertion de médias.</p><p style="text-align: justify;">Pour enregistrer l''article, vous devez spécifier à quelle catégorie il appartient ainsi que son statut de publication. Pour le modifier, cliquez sur l''icône d''édition <img src="media/system/images/edit.png" border="0" alt="Editer un article" width="18" height="18" style="vertical-align: middle;" />.</p><p style="text-align: justify;">Vous pouvez travailler sur des articles non publiés ou de publication programmée dans le temps et, dans le cadre d''un travail collaboratif, ne les rendre visibles qu''à un groupe d''utilisateurs donnés avant de les rendre publics.</p><h3>En savoir plus</h3><p>Une pleine utilisation de Joomla requiert certaines connaissances approfondies que vous pourrez acquérir dans la <a href="http://docs.joomla.org/" target="_blank">documentation officielle de Joomla</a> ou sur le <a href="http://aide.joomla.fr/" target="_blank">site d''aide francophone</a> et dans le <a href="http://forum.joomla.org/" target="_blank">forum officiel</a> ou le <a href="http://forum.joomla.fr/" target="_blank">forum francophone</a>.</p>', '', 1, 2, '2013-11-16 00:00:00', 802, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2013-11-16 00:00:00', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 6, '', '', 1, 141, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(2, 75, 'Présentation du Tutorat', 'presentation-du-tutorat', '<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial;">Bienvenue sur le site du tutorat informatique de l’Université François Rabelais de Blois. </h1>\r\n<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial; min-height: 14px;"> </h1>\r\n<p>Le tutorat a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.</p>\r\n<p>Le tutorat propose un agenda en ligne pour rencontrer les tuteurs afin de s’inscrire aux différents cours proposés. Un forum et une bibliothèque sont à disposition pour chaque étudiant inscrit. Dès votre connexion, vous pourrez de plus, accéder à une page statistique ainsi qu’une page bilan.</p>\r\n<p>Ce soutien est destiné à toutes personnes voulant aider ou qui ressentent le besoin d’être aidé dans sa scolarité en Informatique et Mathématiques. </p>\r\n<p>Si vous avez des questions ou pour plus d’informations, vous pouvez toujours nous contacter via les liens prévus à cet effet.</p>\r\n<h2> </h2>', '', 1, 2, '2015-04-15 18:51:20', 802, '', '2015-04-15 18:57:39', 802, 0, '0000-00-00 00:00:00', '2015-04-15 18:51:20', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 7, 5, '', '', 1, 460, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(3, 76, 'Confirmation d''ajout cours', 'confirmation-d-ajout-cours', '<h2> </h2>', '', 1, 2, '2015-04-16 13:41:18', 802, '', '2015-04-16 13:45:34', 802, 0, '0000-00-00 00:00:00', '2015-04-16 13:41:18', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 2, 4, '', '', 1, 7, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(4, 77, 'Confirmation inscription cours :', 'confirmation-inscription-cours', '<p>Votre inscription à bien été prise en compte. Un E-MAIL de confirmation vous a été envoyé.</p>', '', 1, 2, '2015-04-16 13:51:11', 802, '', '2015-04-16 13:51:11', 0, 802, '2015-05-12 10:09:31', '2015-04-16 13:51:11', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 3, '', '', 1, 7, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(1, 61, 'Comment débuter ?', 'comment-debuter', '<p style="text-align: justify;">La création d''un site web avec Joomla est simple, le déploiement de ce site exemple vous y aidera. <br />Les quelques principes de base présentés ci-dessous vous guideront dans la compréhension de ce logiciel.</p><h3>Qu''est-ce qu''un Système de Gestion de Contenu ?</h3><p style="text-align: justify;">Un   système de gestion de contenu (SGC ou CMS de l''anglais Content  Management System) est un logiciel qui vous permet de créer  et gérer  des pages Web facilement, séparant la création des contenus de la  gestion technique nécessaire à une diffusion sur le web.</p><p style="text-align: justify;">Le  contenu rédactionnel est stocké et restitué par une base de données, l''aspect (police, taille, couleur, emplacement, etc.) est géré par un  template (habillage du site). Le logiciel Joomla permet d''unir ces deux  structures de manière conviviale et de les rendre accessibles au plus  grand nombre d''utilisateurs.</p><h3>Deux interfaces</h3><p>Un site Joomla est structuré en deux parties distinctes : la partie visible du site appelée «Frontal» de <em>Frontend</em> en anglais et, la partie d''administration pure appelée «Administration» de <em>Administrator</em>.</p><h3 style="text-align: justify;">Administration</h3><p style="text-align: justify;">Vous pouvez accéder à l''administration en cliquant sur le sur le lien «Administration» présent dans le module de menu «Menu membre» visible après vous être connecté sur le site ou, en  ajoutant  <em>/administrator</em> dans l''URL après le nom de domaine (exemple : www.mon-domaine.com/administrator).</p><p style="text-align: justify;">Utilisez le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Frontal</h3><p style="text-align: justify;">Si votre profil possède les droits suffisants, vous pouvez créer des articles et les éditer depuis l''interface frontale du site.</p><p style="text-align: justify;">Connectez-vous par le module «Connexion» en utilisant le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Créer un article en frontal</h3><p style="text-align: justify;">Lorsque vous êtes connecté, un nouveau menu nommé «Menu Membres» apparaît. Cliquez sur le lien  «Créer un article» pour afficher l''éditeur de texte et d''insertion de médias.</p><p style="text-align: justify;">Pour enregistrer l''article, vous devez spécifier à quelle catégorie il appartient ainsi que son statut de publication. Pour le modifier, cliquez sur l''icône d''édition <img src="media/system/images/edit.png" border="0" alt="Editer un article" width="18" height="18" style="vertical-align: middle;" />.</p><p style="text-align: justify;">Vous pouvez travailler sur des articles non publiés ou de publication programmée dans le temps et, dans le cadre d''un travail collaboratif, ne les rendre visibles qu''à un groupe d''utilisateurs donnés avant de les rendre publics.</p><h3>En savoir plus</h3><p>Une pleine utilisation de Joomla requiert certaines connaissances approfondies que vous pourrez acquérir dans la <a href="http://docs.joomla.org/" target="_blank">documentation officielle de Joomla</a> ou sur le <a href="http://aide.joomla.fr/" target="_blank">site d''aide francophone</a> et dans le <a href="http://forum.joomla.org/" target="_blank">forum officiel</a> ou le <a href="http://forum.joomla.fr/" target="_blank">forum francophone</a>.</p>', '', 1, 2, '2013-11-16 00:00:00', 802, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2013-11-16 00:00:00', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 5, '', '', 1, 139, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(2, 75, 'Présentation du Tutorat', 'presentation-du-tutorat', '<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial;">Bienvenue sur le site du tutorat informatique de l’Université François Rabelais de Blois. </h1>\r\n<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial; min-height: 14px;"> </h1>\r\n<p>Le tutorat a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.</p>\r\n<p>Le tutorat propose un agenda en ligne pour rencontrer les tuteurs afin de s’inscrire aux différents cours proposés. Un forum et une bibliothèque sont à disposition pour chaque étudiant inscrit. Dès votre connexion, vous pourrez de plus, accéder à une page statistique ainsi qu’une page bilan.</p>\r\n<p>Ce soutien est destiné à toutes personnes voulant aider ou qui ressentent le besoin d’être aidé dans sa scolarité en Informatique et Mathématiques. </p>\r\n<p>Si vous avez des questions ou pour plus d’informations, vous pouvez toujours nous contacter via les liens prévus à cet effet.</p>\r\n<h2> </h2>', '', 1, 2, '2015-04-15 18:51:20', 802, '', '2015-04-15 18:57:39', 802, 0, '0000-00-00 00:00:00', '2015-04-15 18:51:20', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 7, 4, '', '', 1, 449, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(3, 76, 'Confirmation d''ajout cours', 'confirmation-d-ajout-cours', '<h2> </h2>', '', 1, 2, '2015-04-16 13:41:18', 802, '', '2015-04-16 13:45:34', 802, 0, '0000-00-00 00:00:00', '2015-04-16 13:41:18', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 2, 3, '', '', 1, 7, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(4, 77, 'Confirmation inscription cours :', 'confirmation-inscription-cours', '<p>Votre inscription à bien été prise en compte. Un E-MAIL de confirmation vous a été envoyé.</p>', '', 1, 2, '2015-04-16 13:51:11', 802, '', '2015-04-16 13:51:11', 0, 802, '2015-05-12 10:09:31', '2015-04-16 13:51:11', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 2, '', '', 1, 7, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 (5, 82, 'Mon profil', 'profil', '', '', -2, 2, '2015-05-12 10:14:49', 802, '', '2015-05-12 10:26:51', 802, 0, '0000-00-00 00:00:00', '2015-05-12 10:14:49', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 2, 2, '', '', 1, 1, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(6, 158, 'Comment devenir tuteur ?', 'devenir-tuteur', '<p>Le seul pré-requis est que vous devez être un étudiant en deuxième ou troisième année de licence Informatique.</p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;"> </p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Vous devez d''abord vous inscrire en tant que tutoré qui est mis par défaut sur la page inscription du site.</p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Ensuite, envoyer un mail au responsable de L1 avec une lettre de motivation ou allez directement le voir pour lui dire que vous êtes intéressés pour devenir tuteur.</p>\r\n<h2 style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;"> </h2>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Celui-ci regardera votre dossier et votre motivation, puis validera (ou non) votre demande en modifiant votre rôle de tutoré en tuteur.</p>', '', 1, 2, '2015-05-17 17:14:14', 803, '', '2015-05-20 18:09:53', 820, 0, '0000-00-00 00:00:00', '2015-05-17 17:14:14', '0000-00-00 00:00:00', '{}', '{}', '{}', 5, 2, '', '', 1, 20, '{}', 0, '*', ''),
+(6, 158, 'Comment devenir tuteur ?', 'devenir-tuteur', '<p>Le seul pré-requis est que vous devez être un étudiant en deuxième ou troisième année de licence Informatique.</p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;"> </p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Vous devez d''abord vous inscrire en tant que tutoré qui est mis par défaut sur la page inscription du site.</p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Ensuite, envoyer un mail au responsable de L1 avec une lettre de motivation ou allez directement le voir pour lui dire que vous êtes intéressés pour devenir tuteur.</p>\r\n<h2 style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;"> </h2>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Celui-ci regardera votre dossier et votre motivation, puis validera (ou non) votre demande en modifiant votre rôle de tutoré en tuteur.</p>', '', 1, 2, '2015-05-17 17:14:14', 803, '', '2015-05-20 18:09:53', 820, 0, '0000-00-00 00:00:00', '2015-05-17 17:14:14', '0000-00-00 00:00:00', '{}', '{}', '{}', 5, 1, '', '', 1, 20, '{}', 0, '*', ''),
 (11, 212, 'JOGUET', 'joguet', '::cck::17::/cck::', '', 1, 8, '2015-05-18 23:35:12', 814, '', '2015-05-18 23:35:12', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:35:12', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 7, '', '', 2, 1, '{}', 0, '*', ''),
 (12, 213, 'IGUE', 'igue', '::cck::18::/cck::', '', 1, 8, '2015-05-18 23:44:53', 815, '', '2015-05-18 23:44:53', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:44:53', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 6, '', '', 2, 0, '{}', 0, '*', ''),
 (13, 214, 'HUART', 'huart', '::cck::19::/cck::', '', 1, 8, '2015-05-18 23:57:38', 816, '', '2015-05-18 23:57:38', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:57:38', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 5, '', '', 2, 0, '{}', 0, '*', ''),
@@ -2402,9 +2507,7 @@ INSERT INTO `qfupd_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `f
 (15, 216, 'DUCHEMIN', 'duchemin', '::cck::21::/cck::', '', 1, 8, '2015-05-19 00:02:06', 818, '', '2015-05-19 00:02:06', 0, 0, '0000-00-00 00:00:00', '2015-05-19 00:02:06', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 3, '', '', 2, 5, '{}', 0, '*', ''),
 (16, 218, 'BRIZION', 'brizion', '::cck::22::/cck::', '', 1, 8, '2015-05-19 00:39:25', 819, '', '2015-05-19 00:42:42', 818, 0, '0000-00-00 00:00:00', '2015-05-19 00:39:25', '0000-00-00 00:00:00', '{}', '{}', '{}', 2, 2, '', '', 2, 0, '{}', 0, '*', ''),
 (17, 219, 'MARINIER', 'marinier', '::cck::23::/cck::', '', 1, 8, '2015-05-19 00:41:34', 820, '', '2015-05-19 00:42:12', 818, 0, '0000-00-00 00:00:00', '2015-05-19 00:41:34', '0000-00-00 00:00:00', '{}', '{}', '{}', 2, 1, '', '', 2, 16, '{}', 0, '*', ''),
-(39, 241, 'Présentation des tuteurs', 'presentation-des-tuteurs', '::cck::55::/cck::<br />::introtext::::/introtext::<br />::fulltext::::/fulltext::', '::cck::55::/cck::', 1, 2, '2015-05-22 16:17:19', 820, '', '2015-05-22 16:17:19', 0, 0, '0000-00-00 00:00:00', '2015-05-22 16:17:19', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":"","urlatext":"","targeta":"","urlb":"","urlbtext":"","targetb":"","urlc":"","urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_intro":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":""}', 1, 1, '', '', 1, 2, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(40, 245, 'Test', 'test', '::cck::56::/cck::', '', 1, 8, '2015-05-23 18:41:19', 821, '', '2015-05-23 18:41:19', 0, 0, '0000-00-00 00:00:00', '2015-05-23 18:41:19', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 0, '', '', 2, 0, '{}', 0, '*', ''),
-(41, 246, 'Ressources', 'ressources', '<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.</p>\r\n<p> </p>\r\n<h4>Analyse :</h4>\r\n<p> </p>\r\n<h5><strong>TD :</strong></h5>\r\n<p><a title="TD1 analyse" href="images/pdf/analyse/TD1.pdf" target="_blank">Télécharger TD1.pdf</a></p>\r\n<p><a title="TD1 corrigé" href="images/pdf/analyse/TD1-corrige.pdf" target="_blank">Télécharger TD1-corrige.pdf</a></p>\r\n<p><a title="TD2" href="images/pdf/analyse/TD2.pdf" target="_blank">Télécharger TD2.pdf</a></p>\r\n<p><a title="TD2 corrige" href="images/pdf/analyse/TD2-corrige.pdf" target="_blank">Télécharger TD2-corrige.pdf</a></p>\r\n<p><a title="TD3 et corrigé" href="images/pdf/analyse/TD3-et-corrige.pdf" target="_blank">Télécharger TD3-et-corrige.pdf</a></p>\r\n<p> </p>\r\n<h5><strong>Devoirs :</strong></h5>\r\n<p><a title="Examen Tutorat Analyse 2015" href="images/pdf/analyse/controle-tutorat-2015.pdf" target="_blank">Télécharger Examen Tutorat Analyse 2015</a></p>\r\n<p><a title="Correction Examen Tutorat Analyse 2015" href="images/pdf/analyse/correction-controle-2015.pdf" target="_blank">Télécharger Correction Examen Tutorat Analyse 2015</a></p>\r\n<p> </p>\r\n<h4>Informatique :</h4>\r\n<p> </p>\r\n<h5><strong>Fiches de révision :</strong></h5>\r\n<p><a title="Fiche JAVA" href="images/pdf/informatique/fiche-de-revision-java.pdf" target="_blank">Télécharger Fiche Révision Java</a></p>\r\n<p> </p>\r\n<h5><strong>Devoirs :</strong></h5>\r\n<p><a title="Test algo 2015 L1" href="images/pdf/informatique/controle-tutorat.pdf" target="_blank">Télécharger Test Tutorat L1 2015</a></p>', '', 1, 2, '2015-05-23 18:45:41', 818, '', '2015-05-23 19:07:14', 818, 0, '0000-00-00 00:00:00', '2015-05-23 18:45:41', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 13, 0, '', '', 1, 13, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', '');
+(39, 241, 'Présentation des tuteurs', 'presentation-des-tuteurs', '::cck::55::/cck::<br />::introtext::::/introtext::<br />::fulltext::::/fulltext::', '::cck::55::/cck::', 1, 2, '2015-05-22 16:17:19', 820, '', '2015-05-22 16:17:19', 0, 0, '0000-00-00 00:00:00', '2015-05-22 16:17:19', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":"","urlatext":"","targeta":"","urlb":"","urlbtext":"","targetb":"","urlc":"","urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_intro":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":""}', 1, 0, '', '', 1, 2, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', '');
 
 -- --------------------------------------------------------
 
@@ -2412,13 +2515,19 @@ INSERT INTO `qfupd_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `f
 -- Structure de la table `qfupd_contentitem_tag_map`
 --
 
-CREATE TABLE `qfupd_contentitem_tag_map` (
+CREATE TABLE IF NOT EXISTS `qfupd_contentitem_tag_map` (
   `type_alias` varchar(255) NOT NULL DEFAULT '',
   `core_content_id` int(10) unsigned NOT NULL COMMENT 'PK from the core content table',
   `content_item_id` int(11) NOT NULL COMMENT 'PK from the content type table',
   `tag_id` int(10) unsigned NOT NULL COMMENT 'PK from the tag table',
   `tag_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Date of most recent save for this tag-item',
-  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table'
+  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table',
+  UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`),
+  KEY `idx_tag_type` (`tag_id`,`type_id`),
+  KEY `idx_date_id` (`tag_date`,`tag_id`),
+  KEY `idx_tag` (`tag_id`),
+  KEY `idx_type` (`type_id`),
+  KEY `idx_core_content_id` (`core_content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Maps items from content tables to tags';
 
 --
@@ -2434,9 +2543,10 @@ INSERT INTO `qfupd_contentitem_tag_map` (`type_alias`, `core_content_id`, `conte
 -- Structure de la table `qfupd_content_frontpage`
 --
 
-CREATE TABLE `qfupd_content_frontpage` (
+CREATE TABLE IF NOT EXISTS `qfupd_content_frontpage` (
   `content_id` int(11) NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0'
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2445,11 +2555,12 @@ CREATE TABLE `qfupd_content_frontpage` (
 -- Structure de la table `qfupd_content_rating`
 --
 
-CREATE TABLE `qfupd_content_rating` (
+CREATE TABLE IF NOT EXISTS `qfupd_content_rating` (
   `content_id` int(11) NOT NULL DEFAULT '0',
   `rating_sum` int(10) unsigned NOT NULL DEFAULT '0',
   `rating_count` int(10) unsigned NOT NULL DEFAULT '0',
-  `lastip` varchar(50) NOT NULL DEFAULT ''
+  `lastip` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2458,16 +2569,18 @@ CREATE TABLE `qfupd_content_rating` (
 -- Structure de la table `qfupd_content_types`
 --
 
-CREATE TABLE `qfupd_content_types` (
-  `type_id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_content_types` (
+  `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type_title` varchar(255) NOT NULL DEFAULT '',
   `type_alias` varchar(255) NOT NULL DEFAULT '',
   `table` varchar(255) NOT NULL DEFAULT '',
   `rules` text NOT NULL,
   `field_mappings` text NOT NULL,
   `router` varchar(255) NOT NULL DEFAULT '',
-  `content_history_options` varchar(5120) DEFAULT NULL COMMENT 'JSON string for com_contenthistory options'
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+  `content_history_options` varchar(5120) DEFAULT NULL COMMENT 'JSON string for com_contenthistory options',
+  PRIMARY KEY (`type_id`),
+  KEY `idx_alias` (`type_alias`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Contenu de la table `qfupd_content_types`
@@ -2494,7 +2607,7 @@ INSERT INTO `qfupd_content_types` (`type_id`, `type_title`, `type_alias`, `table
 -- Structure de la table `qfupd_core_log_searches`
 --
 
-CREATE TABLE `qfupd_core_log_searches` (
+CREATE TABLE IF NOT EXISTS `qfupd_core_log_searches` (
   `search_term` varchar(128) NOT NULL DEFAULT '',
   `hits` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2505,8 +2618,8 @@ CREATE TABLE `qfupd_core_log_searches` (
 -- Structure de la table `qfupd_extensions`
 --
 
-CREATE TABLE `qfupd_extensions` (
-  `extension_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_extensions` (
+  `extension_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `type` varchar(20) NOT NULL,
   `element` varchar(100) NOT NULL,
@@ -2522,8 +2635,12 @@ CREATE TABLE `qfupd_extensions` (
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ordering` int(11) DEFAULT '0',
-  `state` int(11) DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=10273 DEFAULT CHARSET=utf8;
+  `state` int(11) DEFAULT '0',
+  PRIMARY KEY (`extension_id`),
+  KEY `element_clientid` (`element`,`client_id`),
+  KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
+  KEY `extension` (`type`,`element`,`folder`,`client_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10273 ;
 
 --
 -- Contenu de la table `qfupd_extensions`
@@ -2797,8 +2914,8 @@ INSERT INTO `qfupd_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 -- Structure de la table `qfupd_finder_filters`
 --
 
-CREATE TABLE `qfupd_finder_filters` (
-  `filter_id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_finder_filters` (
+  `filter_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
@@ -2811,8 +2928,9 @@ CREATE TABLE `qfupd_finder_filters` (
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `map_count` int(10) unsigned NOT NULL DEFAULT '0',
   `data` text NOT NULL,
-  `params` mediumtext
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `params` mediumtext,
+  PRIMARY KEY (`filter_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2820,8 +2938,8 @@ CREATE TABLE `qfupd_finder_filters` (
 -- Structure de la table `qfupd_finder_links`
 --
 
-CREATE TABLE `qfupd_finder_links` (
-  `link_id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links` (
+  `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
   `route` varchar(255) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -2839,8 +2957,15 @@ CREATE TABLE `qfupd_finder_links` (
   `list_price` double unsigned NOT NULL DEFAULT '0',
   `sale_price` double unsigned NOT NULL DEFAULT '0',
   `type_id` int(11) NOT NULL,
-  `object` mediumblob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `object` mediumblob NOT NULL,
+  PRIMARY KEY (`link_id`),
+  KEY `idx_type` (`type_id`),
+  KEY `idx_title` (`title`),
+  KEY `idx_md5` (`md5sum`),
+  KEY `idx_url` (`url`(75)),
+  KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`),
+  KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2848,10 +2973,13 @@ CREATE TABLE `qfupd_finder_links` (
 -- Structure de la table `qfupd_finder_links_terms0`
 --
 
-CREATE TABLE `qfupd_finder_links_terms0` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms0` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2860,10 +2988,13 @@ CREATE TABLE `qfupd_finder_links_terms0` (
 -- Structure de la table `qfupd_finder_links_terms1`
 --
 
-CREATE TABLE `qfupd_finder_links_terms1` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms1` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2872,10 +3003,13 @@ CREATE TABLE `qfupd_finder_links_terms1` (
 -- Structure de la table `qfupd_finder_links_terms2`
 --
 
-CREATE TABLE `qfupd_finder_links_terms2` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms2` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2884,10 +3018,13 @@ CREATE TABLE `qfupd_finder_links_terms2` (
 -- Structure de la table `qfupd_finder_links_terms3`
 --
 
-CREATE TABLE `qfupd_finder_links_terms3` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms3` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2896,10 +3033,13 @@ CREATE TABLE `qfupd_finder_links_terms3` (
 -- Structure de la table `qfupd_finder_links_terms4`
 --
 
-CREATE TABLE `qfupd_finder_links_terms4` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms4` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2908,10 +3048,13 @@ CREATE TABLE `qfupd_finder_links_terms4` (
 -- Structure de la table `qfupd_finder_links_terms5`
 --
 
-CREATE TABLE `qfupd_finder_links_terms5` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms5` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2920,10 +3063,13 @@ CREATE TABLE `qfupd_finder_links_terms5` (
 -- Structure de la table `qfupd_finder_links_terms6`
 --
 
-CREATE TABLE `qfupd_finder_links_terms6` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms6` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2932,10 +3078,13 @@ CREATE TABLE `qfupd_finder_links_terms6` (
 -- Structure de la table `qfupd_finder_links_terms7`
 --
 
-CREATE TABLE `qfupd_finder_links_terms7` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms7` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2944,10 +3093,13 @@ CREATE TABLE `qfupd_finder_links_terms7` (
 -- Structure de la table `qfupd_finder_links_terms8`
 --
 
-CREATE TABLE `qfupd_finder_links_terms8` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms8` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2956,10 +3108,13 @@ CREATE TABLE `qfupd_finder_links_terms8` (
 -- Structure de la table `qfupd_finder_links_terms9`
 --
 
-CREATE TABLE `qfupd_finder_links_terms9` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms9` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2968,10 +3123,13 @@ CREATE TABLE `qfupd_finder_links_terms9` (
 -- Structure de la table `qfupd_finder_links_termsa`
 --
 
-CREATE TABLE `qfupd_finder_links_termsa` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsa` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2980,10 +3138,13 @@ CREATE TABLE `qfupd_finder_links_termsa` (
 -- Structure de la table `qfupd_finder_links_termsb`
 --
 
-CREATE TABLE `qfupd_finder_links_termsb` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsb` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2992,10 +3153,13 @@ CREATE TABLE `qfupd_finder_links_termsb` (
 -- Structure de la table `qfupd_finder_links_termsc`
 --
 
-CREATE TABLE `qfupd_finder_links_termsc` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsc` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3004,10 +3168,13 @@ CREATE TABLE `qfupd_finder_links_termsc` (
 -- Structure de la table `qfupd_finder_links_termsd`
 --
 
-CREATE TABLE `qfupd_finder_links_termsd` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsd` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3016,10 +3183,13 @@ CREATE TABLE `qfupd_finder_links_termsd` (
 -- Structure de la table `qfupd_finder_links_termse`
 --
 
-CREATE TABLE `qfupd_finder_links_termse` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termse` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3028,10 +3198,13 @@ CREATE TABLE `qfupd_finder_links_termse` (
 -- Structure de la table `qfupd_finder_links_termsf`
 --
 
-CREATE TABLE `qfupd_finder_links_termsf` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsf` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL
+  `weight` float unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`term_id`),
+  KEY `idx_term_weight` (`term_id`,`weight`),
+  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3040,14 +3213,20 @@ CREATE TABLE `qfupd_finder_links_termsf` (
 -- Structure de la table `qfupd_finder_taxonomy`
 --
 
-CREATE TABLE `qfupd_finder_taxonomy` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_finder_taxonomy` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   `state` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `access` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ordering` tinyint(1) unsigned NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `ordering` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`),
+  KEY `state` (`state`),
+  KEY `ordering` (`ordering`),
+  KEY `access` (`access`),
+  KEY `idx_parent_published` (`parent_id`,`state`,`access`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `qfupd_finder_taxonomy`
@@ -3062,9 +3241,12 @@ INSERT INTO `qfupd_finder_taxonomy` (`id`, `parent_id`, `title`, `state`, `acces
 -- Structure de la table `qfupd_finder_taxonomy_map`
 --
 
-CREATE TABLE `qfupd_finder_taxonomy_map` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_taxonomy_map` (
   `link_id` int(10) unsigned NOT NULL,
-  `node_id` int(10) unsigned NOT NULL
+  `node_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`link_id`,`node_id`),
+  KEY `link_id` (`link_id`),
+  KEY `node_id` (`node_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3073,8 +3255,8 @@ CREATE TABLE `qfupd_finder_taxonomy_map` (
 -- Structure de la table `qfupd_finder_terms`
 --
 
-CREATE TABLE `qfupd_finder_terms` (
-  `term_id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_finder_terms` (
+  `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
   `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -3082,8 +3264,13 @@ CREATE TABLE `qfupd_finder_terms` (
   `weight` float unsigned NOT NULL DEFAULT '0',
   `soundex` varchar(75) NOT NULL,
   `links` int(10) NOT NULL DEFAULT '0',
-  `language` char(3) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `language` char(3) NOT NULL DEFAULT '',
+  PRIMARY KEY (`term_id`),
+  UNIQUE KEY `idx_term` (`term`),
+  KEY `idx_term_phrase` (`term`,`phrase`),
+  KEY `idx_stem_phrase` (`stem`,`phrase`),
+  KEY `idx_soundex_phrase` (`soundex`,`phrase`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3091,9 +3278,11 @@ CREATE TABLE `qfupd_finder_terms` (
 -- Structure de la table `qfupd_finder_terms_common`
 --
 
-CREATE TABLE `qfupd_finder_terms_common` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_terms_common` (
   `term` varchar(75) NOT NULL,
-  `language` varchar(3) NOT NULL
+  `language` varchar(3) NOT NULL,
+  KEY `idx_word_lang` (`term`,`language`),
+  KEY `idx_lang` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3323,14 +3512,16 @@ INSERT INTO `qfupd_finder_terms_common` (`term`, `language`) VALUES
 -- Structure de la table `qfupd_finder_tokens`
 --
 
-CREATE TABLE `qfupd_finder_tokens` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens` (
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
   `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `phrase` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `weight` float unsigned NOT NULL DEFAULT '1',
   `context` tinyint(1) unsigned NOT NULL DEFAULT '2',
-  `language` char(3) NOT NULL DEFAULT ''
+  `language` char(3) NOT NULL DEFAULT '',
+  KEY `idx_word` (`term`),
+  KEY `idx_context` (`context`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3339,7 +3530,7 @@ CREATE TABLE `qfupd_finder_tokens` (
 -- Structure de la table `qfupd_finder_tokens_aggregate`
 --
 
-CREATE TABLE `qfupd_finder_tokens_aggregate` (
+CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens_aggregate` (
   `term_id` int(10) unsigned NOT NULL,
   `map_suffix` char(1) NOT NULL,
   `term` varchar(75) NOT NULL,
@@ -3350,7 +3541,9 @@ CREATE TABLE `qfupd_finder_tokens_aggregate` (
   `context` tinyint(1) unsigned NOT NULL DEFAULT '2',
   `context_weight` float unsigned NOT NULL,
   `total_weight` float unsigned NOT NULL,
-  `language` char(3) NOT NULL DEFAULT ''
+  `language` char(3) NOT NULL DEFAULT '',
+  KEY `token` (`term`),
+  KEY `keyword_id` (`term_id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3359,11 +3552,13 @@ CREATE TABLE `qfupd_finder_tokens_aggregate` (
 -- Structure de la table `qfupd_finder_types`
 --
 
-CREATE TABLE `qfupd_finder_types` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_finder_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
-  `mime` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `mime` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `qfupd_finder_types`
@@ -3382,12 +3577,13 @@ INSERT INTO `qfupd_finder_types` (`id`, `title`, `mime`) VALUES
 -- Structure de la table `qfupd_icagenda`
 --
 
-CREATE TABLE `qfupd_icagenda` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_icagenda` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `version` varchar(255) DEFAULT NULL,
   `releasedate` varchar(255) DEFAULT NULL,
-  `params` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `params` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `qfupd_icagenda`
@@ -3402,8 +3598,8 @@ INSERT INTO `qfupd_icagenda` (`id`, `version`, `releasedate`, `params`) VALUES
 -- Structure de la table `qfupd_icagenda_category`
 --
 
-CREATE TABLE `qfupd_icagenda_category` (
-  `id` int(11) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_icagenda_category` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3411,8 +3607,9 @@ CREATE TABLE `qfupd_icagenda_category` (
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
-  `desc` mediumtext NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `desc` mediumtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `qfupd_icagenda_category`
@@ -3428,8 +3625,8 @@ INSERT INTO `qfupd_icagenda_category` (`id`, `ordering`, `state`, `checked_out`,
 -- Structure de la table `qfupd_icagenda_customfields`
 --
 
-CREATE TABLE `qfupd_icagenda_customfields` (
-  `id` int(11) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3449,8 +3646,9 @@ CREATE TABLE `qfupd_icagenda_customfields` (
   `created_by` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_alias` varchar(255) NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) unsigned NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3458,15 +3656,16 @@ CREATE TABLE `qfupd_icagenda_customfields` (
 -- Structure de la table `qfupd_icagenda_customfields_data`
 --
 
-CREATE TABLE `qfupd_icagenda_customfields_data` (
-  `id` int(11) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields_data` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `slug` varchar(255) NOT NULL,
   `parent_form` int(11) NOT NULL DEFAULT '0',
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `value` varchar(255) NOT NULL,
-  `language` varchar(10) NOT NULL DEFAULT '*'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `language` varchar(10) NOT NULL DEFAULT '*',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3474,8 +3673,8 @@ CREATE TABLE `qfupd_icagenda_customfields_data` (
 -- Structure de la table `qfupd_icagenda_events`
 --
 
-CREATE TABLE `qfupd_icagenda_events` (
-  `id` int(11) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_icagenda_events` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `asset_id` int(10) NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
@@ -3520,8 +3719,9 @@ CREATE TABLE `qfupd_icagenda_events` (
   `shortdesc` text NOT NULL,
   `desc` mediumtext NOT NULL,
   `metadesc` text NOT NULL,
-  `params` text NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+  `params` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Contenu de la table `qfupd_icagenda_events`
@@ -3550,8 +3750,8 @@ INSERT INTO `qfupd_icagenda_events` (`id`, `asset_id`, `ordering`, `state`, `app
 -- Structure de la table `qfupd_icagenda_feature`
 --
 
-CREATE TABLE `qfupd_icagenda_feature` (
-  `id` int(11) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3561,8 +3761,9 @@ CREATE TABLE `qfupd_icagenda_feature` (
   `desc` mediumtext NOT NULL,
   `icon` varchar(255) NOT NULL,
   `icon_alt` varchar(255) NOT NULL,
-  `show_filter` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `show_filter` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3570,11 +3771,12 @@ CREATE TABLE `qfupd_icagenda_feature` (
 -- Structure de la table `qfupd_icagenda_feature_xref`
 --
 
-CREATE TABLE `qfupd_icagenda_feature_xref` (
-  `id` int(11) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature_xref` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `event_id` int(11) NOT NULL,
-  `feature_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `feature_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3582,8 +3784,8 @@ CREATE TABLE `qfupd_icagenda_feature_xref` (
 -- Structure de la table `qfupd_icagenda_registration`
 --
 
-CREATE TABLE `qfupd_icagenda_registration` (
-  `id` int(11) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_icagenda_registration` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3598,8 +3800,9 @@ CREATE TABLE `qfupd_icagenda_registration` (
   `period` tinyint(1) NOT NULL DEFAULT '0',
   `people` int(2) NOT NULL,
   `notes` mediumtext NOT NULL,
-  `custom_fields` text NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `custom_fields` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `qfupd_icagenda_registration`
@@ -3619,11 +3822,15 @@ INSERT INTO `qfupd_icagenda_registration` (`id`, `ordering`, `state`, `checked_o
 -- Structure de la table `qfupd_kunena_aliases`
 --
 
-CREATE TABLE `qfupd_kunena_aliases` (
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_aliases` (
   `alias` varchar(255) NOT NULL,
   `type` varchar(10) NOT NULL,
   `item` varchar(32) NOT NULL,
-  `state` tinyint(4) NOT NULL DEFAULT '0'
+  `state` tinyint(4) NOT NULL DEFAULT '0',
+  UNIQUE KEY `alias` (`alias`),
+  KEY `state` (`state`),
+  KEY `item` (`item`),
+  KEY `type` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3663,8 +3870,8 @@ INSERT INTO `qfupd_kunena_aliases` (`alias`, `type`, `item`, `state`) VALUES
 -- Structure de la table `qfupd_kunena_announcement`
 --
 
-CREATE TABLE `qfupd_kunena_announcement` (
-  `id` int(3) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_announcement` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
   `title` tinytext NOT NULL,
   `created_by` int(11) NOT NULL DEFAULT '0',
   `sdescription` text NOT NULL,
@@ -3672,8 +3879,9 @@ CREATE TABLE `qfupd_kunena_announcement` (
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `published` tinyint(1) NOT NULL DEFAULT '0',
   `ordering` tinyint(4) NOT NULL DEFAULT '0',
-  `showdate` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `showdate` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3681,16 +3889,21 @@ CREATE TABLE `qfupd_kunena_announcement` (
 -- Structure de la table `qfupd_kunena_attachments`
 --
 
-CREATE TABLE `qfupd_kunena_attachments` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_attachments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
   `hash` char(32) DEFAULT NULL,
   `size` int(11) DEFAULT NULL,
   `folder` varchar(255) NOT NULL,
   `filetype` varchar(20) NOT NULL,
-  `filename` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `filename` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `mesid` (`mesid`),
+  KEY `userid` (`userid`),
+  KEY `hash` (`hash`),
+  KEY `filename` (`filename`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3698,8 +3911,8 @@ CREATE TABLE `qfupd_kunena_attachments` (
 -- Structure de la table `qfupd_kunena_categories`
 --
 
-CREATE TABLE `qfupd_kunena_categories` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT '0',
   `name` tinytext,
   `alias` varchar(255) NOT NULL,
@@ -3730,8 +3943,12 @@ CREATE TABLE `qfupd_kunena_categories` (
   `last_topic_id` int(11) NOT NULL DEFAULT '0',
   `last_post_id` int(11) NOT NULL DEFAULT '0',
   `last_post_time` int(11) NOT NULL DEFAULT '0',
-  `params` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `params` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`),
+  KEY `category_access` (`accesstype`,`access`),
+  KEY `published_pubaccess_id` (`published`,`pub_access`,`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `qfupd_kunena_categories`
@@ -3748,9 +3965,10 @@ INSERT INTO `qfupd_kunena_categories` (`id`, `parent_id`, `name`, `alias`, `icon
 -- Structure de la table `qfupd_kunena_configuration`
 --
 
-CREATE TABLE `qfupd_kunena_configuration` (
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_configuration` (
   `id` int(11) NOT NULL DEFAULT '0',
-  `params` text
+  `params` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3766,12 +3984,16 @@ INSERT INTO `qfupd_kunena_configuration` (`id`, `params`) VALUES
 -- Structure de la table `qfupd_kunena_keywords`
 --
 
-CREATE TABLE `qfupd_kunena_keywords` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_keywords` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
   `public_count` int(11) NOT NULL,
-  `total_count` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `total_count` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `public_count` (`public_count`),
+  KEY `total_count` (`total_count`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3779,10 +4001,13 @@ CREATE TABLE `qfupd_kunena_keywords` (
 -- Structure de la table `qfupd_kunena_keywords_map`
 --
 
-CREATE TABLE `qfupd_kunena_keywords_map` (
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_keywords_map` (
   `keyword_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `topic_id` int(11) NOT NULL
+  `topic_id` int(11) NOT NULL,
+  UNIQUE KEY `keyword_user_topic` (`keyword_id`,`user_id`,`topic_id`),
+  KEY `user_id` (`user_id`),
+  KEY `topic_user` (`topic_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3791,8 +4016,8 @@ CREATE TABLE `qfupd_kunena_keywords_map` (
 -- Structure de la table `qfupd_kunena_messages`
 --
 
-CREATE TABLE `qfupd_kunena_messages` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent` int(11) DEFAULT '0',
   `thread` int(11) DEFAULT '0',
   `catid` int(11) NOT NULL DEFAULT '0',
@@ -3810,8 +4035,17 @@ CREATE TABLE `qfupd_kunena_messages` (
   `moved` tinyint(4) DEFAULT '0',
   `modified_by` int(7) DEFAULT NULL,
   `modified_time` int(11) DEFAULT NULL,
-  `modified_reason` tinytext
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `modified_reason` tinytext,
+  PRIMARY KEY (`id`),
+  KEY `thread` (`thread`),
+  KEY `ip` (`ip`),
+  KEY `userid` (`userid`),
+  KEY `time` (`time`),
+  KEY `locked` (`locked`),
+  KEY `hold_time` (`hold`,`time`),
+  KEY `parent_hits` (`parent`,`hits`),
+  KEY `catid_parent` (`catid`,`parent`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `qfupd_kunena_messages`
@@ -3827,9 +4061,10 @@ INSERT INTO `qfupd_kunena_messages` (`id`, `parent`, `thread`, `catid`, `name`, 
 -- Structure de la table `qfupd_kunena_messages_text`
 --
 
-CREATE TABLE `qfupd_kunena_messages_text` (
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_messages_text` (
   `mesid` int(11) NOT NULL DEFAULT '0',
-  `message` text NOT NULL
+  `message` text NOT NULL,
+  PRIMARY KEY (`mesid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3846,12 +4081,14 @@ INSERT INTO `qfupd_kunena_messages_text` (`mesid`, `message`) VALUES
 -- Structure de la table `qfupd_kunena_polls`
 --
 
-CREATE TABLE `qfupd_kunena_polls` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `threadid` int(11) NOT NULL,
-  `polltimetolive` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `polltimetolive` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `threadid` (`threadid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3859,12 +4096,14 @@ CREATE TABLE `qfupd_kunena_polls` (
 -- Structure de la table `qfupd_kunena_polls_options`
 --
 
-CREATE TABLE `qfupd_kunena_polls_options` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls_options` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `pollid` int(11) DEFAULT NULL,
   `text` varchar(100) DEFAULT NULL,
-  `votes` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `votes` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pollid` (`pollid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3872,12 +4111,13 @@ CREATE TABLE `qfupd_kunena_polls_options` (
 -- Structure de la table `qfupd_kunena_polls_users`
 --
 
-CREATE TABLE `qfupd_kunena_polls_users` (
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls_users` (
   `pollid` int(11) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
   `votes` int(11) DEFAULT NULL,
   `lasttime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `lastvote` int(11) DEFAULT NULL
+  `lastvote` int(11) DEFAULT NULL,
+  UNIQUE KEY `pollid` (`pollid`,`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3886,13 +4126,14 @@ CREATE TABLE `qfupd_kunena_polls_users` (
 -- Structure de la table `qfupd_kunena_ranks`
 --
 
-CREATE TABLE `qfupd_kunena_ranks` (
-  `rank_id` mediumint(8) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_ranks` (
+  `rank_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `rank_title` varchar(255) NOT NULL DEFAULT '',
   `rank_min` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `rank_special` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `rank_image` varchar(255) NOT NULL DEFAULT ''
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `rank_image` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Contenu de la table `qfupd_kunena_ranks`
@@ -3916,12 +4157,14 @@ INSERT INTO `qfupd_kunena_ranks` (`rank_id`, `rank_title`, `rank_min`, `rank_spe
 -- Structure de la table `qfupd_kunena_sessions`
 --
 
-CREATE TABLE `qfupd_kunena_sessions` (
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_sessions` (
   `userid` int(11) NOT NULL DEFAULT '0',
   `allowed` text,
   `lasttime` int(11) NOT NULL DEFAULT '0',
   `readtopics` text,
-  `currvisit` int(11) NOT NULL DEFAULT '0'
+  `currvisit` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`userid`),
+  KEY `currvisit` (`currvisit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3939,13 +4182,14 @@ INSERT INTO `qfupd_kunena_sessions` (`userid`, `allowed`, `lasttime`, `readtopic
 -- Structure de la table `qfupd_kunena_smileys`
 --
 
-CREATE TABLE `qfupd_kunena_smileys` (
-  `id` int(4) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_smileys` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
   `code` varchar(12) NOT NULL DEFAULT '',
   `location` varchar(50) NOT NULL DEFAULT '',
   `greylocation` varchar(60) NOT NULL DEFAULT '',
-  `emoticonbar` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+  `emoticonbar` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
 
 --
 -- Contenu de la table `qfupd_kunena_smileys`
@@ -4025,11 +4269,14 @@ INSERT INTO `qfupd_kunena_smileys` (`id`, `code`, `location`, `greylocation`, `e
 -- Structure de la table `qfupd_kunena_thankyou`
 --
 
-CREATE TABLE `qfupd_kunena_thankyou` (
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_thankyou` (
   `postid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `targetuserid` int(11) NOT NULL,
-  `time` datetime NOT NULL
+  `time` datetime NOT NULL,
+  UNIQUE KEY `postid` (`postid`,`userid`),
+  KEY `userid` (`userid`),
+  KEY `targetuserid` (`targetuserid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4038,8 +4285,8 @@ CREATE TABLE `qfupd_kunena_thankyou` (
 -- Structure de la table `qfupd_kunena_topics`
 --
 
-CREATE TABLE `qfupd_kunena_topics` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_topics` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_id` int(11) NOT NULL DEFAULT '0',
   `subject` tinytext,
   `icon_id` int(11) NOT NULL DEFAULT '0',
@@ -4061,8 +4308,18 @@ CREATE TABLE `qfupd_kunena_topics` (
   `last_post_userid` int(11) NOT NULL DEFAULT '0',
   `last_post_message` text,
   `last_post_guest_name` tinytext,
-  `params` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `params` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`),
+  KEY `locked` (`locked`),
+  KEY `hold` (`hold`),
+  KEY `posts` (`posts`),
+  KEY `hits` (`hits`),
+  KEY `first_post_userid` (`first_post_userid`),
+  KEY `last_post_userid` (`last_post_userid`),
+  KEY `first_post_time` (`first_post_time`),
+  KEY `last_post_time` (`last_post_time`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `qfupd_kunena_topics`
@@ -4078,7 +4335,7 @@ INSERT INTO `qfupd_kunena_topics` (`id`, `category_id`, `subject`, `icon_id`, `l
 -- Structure de la table `qfupd_kunena_users`
 --
 
-CREATE TABLE `qfupd_kunena_users` (
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_users` (
   `userid` int(11) NOT NULL DEFAULT '0',
   `view` varchar(8) NOT NULL DEFAULT '',
   `signature` text,
@@ -4116,7 +4373,13 @@ CREATE TABLE `qfupd_kunena_users` (
   `rank` tinyint(4) NOT NULL DEFAULT '0',
   `hideEmail` tinyint(1) NOT NULL DEFAULT '1',
   `showOnline` tinyint(1) NOT NULL DEFAULT '1',
-  `thankyou` int(11) DEFAULT '0'
+  `thankyou` int(11) DEFAULT '0',
+  PRIMARY KEY (`userid`),
+  KEY `group_id` (`group_id`),
+  KEY `posts` (`posts`),
+  KEY `uhits` (`uhits`),
+  KEY `banned` (`banned`),
+  KEY `moderator` (`moderator`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4173,8 +4436,8 @@ INSERT INTO `qfupd_kunena_users` (`userid`, `view`, `signature`, `moderator`, `b
 -- Structure de la table `qfupd_kunena_users_banned`
 --
 
-CREATE TABLE `qfupd_kunena_users_banned` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_users_banned` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) DEFAULT NULL,
   `ip` varchar(128) DEFAULT NULL,
   `blocked` tinyint(4) NOT NULL DEFAULT '0',
@@ -4186,8 +4449,13 @@ CREATE TABLE `qfupd_kunena_users_banned` (
   `modified_by` int(11) DEFAULT NULL,
   `modified_time` datetime DEFAULT NULL,
   `comments` text,
-  `params` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `params` text,
+  PRIMARY KEY (`id`),
+  KEY `userid` (`userid`),
+  KEY `ip` (`ip`),
+  KEY `expiration` (`expiration`),
+  KEY `created_time` (`created_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4195,13 +4463,16 @@ CREATE TABLE `qfupd_kunena_users_banned` (
 -- Structure de la table `qfupd_kunena_user_categories`
 --
 
-CREATE TABLE `qfupd_kunena_user_categories` (
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_categories` (
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `role` tinyint(4) NOT NULL DEFAULT '0',
   `allreadtime` datetime DEFAULT NULL,
   `subscribed` tinyint(4) NOT NULL DEFAULT '0',
-  `params` text NOT NULL
+  `params` text NOT NULL,
+  PRIMARY KEY (`user_id`,`category_id`),
+  KEY `category_subscribed` (`category_id`,`subscribed`),
+  KEY `role` (`role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4210,12 +4481,15 @@ CREATE TABLE `qfupd_kunena_user_categories` (
 -- Structure de la table `qfupd_kunena_user_read`
 --
 
-CREATE TABLE `qfupd_kunena_user_read` (
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_read` (
   `user_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `message_id` int(11) NOT NULL,
-  `time` int(11) NOT NULL
+  `time` int(11) NOT NULL,
+  UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`),
+  KEY `category_user_id` (`category_id`,`user_id`),
+  KEY `time` (`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4232,7 +4506,7 @@ INSERT INTO `qfupd_kunena_user_read` (`user_id`, `topic_id`, `category_id`, `mes
 -- Structure de la table `qfupd_kunena_user_topics`
 --
 
-CREATE TABLE `qfupd_kunena_user_topics` (
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_topics` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `topic_id` int(11) NOT NULL DEFAULT '0',
   `category_id` int(11) NOT NULL,
@@ -4241,7 +4515,13 @@ CREATE TABLE `qfupd_kunena_user_topics` (
   `owner` tinyint(4) NOT NULL DEFAULT '0',
   `favorite` tinyint(4) NOT NULL DEFAULT '0',
   `subscribed` tinyint(4) NOT NULL DEFAULT '0',
-  `params` text NOT NULL
+  `params` text NOT NULL,
+  UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`),
+  KEY `topic_id` (`topic_id`),
+  KEY `posts` (`posts`),
+  KEY `owner` (`owner`),
+  KEY `favorite` (`favorite`),
+  KEY `subscribed` (`subscribed`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4258,15 +4538,16 @@ INSERT INTO `qfupd_kunena_user_topics` (`user_id`, `topic_id`, `category_id`, `p
 -- Structure de la table `qfupd_kunena_version`
 --
 
-CREATE TABLE `qfupd_kunena_version` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_kunena_version` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `version` varchar(20) NOT NULL,
   `versiondate` date NOT NULL,
   `installdate` date NOT NULL,
   `build` varchar(20) NOT NULL,
   `versionname` varchar(40) DEFAULT NULL,
-  `state` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `state` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `qfupd_kunena_version`
@@ -4282,8 +4563,8 @@ INSERT INTO `qfupd_kunena_version` (`id`, `version`, `versiondate`, `installdate
 -- Structure de la table `qfupd_languages`
 --
 
-CREATE TABLE `qfupd_languages` (
-  `lang_id` int(11) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_languages` (
+  `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `lang_code` char(7) NOT NULL,
   `title` varchar(50) NOT NULL,
   `title_native` varchar(50) NOT NULL,
@@ -4295,8 +4576,14 @@ CREATE TABLE `qfupd_languages` (
   `sitename` varchar(1024) NOT NULL DEFAULT '',
   `published` int(11) NOT NULL DEFAULT '0',
   `access` int(10) unsigned NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`lang_id`),
+  UNIQUE KEY `idx_sef` (`sef`),
+  UNIQUE KEY `idx_image` (`image`),
+  UNIQUE KEY `idx_langcode` (`lang_code`),
+  KEY `idx_access` (`access`),
+  KEY `idx_ordering` (`ordering`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `qfupd_languages`
@@ -4312,8 +4599,8 @@ INSERT INTO `qfupd_languages` (`lang_id`, `lang_code`, `title`, `title_native`, 
 -- Structure de la table `qfupd_menu`
 --
 
-CREATE TABLE `qfupd_menu` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `menutype` varchar(24) NOT NULL COMMENT 'The type of menu this item belongs to. FK to #__menu_types.menutype',
   `title` varchar(255) NOT NULL COMMENT 'The display title of the menu item.',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'The SEF alias of the menu item.',
@@ -4336,8 +4623,16 @@ CREATE TABLE `qfupd_menu` (
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
   `home` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Indicates if this menu item is the home or default page.',
   `language` char(7) NOT NULL DEFAULT '',
-  `client_id` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=235 DEFAULT CHARSET=utf8;
+  `client_id` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`,`language`),
+  KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
+  KEY `idx_menutype` (`menutype`),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`),
+  KEY `idx_path` (`path`(255)),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=235 ;
 
 --
 -- Contenu de la table `qfupd_menu`
@@ -4384,7 +4679,7 @@ INSERT INTO `qfupd_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 (150, 'mainmenu', 'Agenda', 'agenda', '', 'agenda', 'index.php?option=com_icagenda&view=list', 'component', 1, 1, 1, 10001, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"template":"ic_rounded","time":"","orderby":"","datesDisplay":"","features_incl_excl":"1","features_any_all":"1","displayCatDesc_menu":"global","number":"5","format":"0","date_separator":"","limitGlobal":"1","limit":"","m_width":"100%","m_height":"300px","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 25, 30, 0, '*', 0),
 (151, 'mainmenu', 'Ajouter un cours', 'ajouter-un-cours', '', 'agenda/ajouter-un-cours', 'index.php?option=com_icagenda&view=submit', 'component', -2, 150, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"template":"default","orderby_catlist":"alpha","default_catlist":"","submit_imageDisplay":"","submit_imageMaxSize":"","submit_periodDisplay":"","submit_weekdaysDisplay":"","submit_datesDisplay":"","submit_shortdescDisplay":"","submit_descDisplay":"","submit_metadescDisplay":"","submit_venueDisplay":"","submit_emailDisplay":"","submit_phoneDisplay":"","submit_websiteDisplay":"","submit_customfieldsDisplay":"","submit_fileDisplay":"","submit_gmapDisplay":"","submit_regoptionsDisplay":"","submit_captcha":"","submitReturn":"","submitReturn_Article":"","submitReturn_Url":"","char_limit_short_description":"","char_limit_meta_description":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 26, 27, 0, '*', 0),
 (152, 'mainmenu', 'Ajouter un cours', 'ajouter-cours', '', 'agenda/ajouter-cours', 'index.php?option=com_icagenda&view=submit', 'component', 1, 150, 2, 10001, 0, '0000-00-00 00:00:00', 0, 8, '', 0, '{"template":"ic_rounded","orderby_catlist":"alpha","default_catlist":"","submit_imageDisplay":"","submit_imageMaxSize":"","submit_periodDisplay":"","submit_weekdaysDisplay":"","submit_datesDisplay":"","submit_shortdescDisplay":"","submit_descDisplay":"","submit_metadescDisplay":"","submit_venueDisplay":"","submit_emailDisplay":"","submit_phoneDisplay":"","submit_websiteDisplay":"","submit_customfieldsDisplay":"","submit_fileDisplay":"","submit_gmapDisplay":"","submit_regoptionsDisplay":"","submit_captcha":"","submitReturn":"","submitReturn_Article":"","submitReturn_Url":"","char_limit_short_description":"","char_limit_meta_description":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 28, 29, 0, '*', 0),
-(153, 'mainmenu', 'Ressources', 's-entraider', '', 's-entraider', 'index.php?option=com_content&view=article&id=41', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 9, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 39, 40, 0, '*', 0),
+(153, 'mainmenu', 'Ressources', 's-entraider', '', 's-entraider', 'index.php?option=com_content&view=article&id=1', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 9, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 39, 40, 0, '*', 0),
 (154, 'mainmenu', 'Inscription', 'inscription', '', 'inscription', 'index.php?option=com_users&view=registration', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 5, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 41, 42, 0, '*', 0),
 (155, 'usermenu', 'Contact', 'contact', '', 'contact', 'index.php?option=com_content&view=article&id=1', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 139, 140, 0, '*', 0),
 (156, 'liens', 'ENT', '2015-03-28-16-37-04', '', '2015-03-28-16-37-04', 'http://ent.univ-tours.fr/uPortal/render.userLayoutRootNode.uP;jsessionid=0497A75FCE4BD84A56526F7F8CDBC974', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 1, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 93, 94, 0, '*', 0),
@@ -4434,12 +4729,14 @@ INSERT INTO `qfupd_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 -- Structure de la table `qfupd_menu_types`
 --
 
-CREATE TABLE `qfupd_menu_types` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_menu_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `menutype` varchar(24) NOT NULL,
   `title` varchar(48) NOT NULL,
-  `description` varchar(255) NOT NULL DEFAULT ''
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `description` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_menutype` (`menutype`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `qfupd_menu_types`
@@ -4457,8 +4754,8 @@ INSERT INTO `qfupd_menu_types` (`id`, `menutype`, `title`, `description`) VALUES
 -- Structure de la table `qfupd_messages`
 --
 
-CREATE TABLE `qfupd_messages` (
-  `message_id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_messages` (
+  `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id_from` int(10) unsigned NOT NULL DEFAULT '0',
   `user_id_to` int(10) unsigned NOT NULL DEFAULT '0',
   `folder_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -4466,8 +4763,10 @@ CREATE TABLE `qfupd_messages` (
   `state` tinyint(1) NOT NULL DEFAULT '0',
   `priority` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `subject` varchar(255) NOT NULL DEFAULT '',
-  `message` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `message` text NOT NULL,
+  PRIMARY KEY (`message_id`),
+  KEY `useridto_state` (`user_id_to`,`state`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4475,10 +4774,11 @@ CREATE TABLE `qfupd_messages` (
 -- Structure de la table `qfupd_messages_cfg`
 --
 
-CREATE TABLE `qfupd_messages_cfg` (
+CREATE TABLE IF NOT EXISTS `qfupd_messages_cfg` (
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `cfg_name` varchar(100) NOT NULL DEFAULT '',
-  `cfg_value` varchar(255) NOT NULL DEFAULT ''
+  `cfg_value` varchar(255) NOT NULL DEFAULT '',
+  UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4487,8 +4787,8 @@ CREATE TABLE `qfupd_messages_cfg` (
 -- Structure de la table `qfupd_modules`
 --
 
-CREATE TABLE `qfupd_modules` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_modules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(100) NOT NULL DEFAULT '',
   `note` varchar(255) NOT NULL DEFAULT '',
@@ -4505,8 +4805,12 @@ CREATE TABLE `qfupd_modules` (
   `showtitle` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `params` text NOT NULL,
   `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  `language` char(7) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+  `language` char(7) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `published` (`published`,`access`),
+  KEY `newsfeeds` (`module`,`published`),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=106 ;
 
 --
 -- Contenu de la table `qfupd_modules`
@@ -4552,9 +4856,10 @@ INSERT INTO `qfupd_modules` (`id`, `asset_id`, `title`, `note`, `content`, `orde
 -- Structure de la table `qfupd_modules_menu`
 --
 
-CREATE TABLE `qfupd_modules_menu` (
+CREATE TABLE IF NOT EXISTS `qfupd_modules_menu` (
   `moduleid` int(11) NOT NULL DEFAULT '0',
-  `menuid` int(11) NOT NULL DEFAULT '0'
+  `menuid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`moduleid`,`menuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4603,9 +4908,9 @@ INSERT INTO `qfupd_modules_menu` (`moduleid`, `menuid`) VALUES
 -- Structure de la table `qfupd_newsfeeds`
 --
 
-CREATE TABLE `qfupd_newsfeeds` (
+CREATE TABLE IF NOT EXISTS `qfupd_newsfeeds` (
   `catid` int(11) NOT NULL DEFAULT '0',
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `link` varchar(200) NOT NULL DEFAULT '',
@@ -4633,8 +4938,16 @@ CREATE TABLE `qfupd_newsfeeds` (
   `description` text NOT NULL,
   `version` int(10) unsigned NOT NULL DEFAULT '1',
   `hits` int(10) unsigned NOT NULL DEFAULT '0',
-  `images` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `images` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`published`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_language` (`language`),
+  KEY `idx_xreference` (`xreference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4642,12 +4955,13 @@ CREATE TABLE `qfupd_newsfeeds` (
 -- Structure de la table `qfupd_overrider`
 --
 
-CREATE TABLE `qfupd_overrider` (
-  `id` int(10) NOT NULL COMMENT 'Primary Key',
+CREATE TABLE IF NOT EXISTS `qfupd_overrider` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `constant` varchar(255) NOT NULL,
   `string` text NOT NULL,
-  `file` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `file` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4655,8 +4969,8 @@ CREATE TABLE `qfupd_overrider` (
 -- Structure de la table `qfupd_postinstall_messages`
 --
 
-CREATE TABLE `qfupd_postinstall_messages` (
-  `postinstall_message_id` bigint(20) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_postinstall_messages` (
+  `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `extension_id` bigint(20) NOT NULL DEFAULT '700' COMMENT 'FK to #__extensions',
   `title_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for the title',
   `description_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for description',
@@ -4669,8 +4983,9 @@ CREATE TABLE `qfupd_postinstall_messages` (
   `condition_file` varchar(255) DEFAULT NULL COMMENT 'RAD URI to file holding display condition method',
   `condition_method` varchar(255) DEFAULT NULL COMMENT 'Display condition method, must return boolean',
   `version_introduced` varchar(50) NOT NULL DEFAULT '3.2.0' COMMENT 'Version when this message was introduced',
-  `enabled` tinyint(3) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+  `enabled` tinyint(3) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`postinstall_message_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Contenu de la table `qfupd_postinstall_messages`
@@ -4693,8 +5008,8 @@ INSERT INTO `qfupd_postinstall_messages` (`postinstall_message_id`, `extension_i
 -- Structure de la table `qfupd_redirect_links`
 --
 
-CREATE TABLE `qfupd_redirect_links` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_redirect_links` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `old_url` varchar(255) NOT NULL,
   `new_url` varchar(255) DEFAULT NULL,
   `referer` varchar(150) NOT NULL,
@@ -4703,8 +5018,11 @@ CREATE TABLE `qfupd_redirect_links` (
   `published` tinyint(4) NOT NULL,
   `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `header` smallint(3) NOT NULL DEFAULT '301'
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+  `header` smallint(3) NOT NULL DEFAULT '301',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_link_old` (`old_url`),
+  KEY `idx_link_modifed` (`modified_date`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Contenu de la table `qfupd_redirect_links`
@@ -4722,8 +5040,7 @@ INSERT INTO `qfupd_redirect_links` (`id`, `old_url`, `new_url`, `referer`, `comm
 (9, 'http://localhost:8888/Site-Tutorat-Informatique2-master-2/index.php', '', 'http://localhost:8888/Site-Tutorat-Informatique2-master-2/index.php', '', 1, 0, '2015-05-19 13:23:56', '0000-00-00 00:00:00', 301),
 (10, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/component/cck/', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php?option=com_cck&view=form&layout=edit&type=user&Itemid=154', '', 2, 0, '2015-05-21 23:29:48', '0000-00-00 00:00:00', 301),
 (11, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/component/content/article?id=article&thanks=user', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/component/content/article?id=2&thanks=user', '', 1, 0, '2015-05-22 14:32:34', '0000-00-00 00:00:00', 301),
-(12, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/tuteurs/presentation-des-tuteurs', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/validation-tuteur', '', 1, 0, '2015-05-22 16:04:46', '0000-00-00 00:00:00', 301),
-(13, 'http://localhost:8888/Site-Tutorat-Informatique2/index.php/component/content/article?id=article&thanks=user', '', 'http://localhost:8888/Site-Tutorat-Informatique2/index.php/component/content/article?id=2&thanks=user', '', 1, 0, '2015-05-23 18:41:38', '0000-00-00 00:00:00', 301);
+(12, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/tuteurs/presentation-des-tuteurs', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/validation-tuteur', '', 1, 0, '2015-05-22 16:04:46', '0000-00-00 00:00:00', 301);
 
 -- --------------------------------------------------------
 
@@ -4731,9 +5048,10 @@ INSERT INTO `qfupd_redirect_links` (`id`, `old_url`, `new_url`, `referer`, `comm
 -- Structure de la table `qfupd_schemas`
 --
 
-CREATE TABLE `qfupd_schemas` (
+CREATE TABLE IF NOT EXISTS `qfupd_schemas` (
   `extension_id` int(11) NOT NULL,
-  `version_id` varchar(20) NOT NULL
+  `version_id` varchar(20) NOT NULL,
+  PRIMARY KEY (`extension_id`,`version_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4751,14 +5069,17 @@ INSERT INTO `qfupd_schemas` (`extension_id`, `version_id`) VALUES
 -- Structure de la table `qfupd_session`
 --
 
-CREATE TABLE `qfupd_session` (
+CREATE TABLE IF NOT EXISTS `qfupd_session` (
   `session_id` varchar(200) NOT NULL DEFAULT '',
   `client_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `guest` tinyint(4) unsigned DEFAULT '1',
   `time` varchar(14) DEFAULT '',
   `data` mediumtext,
   `userid` int(11) DEFAULT '0',
-  `username` varchar(150) DEFAULT ''
+  `username` varchar(150) DEFAULT '',
+  PRIMARY KEY (`session_id`),
+  KEY `userid` (`userid`),
+  KEY `time` (`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4766,8 +5087,8 @@ CREATE TABLE `qfupd_session` (
 --
 
 INSERT INTO `qfupd_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('239a195a8072d689c0e3a57e07115b77', 1, 0, '1432408121', '__default|a:9:{s:15:"session.counter";i:81;s:19:"session.timer.start";i:1432406005;s:18:"session.timer.last";i:1432408120;s:17:"session.timer.now";i:1432408120;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":4:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:0:"";}s:13:"com_installer";O:8:"stdClass":2:{s:7:"message";s:0:"";s:17:"extension_message";s:0:"";}s:11:"com_content";O:8:"stdClass":1:{s:4:"edit";O:8:"stdClass":1:{s:7:"article";O:8:"stdClass":2:{s:2:"id";a:0:{}s:4:"data";N;}}}s:9:"com_menus";O:8:"stdClass":2:{s:5:"items";O:8:"stdClass":3:{s:8:"menutype";s:8:"mainmenu";s:10:"limitstart";i:0;s:4:"list";a:4:{s:9:"direction";s:3:"asc";s:5:"limit";s:2:"20";s:8:"ordering";s:5:"a.lft";s:5:"start";d:0;}}s:4:"edit";O:8:"stdClass":1:{s:4:"item";O:8:"stdClass":4:{s:2:"id";a:0:{}s:4:"data";N;s:4:"type";N;s:4:"link";N;}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":33:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"818";s:4:"name";s:8:"DUCHEMIN";s:8:"username";s:13:"laureduchemin";s:5:"email";s:24:"duchemin_laure@gmail.com";s:8:"password";s:60:"$2y$10$fEtZDBctT8s7dZTSm.lr2.nXDqL3MDdN9EeygQhOp/dRAhY8J/zGC";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:02:06";s:13:"lastvisitDate";s:19:"2015-05-23 18:32:44";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:0:"";s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";}s:13:"session.token";s:32:"99e63654ba77081ef5f17277680ee5c1";s:20:"com_media.return_url";s:26:"index.php?option=com_media";}', 818, 'laureduchemin'),
-('ab1d81a8ed8c0c654e463a28ad07df0c', 0, 0, '1432408038', '__default|a:9:{s:15:"session.counter";i:24;s:19:"session.timer.start";i:1432406420;s:18:"session.timer.last";i:1432407901;s:17:"session.timer.now";i:1432408038;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":2:{s:10:"com_kunena";O:8:"stdClass":1:{s:10:"user0_read";N;}s:5:"users";O:8:"stdClass":1:{s:5:"login";O:8:"stdClass":1:{s:4:"form";O:8:"stdClass":2:{s:6:"return";s:64:"index.php?id=article&thanks=user&option=com_content&view=article";s:4:"data";a:0:{}}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":33:{s:9:"\\0\\0\\0isRoot";b:0;s:2:"id";s:3:"821";s:4:"name";s:4:"Test";s:8:"username";s:4:"Test";s:5:"email";s:23:"duchemin_laure@yahoo.fr";s:8:"password";s:60:"$2y$10$Oc8xh79Ef5dGdJrRMwWLOOnIURLOz2cpU0Yff/vcRs2PEROx5HD/q";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-23 18:41:19";s:13:"lastvisitDate";s:19:"0000-00-00 00:00:00";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:12;s:2:"12";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:3:{i:0;i:1;i:1;i:2;i:2;i:12;}s:14:"\\0\\0\\0_authLevels";a:4:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:9;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:5:"Bac S";s:9:"promotion";s:2:"L2";s:4:"role";s:0:"";s:14:"helped_subject";s:6:"Aucune";s:17:"need_help_subject";s:14:"Mathématiques";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";}s:13:"session.token";s:32:"7cb3ec34ee86f8d33e1a1b321e7e7ea1";s:25:"cck_hash_seblod_form_user";s:32:"82ec0c7061563f8bd13323ac66eff75b";}', 821, 'Test');
+('d4a1cth8ljtho2ihs6scneme60', 1, 0, '1432402940', '__default|a:8:{s:15:"session.counter";i:18;s:19:"session.timer.start";i:1432402784;s:18:"session.timer.last";i:1432402940;s:17:"session.timer.now";i:1432402940;s:22:"session.client.browser";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":4:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:0:"";}s:13:"com_installer";O:8:"stdClass":2:{s:7:"message";s:0:"";s:17:"extension_message";s:0:"";}s:9:"com_menus";O:8:"stdClass":2:{s:5:"items";O:8:"stdClass":3:{s:8:"menutype";s:8:"usermenu";s:10:"limitstart";i:0;s:4:"list";a:4:{s:9:"direction";s:3:"asc";s:5:"limit";s:2:"20";s:8:"ordering";s:5:"a.lft";s:5:"start";d:0;}}s:4:"edit";O:8:"stdClass":1:{s:4:"item";O:8:"stdClass":4:{s:4:"data";N;s:4:"type";N;s:4:"link";N;s:2:"id";a:0:{}}}}s:4:"item";O:8:"stdClass":1:{s:6:"filter";O:8:"stdClass":1:{s:8:"menutype";s:8:"usermenu";}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":33:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"819";s:4:"name";s:7:"BRIZION";s:8:"username";s:16:"alexandrebrizion";s:5:"email";s:25:"harleq1.private@gmail.com";s:8:"password";s:60:"$2y$10$bbIzyjOLCLgWFC6X/i0u4OiQLLFTMT2GOxNDx6dB4FOVWeDjXskxC";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:39:25";s:13:"lastvisitDate";s:19:"2015-05-23 17:38:32";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:0:"";s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";}s:13:"session.token";s:32:"434765f864e950755094384f8b2a12d5";}', 819, 'alexandrebrizion'),
+('daputinl0epfl4egord8i26ru7', 0, 0, '1432402929', '__default|a:8:{s:15:"session.counter";i:12;s:19:"session.timer.start";i:1432402704;s:18:"session.timer.last";i:1432402927;s:17:"session.timer.now";i:1432402929;s:22:"session.client.browser";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":2:{s:5:"users";O:8:"stdClass":1:{s:5:"login";O:8:"stdClass":1:{s:4:"form";O:8:"stdClass":2:{s:6:"return";s:57:"index.php?option=com_content&view=article&id=2&Itemid=101";s:4:"data";a:0:{}}}}s:13:"rememberLogin";b:1;}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":52:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"819";s:4:"name";s:7:"BRIZION";s:8:"username";s:16:"alexandrebrizion";s:5:"email";s:25:"harleq1.private@gmail.com";s:8:"password";s:60:"$2y$10$bbIzyjOLCLgWFC6X/i0u4OiQLLFTMT2GOxNDx6dB4FOVWeDjXskxC";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:39:25";s:13:"lastvisitDate";s:19:"0000-00-00 00:00:00";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:0:"";s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";s:10:"session_id";N;s:12:"where_clause";s:11:"user_id=819";s:2:"ip";s:3:"::1";s:3:"cck";s:4:"user";s:6:"gender";s:1:"M";s:9:"last_name";s:0:"";s:10:"first_name";s:9:"Alexandre";s:8:"about_me";s:0:"";s:6:"avatar";s:0:"";s:8:"address1";s:0:"";s:8:"address2";s:0:"";s:4:"city";s:0:"";s:11:"postal_code";s:0:"";s:6:"region";s:0:"";s:7:"country";s:0:"";s:5:"phone";s:0:"";s:7:"website";s:0:"";s:9:"birthdate";s:19:"0000-00-00 00:00:00";s:10:"birthplace";s:0:"";}s:13:"session.token";s:32:"5cf40166a7fb3e438666872c714ee7ae";}', 819, 'alexandrebrizion');
 
 -- --------------------------------------------------------
 
@@ -4775,8 +5096,8 @@ INSERT INTO `qfupd_session` (`session_id`, `client_id`, `guest`, `time`, `data`,
 -- Structure de la table `qfupd_tags`
 --
 
-CREATE TABLE `qfupd_tags` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_tags` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
   `rgt` int(11) NOT NULL DEFAULT '0',
@@ -4805,8 +5126,16 @@ CREATE TABLE `qfupd_tags` (
   `language` char(7) NOT NULL,
   `version` int(10) unsigned NOT NULL DEFAULT '1',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `tag_idx` (`published`,`access`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_path` (`path`),
+  KEY `idx_left_right` (`lft`,`rgt`),
+  KEY `idx_alias` (`alias`),
+  KEY `idx_language` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `qfupd_tags`
@@ -4822,14 +5151,17 @@ INSERT INTO `qfupd_tags` (`id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `tit
 -- Structure de la table `qfupd_template_styles`
 --
 
-CREATE TABLE `qfupd_template_styles` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_template_styles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `template` varchar(50) NOT NULL DEFAULT '',
   `client_id` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `home` char(7) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL DEFAULT '',
-  `params` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+  `params` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_template` (`template`),
+  KEY `idx_home` (`home`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
 
 --
 -- Contenu de la table `qfupd_template_styles`
@@ -4870,11 +5202,15 @@ INSERT INTO `qfupd_template_styles` (`id`, `template`, `client_id`, `home`, `tit
 -- Structure de la table `qfupd_ucm_base`
 --
 
-CREATE TABLE `qfupd_ucm_base` (
+CREATE TABLE IF NOT EXISTS `qfupd_ucm_base` (
   `ucm_id` int(10) unsigned NOT NULL,
   `ucm_item_id` int(10) NOT NULL,
   `ucm_type_id` int(11) NOT NULL,
-  `ucm_language_id` int(11) NOT NULL
+  `ucm_language_id` int(11) NOT NULL,
+  PRIMARY KEY (`ucm_id`),
+  KEY `idx_ucm_item_id` (`ucm_item_id`),
+  KEY `idx_ucm_type_id` (`ucm_type_id`),
+  KEY `idx_ucm_language_id` (`ucm_language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4883,8 +5219,8 @@ CREATE TABLE `qfupd_ucm_base` (
 -- Structure de la table `qfupd_ucm_content`
 --
 
-CREATE TABLE `qfupd_ucm_content` (
-  `core_content_id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_ucm_content` (
+  `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `core_type_alias` varchar(255) NOT NULL DEFAULT '' COMMENT 'FK to the content types table',
   `core_title` varchar(255) NOT NULL,
   `core_alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -4915,8 +5251,21 @@ CREATE TABLE `qfupd_ucm_content` (
   `core_metadesc` text NOT NULL,
   `core_catid` int(10) unsigned NOT NULL DEFAULT '0',
   `core_xreference` varchar(50) NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
-  `core_type_id` int(10) unsigned DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contains core content data in name spaced fields';
+  `core_type_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`core_content_id`),
+  KEY `tag_idx` (`core_state`,`core_access`),
+  KEY `idx_access` (`core_access`),
+  KEY `idx_alias` (`core_alias`),
+  KEY `idx_language` (`core_language`),
+  KEY `idx_title` (`core_title`),
+  KEY `idx_modified_time` (`core_modified_time`),
+  KEY `idx_created_time` (`core_created_time`),
+  KEY `idx_content_type` (`core_type_alias`),
+  KEY `idx_core_modified_user_id` (`core_modified_user_id`),
+  KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`),
+  KEY `idx_core_created_user_id` (`core_created_user_id`),
+  KEY `idx_core_type_id` (`core_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contains core content data in name spaced fields' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4924,8 +5273,8 @@ CREATE TABLE `qfupd_ucm_content` (
 -- Structure de la table `qfupd_ucm_history`
 --
 
-CREATE TABLE `qfupd_ucm_history` (
-  `version_id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_ucm_history` (
+  `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ucm_item_id` int(10) unsigned NOT NULL,
   `ucm_type_id` int(10) unsigned NOT NULL,
   `version_note` varchar(255) NOT NULL DEFAULT '' COMMENT 'Optional version name',
@@ -4934,8 +5283,11 @@ CREATE TABLE `qfupd_ucm_history` (
   `character_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Number of characters in this version.',
   `sha1_hash` varchar(50) NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
   `version_data` mediumtext NOT NULL COMMENT 'json-encoded string of version data',
-  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep'
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep',
+  PRIMARY KEY (`version_id`),
+  KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
+  KEY `idx_save_date` (`save_date`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
 --
 -- Contenu de la table `qfupd_ucm_history`
@@ -4972,18 +5324,7 @@ INSERT INTO `qfupd_ucm_history` (`version_id`, `ucm_item_id`, `ucm_type_id`, `ve
 (31, 17, 1, '', '2015-05-19 00:41:34', 818, 546, '7abc36f2f11293e2e3909343018b404e11fa24e6', '{"id":17,"asset_id":219,"title":"MARINIER","alias":"marinier","introtext":"::cck::23::\\/cck::","fulltext":"","state":"1","catid":"8","created":"2015-05-19 00:41:34","created_by":820,"created_by_alias":null,"modified":"2015-05-19 00:41:34","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2015-05-19 00:41:34","publish_down":null,"images":"{}","urls":"{}","attribs":"{}","version":1,"ordering":null,"metakey":null,"metadesc":null,"access":"2","hits":null,"metadata":"{}","featured":null,"language":"*","xreference":null}', 0),
 (32, 16, 1, '', '2015-05-19 00:42:42', 818, 573, '059643b2b38c0aa1aeb58484857662c332f381ff', '{"id":"16","asset_id":"218","title":"BRIZION","alias":"brizion","introtext":"::cck::22::\\/cck::","fulltext":"","state":"1","catid":"8","created":"2015-05-19 00:39:25","created_by":"819","created_by_alias":"","modified":"2015-05-19 00:42:42","modified_by":"818","checked_out":"0","checked_out_time":"0000-00-00 00:00:00","publish_up":"2015-05-19 00:39:25","publish_down":"0000-00-00 00:00:00","images":"{}","urls":"{}","attribs":"{}","version":2,"ordering":"1","metakey":"","metadesc":"","access":"2","hits":"0","metadata":"{}","featured":"0","language":"*","xreference":""}', 0),
 (33, 6, 1, '', '2015-05-20 18:09:53', 820, 1617, 'ca9c98d0804a46fbb38c765ccf540b25f89b8e17', '{"id":6,"asset_id":"158","title":"Comment devenir tuteur ?","alias":"devenir-tuteur","introtext":"<p>Le seul pr\\u00e9-requis est que vous devez \\u00eatre un \\u00e9tudiant en deuxi\\u00e8me ou troisi\\u00e8me ann\\u00e9e de licence Informatique.<\\/p>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">\\u00a0<\\/p>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">Vous devez d''abord vous inscrire en tant que tutor\\u00e9 qui est mis par d\\u00e9faut sur la page inscription du site.<\\/p>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">Ensuite, envoyer un mail au responsable de L1 avec une lettre de motivation ou allez directement le voir pour lui dire que vous \\u00eates int\\u00e9ress\\u00e9s pour devenir tuteur.<\\/p>\\r\\n<h2 style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">\\u00a0<\\/h2>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">Celui-ci regardera votre dossier et votre motivation, puis validera\\u00a0(ou non) votre demande en modifiant votre r\\u00f4le de tutor\\u00e9 en tuteur.<\\/p>","fulltext":"","state":"1","catid":"2","created":"2015-05-17 17:14:14","created_by":"803","created_by_alias":"","modified":"2015-05-20 18:09:53","modified_by":"820","checked_out":"820","checked_out_time":"2015-05-20 18:09:32","publish_up":"2015-05-17 17:14:14","publish_down":"0000-00-00 00:00:00","images":"{}","urls":"{}","attribs":"{}","version":5,"ordering":"1","metakey":"","metadesc":"","access":"1","hits":"16","metadata":"{}","featured":"0","language":"*","xreference":""}', 0),
-(55, 39, 1, '', '2015-05-22 16:17:19', 820, 1596, '6e69141ce70badb899da0b3d412f92be1e483581', '{"id":39,"asset_id":241,"title":"Pr\\u00e9sentation des tuteurs","alias":"presentation-des-tuteurs","introtext":"::cck::55::\\/cck::<br \\/>::introtext::::\\/introtext::<br \\/>::fulltext::::\\/fulltext::","fulltext":"::cck::55::\\/cck::","state":"1","catid":"2","created":"2015-05-22 16:17:19","created_by":"820","created_by_alias":"","modified":"2015-05-22 16:17:19","modified_by":0,"checked_out":null,"checked_out_time":null,"publish_up":"2015-05-22 16:17:19","publish_down":"","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":\\"\\",\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":\\"\\",\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":\\"\\",\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_intro\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\"}","version":"1","ordering":null,"metakey":"","metadesc":"","access":"1","hits":"","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(56, 40, 1, '', '2015-05-23 18:41:19', 0, 538, 'e959a315edd2f34a0789e9adb95e496c1dceddcf', '{"id":40,"asset_id":245,"title":"Test","alias":"test","introtext":"::cck::56::\\/cck::","fulltext":"","state":"1","catid":"8","created":"2015-05-23 18:41:19","created_by":821,"created_by_alias":null,"modified":"2015-05-23 18:41:19","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2015-05-23 18:41:19","publish_down":null,"images":"{}","urls":"{}","attribs":"{}","version":1,"ordering":null,"metakey":null,"metadesc":null,"access":"2","hits":null,"metadata":"{}","featured":null,"language":"*","xreference":null}', 0),
-(59, 41, 1, '', '2015-05-23 18:48:31', 818, 2118, 'fef9dc9e98175cd3baa577e6286200c54e37f970', '{"id":41,"asset_id":"246","title":"Ressources","alias":"ressources","introtext":"<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.<\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Analyse :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<p><a title=\\"TD1 analyse\\" href=\\"images\\/pdf\\/analyse\\/TD1.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD1 corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD1-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1-corrige.pdf<\\/a><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-23 18:45:41","created_by":"818","created_by_alias":"","modified":"2015-05-23 18:48:31","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-23 18:46:59","publish_up":"2015-05-23 18:45:41","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":3,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"2","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(60, 41, 1, '', '2015-05-23 18:49:09', 818, 2154, 'f931579092ebbb8abf8272b0caf9bd7634dfcf24', '{"id":41,"asset_id":"246","title":"Ressources","alias":"ressources","introtext":"<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.<\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Analyse :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>TD :<\\/strong><\\/h5>\\r\\n<p><a title=\\"TD1 analyse\\" href=\\"images\\/pdf\\/analyse\\/TD1.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD1 corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD1-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1-corrige.pdf<\\/a><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-23 18:45:41","created_by":"818","created_by_alias":"","modified":"2015-05-23 18:49:09","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-23 18:48:31","publish_up":"2015-05-23 18:45:41","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":4,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"3","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(61, 41, 1, '', '2015-05-23 18:50:23', 818, 2274, 'b9985987d166ffd4f3e2d65d15fe124c7454067d', '{"id":41,"asset_id":"246","title":"Ressources","alias":"ressources","introtext":"<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.<\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Analyse :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>TD :<\\/strong><\\/h5>\\r\\n<p><a title=\\"TD1 analyse\\" href=\\"images\\/pdf\\/analyse\\/TD1.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD1 corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD1-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2\\" href=\\"images\\/pdf\\/analyse\\/TD2.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2.pdf<\\/a><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-23 18:45:41","created_by":"818","created_by_alias":"","modified":"2015-05-23 18:50:23","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-23 18:49:09","publish_up":"2015-05-23 18:45:41","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":5,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"4","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(62, 41, 1, '', '2015-05-23 18:51:22', 818, 2418, '6b9d1dfda3eaacde1ecd6a15a189dba69eb3e0eb', '{"id":41,"asset_id":"246","title":"Ressources","alias":"ressources","introtext":"<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.<\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Analyse :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>TD :<\\/strong><\\/h5>\\r\\n<p><a title=\\"TD1 analyse\\" href=\\"images\\/pdf\\/analyse\\/TD1.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD1 corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD1-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2\\" href=\\"images\\/pdf\\/analyse\\/TD2.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2 corrige\\" href=\\"images\\/pdf\\/analyse\\/TD2-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2-corrige.pdf<\\/a><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-23 18:45:41","created_by":"818","created_by_alias":"","modified":"2015-05-23 18:51:22","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-23 18:50:23","publish_up":"2015-05-23 18:45:41","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":6,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"5","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(63, 41, 1, '', '2015-05-23 18:52:23', 818, 2576, '49449ba16d853c6cac1cf17000eb437f79cef514', '{"id":41,"asset_id":"246","title":"Ressources","alias":"ressources","introtext":"<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.<\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Analyse :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>TD :<\\/strong><\\/h5>\\r\\n<p><a title=\\"TD1 analyse\\" href=\\"images\\/pdf\\/analyse\\/TD1.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD1 corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD1-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2\\" href=\\"images\\/pdf\\/analyse\\/TD2.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2 corrige\\" href=\\"images\\/pdf\\/analyse\\/TD2-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD3 et corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD3-et-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD3-et-corrige.pdf<\\/a><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-23 18:45:41","created_by":"818","created_by_alias":"","modified":"2015-05-23 18:52:23","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-23 18:51:22","publish_up":"2015-05-23 18:45:41","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":7,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"6","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(64, 41, 1, '', '2015-05-23 18:54:51', 818, 2799, '1557d7dd4821fd7955512200582faf6955df1348', '{"id":41,"asset_id":"246","title":"Ressources","alias":"ressources","introtext":"<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.<\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Analyse :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>TD :<\\/strong><\\/h5>\\r\\n<p><a title=\\"TD1 analyse\\" href=\\"images\\/pdf\\/analyse\\/TD1.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD1 corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD1-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2\\" href=\\"images\\/pdf\\/analyse\\/TD2.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2 corrige\\" href=\\"images\\/pdf\\/analyse\\/TD2-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD3 et corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD3-et-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD3-et-corrige.pdf<\\/a><\\/p>\\r\\n<h5><strong>Devoirs :<\\/strong><\\/h5>\\r\\n<p><a title=\\"Examen Tutorat Analyse 2015\\" href=\\"images\\/pdf\\/analyse\\/controle-tutorat-2015.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger Examen Tutorat Analyse 2015<\\/a><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-23 18:45:41","created_by":"818","created_by_alias":"","modified":"2015-05-23 18:54:51","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-23 18:52:33","publish_up":"2015-05-23 18:45:41","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":9,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"7","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(65, 41, 1, '', '2015-05-23 18:55:12', 818, 2818, '4a421845d818cb1b5cd7a610c88794784c5a5e9a', '{"id":41,"asset_id":"246","title":"Ressources","alias":"ressources","introtext":"<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.<\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Analyse :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>TD :<\\/strong><\\/h5>\\r\\n<p><a title=\\"TD1 analyse\\" href=\\"images\\/pdf\\/analyse\\/TD1.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD1 corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD1-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2\\" href=\\"images\\/pdf\\/analyse\\/TD2.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2 corrige\\" href=\\"images\\/pdf\\/analyse\\/TD2-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD3 et corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD3-et-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD3-et-corrige.pdf<\\/a><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>Devoirs :<\\/strong><\\/h5>\\r\\n<p><a title=\\"Examen Tutorat Analyse 2015\\" href=\\"images\\/pdf\\/analyse\\/controle-tutorat-2015.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger Examen Tutorat Analyse 2015<\\/a><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-23 18:45:41","created_by":"818","created_by_alias":"","modified":"2015-05-23 18:55:12","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-23 18:54:51","publish_up":"2015-05-23 18:45:41","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":10,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"8","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(66, 41, 1, '', '2015-05-23 18:56:42', 818, 3025, 'd80ff689743f8e382fa5c567254abe0d166f352a', '{"id":41,"asset_id":"246","title":"Ressources","alias":"ressources","introtext":"<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.<\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Analyse :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>TD :<\\/strong><\\/h5>\\r\\n<p><a title=\\"TD1 analyse\\" href=\\"images\\/pdf\\/analyse\\/TD1.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD1 corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD1-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2\\" href=\\"images\\/pdf\\/analyse\\/TD2.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2 corrige\\" href=\\"images\\/pdf\\/analyse\\/TD2-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD3 et corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD3-et-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD3-et-corrige.pdf<\\/a><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>Devoirs :<\\/strong><\\/h5>\\r\\n<p><a title=\\"Examen Tutorat Analyse 2015\\" href=\\"images\\/pdf\\/analyse\\/controle-tutorat-2015.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger Examen Tutorat Analyse 2015<\\/a><\\/p>\\r\\n<p><a title=\\"Correction Examen Tutorat Analyse 2015\\" href=\\"images\\/pdf\\/analyse\\/correction-controle-2015.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger Correction Examen Tutorat Analyse 2015<\\/a><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-23 18:45:41","created_by":"818","created_by_alias":"","modified":"2015-05-23 18:56:42","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-23 18:55:12","publish_up":"2015-05-23 18:45:41","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":11,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"9","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(67, 41, 1, '', '2015-05-23 19:04:57', 818, 3315, '9a5e5825184cb033978fdc120a39a71cc72aa3ac', '{"id":41,"asset_id":"246","title":"Ressources","alias":"ressources","introtext":"<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.<\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Analyse :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>TD :<\\/strong><\\/h5>\\r\\n<p><a title=\\"TD1 analyse\\" href=\\"images\\/pdf\\/analyse\\/TD1.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD1 corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD1-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2\\" href=\\"images\\/pdf\\/analyse\\/TD2.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2 corrige\\" href=\\"images\\/pdf\\/analyse\\/TD2-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD3 et corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD3-et-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD3-et-corrige.pdf<\\/a><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>Devoirs :<\\/strong><\\/h5>\\r\\n<p><a title=\\"Examen Tutorat Analyse 2015\\" href=\\"images\\/pdf\\/analyse\\/controle-tutorat-2015.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger Examen Tutorat Analyse 2015<\\/a><\\/p>\\r\\n<p><a title=\\"Correction Examen Tutorat Analyse 2015\\" href=\\"images\\/pdf\\/analyse\\/correction-controle-2015.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger Correction Examen Tutorat Analyse 2015<\\/a><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Informatique :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>Fiches de r\\u00e9vision :<\\/strong><\\/h5>\\r\\n<p><a title=\\"Fiche JAVA\\" href=\\"images\\/pdf\\/informatique\\/fiche-de-revision-java.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger Fiche R\\u00e9vision Java<\\/a><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-23 18:45:41","created_by":"818","created_by_alias":"","modified":"2015-05-23 19:04:57","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-23 19:02:33","publish_up":"2015-05-23 18:45:41","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":12,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"11","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
-(68, 41, 1, '', '2015-05-23 19:07:14', 818, 3539, '1e7d8e6e9ff98ffd5c133182d8475d534b4fe797', '{"id":41,"asset_id":"246","title":"Ressources","alias":"ressources","introtext":"<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.<\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Analyse :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>TD :<\\/strong><\\/h5>\\r\\n<p><a title=\\"TD1 analyse\\" href=\\"images\\/pdf\\/analyse\\/TD1.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD1 corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD1-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD1-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2\\" href=\\"images\\/pdf\\/analyse\\/TD2.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD2 corrige\\" href=\\"images\\/pdf\\/analyse\\/TD2-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD2-corrige.pdf<\\/a><\\/p>\\r\\n<p><a title=\\"TD3 et corrig\\u00e9\\" href=\\"images\\/pdf\\/analyse\\/TD3-et-corrige.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger TD3-et-corrige.pdf<\\/a><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>Devoirs :<\\/strong><\\/h5>\\r\\n<p><a title=\\"Examen Tutorat Analyse 2015\\" href=\\"images\\/pdf\\/analyse\\/controle-tutorat-2015.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger Examen Tutorat Analyse 2015<\\/a><\\/p>\\r\\n<p><a title=\\"Correction Examen Tutorat Analyse 2015\\" href=\\"images\\/pdf\\/analyse\\/correction-controle-2015.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger Correction Examen Tutorat Analyse 2015<\\/a><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Informatique :<\\/h4>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>Fiches de r\\u00e9vision :<\\/strong><\\/h5>\\r\\n<p><a title=\\"Fiche JAVA\\" href=\\"images\\/pdf\\/informatique\\/fiche-de-revision-java.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger Fiche R\\u00e9vision Java<\\/a><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h5><strong>Devoirs :<\\/strong><\\/h5>\\r\\n<p><a title=\\"Test algo 2015 L1\\" href=\\"images\\/pdf\\/informatique\\/controle-tutorat.pdf\\" target=\\"_blank\\">T\\u00e9l\\u00e9charger Test Tutorat L1 2015<\\/a><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-23 18:45:41","created_by":"818","created_by_alias":"","modified":"2015-05-23 19:07:14","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-23 19:04:57","publish_up":"2015-05-23 18:45:41","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":13,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"12","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0);
+(55, 39, 1, '', '2015-05-22 16:17:19', 820, 1596, '6e69141ce70badb899da0b3d412f92be1e483581', '{"id":39,"asset_id":241,"title":"Pr\\u00e9sentation des tuteurs","alias":"presentation-des-tuteurs","introtext":"::cck::55::\\/cck::<br \\/>::introtext::::\\/introtext::<br \\/>::fulltext::::\\/fulltext::","fulltext":"::cck::55::\\/cck::","state":"1","catid":"2","created":"2015-05-22 16:17:19","created_by":"820","created_by_alias":"","modified":"2015-05-22 16:17:19","modified_by":0,"checked_out":null,"checked_out_time":null,"publish_up":"2015-05-22 16:17:19","publish_down":"","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":\\"\\",\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":\\"\\",\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":\\"\\",\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_intro\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\"}","version":"1","ordering":null,"metakey":"","metadesc":"","access":"1","hits":"","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0);
 
 -- --------------------------------------------------------
 
@@ -4991,8 +5332,8 @@ INSERT INTO `qfupd_ucm_history` (`version_id`, `ucm_item_id`, `ucm_type_id`, `ve
 -- Structure de la table `qfupd_updates`
 --
 
-CREATE TABLE `qfupd_updates` (
-  `update_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_updates` (
+  `update_id` int(11) NOT NULL AUTO_INCREMENT,
   `update_site_id` int(11) DEFAULT '0',
   `extension_id` int(11) DEFAULT '0',
   `name` varchar(100) DEFAULT '',
@@ -5005,15 +5346,79 @@ CREATE TABLE `qfupd_updates` (
   `data` text NOT NULL,
   `detailsurl` text NOT NULL,
   `infourl` text NOT NULL,
-  `extra_query` varchar(1000) DEFAULT ''
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Available Updates';
+  `extra_query` varchar(1000) DEFAULT '',
+  PRIMARY KEY (`update_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Available Updates' AUTO_INCREMENT=65 ;
 
 --
 -- Contenu de la table `qfupd_updates`
 --
 
 INSERT INTO `qfupd_updates` (`update_id`, `update_site_id`, `extension_id`, `name`, `description`, `element`, `type`, `folder`, `client_id`, `version`, `data`, `detailsurl`, `infourl`, `extra_query`) VALUES
-(1, 11, 10233, 'SEBLOD 3.x (App Builder & CCK)', 'SEBLOD 3.x Core', 'pkg_cck', 'package', '', 0, '3.6.2', '', 'http://update.seblod.com/pkg_cck.xml', 'http://www.seblod.com/', '');
+(1, 3, 0, 'Malay', '', 'pkg_ms-MY', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/ms-MY_details.xml', '', ''),
+(2, 3, 0, 'Romanian', '', 'pkg_ro-RO', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/ro-RO_details.xml', '', ''),
+(3, 3, 0, 'Flemish', '', 'pkg_nl-BE', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/nl-BE_details.xml', '', ''),
+(4, 3, 0, 'Chinese Traditional', '', 'pkg_zh-TW', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/zh-TW_details.xml', '', ''),
+(5, 3, 0, 'Galician', '', 'pkg_gl-ES', 'package', '', 0, '3.3.1.2', '', 'http://update.joomla.org/language/details3/gl-ES_details.xml', '', ''),
+(6, 3, 0, 'German', '', 'pkg_de-DE', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/de-DE_details.xml', '', ''),
+(7, 3, 0, 'Greek', '', 'pkg_el-GR', 'package', '', 0, '3.3.3.1', '', 'http://update.joomla.org/language/details3/el-GR_details.xml', '', ''),
+(8, 3, 0, 'Japanese', '', 'pkg_ja-JP', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/ja-JP_details.xml', '', ''),
+(9, 3, 0, 'Hebrew', '', 'pkg_he-IL', 'package', '', 0, '3.1.1.1', '', 'http://update.joomla.org/language/details3/he-IL_details.xml', '', ''),
+(10, 3, 0, 'EnglishAU', '', 'pkg_en-AU', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/en-AU_details.xml', '', ''),
+(11, 3, 0, 'EnglishUS', '', 'pkg_en-US', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/en-US_details.xml', '', ''),
+(12, 3, 0, 'Hungarian', '', 'pkg_hu-HU', 'package', '', 0, '3.3.3.1', '', 'http://update.joomla.org/language/details3/hu-HU_details.xml', '', ''),
+(13, 3, 0, 'Afrikaans', '', 'pkg_af-ZA', 'package', '', 0, '3.2.0.2', '', 'http://update.joomla.org/language/details3/af-ZA_details.xml', '', ''),
+(14, 3, 0, 'Arabic Unitag', '', 'pkg_ar-AA', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/ar-AA_details.xml', '', ''),
+(15, 3, 0, 'Belarusian', '', 'pkg_be-BY', 'package', '', 0, '3.2.1.1', '', 'http://update.joomla.org/language/details3/be-BY_details.xml', '', ''),
+(16, 3, 0, 'Bulgarian', '', 'pkg_bg-BG', 'package', '', 0, '3.3.0.1', '', 'http://update.joomla.org/language/details3/bg-BG_details.xml', '', ''),
+(17, 3, 0, 'Catalan', '', 'pkg_ca-ES', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/ca-ES_details.xml', '', ''),
+(18, 3, 0, 'Chinese Simplified', '', 'pkg_zh-CN', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/zh-CN_details.xml', '', ''),
+(19, 3, 0, 'Croatian', '', 'pkg_hr-HR', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/hr-HR_details.xml', '', ''),
+(20, 3, 0, 'Czech', '', 'pkg_cs-CZ', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/cs-CZ_details.xml', '', ''),
+(21, 3, 0, 'Danish', '', 'pkg_da-DK', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/da-DK_details.xml', '', ''),
+(22, 3, 0, 'Dutch', '', 'pkg_nl-NL', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/nl-NL_details.xml', '', ''),
+(23, 3, 0, 'Estonian', '', 'pkg_et-EE', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/et-EE_details.xml', '', ''),
+(24, 3, 0, 'Italian', '', 'pkg_it-IT', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/it-IT_details.xml', '', ''),
+(25, 3, 0, 'Korean', '', 'pkg_ko-KR', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/ko-KR_details.xml', '', ''),
+(26, 3, 0, 'Latvian', '', 'pkg_lv-LV', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/lv-LV_details.xml', '', ''),
+(27, 3, 0, 'Macedonian', '', 'pkg_mk-MK', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/mk-MK_details.xml', '', ''),
+(28, 3, 0, 'Norwegian Bokmal', '', 'pkg_nb-NO', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/nb-NO_details.xml', '', ''),
+(29, 3, 0, 'Norwegian Nynorsk', '', 'pkg_nn-NO', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/nn-NO_details.xml', '', ''),
+(30, 3, 0, 'Persian', '', 'pkg_fa-IR', 'package', '', 0, '3.4.1.2', '', 'http://update.joomla.org/language/details3/fa-IR_details.xml', '', ''),
+(31, 3, 0, 'Polish', '', 'pkg_pl-PL', 'package', '', 0, '3.4.1.3', '', 'http://update.joomla.org/language/details3/pl-PL_details.xml', '', ''),
+(32, 3, 0, 'Portuguese', '', 'pkg_pt-PT', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/pt-PT_details.xml', '', ''),
+(33, 3, 0, 'Russian', '', 'pkg_ru-RU', 'package', '', 0, '3.4.1.2', '', 'http://update.joomla.org/language/details3/ru-RU_details.xml', '', ''),
+(34, 3, 0, 'Slovak', '', 'pkg_sk-SK', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/sk-SK_details.xml', '', ''),
+(35, 3, 0, 'Swedish', '', 'pkg_sv-SE', 'package', '', 0, '3.4.1.3', '', 'http://update.joomla.org/language/details3/sv-SE_details.xml', '', ''),
+(36, 3, 0, 'Syriac', '', 'pkg_sy-IQ', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/sy-IQ_details.xml', '', ''),
+(37, 3, 0, 'Tamil', '', 'pkg_ta-IN', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/ta-IN_details.xml', '', ''),
+(38, 3, 0, 'Thai', '', 'pkg_th-TH', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/th-TH_details.xml', '', ''),
+(39, 3, 0, 'Turkish', '', 'pkg_tr-TR', 'package', '', 0, '3.4.1.3', '', 'http://update.joomla.org/language/details3/tr-TR_details.xml', '', ''),
+(40, 3, 0, 'Ukrainian', '', 'pkg_uk-UA', 'package', '', 0, '3.3.3.15', '', 'http://update.joomla.org/language/details3/uk-UA_details.xml', '', ''),
+(41, 3, 0, 'Uyghur', '', 'pkg_ug-CN', 'package', '', 0, '3.3.0.1', '', 'http://update.joomla.org/language/details3/ug-CN_details.xml', '', ''),
+(42, 3, 0, 'Albanian', '', 'pkg_sq-AL', 'package', '', 0, '3.1.1.1', '', 'http://update.joomla.org/language/details3/sq-AL_details.xml', '', ''),
+(43, 3, 0, 'Hindi', '', 'pkg_hi-IN', 'package', '', 0, '3.3.6.1', '', 'http://update.joomla.org/language/details3/hi-IN_details.xml', '', ''),
+(44, 3, 0, 'Portuguese Brazil', '', 'pkg_pt-BR', 'package', '', 0, '3.4.1.3', '', 'http://update.joomla.org/language/details3/pt-BR_details.xml', '', ''),
+(45, 3, 0, 'Serbian Latin', '', 'pkg_sr-YU', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/sr-YU_details.xml', '', ''),
+(46, 3, 0, 'Spanish', '', 'pkg_es-ES', 'package', '', 0, '3.4.1.2', '', 'http://update.joomla.org/language/details3/es-ES_details.xml', '', ''),
+(47, 3, 0, 'Bosnian', '', 'pkg_bs-BA', 'package', '', 0, '3.4.0.1', '', 'http://update.joomla.org/language/details3/bs-BA_details.xml', '', ''),
+(48, 3, 0, 'Serbian Cyrillic', '', 'pkg_sr-RS', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/sr-RS_details.xml', '', ''),
+(49, 3, 0, 'Vietnamese', '', 'pkg_vi-VN', 'package', '', 0, '3.2.1.1', '', 'http://update.joomla.org/language/details3/vi-VN_details.xml', '', ''),
+(50, 3, 0, 'Bahasa Indonesia', '', 'pkg_id-ID', 'package', '', 0, '3.3.0.2', '', 'http://update.joomla.org/language/details3/id-ID_details.xml', '', ''),
+(51, 3, 0, 'Finnish', '', 'pkg_fi-FI', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/fi-FI_details.xml', '', ''),
+(52, 3, 0, 'Swahili', '', 'pkg_sw-KE', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/sw-KE_details.xml', '', ''),
+(53, 3, 0, 'Montenegrin', '', 'pkg_srp-ME', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/srp-ME_details.xml', '', ''),
+(54, 3, 0, 'EnglishCA', '', 'pkg_en-CA', 'package', '', 0, '3.3.6.1', '', 'http://update.joomla.org/language/details3/en-CA_details.xml', '', ''),
+(55, 3, 0, 'FrenchCA', '', 'pkg_fr-CA', 'package', '', 0, '3.3.6.1', '', 'http://update.joomla.org/language/details3/fr-CA_details.xml', '', ''),
+(56, 3, 0, 'Welsh', '', 'pkg_cy-GB', 'package', '', 0, '3.3.0.1', '', 'http://update.joomla.org/language/details3/cy-GB_details.xml', '', ''),
+(57, 3, 0, 'Sinhala', '', 'pkg_si-LK', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/si-LK_details.xml', '', ''),
+(58, 5, 0, 'Kunena Latest Module', '', 'mod_kunenalatest', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenalatest.xml', '', ''),
+(59, 5, 0, 'Kunena Login Module', '', 'mod_kunenalogin', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenalogin.xml', '', ''),
+(60, 5, 0, 'Kunena Search Module', '', 'mod_kunenasearch', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenasearch.xml', '', ''),
+(61, 5, 0, 'Kunena Statistics Module', '', 'mod_kunenastats', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenastats.xml', '', ''),
+(62, 5, 0, 'Content - Kunena Discuss', '', 'kunenadiscuss', 'plugin', 'content', 0, '3.0.7', '', 'http://update.kunena.org/3.0/plg_content_kunenadiscuss.xml', '', ''),
+(63, 5, 0, 'Search - Kunena', '', 'kunena', 'plugin', 'search', 0, '3.0.1', '', 'http://update.kunena.org/3.0/plg_search_kunena.xml', '', ''),
+(64, 11, 10233, 'SEBLOD 3.x (App Builder & CCK)', 'SEBLOD 3.x Core', 'pkg_cck', 'package', '', 0, '3.6.2', '', 'http://update.seblod.com/pkg_cck.xml', 'http://www.seblod.com/', '');
 
 -- --------------------------------------------------------
 
@@ -5021,29 +5426,30 @@ INSERT INTO `qfupd_updates` (`update_id`, `update_site_id`, `extension_id`, `nam
 -- Structure de la table `qfupd_update_sites`
 --
 
-CREATE TABLE `qfupd_update_sites` (
-  `update_site_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_update_sites` (
+  `update_site_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT '',
   `type` varchar(20) DEFAULT '',
   `location` text NOT NULL,
   `enabled` int(11) DEFAULT '0',
   `last_check_timestamp` bigint(20) DEFAULT '0',
-  `extra_query` varchar(1000) DEFAULT ''
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='Update Sites';
+  `extra_query` varchar(1000) DEFAULT '',
+  PRIMARY KEY (`update_site_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Update Sites' AUTO_INCREMENT=13 ;
 
 --
 -- Contenu de la table `qfupd_update_sites`
 --
 
 INSERT INTO `qfupd_update_sites` (`update_site_id`, `name`, `type`, `location`, `enabled`, `last_check_timestamp`, `extra_query`) VALUES
-(1, 'Joomla! Core', 'collection', 'http://update.joomla.org/core/list.xml', 1, 1432406011, ''),
-(2, 'Joomla! Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1432406011, ''),
-(3, 'Accredited Joomla! Translations', 'collection', 'http://update.joomla.org/language/translationlist_3.xml', 1, 0, ''),
-(4, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 0, ''),
-(5, 'Kunena 3.0 Update Site', 'collection', 'http://update.kunena.org/3.0/list.xml', 1, 0, ''),
-(8, 'WebInstaller Update Site', 'extension', 'http://appscdn.joomla.org/webapps/jedapps/webinstaller.xml', 1, 1432406009, ''),
-(10, 'Asikart UserXTD', 'extension', 'https://raw.githubusercontent.com/asikart/userxtd/staging/update.xml', 1, 1432406009, ''),
-(11, 'SEBLOD 3.x Core Updates', 'extension', 'http://update.seblod.com/pkg_cck.xml', 1, 1432406009, '');
+(1, 'Joomla! Core', 'collection', 'http://update.joomla.org/core/list.xml', 1, 1432402886, ''),
+(2, 'Joomla! Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1432402886, ''),
+(3, 'Accredited Joomla! Translations', 'collection', 'http://update.joomla.org/language/translationlist_3.xml', 1, 1432402886, ''),
+(4, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1432402886, ''),
+(5, 'Kunena 3.0 Update Site', 'collection', 'http://update.kunena.org/3.0/list.xml', 1, 1432402886, ''),
+(8, 'WebInstaller Update Site', 'extension', 'http://appscdn.joomla.org/webapps/jedapps/webinstaller.xml', 1, 1432402886, ''),
+(10, 'Asikart UserXTD', 'extension', 'https://raw.githubusercontent.com/asikart/userxtd/staging/update.xml', 1, 1432402886, ''),
+(11, 'SEBLOD 3.x Core Updates', 'extension', 'http://update.seblod.com/pkg_cck.xml', 1, 1432402886, '');
 
 -- --------------------------------------------------------
 
@@ -5051,9 +5457,10 @@ INSERT INTO `qfupd_update_sites` (`update_site_id`, `name`, `type`, `location`, 
 -- Structure de la table `qfupd_update_sites_extensions`
 --
 
-CREATE TABLE `qfupd_update_sites_extensions` (
+CREATE TABLE IF NOT EXISTS `qfupd_update_sites_extensions` (
   `update_site_id` int(11) NOT NULL DEFAULT '0',
-  `extension_id` int(11) NOT NULL DEFAULT '0'
+  `extension_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`update_site_id`,`extension_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Links extensions to update sites';
 
 --
@@ -5077,13 +5484,18 @@ INSERT INTO `qfupd_update_sites_extensions` (`update_site_id`, `extension_id`) V
 -- Structure de la table `qfupd_usergroups`
 --
 
-CREATE TABLE `qfupd_usergroups` (
-  `id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
+CREATE TABLE IF NOT EXISTS `qfupd_usergroups` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Adjacency List Reference Id',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `title` varchar(100) NOT NULL DEFAULT ''
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  `title` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`),
+  KEY `idx_usergroup_title_lookup` (`title`),
+  KEY `idx_usergroup_adjacency_lookup` (`parent_id`),
+  KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Contenu de la table `qfupd_usergroups`
@@ -5105,8 +5517,8 @@ INSERT INTO `qfupd_usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUES
 -- Structure de la table `qfupd_users`
 --
 
-CREATE TABLE `qfupd_users` (
-  `id` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_users` (
+  `id` int(100) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '',
   `username` varchar(100) NOT NULL DEFAULT '',
   `email` varchar(100) NOT NULL DEFAULT '',
@@ -5126,8 +5538,13 @@ CREATE TABLE `qfupd_users` (
   `resetCount` int(11) NOT NULL DEFAULT '0' COMMENT 'Count of password resets since lastResetTime',
   `otpKey` varchar(1000) NOT NULL DEFAULT '' COMMENT 'Two factor authentication encrypted keys',
   `otep` varchar(1000) NOT NULL DEFAULT '' COMMENT 'One time emergency passwords',
-  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login'
-) ENGINE=InnoDB AUTO_INCREMENT=822 DEFAULT CHARSET=utf8;
+  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login',
+  PRIMARY KEY (`id`),
+  KEY `idx_name` (`name`),
+  KEY `idx_block` (`block`),
+  KEY `username` (`username`),
+  KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=821 ;
 
 --
 -- Contenu de la table `qfupd_users`
@@ -5138,10 +5555,9 @@ INSERT INTO `qfupd_users` (`id`, `name`, `username`, `email`, `password`, `diplo
 (815, 'IGUE', 'salimigue', 'limsamohamed@gmail.com', '$2y$10$Pb53xAib/vilP/K5K8F8We1k.ddRcbnQ2k7.1MfsibtJDY6C1SWwm', '', '', '', '', '', 0, 0, '2015-05-18 23:44:53', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (816, 'HUART', 'tristanhuart', 'letudianteninfo@gmail.com', '$2y$10$iTn7jeeUDb6T89J.ieMMWu.2ZBYV/mdayYJXAEvyX315OaoMd7sd6', '', '', '', '', '', 0, 0, '2015-05-18 23:57:38', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (817, 'GAYAT', 'theotimegayat', 'theotime.gayat@gmail.com', '$2y$10$X6fGl4E3V0T1Lm0PBFDu2OUPpHmTo4nT1ShXCLz08883M7DYOWu6.', '', '', '', '', '', 0, 0, '2015-05-18 23:59:47', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
-(818, 'DUCHEMIN', 'laureduchemin', 'duchemin_laure@gmail.com', '$2y$10$fEtZDBctT8s7dZTSm.lr2.nXDqL3MDdN9EeygQhOp/dRAhY8J/zGC', '', '', '', '', '', 0, 0, '2015-05-19 00:02:06', '2015-05-23 18:40:20', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
+(818, 'DUCHEMIN', 'laureduchemin', 'duchemin_laure@gmail.com', '$2y$10$fEtZDBctT8s7dZTSm.lr2.nXDqL3MDdN9EeygQhOp/dRAhY8J/zGC', '', '', '', '', '', 0, 0, '2015-05-19 00:02:06', '2015-05-22 11:49:44', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (819, 'BRIZION', 'alexandrebrizion', 'harleq1.private@gmail.com', '$2y$10$bbIzyjOLCLgWFC6X/i0u4OiQLLFTMT2GOxNDx6dB4FOVWeDjXskxC', '', '', '', '', '', 0, 0, '2015-05-19 00:39:25', '2015-05-23 17:39:46', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
-(820, 'MARINIER', 'opheliemarinier', 'ophelie.marinier@gmail.com', '$2y$10$vjoKE71aLqzDKBCWaG5.YOjgVyl88L.4gxhaM6VSk5APwGWNoudGu', '', '', '', '', '', 0, 0, '2015-05-19 00:41:34', '2015-05-23 08:02:05', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
-(821, 'Test', 'Test', 'duchemin_laure@yahoo.fr', '$2y$10$Oc8xh79Ef5dGdJrRMwWLOOnIURLOz2cpU0Yff/vcRs2PEROx5HD/q', 'Bac S', 'L2', '', 'Aucune', 'Mathématiques', 0, 0, '2015-05-23 18:41:19', '2015-05-23 18:41:38', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
+(820, 'MARINIER', 'opheliemarinier', 'ophelie.marinier@gmail.com', '$2y$10$vjoKE71aLqzDKBCWaG5.YOjgVyl88L.4gxhaM6VSk5APwGWNoudGu', '', '', '', '', '', 0, 0, '2015-05-19 00:41:34', '2015-05-23 08:02:05', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -5149,8 +5565,8 @@ INSERT INTO `qfupd_users` (`id`, `name`, `username`, `email`, `password`, `diplo
 -- Structure de la table `qfupd_userxtd_fields`
 --
 
-CREATE TABLE `qfupd_userxtd_fields` (
-  `id` int(11) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_userxtd_fields` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `asset_id` int(11) NOT NULL,
   `catid` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -5172,8 +5588,14 @@ CREATE TABLE `qfupd_userxtd_fields` (
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `access` int(10) unsigned NOT NULL,
   `language` char(7) NOT NULL,
-  `params` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+  `params` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_createdby` (`catid`),
+  KEY `idx_language` (`language`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `cat_index` (`published`,`access`,`catid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Contenu de la table `qfupd_userxtd_fields`
@@ -5206,8 +5628,8 @@ INSERT INTO `qfupd_userxtd_fields` (`id`, `asset_id`, `catid`, `title`, `label`,
 -- Structure de la table `qfupd_userxtd_profiles`
 --
 
-CREATE TABLE `qfupd_userxtd_profiles` (
-  `id` int(11) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_userxtd_profiles` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `key` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,
@@ -5216,8 +5638,15 @@ CREATE TABLE `qfupd_userxtd_profiles` (
   `ordering` int(11) NOT NULL,
   `access` int(10) unsigned NOT NULL,
   `language` char(7) NOT NULL,
-  `params` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8;
+  `params` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_access` (`access`),
+  KEY `idx_language` (`language`),
+  KEY `cat_index` (`access`),
+  KEY `idx_value` (`value`),
+  KEY `user_id` (`user_id`),
+  KEY `key` (`key`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=151 ;
 
 --
 -- Contenu de la table `qfupd_userxtd_profiles`
@@ -5261,15 +5690,20 @@ INSERT INTO `qfupd_userxtd_profiles` (`id`, `user_id`, `key`, `value`, `created`
 -- Structure de la table `qfupd_user_keys`
 --
 
-CREATE TABLE `qfupd_user_keys` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_user_keys` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `series` varchar(255) NOT NULL,
   `invalid` tinyint(4) NOT NULL,
   `time` varchar(200) NOT NULL,
-  `uastring` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `uastring` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `series` (`series`),
+  UNIQUE KEY `series_2` (`series`),
+  UNIQUE KEY `series_3` (`series`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `qfupd_user_keys`
@@ -5284,8 +5718,8 @@ INSERT INTO `qfupd_user_keys` (`id`, `user_id`, `token`, `series`, `invalid`, `t
 -- Structure de la table `qfupd_user_notes`
 --
 
-CREATE TABLE `qfupd_user_notes` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `qfupd_user_notes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `subject` varchar(100) NOT NULL DEFAULT '',
@@ -5299,8 +5733,11 @@ CREATE TABLE `qfupd_user_notes` (
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `review_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_category_id` (`catid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -5308,11 +5745,12 @@ CREATE TABLE `qfupd_user_notes` (
 -- Structure de la table `qfupd_user_profiles`
 --
 
-CREATE TABLE `qfupd_user_profiles` (
+CREATE TABLE IF NOT EXISTS `qfupd_user_profiles` (
   `user_id` int(11) NOT NULL,
   `profile_key` varchar(100) NOT NULL,
   `profile_value` text NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0'
+  `ordering` int(11) NOT NULL DEFAULT '0',
+  UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Simple user profile storage table';
 
 -- --------------------------------------------------------
@@ -5321,9 +5759,10 @@ CREATE TABLE `qfupd_user_profiles` (
 -- Structure de la table `qfupd_user_usergroup_map`
 --
 
-CREATE TABLE `qfupd_user_usergroup_map` (
+CREATE TABLE IF NOT EXISTS `qfupd_user_usergroup_map` (
   `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__users.id',
-  `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__usergroups.id'
+  `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__usergroups.id',
+  PRIMARY KEY (`user_id`,`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5337,8 +5776,7 @@ INSERT INTO `qfupd_user_usergroup_map` (`user_id`, `group_id`) VALUES
 (817, 8),
 (818, 8),
 (819, 8),
-(820, 8),
-(821, 12);
+(820, 8);
 
 -- --------------------------------------------------------
 
@@ -5346,12 +5784,14 @@ INSERT INTO `qfupd_user_usergroup_map` (`user_id`, `group_id`) VALUES
 -- Structure de la table `qfupd_viewlevels`
 --
 
-CREATE TABLE `qfupd_viewlevels` (
-  `id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
+CREATE TABLE IF NOT EXISTS `qfupd_viewlevels` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `title` varchar(100) NOT NULL DEFAULT '',
   `ordering` int(11) NOT NULL DEFAULT '0',
-  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.'
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_assetgroup_title_lookup` (`title`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Contenu de la table `qfupd_viewlevels`
@@ -5368,1337 +5808,6 @@ INSERT INTO `qfupd_viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 (9, 'Accès tutoré', 0, '[12]'),
 (10, 'Accès tuteur (en attente de validation)', 0, '[11]');
 
---
--- Index pour les tables exportées
---
-
---
--- Index pour la table `qfupd_assets`
---
-ALTER TABLE `qfupd_assets`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_asset_name` (`name`),
-  ADD KEY `idx_lft_rgt` (`lft`,`rgt`),
-  ADD KEY `idx_parent_id` (`parent_id`);
-
---
--- Index pour la table `qfupd_associations`
---
-ALTER TABLE `qfupd_associations`
-  ADD PRIMARY KEY (`context`,`id`),
-  ADD KEY `idx_key` (`key`);
-
---
--- Index pour la table `qfupd_banners`
---
-ALTER TABLE `qfupd_banners`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_state` (`state`),
-  ADD KEY `idx_own_prefix` (`own_prefix`),
-  ADD KEY `idx_metakey_prefix` (`metakey_prefix`),
-  ADD KEY `idx_banner_catid` (`catid`),
-  ADD KEY `idx_language` (`language`);
-
---
--- Index pour la table `qfupd_banner_clients`
---
-ALTER TABLE `qfupd_banner_clients`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_own_prefix` (`own_prefix`),
-  ADD KEY `idx_metakey_prefix` (`metakey_prefix`);
-
---
--- Index pour la table `qfupd_banner_tracks`
---
-ALTER TABLE `qfupd_banner_tracks`
-  ADD PRIMARY KEY (`track_date`,`track_type`,`banner_id`),
-  ADD KEY `idx_track_date` (`track_date`),
-  ADD KEY `idx_track_type` (`track_type`),
-  ADD KEY `idx_banner_id` (`banner_id`);
-
---
--- Index pour la table `qfupd_categories`
---
-ALTER TABLE `qfupd_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cat_idx` (`extension`,`published`,`access`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_path` (`path`),
-  ADD KEY `idx_left_right` (`lft`,`rgt`),
-  ADD KEY `idx_alias` (`alias`),
-  ADD KEY `idx_language` (`language`);
-
---
--- Index pour la table `qfupd_cck_core`
---
-ALTER TABLE `qfupd_cck_core`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_cck` (`cck`),
-  ADD KEY `idx_pk` (`pk`);
-
---
--- Index pour la table `qfupd_cck_core_activities`
---
-ALTER TABLE `qfupd_cck_core_activities`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `idx_category` (`folder`);
-
---
--- Index pour la table `qfupd_cck_core_downloads`
---
-ALTER TABLE `qfupd_cck_core_downloads`
-  ADD PRIMARY KEY (`id`,`field`,`collection`,`x`),
-  ADD KEY `idx_contentid` (`id`),
-  ADD KEY `idx_item` (`field`);
-
---
--- Index pour la table `qfupd_cck_core_fields`
---
-ALTER TABLE `qfupd_cck_core_fields`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `idx_type` (`type`),
-  ADD KEY `idx_folder` (`folder`);
-
---
--- Index pour la table `qfupd_cck_core_folders`
---
-ALTER TABLE `qfupd_cck_core_folders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_parent_id` (`parent_id`);
-
---
--- Index pour la table `qfupd_cck_core_objects`
---
-ALTER TABLE `qfupd_cck_core_objects`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `idx_component` (`component`),
-  ADD KEY `idx_view` (`view`);
-
---
--- Index pour la table `qfupd_cck_core_preferences`
---
-ALTER TABLE `qfupd_cck_core_preferences`
-  ADD PRIMARY KEY (`userid`);
-
---
--- Index pour la table `qfupd_cck_core_searchs`
---
-ALTER TABLE `qfupd_cck_core_searchs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `idx_folder` (`folder`),
-  ADD KEY `idx_template_search` (`template_search`),
-  ADD KEY `idx_template_filter` (`template_filter`),
-  ADD KEY `idx_template_list` (`template_list`),
-  ADD KEY `idx_template_item` (`template_item`);
-
---
--- Index pour la table `qfupd_cck_core_search_field`
---
-ALTER TABLE `qfupd_cck_core_search_field`
-  ADD PRIMARY KEY (`searchid`,`fieldid`,`client`),
-  ADD KEY `searchid` (`searchid`),
-  ADD KEY `fieldid` (`fieldid`);
-
---
--- Index pour la table `qfupd_cck_core_search_position`
---
-ALTER TABLE `qfupd_cck_core_search_position`
-  ADD PRIMARY KEY (`searchid`,`position`,`client`),
-  ADD KEY `position` (`position`),
-  ADD KEY `searchid` (`searchid`);
-
---
--- Index pour la table `qfupd_cck_core_sites`
---
-ALTER TABLE `qfupd_cck_core_sites`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
-
---
--- Index pour la table `qfupd_cck_core_templates`
---
-ALTER TABLE `qfupd_cck_core_templates`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `idx_folder` (`folder`);
-
---
--- Index pour la table `qfupd_cck_core_types`
---
-ALTER TABLE `qfupd_cck_core_types`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `idx_folder` (`folder`),
-  ADD KEY `idx_template_admin` (`template_admin`),
-  ADD KEY `idx_template_site` (`template_site`),
-  ADD KEY `idx_template_content` (`template_content`),
-  ADD KEY `idx_template_intro` (`template_intro`);
-
---
--- Index pour la table `qfupd_cck_core_type_field`
---
-ALTER TABLE `qfupd_cck_core_type_field`
-  ADD PRIMARY KEY (`typeid`,`fieldid`,`client`),
-  ADD KEY `typeid` (`typeid`),
-  ADD KEY `fieldid` (`fieldid`);
-
---
--- Index pour la table `qfupd_cck_core_type_position`
---
-ALTER TABLE `qfupd_cck_core_type_position`
-  ADD PRIMARY KEY (`typeid`,`position`,`client`),
-  ADD KEY `typeid` (`typeid`),
-  ADD KEY `position` (`position`);
-
---
--- Index pour la table `qfupd_cck_core_versions`
---
-ALTER TABLE `qfupd_cck_core_versions`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `type_id_version` (`e_id`,`e_type`,`e_version`);
-
---
--- Index pour la table `qfupd_cck_more_countries`
---
-ALTER TABLE `qfupd_cck_more_countries`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_cck_more_processings`
---
-ALTER TABLE `qfupd_cck_more_processings`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_cck_more_sessions`
---
-ALTER TABLE `qfupd_cck_more_sessions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_extension` (`extension`);
-
---
--- Index pour la table `qfupd_cck_store_item_users`
---
-ALTER TABLE `qfupd_cck_store_item_users`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_contact_details`
---
-ALTER TABLE `qfupd_contact_details`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_state` (`published`),
-  ADD KEY `idx_catid` (`catid`),
-  ADD KEY `idx_createdby` (`created_by`),
-  ADD KEY `idx_featured_catid` (`featured`,`catid`),
-  ADD KEY `idx_language` (`language`),
-  ADD KEY `idx_xreference` (`xreference`);
-
---
--- Index pour la table `qfupd_content`
---
-ALTER TABLE `qfupd_content`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_state` (`state`),
-  ADD KEY `idx_catid` (`catid`),
-  ADD KEY `idx_createdby` (`created_by`),
-  ADD KEY `idx_featured_catid` (`featured`,`catid`),
-  ADD KEY `idx_language` (`language`),
-  ADD KEY `idx_xreference` (`xreference`);
-
---
--- Index pour la table `qfupd_contentitem_tag_map`
---
-ALTER TABLE `qfupd_contentitem_tag_map`
-  ADD UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`),
-  ADD KEY `idx_tag_type` (`tag_id`,`type_id`),
-  ADD KEY `idx_date_id` (`tag_date`,`tag_id`),
-  ADD KEY `idx_tag` (`tag_id`),
-  ADD KEY `idx_type` (`type_id`),
-  ADD KEY `idx_core_content_id` (`core_content_id`);
-
---
--- Index pour la table `qfupd_content_frontpage`
---
-ALTER TABLE `qfupd_content_frontpage`
-  ADD PRIMARY KEY (`content_id`);
-
---
--- Index pour la table `qfupd_content_rating`
---
-ALTER TABLE `qfupd_content_rating`
-  ADD PRIMARY KEY (`content_id`);
-
---
--- Index pour la table `qfupd_content_types`
---
-ALTER TABLE `qfupd_content_types`
-  ADD PRIMARY KEY (`type_id`),
-  ADD KEY `idx_alias` (`type_alias`);
-
---
--- Index pour la table `qfupd_extensions`
---
-ALTER TABLE `qfupd_extensions`
-  ADD PRIMARY KEY (`extension_id`),
-  ADD KEY `element_clientid` (`element`,`client_id`),
-  ADD KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
-  ADD KEY `extension` (`type`,`element`,`folder`,`client_id`);
-
---
--- Index pour la table `qfupd_finder_filters`
---
-ALTER TABLE `qfupd_finder_filters`
-  ADD PRIMARY KEY (`filter_id`);
-
---
--- Index pour la table `qfupd_finder_links`
---
-ALTER TABLE `qfupd_finder_links`
-  ADD PRIMARY KEY (`link_id`),
-  ADD KEY `idx_type` (`type_id`),
-  ADD KEY `idx_title` (`title`),
-  ADD KEY `idx_md5` (`md5sum`),
-  ADD KEY `idx_url` (`url`(75)),
-  ADD KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`),
-  ADD KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`);
-
---
--- Index pour la table `qfupd_finder_links_terms0`
---
-ALTER TABLE `qfupd_finder_links_terms0`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_terms1`
---
-ALTER TABLE `qfupd_finder_links_terms1`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_terms2`
---
-ALTER TABLE `qfupd_finder_links_terms2`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_terms3`
---
-ALTER TABLE `qfupd_finder_links_terms3`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_terms4`
---
-ALTER TABLE `qfupd_finder_links_terms4`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_terms5`
---
-ALTER TABLE `qfupd_finder_links_terms5`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_terms6`
---
-ALTER TABLE `qfupd_finder_links_terms6`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_terms7`
---
-ALTER TABLE `qfupd_finder_links_terms7`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_terms8`
---
-ALTER TABLE `qfupd_finder_links_terms8`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_terms9`
---
-ALTER TABLE `qfupd_finder_links_terms9`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_termsa`
---
-ALTER TABLE `qfupd_finder_links_termsa`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_termsb`
---
-ALTER TABLE `qfupd_finder_links_termsb`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_termsc`
---
-ALTER TABLE `qfupd_finder_links_termsc`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_termsd`
---
-ALTER TABLE `qfupd_finder_links_termsd`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_termse`
---
-ALTER TABLE `qfupd_finder_links_termse`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_links_termsf`
---
-ALTER TABLE `qfupd_finder_links_termsf`
-  ADD PRIMARY KEY (`link_id`,`term_id`),
-  ADD KEY `idx_term_weight` (`term_id`,`weight`),
-  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
-
---
--- Index pour la table `qfupd_finder_taxonomy`
---
-ALTER TABLE `qfupd_finder_taxonomy`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `parent_id` (`parent_id`),
-  ADD KEY `state` (`state`),
-  ADD KEY `ordering` (`ordering`),
-  ADD KEY `access` (`access`),
-  ADD KEY `idx_parent_published` (`parent_id`,`state`,`access`);
-
---
--- Index pour la table `qfupd_finder_taxonomy_map`
---
-ALTER TABLE `qfupd_finder_taxonomy_map`
-  ADD PRIMARY KEY (`link_id`,`node_id`),
-  ADD KEY `link_id` (`link_id`),
-  ADD KEY `node_id` (`node_id`);
-
---
--- Index pour la table `qfupd_finder_terms`
---
-ALTER TABLE `qfupd_finder_terms`
-  ADD PRIMARY KEY (`term_id`),
-  ADD UNIQUE KEY `idx_term` (`term`),
-  ADD KEY `idx_term_phrase` (`term`,`phrase`),
-  ADD KEY `idx_stem_phrase` (`stem`,`phrase`),
-  ADD KEY `idx_soundex_phrase` (`soundex`,`phrase`);
-
---
--- Index pour la table `qfupd_finder_terms_common`
---
-ALTER TABLE `qfupd_finder_terms_common`
-  ADD KEY `idx_word_lang` (`term`,`language`),
-  ADD KEY `idx_lang` (`language`);
-
---
--- Index pour la table `qfupd_finder_tokens`
---
-ALTER TABLE `qfupd_finder_tokens`
-  ADD KEY `idx_word` (`term`),
-  ADD KEY `idx_context` (`context`);
-
---
--- Index pour la table `qfupd_finder_tokens_aggregate`
---
-ALTER TABLE `qfupd_finder_tokens_aggregate`
-  ADD KEY `token` (`term`),
-  ADD KEY `keyword_id` (`term_id`);
-
---
--- Index pour la table `qfupd_finder_types`
---
-ALTER TABLE `qfupd_finder_types`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `title` (`title`);
-
---
--- Index pour la table `qfupd_icagenda`
---
-ALTER TABLE `qfupd_icagenda`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_icagenda_category`
---
-ALTER TABLE `qfupd_icagenda_category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_icagenda_customfields`
---
-ALTER TABLE `qfupd_icagenda_customfields`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_icagenda_customfields_data`
---
-ALTER TABLE `qfupd_icagenda_customfields_data`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_icagenda_events`
---
-ALTER TABLE `qfupd_icagenda_events`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_icagenda_feature`
---
-ALTER TABLE `qfupd_icagenda_feature`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_icagenda_feature_xref`
---
-ALTER TABLE `qfupd_icagenda_feature_xref`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_icagenda_registration`
---
-ALTER TABLE `qfupd_icagenda_registration`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_kunena_aliases`
---
-ALTER TABLE `qfupd_kunena_aliases`
-  ADD UNIQUE KEY `alias` (`alias`),
-  ADD KEY `state` (`state`),
-  ADD KEY `item` (`item`),
-  ADD KEY `type` (`type`);
-
---
--- Index pour la table `qfupd_kunena_announcement`
---
-ALTER TABLE `qfupd_kunena_announcement`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_kunena_attachments`
---
-ALTER TABLE `qfupd_kunena_attachments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `mesid` (`mesid`),
-  ADD KEY `userid` (`userid`),
-  ADD KEY `hash` (`hash`),
-  ADD KEY `filename` (`filename`);
-
---
--- Index pour la table `qfupd_kunena_categories`
---
-ALTER TABLE `qfupd_kunena_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `parent_id` (`parent_id`),
-  ADD KEY `category_access` (`accesstype`,`access`),
-  ADD KEY `published_pubaccess_id` (`published`,`pub_access`,`id`);
-
---
--- Index pour la table `qfupd_kunena_configuration`
---
-ALTER TABLE `qfupd_kunena_configuration`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_kunena_keywords`
---
-ALTER TABLE `qfupd_kunena_keywords`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `public_count` (`public_count`),
-  ADD KEY `total_count` (`total_count`);
-
---
--- Index pour la table `qfupd_kunena_keywords_map`
---
-ALTER TABLE `qfupd_kunena_keywords_map`
-  ADD UNIQUE KEY `keyword_user_topic` (`keyword_id`,`user_id`,`topic_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `topic_user` (`topic_id`,`user_id`);
-
---
--- Index pour la table `qfupd_kunena_messages`
---
-ALTER TABLE `qfupd_kunena_messages`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `thread` (`thread`),
-  ADD KEY `ip` (`ip`),
-  ADD KEY `userid` (`userid`),
-  ADD KEY `time` (`time`),
-  ADD KEY `locked` (`locked`),
-  ADD KEY `hold_time` (`hold`,`time`),
-  ADD KEY `parent_hits` (`parent`,`hits`),
-  ADD KEY `catid_parent` (`catid`,`parent`);
-
---
--- Index pour la table `qfupd_kunena_messages_text`
---
-ALTER TABLE `qfupd_kunena_messages_text`
-  ADD PRIMARY KEY (`mesid`);
-
---
--- Index pour la table `qfupd_kunena_polls`
---
-ALTER TABLE `qfupd_kunena_polls`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `threadid` (`threadid`);
-
---
--- Index pour la table `qfupd_kunena_polls_options`
---
-ALTER TABLE `qfupd_kunena_polls_options`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `pollid` (`pollid`);
-
---
--- Index pour la table `qfupd_kunena_polls_users`
---
-ALTER TABLE `qfupd_kunena_polls_users`
-  ADD UNIQUE KEY `pollid` (`pollid`,`userid`);
-
---
--- Index pour la table `qfupd_kunena_ranks`
---
-ALTER TABLE `qfupd_kunena_ranks`
-  ADD PRIMARY KEY (`rank_id`);
-
---
--- Index pour la table `qfupd_kunena_sessions`
---
-ALTER TABLE `qfupd_kunena_sessions`
-  ADD PRIMARY KEY (`userid`),
-  ADD KEY `currvisit` (`currvisit`);
-
---
--- Index pour la table `qfupd_kunena_smileys`
---
-ALTER TABLE `qfupd_kunena_smileys`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_kunena_thankyou`
---
-ALTER TABLE `qfupd_kunena_thankyou`
-  ADD UNIQUE KEY `postid` (`postid`,`userid`),
-  ADD KEY `userid` (`userid`),
-  ADD KEY `targetuserid` (`targetuserid`);
-
---
--- Index pour la table `qfupd_kunena_topics`
---
-ALTER TABLE `qfupd_kunena_topics`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `category_id` (`category_id`),
-  ADD KEY `locked` (`locked`),
-  ADD KEY `hold` (`hold`),
-  ADD KEY `posts` (`posts`),
-  ADD KEY `hits` (`hits`),
-  ADD KEY `first_post_userid` (`first_post_userid`),
-  ADD KEY `last_post_userid` (`last_post_userid`),
-  ADD KEY `first_post_time` (`first_post_time`),
-  ADD KEY `last_post_time` (`last_post_time`);
-
---
--- Index pour la table `qfupd_kunena_users`
---
-ALTER TABLE `qfupd_kunena_users`
-  ADD PRIMARY KEY (`userid`),
-  ADD KEY `group_id` (`group_id`),
-  ADD KEY `posts` (`posts`),
-  ADD KEY `uhits` (`uhits`),
-  ADD KEY `banned` (`banned`),
-  ADD KEY `moderator` (`moderator`);
-
---
--- Index pour la table `qfupd_kunena_users_banned`
---
-ALTER TABLE `qfupd_kunena_users_banned`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `userid` (`userid`),
-  ADD KEY `ip` (`ip`),
-  ADD KEY `expiration` (`expiration`),
-  ADD KEY `created_time` (`created_time`);
-
---
--- Index pour la table `qfupd_kunena_user_categories`
---
-ALTER TABLE `qfupd_kunena_user_categories`
-  ADD PRIMARY KEY (`user_id`,`category_id`),
-  ADD KEY `category_subscribed` (`category_id`,`subscribed`),
-  ADD KEY `role` (`role`);
-
---
--- Index pour la table `qfupd_kunena_user_read`
---
-ALTER TABLE `qfupd_kunena_user_read`
-  ADD UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`),
-  ADD KEY `category_user_id` (`category_id`,`user_id`),
-  ADD KEY `time` (`time`);
-
---
--- Index pour la table `qfupd_kunena_user_topics`
---
-ALTER TABLE `qfupd_kunena_user_topics`
-  ADD UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`),
-  ADD KEY `topic_id` (`topic_id`),
-  ADD KEY `posts` (`posts`),
-  ADD KEY `owner` (`owner`),
-  ADD KEY `favorite` (`favorite`),
-  ADD KEY `subscribed` (`subscribed`);
-
---
--- Index pour la table `qfupd_kunena_version`
---
-ALTER TABLE `qfupd_kunena_version`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_languages`
---
-ALTER TABLE `qfupd_languages`
-  ADD PRIMARY KEY (`lang_id`),
-  ADD UNIQUE KEY `idx_sef` (`sef`),
-  ADD UNIQUE KEY `idx_image` (`image`),
-  ADD UNIQUE KEY `idx_langcode` (`lang_code`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_ordering` (`ordering`);
-
---
--- Index pour la table `qfupd_menu`
---
-ALTER TABLE `qfupd_menu`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`,`language`),
-  ADD KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
-  ADD KEY `idx_menutype` (`menutype`),
-  ADD KEY `idx_left_right` (`lft`,`rgt`),
-  ADD KEY `idx_alias` (`alias`),
-  ADD KEY `idx_path` (`path`(255)),
-  ADD KEY `idx_language` (`language`);
-
---
--- Index pour la table `qfupd_menu_types`
---
-ALTER TABLE `qfupd_menu_types`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_menutype` (`menutype`);
-
---
--- Index pour la table `qfupd_messages`
---
-ALTER TABLE `qfupd_messages`
-  ADD PRIMARY KEY (`message_id`),
-  ADD KEY `useridto_state` (`user_id_to`,`state`);
-
---
--- Index pour la table `qfupd_messages_cfg`
---
-ALTER TABLE `qfupd_messages_cfg`
-  ADD UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`);
-
---
--- Index pour la table `qfupd_modules`
---
-ALTER TABLE `qfupd_modules`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `published` (`published`,`access`),
-  ADD KEY `newsfeeds` (`module`,`published`),
-  ADD KEY `idx_language` (`language`);
-
---
--- Index pour la table `qfupd_modules_menu`
---
-ALTER TABLE `qfupd_modules_menu`
-  ADD PRIMARY KEY (`moduleid`,`menuid`);
-
---
--- Index pour la table `qfupd_newsfeeds`
---
-ALTER TABLE `qfupd_newsfeeds`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_state` (`published`),
-  ADD KEY `idx_catid` (`catid`),
-  ADD KEY `idx_createdby` (`created_by`),
-  ADD KEY `idx_language` (`language`),
-  ADD KEY `idx_xreference` (`xreference`);
-
---
--- Index pour la table `qfupd_overrider`
---
-ALTER TABLE `qfupd_overrider`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `qfupd_postinstall_messages`
---
-ALTER TABLE `qfupd_postinstall_messages`
-  ADD PRIMARY KEY (`postinstall_message_id`);
-
---
--- Index pour la table `qfupd_redirect_links`
---
-ALTER TABLE `qfupd_redirect_links`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_link_old` (`old_url`),
-  ADD KEY `idx_link_modifed` (`modified_date`);
-
---
--- Index pour la table `qfupd_schemas`
---
-ALTER TABLE `qfupd_schemas`
-  ADD PRIMARY KEY (`extension_id`,`version_id`);
-
---
--- Index pour la table `qfupd_session`
---
-ALTER TABLE `qfupd_session`
-  ADD PRIMARY KEY (`session_id`),
-  ADD KEY `userid` (`userid`),
-  ADD KEY `time` (`time`);
-
---
--- Index pour la table `qfupd_tags`
---
-ALTER TABLE `qfupd_tags`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `tag_idx` (`published`,`access`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_path` (`path`),
-  ADD KEY `idx_left_right` (`lft`,`rgt`),
-  ADD KEY `idx_alias` (`alias`),
-  ADD KEY `idx_language` (`language`);
-
---
--- Index pour la table `qfupd_template_styles`
---
-ALTER TABLE `qfupd_template_styles`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_template` (`template`),
-  ADD KEY `idx_home` (`home`);
-
---
--- Index pour la table `qfupd_ucm_base`
---
-ALTER TABLE `qfupd_ucm_base`
-  ADD PRIMARY KEY (`ucm_id`),
-  ADD KEY `idx_ucm_item_id` (`ucm_item_id`),
-  ADD KEY `idx_ucm_type_id` (`ucm_type_id`),
-  ADD KEY `idx_ucm_language_id` (`ucm_language_id`);
-
---
--- Index pour la table `qfupd_ucm_content`
---
-ALTER TABLE `qfupd_ucm_content`
-  ADD PRIMARY KEY (`core_content_id`),
-  ADD KEY `tag_idx` (`core_state`,`core_access`),
-  ADD KEY `idx_access` (`core_access`),
-  ADD KEY `idx_alias` (`core_alias`),
-  ADD KEY `idx_language` (`core_language`),
-  ADD KEY `idx_title` (`core_title`),
-  ADD KEY `idx_modified_time` (`core_modified_time`),
-  ADD KEY `idx_created_time` (`core_created_time`),
-  ADD KEY `idx_content_type` (`core_type_alias`),
-  ADD KEY `idx_core_modified_user_id` (`core_modified_user_id`),
-  ADD KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`),
-  ADD KEY `idx_core_created_user_id` (`core_created_user_id`),
-  ADD KEY `idx_core_type_id` (`core_type_id`);
-
---
--- Index pour la table `qfupd_ucm_history`
---
-ALTER TABLE `qfupd_ucm_history`
-  ADD PRIMARY KEY (`version_id`),
-  ADD KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
-  ADD KEY `idx_save_date` (`save_date`);
-
---
--- Index pour la table `qfupd_updates`
---
-ALTER TABLE `qfupd_updates`
-  ADD PRIMARY KEY (`update_id`);
-
---
--- Index pour la table `qfupd_update_sites`
---
-ALTER TABLE `qfupd_update_sites`
-  ADD PRIMARY KEY (`update_site_id`);
-
---
--- Index pour la table `qfupd_update_sites_extensions`
---
-ALTER TABLE `qfupd_update_sites_extensions`
-  ADD PRIMARY KEY (`update_site_id`,`extension_id`);
-
---
--- Index pour la table `qfupd_usergroups`
---
-ALTER TABLE `qfupd_usergroups`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`),
-  ADD KEY `idx_usergroup_title_lookup` (`title`),
-  ADD KEY `idx_usergroup_adjacency_lookup` (`parent_id`),
-  ADD KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE;
-
---
--- Index pour la table `qfupd_users`
---
-ALTER TABLE `qfupd_users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_name` (`name`),
-  ADD KEY `idx_block` (`block`),
-  ADD KEY `username` (`username`),
-  ADD KEY `email` (`email`);
-
---
--- Index pour la table `qfupd_userxtd_fields`
---
-ALTER TABLE `qfupd_userxtd_fields`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_createdby` (`catid`),
-  ADD KEY `idx_language` (`language`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `cat_index` (`published`,`access`,`catid`);
-
---
--- Index pour la table `qfupd_userxtd_profiles`
---
-ALTER TABLE `qfupd_userxtd_profiles`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_language` (`language`),
-  ADD KEY `cat_index` (`access`),
-  ADD KEY `idx_value` (`value`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `key` (`key`);
-
---
--- Index pour la table `qfupd_user_keys`
---
-ALTER TABLE `qfupd_user_keys`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `series` (`series`),
-  ADD UNIQUE KEY `series_2` (`series`),
-  ADD UNIQUE KEY `series_3` (`series`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- Index pour la table `qfupd_user_notes`
---
-ALTER TABLE `qfupd_user_notes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_user_id` (`user_id`),
-  ADD KEY `idx_category_id` (`catid`);
-
---
--- Index pour la table `qfupd_user_profiles`
---
-ALTER TABLE `qfupd_user_profiles`
-  ADD UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`);
-
---
--- Index pour la table `qfupd_user_usergroup_map`
---
-ALTER TABLE `qfupd_user_usergroup_map`
-  ADD PRIMARY KEY (`user_id`,`group_id`);
-
---
--- Index pour la table `qfupd_viewlevels`
---
-ALTER TABLE `qfupd_viewlevels`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_assetgroup_title_lookup` (`title`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `qfupd_assets`
---
-ALTER TABLE `qfupd_assets`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=247;
---
--- AUTO_INCREMENT pour la table `qfupd_banners`
---
-ALTER TABLE `qfupd_banners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_banner_clients`
---
-ALTER TABLE `qfupd_banner_clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_categories`
---
-ALTER TABLE `qfupd_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_core`
---
-ALTER TABLE `qfupd_cck_core`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_core_activities`
---
-ALTER TABLE `qfupd_cck_core_activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_core_fields`
---
-ALTER TABLE `qfupd_cck_core_fields`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100538;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_core_folders`
---
-ALTER TABLE `qfupd_cck_core_folders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_core_objects`
---
-ALTER TABLE `qfupd_cck_core_objects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_core_searchs`
---
-ALTER TABLE `qfupd_cck_core_searchs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_core_sites`
---
-ALTER TABLE `qfupd_cck_core_sites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_core_templates`
---
-ALTER TABLE `qfupd_cck_core_templates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_core_types`
---
-ALTER TABLE `qfupd_cck_core_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_core_versions`
---
-ALTER TABLE `qfupd_cck_core_versions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=519;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_more_countries`
---
-ALTER TABLE `qfupd_cck_more_countries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=247;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_more_processings`
---
-ALTER TABLE `qfupd_cck_more_processings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_cck_more_sessions`
---
-ALTER TABLE `qfupd_cck_more_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_contact_details`
---
-ALTER TABLE `qfupd_contact_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_content`
---
-ALTER TABLE `qfupd_content`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
---
--- AUTO_INCREMENT pour la table `qfupd_content_types`
---
-ALTER TABLE `qfupd_content_types`
-  MODIFY `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT pour la table `qfupd_extensions`
---
-ALTER TABLE `qfupd_extensions`
-  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10273;
---
--- AUTO_INCREMENT pour la table `qfupd_finder_filters`
---
-ALTER TABLE `qfupd_finder_filters`
-  MODIFY `filter_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_finder_links`
---
-ALTER TABLE `qfupd_finder_links`
-  MODIFY `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_finder_taxonomy`
---
-ALTER TABLE `qfupd_finder_taxonomy`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT pour la table `qfupd_finder_terms`
---
-ALTER TABLE `qfupd_finder_terms`
-  MODIFY `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_finder_types`
---
-ALTER TABLE `qfupd_finder_types`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT pour la table `qfupd_icagenda`
---
-ALTER TABLE `qfupd_icagenda`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT pour la table `qfupd_icagenda_category`
---
-ALTER TABLE `qfupd_icagenda_category`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT pour la table `qfupd_icagenda_customfields`
---
-ALTER TABLE `qfupd_icagenda_customfields`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_icagenda_customfields_data`
---
-ALTER TABLE `qfupd_icagenda_customfields_data`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_icagenda_events`
---
-ALTER TABLE `qfupd_icagenda_events`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
---
--- AUTO_INCREMENT pour la table `qfupd_icagenda_feature`
---
-ALTER TABLE `qfupd_icagenda_feature`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_icagenda_feature_xref`
---
-ALTER TABLE `qfupd_icagenda_feature_xref`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_icagenda_registration`
---
-ALTER TABLE `qfupd_icagenda_registration`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_announcement`
---
-ALTER TABLE `qfupd_kunena_announcement`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_attachments`
---
-ALTER TABLE `qfupd_kunena_attachments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_categories`
---
-ALTER TABLE `qfupd_kunena_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_keywords`
---
-ALTER TABLE `qfupd_kunena_keywords`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_messages`
---
-ALTER TABLE `qfupd_kunena_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_polls`
---
-ALTER TABLE `qfupd_kunena_polls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_polls_options`
---
-ALTER TABLE `qfupd_kunena_polls_options`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_ranks`
---
-ALTER TABLE `qfupd_kunena_ranks`
-  MODIFY `rank_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_smileys`
---
-ALTER TABLE `qfupd_kunena_smileys`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=67;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_topics`
---
-ALTER TABLE `qfupd_kunena_topics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_users_banned`
---
-ALTER TABLE `qfupd_kunena_users_banned`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_kunena_version`
---
-ALTER TABLE `qfupd_kunena_version`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT pour la table `qfupd_languages`
---
-ALTER TABLE `qfupd_languages`
-  MODIFY `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT pour la table `qfupd_menu`
---
-ALTER TABLE `qfupd_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=235;
---
--- AUTO_INCREMENT pour la table `qfupd_menu_types`
---
-ALTER TABLE `qfupd_menu_types`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT pour la table `qfupd_messages`
---
-ALTER TABLE `qfupd_messages`
-  MODIFY `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_modules`
---
-ALTER TABLE `qfupd_modules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=106;
---
--- AUTO_INCREMENT pour la table `qfupd_newsfeeds`
---
-ALTER TABLE `qfupd_newsfeeds`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_overrider`
---
-ALTER TABLE `qfupd_overrider`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key';
---
--- AUTO_INCREMENT pour la table `qfupd_postinstall_messages`
---
-ALTER TABLE `qfupd_postinstall_messages`
-  MODIFY `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT pour la table `qfupd_redirect_links`
---
-ALTER TABLE `qfupd_redirect_links`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT pour la table `qfupd_tags`
---
-ALTER TABLE `qfupd_tags`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT pour la table `qfupd_template_styles`
---
-ALTER TABLE `qfupd_template_styles`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
---
--- AUTO_INCREMENT pour la table `qfupd_ucm_content`
---
-ALTER TABLE `qfupd_ucm_content`
-  MODIFY `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_ucm_history`
---
-ALTER TABLE `qfupd_ucm_history`
-  MODIFY `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=69;
---
--- AUTO_INCREMENT pour la table `qfupd_updates`
---
-ALTER TABLE `qfupd_updates`
-  MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT pour la table `qfupd_update_sites`
---
-ALTER TABLE `qfupd_update_sites`
-  MODIFY `update_site_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT pour la table `qfupd_usergroups`
---
-ALTER TABLE `qfupd_usergroups`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=15;
---
--- AUTO_INCREMENT pour la table `qfupd_users`
---
-ALTER TABLE `qfupd_users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=822;
---
--- AUTO_INCREMENT pour la table `qfupd_userxtd_fields`
---
-ALTER TABLE `qfupd_userxtd_fields`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
---
--- AUTO_INCREMENT pour la table `qfupd_userxtd_profiles`
---
-ALTER TABLE `qfupd_userxtd_profiles`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=151;
---
--- AUTO_INCREMENT pour la table `qfupd_user_keys`
---
-ALTER TABLE `qfupd_user_keys`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT pour la table `qfupd_user_notes`
---
-ALTER TABLE `qfupd_user_notes`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `qfupd_viewlevels`
---
-ALTER TABLE `qfupd_viewlevels`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=11;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
