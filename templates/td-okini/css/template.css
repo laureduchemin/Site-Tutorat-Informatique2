@@ -1749,7 +1749,7 @@ a.feed-link {
 
 #footer_wrap {
 	background-color: #fff;
-	padding-bottom: 20px;
+	padding-bottom: 5px;
 	min-width: 1068px;
 }
 
@@ -1757,7 +1757,7 @@ a.feed-link {
 	clear: both;
 	width: 1000px;
 	margin: auto;
-	padding-top: 20px;
+	padding-top: 5px;
 	background-color: #fff;
 }
 
@@ -1776,7 +1776,7 @@ a.feed-link {
 	clear: both;
 	width: 1000px;
 	margin: auto;
-	padding-top: 70px;
+	padding-top: 5px;
 	font-size: 0.86em;
 	text-align: center; 
 	color: #555555;
