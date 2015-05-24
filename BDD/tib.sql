@@ -3,16 +3,18 @@
 -- http://www.phpmyadmin.net
 --
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Client :  localhost
 -- Généré le :  Dim 24 Mai 2015 à 16:34
 -- Version du serveur :  5.5.42
 -- Version de PHP :  5.6.7
 =======
+=======
+>>>>>>> origin/master
 -- Client :  127.0.0.1
 -- Généré le :  Dim 24 Mai 2015 à 15:32
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
->>>>>>> origin/master
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -36,16 +38,18 @@ CREATE TABLE `qfupd_assets` (
   `name` varchar(50) NOT NULL COMMENT 'The unique name for the asset.\n',
   `title` varchar(100) NOT NULL COMMENT 'The descriptive title for the asset.',
 <<<<<<< HEAD
+<<<<<<< HEAD
   `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.'
 ) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=utf8;
 =======
+=======
+>>>>>>> origin/master
   `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_asset_name` (`name`),
   KEY `idx_lft_rgt` (`lft`,`rgt`),
   KEY `idx_parent_id` (`parent_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=253 ;
->>>>>>> origin/master
 
 --
 -- Contenu de la table `qfupd_assets`
@@ -53,16 +57,19 @@ CREATE TABLE `qfupd_assets` (
 
 INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `title`, `rules`) VALUES
 <<<<<<< HEAD
+<<<<<<< HEAD
 (1, 0, 0, 333, 0, 'root.1', 'Root Asset', '{"core.login.site":{"2":1},"core.login.admin":[],"core.login.offline":[],"core.admin":{"8":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 =======
-(1, 0, 0, 329, 0, 'root.1', 'Root Asset', '{"core.login.site":{"2":1},"core.login.admin":[],"core.login.offline":[],"core.admin":{"8":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+=======
 >>>>>>> origin/master
+(1, 0, 0, 329, 0, 'root.1', 'Root Asset', '{"core.login.site":{"2":1},"core.login.admin":[],"core.login.offline":[],"core.admin":{"8":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (2, 1, 1, 2, 1, 'com_admin', 'com_admin', '{}'),
 (3, 1, 3, 6, 1, 'com_banners', 'com_banners', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (4, 1, 7, 8, 1, 'com_cache', 'com_cache', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
 (5, 1, 9, 10, 1, 'com_checkin', 'com_checkin', '{"core.admin":{"7":1},"core.manage":{"7":1}}'),
 (6, 1, 11, 12, 1, 'com_config', 'com_config', '{}'),
 (7, 1, 13, 16, 1, 'com_contact', 'com_contact', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+<<<<<<< HEAD
 <<<<<<< HEAD
 (8, 1, 17, 62, 1, 'com_content', 'com_content', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
 (9, 1, 63, 64, 1, 'com_cpanel', 'com_cpanel', '{}'),
@@ -83,6 +90,8 @@ INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (24, 1, 163, 166, 1, 'com_users', 'com_users', '{"core.admin":[],"core.manage":[],"core.create":{"10":1},"core.delete":{"10":1},"core.edit":{"10":1},"core.edit.state":[]}'),
 (26, 1, 167, 168, 1, 'com_wrapper', 'com_wrapper', '{}'),
 =======
+=======
+>>>>>>> origin/master
 (8, 1, 17, 60, 1, 'com_content', 'com_content', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
 (9, 1, 61, 62, 1, 'com_cpanel', 'com_cpanel', '{}'),
 (10, 1, 63, 64, 1, 'com_installer', 'com_installer', '{"core.admin":[],"core.manage":{"7":0},"core.delete":{"7":0},"core.edit.state":{"7":0}}'),
@@ -162,11 +171,11 @@ INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (72, 1, 197, 198, 1, '#__icagenda_events.8', '#__icagenda_events.8', ''),
 (73, 1, 199, 200, 1, '#__icagenda_events.9', '#__icagenda_events.9', ''),
 (74, 1, 201, 202, 1, '#__icagenda_events.10', '#__icagenda_events.10', ''),
->>>>>>> origin/master
 (75, 27, 21, 22, 3, 'com_content.article.2', 'Présentation du Tutorat', '{"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'),
 (76, 27, 23, 24, 3, 'com_content.article.3', 'Confirmation d''ajout cours', '{"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'),
 (77, 27, 25, 26, 3, 'com_content.article.4', 'Confirmation inscription cours :', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
 (82, 27, 27, 28, 3, 'com_content.article.5', 'Mon profil', '{"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'),
+<<<<<<< HEAD
 <<<<<<< HEAD
 (92, 8, 38, 59, 2, 'com_content.category.8', 'Users', '{"core.create":{"1":0},"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (93, 8, 60, 61, 2, 'com_content.category.9', 'User Groups', '{"core.create":{"1":0},"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
@@ -243,6 +252,8 @@ INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (202, 171, 283, 284, 5, 'com_cck.form.30', 'Article Grp Images & Links', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
 (203, 169, 260, 261, 4, 'com_cck.form.35', 'Button Grp (Form)', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
 =======
+=======
+>>>>>>> origin/master
 (92, 8, 38, 57, 2, 'com_content.category.8', 'Users', '{"core.create":{"1":0},"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (93, 8, 58, 59, 2, 'com_content.category.9', 'User Groups', '{"core.create":{"1":0},"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (132, 1, 203, 214, 1, 'com_userxtd', 'com_userxtd', '{"core.admin":[],"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
@@ -330,16 +341,18 @@ INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (246, 27, 33, 34, 3, 'com_content.article.41', 'Ressources', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (249, 27, 35, 36, 3, 'com_content.article.44', 'Contactez-nous', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 <<<<<<< HEAD
+<<<<<<< HEAD
 (250, 18, 146, 147, 2, 'com_modules.module.106', 'Footer droit', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
 (251, 18, 148, 149, 2, 'com_modules.module.107', 'Footer gauche', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
 (252, 92, 55, 56, 3, 'com_content.article.45', 'tuteur', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
 (253, 1, 331, 332, 1, '#__icagenda_events.16', '#__icagenda_events.16', ''),
 (254, 92, 57, 58, 3, 'com_content.article.46', 'Test', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}');
 =======
+=======
+>>>>>>> origin/master
 (250, 18, 144, 145, 2, 'com_modules.module.106', 'Footer droit', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
 (251, 18, 146, 147, 2, 'com_modules.module.107', 'Footer gauche', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
 (252, 92, 55, 56, 3, 'com_content.article.45', 'tuteur', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}');
->>>>>>> origin/master
 
 -- --------------------------------------------------------
 
@@ -2539,9 +2552,12 @@ CREATE TABLE `qfupd_content` (
   `featured` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
   `language` char(7) NOT NULL COMMENT 'The language code for the article.',
 <<<<<<< HEAD
+<<<<<<< HEAD
   `xreference` varchar(50) NOT NULL COMMENT 'A reference to enable linkages to external data sets.'
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 =======
+=======
+>>>>>>> origin/master
   `xreference` varchar(50) NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
   PRIMARY KEY (`id`),
   KEY `idx_access` (`access`),
@@ -2553,7 +2569,6 @@ CREATE TABLE `qfupd_content` (
   KEY `idx_language` (`language`),
   KEY `idx_xreference` (`xreference`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=46 ;
->>>>>>> origin/master
 
 --
 -- Contenu de la table `qfupd_content`
@@ -2562,7 +2577,11 @@ CREATE TABLE `qfupd_content` (
 INSERT INTO `qfupd_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`) VALUES
 (1, 61, 'Comment débuter ?', 'comment-debuter', '<p style="text-align: justify;">La création d''un site web avec Joomla est simple, le déploiement de ce site exemple vous y aidera. <br />Les quelques principes de base présentés ci-dessous vous guideront dans la compréhension de ce logiciel.</p><h3>Qu''est-ce qu''un Système de Gestion de Contenu ?</h3><p style="text-align: justify;">Un   système de gestion de contenu (SGC ou CMS de l''anglais Content  Management System) est un logiciel qui vous permet de créer  et gérer  des pages Web facilement, séparant la création des contenus de la  gestion technique nécessaire à une diffusion sur le web.</p><p style="text-align: justify;">Le  contenu rédactionnel est stocké et restitué par une base de données, l''aspect (police, taille, couleur, emplacement, etc.) est géré par un  template (habillage du site). Le logiciel Joomla permet d''unir ces deux  structures de manière conviviale et de les rendre accessibles au plus  grand nombre d''utilisateurs.</p><h3>Deux interfaces</h3><p>Un site Joomla est structuré en deux parties distinctes : la partie visible du site appelée «Frontal» de <em>Frontend</em> en anglais et, la partie d''administration pure appelée «Administration» de <em>Administrator</em>.</p><h3 style="text-align: justify;">Administration</h3><p style="text-align: justify;">Vous pouvez accéder à l''administration en cliquant sur le sur le lien «Administration» présent dans le module de menu «Menu membre» visible après vous être connecté sur le site ou, en  ajoutant  <em>/administrator</em> dans l''URL après le nom de domaine (exemple : www.mon-domaine.com/administrator).</p><p style="text-align: justify;">Utilisez le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Frontal</h3><p style="text-align: justify;">Si votre profil possède les droits suffisants, vous pouvez créer des articles et les éditer depuis l''interface frontale du site.</p><p style="text-align: justify;">Connectez-vous par le module «Connexion» en utilisant le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Créer un article en frontal</h3><p style="text-align: justify;">Lorsque vous êtes connecté, un nouveau menu nommé «Menu Membres» apparaît. Cliquez sur le lien  «Créer un article» pour afficher l''éditeur de texte et d''insertion de médias.</p><p style="text-align: justify;">Pour enregistrer l''article, vous devez spécifier à quelle catégorie il appartient ainsi que son statut de publication. Pour le modifier, cliquez sur l''icône d''édition <img src="media/system/images/edit.png" border="0" alt="Editer un article" width="18" height="18" style="vertical-align: middle;" />.</p><p style="text-align: justify;">Vous pouvez travailler sur des articles non publiés ou de publication programmée dans le temps et, dans le cadre d''un travail collaboratif, ne les rendre visibles qu''à un groupe d''utilisateurs donnés avant de les rendre publics.</p><h3>En savoir plus</h3><p>Une pleine utilisation de Joomla requiert certaines connaissances approfondies que vous pourrez acquérir dans la <a href="http://docs.joomla.org/" target="_blank">documentation officielle de Joomla</a> ou sur le <a href="http://aide.joomla.fr/" target="_blank">site d''aide francophone</a> et dans le <a href="http://forum.joomla.org/" target="_blank">forum officiel</a> ou le <a href="http://forum.joomla.fr/" target="_blank">forum francophone</a>.</p>', '', 1, 2, '2013-11-16 00:00:00', 802, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2013-11-16 00:00:00', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 7, '', '', 1, 143, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 <<<<<<< HEAD
+<<<<<<< HEAD
 (2, 75, 'Présentation du Tutorat', 'presentation-du-tutorat', '<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial;">Bienvenue sur le site du tutorat informatique de l’Université François Rabelais de Blois. </h1>\r\n<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial; min-height: 14px;"> </h1>\r\n<p>Le tutorat a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.</p>\r\n<p>Le tutorat propose un agenda en ligne pour rencontrer les tuteurs afin de s’inscrire aux différents cours proposés. Un forum et une bibliothèque sont à disposition pour chaque étudiant inscrit. Dès votre connexion, vous pourrez de plus, accéder à une page statistique ainsi qu’une page bilan.</p>\r\n<p>Ce soutien est destiné à toutes personnes voulant aider ou qui ressentent le besoin d’être aidé dans sa scolarité en Informatique et Mathématiques. </p>\r\n<p>Si vous avez des questions ou pour plus d’informations, vous pouvez toujours nous contacter via les liens prévus à cet effet.</p>\r\n<h2> </h2>', '', 1, 2, '2015-04-15 18:51:20', 802, '', '2015-04-15 18:57:39', 802, 0, '0000-00-00 00:00:00', '2015-04-15 18:51:20', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 7, 6, '', '', 1, 508, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+=======
+(2, 75, 'Présentation du Tutorat', 'presentation-du-tutorat', '<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial;">Bienvenue sur le site du tutorat informatique de l’Université François Rabelais de Blois. </h1>\r\n<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial; min-height: 14px;"> </h1>\r\n<p>Le tutorat a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.</p>\r\n<p>Le tutorat propose un agenda en ligne pour rencontrer les tuteurs afin de s’inscrire aux différents cours proposés. Un forum et une bibliothèque sont à disposition pour chaque étudiant inscrit. Dès votre connexion, vous pourrez de plus, accéder à une page statistique ainsi qu’une page bilan.</p>\r\n<p>Ce soutien est destiné à toutes personnes voulant aider ou qui ressentent le besoin d’être aidé dans sa scolarité en Informatique et Mathématiques. </p>\r\n<p>Si vous avez des questions ou pour plus d’informations, vous pouvez toujours nous contacter via les liens prévus à cet effet.</p>\r\n<h2> </h2>', '', 1, 2, '2015-04-15 18:51:20', 802, '', '2015-04-15 18:57:39', 802, 0, '0000-00-00 00:00:00', '2015-04-15 18:51:20', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 7, 6, '', '', 1, 493, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+>>>>>>> origin/master
 =======
 (2, 75, 'Présentation du Tutorat', 'presentation-du-tutorat', '<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial;">Bienvenue sur le site du tutorat informatique de l’Université François Rabelais de Blois. </h1>\r\n<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial; min-height: 14px;"> </h1>\r\n<p>Le tutorat a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.</p>\r\n<p>Le tutorat propose un agenda en ligne pour rencontrer les tuteurs afin de s’inscrire aux différents cours proposés. Un forum et une bibliothèque sont à disposition pour chaque étudiant inscrit. Dès votre connexion, vous pourrez de plus, accéder à une page statistique ainsi qu’une page bilan.</p>\r\n<p>Ce soutien est destiné à toutes personnes voulant aider ou qui ressentent le besoin d’être aidé dans sa scolarité en Informatique et Mathématiques. </p>\r\n<p>Si vous avez des questions ou pour plus d’informations, vous pouvez toujours nous contacter via les liens prévus à cet effet.</p>\r\n<h2> </h2>', '', 1, 2, '2015-04-15 18:51:20', 802, '', '2015-04-15 18:57:39', 802, 0, '0000-00-00 00:00:00', '2015-04-15 18:51:20', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 7, 6, '', '', 1, 493, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 >>>>>>> origin/master
@@ -2570,6 +2589,7 @@ INSERT INTO `qfupd_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `f
 (4, 77, 'Confirmation inscription cours :', 'confirmation-inscription-cours', '<p>Votre inscription à bien été prise en compte. Un E-MAIL de confirmation vous a été envoyé.</p>', '', 1, 2, '2015-04-16 13:51:11', 802, '', '2015-04-16 13:51:11', 0, 802, '2015-05-12 10:09:31', '2015-04-16 13:51:11', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 4, '', '', 1, 7, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 (5, 82, 'Mon profil', 'profil', '', '', -2, 2, '2015-05-12 10:14:49', 802, '', '2015-05-12 10:26:51', 802, 0, '0000-00-00 00:00:00', '2015-05-12 10:14:49', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 2, 2, '', '', 1, 1, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 (6, 158, 'Comment devenir tuteur ?', 'devenir-tuteur', '<p>Le seul pré-requis est que vous devez être un étudiant en deuxième ou troisième année de licence Informatique.</p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;"> </p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Vous devez d''abord vous inscrire en tant que tutoré qui est mis par défaut sur la page inscription du site.</p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Ensuite, envoyer un mail au responsable de L1 avec une lettre de motivation ou allez directement le voir pour lui dire que vous êtes intéressés pour devenir tuteur.</p>\r\n<h2 style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;"> </h2>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Celui-ci regardera votre dossier et votre motivation, puis validera (ou non) votre demande en modifiant votre rôle de tutoré en tuteur.</p>', '', 1, 2, '2015-05-17 17:14:14', 803, '', '2015-05-20 18:09:53', 820, 0, '0000-00-00 00:00:00', '2015-05-17 17:14:14', '0000-00-00 00:00:00', '{}', '{}', '{}', 5, 3, '', '', 1, 20, '{}', 0, '*', ''),
+<<<<<<< HEAD
 <<<<<<< HEAD
 (11, 212, 'JOGUET', 'joguet', '::cck::17::/cck::', '', 1, 8, '2015-05-18 23:35:12', 814, '', '2015-05-18 23:35:12', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:35:12', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 9, '', '', 2, 1, '{}', 0, '*', ''),
 (12, 213, 'IGUE', 'igue', '::cck::18::/cck::', '', 1, 8, '2015-05-18 23:44:53', 815, '', '2015-05-18 23:44:53', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:44:53', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 8, '', '', 2, 0, '{}', 0, '*', ''),
@@ -2579,6 +2599,8 @@ INSERT INTO `qfupd_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `f
 (16, 218, 'BRIZION', 'brizion', '::cck::22::/cck::', '', 1, 8, '2015-05-19 00:39:25', 819, '', '2015-05-19 00:42:42', 818, 0, '0000-00-00 00:00:00', '2015-05-19 00:39:25', '0000-00-00 00:00:00', '{}', '{}', '{}', 2, 4, '', '', 2, 0, '{}', 0, '*', ''),
 (17, 219, 'MARINIER', 'marinier', '::cck::23::/cck::', '', 1, 8, '2015-05-19 00:41:34', 820, '', '2015-05-19 00:42:12', 818, 0, '0000-00-00 00:00:00', '2015-05-19 00:41:34', '0000-00-00 00:00:00', '{}', '{}', '{}', 2, 3, '', '', 2, 16, '{}', 0, '*', ''),
 =======
+=======
+>>>>>>> origin/master
 (11, 212, 'JOGUET', 'joguet', '::cck::17::/cck::', '', 1, 8, '2015-05-18 23:35:12', 814, '', '2015-05-18 23:35:12', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:35:12', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 10, '', '', 2, 1, '{}', 0, '*', ''),
 (12, 213, 'IGUE', 'igue', '::cck::18::/cck::', '', 1, 8, '2015-05-18 23:44:53', 815, '', '2015-05-18 23:44:53', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:44:53', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 9, '', '', 2, 0, '{}', 0, '*', ''),
 (13, 214, 'HUART', 'huart', '::cck::19::/cck::', '', 1, 8, '2015-05-18 23:57:38', 816, '', '2015-05-18 23:57:38', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:57:38', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 8, '', '', 2, 0, '{}', 0, '*', ''),
@@ -2597,7 +2619,6 @@ INSERT INTO `qfupd_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `f
 =======
 (44, 249, 'Contactez-nous', 'contactez-nous', '<p>Si tu as des questions concernant le tutorat tu peux joindre le responsable aux coordonnées suivant :</p>\r\n<p style="text-align: center;"> <strong>M. Jean-Yves Antoine</strong></p>\r\n<p style="text-align: center;"><strong>3 Place Jean Jaurès, 41000 Blois</strong></p>\r\n<p style="text-align: center;"><strong>Bâtiment C, étage 3, bureau 7</strong></p>\r\n<p style="text-align: center;"><strong>Email : <a href="mailto:jean-yves.antoine@univ-tours.fr">jean-yves.antoine@univ-tours.fr</a></strong></p>\r\n<p style="text-align: center;"><strong>Email : <a href="mailto:responsable.tutorat@gmail.com">responsable.tutorat@gmail.com</a></strong></p>\r\n<p style="text-align: center;"> </p>\r\n\r\n<p style="text-align: center;"> <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1345.4066373445617!2d1.336488626983634!3d47.590873883504635!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa0d9b378d47ecc0b!2sd%C3%A9partement+informatique+de+l&#39;universit%C3%A9+Fran%C3%A7ois+Rabelais+Tours+Blois!5e0!3m2!1sfr!2sfr!4v1432459638516" width="600" height="450" frameborder="0" style="border:0"></iframe></p>\r\n\r\n\r\n<p>Tu peux aussi poser toutes tes questions sur le <a title="lien forum" href="index.php/forum" target="_blank">forum des étudiants de licence informatique</a>.</p>', '', 1, 2, '2015-05-24 08:57:58', 818, '', '2015-05-24 11:45:23', 818, 0, '0000-00-00 00:00:00', '2015-05-24 08:57:58', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 17, 0, '', '', 1, 30, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 (45, 252, 'tuteur', 'tuteur', '::cck::59::/cck::', '', 1, 8, '2015-05-24 12:58:01', 824, '', '2015-05-24 12:58:01', 0, 0, '0000-00-00 00:00:00', '2015-05-24 12:58:01', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 0, '', '', 2, 0, '{}', 0, '*', '');
->>>>>>> origin/master
 
 -- --------------------------------------------------------
 
@@ -3713,14 +3734,9 @@ CREATE TABLE `qfupd_icagenda_events` (
   `shortdesc` text NOT NULL,
   `desc` mediumtext NOT NULL,
   `metadesc` text NOT NULL,
-<<<<<<< HEAD
-  `params` text NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
-=======
   `params` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
->>>>>>> origin/master
 
 --
 -- Contenu de la table `qfupd_icagenda_events`
@@ -3742,8 +3758,12 @@ INSERT INTO `qfupd_icagenda_events` (`id`, `asset_id`, `ordering`, `state`, `app
 (13, 0, 0, 0, 0, 161, 0, '0000-00-00 00:00:00', ',,', '2015-04-16-13-46-10', 1, '*', '2015-04-16 13:46:10', 802, '', 'duchemin_laure@yahoo.fr', '0000-00-00 00:00:00', 0, 'DUCHEMIN', 2, '', '', 1, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'a:1:{i:0;s:16:"2015-04-30 00:00";}', '2015-04-30 00:00:00', '', '', '', '', '', '', '', '', '', '', 0.0000000000000000, 0.0000000000000000, '', '', '', '{"statutReg":"1","maxReg":"","accessReg":"","maxRlistGlobal":"","maxRlist":""}'),
 (14, 0, 0, 0, 0, 161, 0, '0000-00-00 00:00:00', 'lk', 'lk', 1, '*', '2015-04-16 14:20:15', 802, '', 'duchemin_laure@yahoo.fr', '0000-00-00 00:00:00', 0, 'DUCHEMIN', 1, '', '', 1, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'a:1:{i:0;s:16:"2015-04-29 00:00";}', '2015-04-29 00:00:00', '', '', '', '', '', '', '', '', '', '', 0.0000000000000000, 0.0000000000000000, '', '', '', '{"statutReg":"1","maxReg":"","accessReg":"","maxRlistGlobal":"","maxRlist":""}'),
 <<<<<<< HEAD
+<<<<<<< HEAD
 (15, 0, 0, 0, 0, 161, 0, '0000-00-00 00:00:00', 'jkhkjh', 'jkhkjh', 1, '*', '2015-04-16 14:22:03', 802, '', 'duchemin_laure@yahoo.fr', '0000-00-00 00:00:00', 0, 'DUCHEMIN', 1, '', '', 1, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'a:1:{i:0;s:16:"2015-04-29 10:30";}', '2015-04-29 10:30:00', '', '', '', '', '', '', '', '', '', '', 0.0000000000000000, 0.0000000000000000, '', '', '', '{"statutReg":"1","maxReg":"","accessReg":"","maxRlistGlobal":"","maxRlist":""}'),
 (16, 253, 9, 1, 0, 0, 0, '0000-00-00 00:00:00', 'Cours Pré-Rentrée', 'cours-pre-rentree', 1, '*', '2015-05-24 14:15:15', 0, '', '', '0000-00-00 00:00:00', 0, 'DUCHEMIN', 1, '', '', 1, '', '', '2015-09-01 08:15:00', '2015-09-01 10:00:00', 'a:1:{i:0;s:16:"2015-09-01 08:15";}', 'a:1:{i:0;s:16:"0000-00-00 00:00";}', '2015-09-01 08:15:00', '', '', '', '', '', '', '', '', '', '', 0.0000000000000000, 0.0000000000000000, 'Cours de remise à niveau et de révision afin de bien commencer l''année scolaire !', '', '', '{"statutReg":"1","accessReg":"","RegButtonLink":"","RegButtonLink_Article":"","RegButtonLink_Url":"","typeReg":"1","maxReg":"15","maxRlistGlobal":"","maxRlist":"","RegButtonText":"","RegButtonTarget":"0","atevent":""}');
+=======
+(15, 0, 0, 0, 0, 161, 0, '0000-00-00 00:00:00', 'jkhkjh', 'jkhkjh', 1, '*', '2015-04-16 14:22:03', 802, '', 'duchemin_laure@yahoo.fr', '0000-00-00 00:00:00', 0, 'DUCHEMIN', 1, '', '', 1, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'a:1:{i:0;s:16:"2015-04-29 10:30";}', '2015-04-29 10:30:00', '', '', '', '', '', '', '', '', '', '', 0.0000000000000000, 0.0000000000000000, '', '', '', '{"statutReg":"1","maxReg":"","accessReg":"","maxRlistGlobal":"","maxRlist":""}');
+>>>>>>> origin/master
 =======
 (15, 0, 0, 0, 0, 161, 0, '0000-00-00 00:00:00', 'jkhkjh', 'jkhkjh', 1, '*', '2015-04-16 14:22:03', 802, '', 'duchemin_laure@yahoo.fr', '0000-00-00 00:00:00', 0, 'DUCHEMIN', 1, '', '', 1, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'a:1:{i:0;s:16:"2015-04-29 10:30";}', '2015-04-29 10:30:00', '', '', '', '', '', '', '', '', '', '', 0.0000000000000000, 0.0000000000000000, '', '', '', '{"statutReg":"1","maxReg":"","accessReg":"","maxRlistGlobal":"","maxRlist":""}');
 >>>>>>> origin/master
@@ -4990,12 +5010,14 @@ CREATE TABLE `qfupd_session` (
 
 INSERT INTO `qfupd_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
 <<<<<<< HEAD
+<<<<<<< HEAD
 ('19e27914a3d6d011e72dbaac934a40b7', 0, 1, '1432477966', '__default|a:8:{s:15:"session.counter";i:4;s:19:"session.timer.start";i:1432477882;s:18:"session.timer.last";i:1432477951;s:17:"session.timer.now";i:1432477965;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":26:{s:9:"\\0\\0\\0isRoot";b:0;s:2:"id";i:0;s:4:"name";N;s:8:"username";N;s:5:"email";N;s:8:"password";N;s:14:"password_clear";s:0:"";s:5:"block";N;s:9:"sendEmail";i:0;s:12:"registerDate";N;s:13:"lastvisitDate";N;s:10:"activation";N;s:6:"params";N;s:6:"groups";a:1:{i:0;s:1:"9";}s:5:"guest";i:1;s:13:"lastResetTime";N;s:10:"resetCount";N;s:12:"requireReset";N;s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:9;}s:14:"\\0\\0\\0_authLevels";a:3:{i:0;i:1;i:1;i:1;i:2;i:5;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;}s:13:"session.token";s:32:"f2dd4a6c5e93978d2ec88158f8151ecf";}', 0, ''),
 ('d8ee8f12633d4f8adf0d6aa43714d2ff', 1, 0, '1432477242', '__default|a:9:{s:15:"session.counter";i:21;s:19:"session.timer.start";i:1432475974;s:18:"session.timer.last";i:1432477236;s:17:"session.timer.now";i:1432477239;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":7:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:0:"";}s:13:"com_installer";O:8:"stdClass":2:{s:7:"message";s:0:"";s:17:"extension_message";s:0:"";}s:11:"com_content";O:8:"stdClass":1:{s:4:"edit";O:8:"stdClass":1:{s:7:"article";O:8:"stdClass":2:{s:2:"id";a:0:{}s:4:"data";N;}}}s:12:"com_icagenda";O:8:"stdClass":1:{s:4:"edit";O:8:"stdClass":1:{s:5:"event";O:8:"stdClass":1:{s:4:"data";N;}}}s:9:"com_menus";O:8:"stdClass":1:{s:5:"items";O:8:"stdClass":3:{s:8:"menutype";s:8:"mainmenu";s:10:"limitstart";i:0;s:4:"list";a:4:{s:9:"direction";s:3:"asc";s:5:"limit";s:2:"20";s:8:"ordering";s:5:"a.lft";s:5:"start";d:0;}}}s:9:"com_users";O:8:"stdClass":1:{s:4:"edit";O:8:"stdClass":1:{s:4:"user";O:8:"stdClass":1:{s:4:"data";N;}}}s:10:"com_kunena";O:8:"stdClass":1:{s:12:"user818_read";N;}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":52:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"818";s:4:"name";s:8:"DUCHEMIN";s:8:"username";s:13:"laureduchemin";s:5:"email";s:24:"duchemin_laure@gmail.com";s:8:"password";s:60:"$2y$10$fEtZDBctT8s7dZTSm.lr2.nXDqL3MDdN9EeygQhOp/dRAhY8J/zGC";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:02:06";s:13:"lastvisitDate";s:19:"2015-05-24 13:59:25";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:0:"";s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";s:10:"session_id";N;s:12:"where_clause";s:11:"user_id=818";s:2:"ip";s:3:"::1";s:3:"cck";s:4:"user";s:6:"gender";s:1:"F";s:9:"last_name";s:0:"";s:10:"first_name";s:5:"Laure";s:8:"about_me";s:0:"";s:6:"avatar";s:0:"";s:8:"address1";s:0:"";s:8:"address2";s:0:"";s:4:"city";s:0:"";s:11:"postal_code";s:0:"";s:6:"region";s:0:"";s:7:"country";s:0:"";s:5:"phone";s:0:"";s:7:"website";s:0:"";s:9:"birthdate";s:19:"0000-00-00 00:00:00";s:10:"birthplace";s:0:"";}s:13:"session.token";s:32:"30f4a3fa4a2a0d60d347a4b454a8ff32";s:20:"cck_hash_seblod_form";s:32:"82ec0c7061563f8bd13323ac66eff75b";}', 818, 'laureduchemin');
 =======
+=======
+>>>>>>> origin/master
 ('bidv8qb4sni04bni8ue4p86a35', 0, 0, '1432474120', '__default|a:8:{s:15:"session.counter";i:6;s:19:"session.timer.start";i:1432473313;s:18:"session.timer.last";i:1432473586;s:17:"session.timer.now";i:1432474116;s:22:"session.client.browser";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":1:{s:5:"users";O:8:"stdClass":1:{s:5:"login";O:8:"stdClass":1:{s:4:"form";O:8:"stdClass":2:{s:6:"return";s:57:"index.php?option=com_content&view=article&id=2&Itemid=101";s:4:"data";a:0:{}}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":53:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"820";s:4:"name";s:8:"MARINIER";s:8:"username";s:15:"opheliemarinier";s:5:"email";s:26:"ophelie.marinier@gmail.com";s:8:"password";s:60:"$2y$10$vjoKE71aLqzDKBCWaG5.YOjgVyl88L.4gxhaM6VSk5APwGWNoudGu";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:41:34";s:13:"lastvisitDate";s:19:"2015-05-24 12:55:24";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:0:"";s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";s:10:"session_id";N;s:12:"where_clause";s:11:"user_id=820";s:2:"ip";s:3:"::1";s:3:"cck";s:4:"user";s:6:"gender";s:1:"F";s:9:"last_name";s:0:"";s:10:"first_name";s:8:"Ophélie";s:8:"about_me";s:0:"";s:6:"avatar";s:0:"";s:8:"address1";s:0:"";s:8:"address2";s:0:"";s:4:"city";s:0:"";s:11:"postal_code";s:0:"";s:6:"region";s:0:"";s:7:"country";s:0:"";s:5:"phone";s:0:"";s:7:"website";s:0:"";s:9:"birthdate";s:19:"0000-00-00 00:00:00";s:10:"birthplace";s:0:"";s:3:"gid";i:25;}s:13:"session.token";s:32:"6b55fec21303d0b52344afa745712d9c";}', 820, 'opheliemarinier'),
 ('m8q1ktrvbd48stt36ccq0ua6o5', 1, 0, '1432474313', '__default|a:9:{s:15:"session.counter";i:79;s:19:"session.timer.start";i:1432472112;s:18:"session.timer.last";i:1432474308;s:17:"session.timer.now";i:1432474310;s:22:"session.client.browser";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":5:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:0:"";}s:13:"com_installer";O:8:"stdClass":2:{s:7:"message";s:0:"";s:17:"extension_message";s:0:"";}s:10:"com_kunena";O:8:"stdClass":1:{s:12:"user820_read";N;}s:7:"com_cck";O:8:"stdClass":2:{s:4:"edit";O:8:"stdClass":3:{s:6:"search";O:8:"stdClass":3:{s:4:"data";N;s:2:"id";a:0:{}s:6:"client";N;}s:3:"box";O:8:"stdClass":1:{s:4:"data";N;}s:5:"field";O:8:"stdClass":3:{s:2:"id";a:0:{}s:4:"data";N;s:9:"ajax_type";N;}}s:3:"add";O:8:"stdClass":3:{s:6:"search";O:8:"stdClass":6:{s:12:"content_type";s:10:"user_group";s:10:"tpl_search";s:7:"seb_one";s:10:"tpl_filter";s:7:"seb_one";s:8:"tpl_list";s:0:"";s:8:"tpl_item";s:7:"seb_one";s:4:"skip";s:0:"";}s:3:"box";O:8:"stdClass":5:{s:3:"alt";i:0;s:10:"validation";i:1;s:4:"file";s:61:"administrator/components/com_cck/helpers/scripts/ordering.php";s:8:"function";s:0:"";s:2:"bx";O:8:"stdClass":5:{s:2:"id";s:1:"8";s:5:"title";s:0:"";s:4:"name";s:9:"user_name";s:4:"type";s:0:"";s:6:"params";s:0:"";}}s:5:"field";O:8:"stdClass":1:{s:10:"ajax_state";N;}}}s:9:"com_menus";O:8:"stdClass":2:{s:5:"items";O:8:"stdClass":3:{s:8:"menutype";s:8:"mainmenu";s:10:"limitstart";i:0;s:4:"list";a:4:{s:9:"direction";s:3:"asc";s:5:"limit";s:2:"20";s:8:"ordering";s:5:"a.lft";s:5:"start";d:0;}}s:4:"edit";O:8:"stdClass":1:{s:4:"item";O:8:"stdClass":4:{s:2:"id";a:0:{}s:4:"data";N;s:4:"type";N;s:4:"link";N;}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":52:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"820";s:4:"name";s:8:"MARINIER";s:8:"username";s:15:"opheliemarinier";s:5:"email";s:26:"ophelie.marinier@gmail.com";s:8:"password";s:60:"$2y$10$vjoKE71aLqzDKBCWaG5.YOjgVyl88L.4gxhaM6VSk5APwGWNoudGu";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:41:34";s:13:"lastvisitDate";s:19:"2015-05-24 12:54:25";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:0:"";s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";s:10:"session_id";N;s:12:"where_clause";s:11:"user_id=820";s:2:"ip";s:3:"::1";s:3:"cck";s:4:"user";s:6:"gender";s:1:"F";s:9:"last_name";s:0:"";s:10:"first_name";s:8:"Ophélie";s:8:"about_me";s:0:"";s:6:"avatar";s:0:"";s:8:"address1";s:0:"";s:8:"address2";s:0:"";s:4:"city";s:0:"";s:11:"postal_code";s:0:"";s:6:"region";s:0:"";s:7:"country";s:0:"";s:5:"phone";s:0:"";s:7:"website";s:0:"";s:9:"birthdate";s:19:"0000-00-00 00:00:00";s:10:"birthplace";s:0:"";}s:13:"session.token";s:32:"5fbdea5910a39b85b9d22713408c45bc";s:20:"cck_hash_seblod_form";s:32:"82ec0c7061563f8bd13323ac66eff75b";}', 820, 'opheliemarinier');
->>>>>>> origin/master
 
 -- --------------------------------------------------------
 
@@ -5166,15 +5188,17 @@ CREATE TABLE `qfupd_ucm_history` (
   `sha1_hash` varchar(50) NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
   `version_data` mediumtext NOT NULL COMMENT 'json-encoded string of version data',
 <<<<<<< HEAD
+<<<<<<< HEAD
   `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep'
 ) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
 =======
+=======
+>>>>>>> origin/master
   `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep',
   PRIMARY KEY (`version_id`),
   KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
   KEY `idx_save_date` (`save_date`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=88 ;
->>>>>>> origin/master
 
 --
 -- Contenu de la table `qfupd_ucm_history`
@@ -5235,11 +5259,13 @@ INSERT INTO `qfupd_ucm_history` (`version_id`, `ucm_item_id`, `ucm_type_id`, `ve
 (85, 44, 1, '', '2015-05-24 11:44:40', 818, 3079, 'ac81225509a6c4384e1611a763db2af06c237ed7', '{"id":44,"asset_id":"249","title":"Contactez-nous","alias":"contactez-nous","introtext":"<p>Si tu as des questions concernant le tutorat tu peux joindre le responsable aux coordonn\\u00e9es suivant :<\\/p>\\r\\n<p style=\\"text-align: center;\\">\\u00a0<strong>M. Jean-Yves Antoine<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>3 Place Jean Jaur\\u00e8s, 41000 Blois<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>B\\u00e2timent C, \\u00e9tage 3, bureau 7<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>Email : <a href=\\"mailto:jean-yves.antoine@univ-tours.fr\\">jean-yves.antoine@univ-tours.fr<\\/a><\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>Email : <a href=\\"mailto:responsable.tutorat@gmail.com\\">jean-yves.antoine@univ-tours.fr<\\/a><\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\">\\u00a0<\\/p>\\r\\n\\r\\n<p style=\\"text-align: center;\\">\\u00a0<iframe src=\\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m14!1m8!1m3!1d1345.4066373445617!2d1.336488626983634!3d47.590873883504635!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa0d9b378d47ecc0b!2sd%C3%A9partement+informatique+de+l&#39;universit%C3%A9+Fran%C3%A7ois+Rabelais+Tours+Blois!5e0!3m2!1sfr!2sfr!4v1432459638516\\" width=\\"600\\" height=\\"450\\" frameborder=\\"0\\" style=\\"border:0\\"><\\/iframe><\\/p>\\r\\n\\r\\n\\r\\n<p>Tu peux aussi poser toutes tes questions sur le <a title=\\"lien forum\\" href=\\"index.php\\/forum\\" target=\\"_blank\\">forum des \\u00e9tudiants de licence informatique<\\/a>.<\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-24 08:57:58","created_by":"818","created_by_alias":"","modified":"2015-05-24 11:44:40","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-24 11:43:10","publish_up":"2015-05-24 08:57:58","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":16,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"26","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
 (86, 44, 1, '', '2015-05-24 11:45:23', 818, 3077, '0d75b2f99c8d920edd98aeb1fd21b2400b5c0d90', '{"id":44,"asset_id":"249","title":"Contactez-nous","alias":"contactez-nous","introtext":"<p>Si tu as des questions concernant le tutorat tu peux joindre le responsable aux coordonn\\u00e9es suivant :<\\/p>\\r\\n<p style=\\"text-align: center;\\">\\u00a0<strong>M. Jean-Yves Antoine<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>3 Place Jean Jaur\\u00e8s, 41000 Blois<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>B\\u00e2timent C, \\u00e9tage 3, bureau 7<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>Email : <a href=\\"mailto:jean-yves.antoine@univ-tours.fr\\">jean-yves.antoine@univ-tours.fr<\\/a><\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>Email : <a href=\\"mailto:responsable.tutorat@gmail.com\\">responsable.tutorat@gmail.com<\\/a><\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\">\\u00a0<\\/p>\\r\\n\\r\\n<p style=\\"text-align: center;\\">\\u00a0<iframe src=\\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m14!1m8!1m3!1d1345.4066373445617!2d1.336488626983634!3d47.590873883504635!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa0d9b378d47ecc0b!2sd%C3%A9partement+informatique+de+l&#39;universit%C3%A9+Fran%C3%A7ois+Rabelais+Tours+Blois!5e0!3m2!1sfr!2sfr!4v1432459638516\\" width=\\"600\\" height=\\"450\\" frameborder=\\"0\\" style=\\"border:0\\"><\\/iframe><\\/p>\\r\\n\\r\\n\\r\\n<p>Tu peux aussi poser toutes tes questions sur le <a title=\\"lien forum\\" href=\\"index.php\\/forum\\" target=\\"_blank\\">forum des \\u00e9tudiants de licence informatique<\\/a>.<\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-24 08:57:58","created_by":"818","created_by_alias":"","modified":"2015-05-24 11:45:23","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-24 11:44:40","publish_up":"2015-05-24 08:57:58","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":17,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"27","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 (87, 45, 1, '', '2015-05-24 12:58:01', 820, 542, '831f9eb981bcce35a5b0eaea16dfcc1f0b4a4fee', '{"id":45,"asset_id":252,"title":"tuteur","alias":"tuteur","introtext":"::cck::59::\\/cck::","fulltext":"","state":"1","catid":"8","created":"2015-05-24 12:58:01","created_by":824,"created_by_alias":null,"modified":"2015-05-24 12:58:01","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2015-05-24 12:58:01","publish_down":null,"images":"{}","urls":"{}","attribs":"{}","version":1,"ordering":null,"metakey":null,"metadesc":null,"access":"2","hits":null,"metadata":"{}","featured":null,"language":"*","xreference":null}', 0),
 (88, 46, 1, '', '2015-05-24 14:20:38', 818, 540, '05f54c53146850a70cebc601684f408e59082170', '{"id":46,"asset_id":254,"title":"Test","alias":"test-2","introtext":"::cck::60::\\/cck::","fulltext":"","state":"1","catid":"8","created":"2015-05-24 14:20:38","created_by":825,"created_by_alias":null,"modified":"2015-05-24 14:20:38","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2015-05-24 14:20:38","publish_down":null,"images":"{}","urls":"{}","attribs":"{}","version":1,"ordering":null,"metakey":null,"metadesc":null,"access":"2","hits":null,"metadata":"{}","featured":null,"language":"*","xreference":null}', 0);
 =======
-(87, 45, 1, '', '2015-05-24 12:58:01', 820, 542, '831f9eb981bcce35a5b0eaea16dfcc1f0b4a4fee', '{"id":45,"asset_id":252,"title":"tuteur","alias":"tuteur","introtext":"::cck::59::\\/cck::","fulltext":"","state":"1","catid":"8","created":"2015-05-24 12:58:01","created_by":824,"created_by_alias":null,"modified":"2015-05-24 12:58:01","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2015-05-24 12:58:01","publish_down":null,"images":"{}","urls":"{}","attribs":"{}","version":1,"ordering":null,"metakey":null,"metadesc":null,"access":"2","hits":null,"metadata":"{}","featured":null,"language":"*","xreference":null}', 0);
+=======
 >>>>>>> origin/master
+(87, 45, 1, '', '2015-05-24 12:58:01', 820, 542, '831f9eb981bcce35a5b0eaea16dfcc1f0b4a4fee', '{"id":45,"asset_id":252,"title":"tuteur","alias":"tuteur","introtext":"::cck::59::\\/cck::","fulltext":"","state":"1","catid":"8","created":"2015-05-24 12:58:01","created_by":824,"created_by_alias":null,"modified":"2015-05-24 12:58:01","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2015-05-24 12:58:01","publish_down":null,"images":"{}","urls":"{}","attribs":"{}","version":1,"ordering":null,"metakey":null,"metadesc":null,"access":"2","hits":null,"metadata":"{}","featured":null,"language":"*","xreference":null}', 0);
 
 -- --------------------------------------------------------
 
@@ -5261,29 +5287,15 @@ CREATE TABLE `qfupd_updates` (
   `data` text NOT NULL,
   `detailsurl` text NOT NULL,
   `infourl` text NOT NULL,
-<<<<<<< HEAD
-  `extra_query` varchar(1000) DEFAULT ''
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='Available Updates';
-=======
   `extra_query` varchar(1000) DEFAULT '',
   PRIMARY KEY (`update_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Available Updates' AUTO_INCREMENT=38 ;
->>>>>>> origin/master
 
 --
 -- Contenu de la table `qfupd_updates`
 --
 
 INSERT INTO `qfupd_updates` (`update_id`, `update_site_id`, `extension_id`, `name`, `description`, `element`, `type`, `folder`, `client_id`, `version`, `data`, `detailsurl`, `infourl`, `extra_query`) VALUES
-<<<<<<< HEAD
-(1, 5, 0, 'Kunena Latest Module', '', 'mod_kunenalatest', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenalatest.xml', '', ''),
-(2, 5, 0, 'Kunena Login Module', '', 'mod_kunenalogin', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenalogin.xml', '', ''),
-(3, 5, 0, 'Kunena Search Module', '', 'mod_kunenasearch', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenasearch.xml', '', ''),
-(4, 5, 0, 'Kunena Statistics Module', '', 'mod_kunenastats', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenastats.xml', '', ''),
-(5, 5, 0, 'Content - Kunena Discuss', '', 'kunenadiscuss', 'plugin', 'content', 0, '3.0.7', '', 'http://update.kunena.org/3.0/plg_content_kunenadiscuss.xml', '', ''),
-(6, 5, 0, 'Search - Kunena', '', 'kunena', 'plugin', 'search', 0, '3.0.1', '', 'http://update.kunena.org/3.0/plg_search_kunena.xml', '', ''),
-(7, 11, 10233, 'SEBLOD 3.x (App Builder & CCK)', 'SEBLOD 3.x Core', 'pkg_cck', 'package', '', 0, '3.6.2', '', 'http://update.seblod.com/pkg_cck.xml', 'http://www.seblod.com/', '');
-=======
 (1, 3, 0, 'Norwegian Bokmal', '', 'pkg_nb-NO', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/nb-NO_details.xml', '', ''),
 (2, 3, 0, 'Norwegian Nynorsk', '', 'pkg_nn-NO', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/nn-NO_details.xml', '', ''),
 (3, 3, 0, 'Persian', '', 'pkg_fa-IR', 'package', '', 0, '3.4.1.2', '', 'http://update.joomla.org/language/details3/fa-IR_details.xml', '', ''),
@@ -5321,7 +5333,6 @@ INSERT INTO `qfupd_updates` (`update_id`, `update_site_id`, `extension_id`, `nam
 (35, 5, 0, 'Content - Kunena Discuss', '', 'kunenadiscuss', 'plugin', 'content', 0, '3.0.7', '', 'http://update.kunena.org/3.0/plg_content_kunenadiscuss.xml', '', ''),
 (36, 5, 0, 'Search - Kunena', '', 'kunena', 'plugin', 'search', 0, '3.0.1', '', 'http://update.kunena.org/3.0/plg_search_kunena.xml', '', ''),
 (37, 11, 10233, 'SEBLOD 3.x (App Builder & CCK)', 'SEBLOD 3.x Core', 'pkg_cck', 'package', '', 0, '3.6.2', '', 'http://update.seblod.com/pkg_cck.xml', 'http://www.seblod.com/', '');
->>>>>>> origin/master
 
 -- --------------------------------------------------------
 
@@ -5345,6 +5356,7 @@ CREATE TABLE `qfupd_update_sites` (
 
 INSERT INTO `qfupd_update_sites` (`update_site_id`, `name`, `type`, `location`, `enabled`, `last_check_timestamp`, `extra_query`) VALUES
 <<<<<<< HEAD
+<<<<<<< HEAD
 (1, 'Joomla! Core', 'collection', 'http://update.joomla.org/core/list.xml', 1, 1432475982, ''),
 (2, 'Joomla! Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1432475982, ''),
 (3, 'Accredited Joomla! Translations', 'collection', 'http://update.joomla.org/language/translationlist_3.xml', 1, 0, ''),
@@ -5354,6 +5366,8 @@ INSERT INTO `qfupd_update_sites` (`update_site_id`, `name`, `type`, `location`, 
 (10, 'Asikart UserXTD', 'extension', 'https://raw.githubusercontent.com/asikart/userxtd/staging/update.xml', 1, 1432475980, ''),
 (11, 'SEBLOD 3.x Core Updates', 'extension', 'http://update.seblod.com/pkg_cck.xml', 1, 1432475980, '');
 =======
+=======
+>>>>>>> origin/master
 (1, 'Joomla! Core', 'collection', 'http://update.joomla.org/core/list.xml', 1, 1432472131, ''),
 (2, 'Joomla! Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1432472131, ''),
 (3, 'Accredited Joomla! Translations', 'collection', 'http://update.joomla.org/language/translationlist_3.xml', 1, 1432472129, ''),
@@ -5362,7 +5376,6 @@ INSERT INTO `qfupd_update_sites` (`update_site_id`, `name`, `type`, `location`, 
 (8, 'WebInstaller Update Site', 'extension', 'http://appscdn.joomla.org/webapps/jedapps/webinstaller.xml', 1, 1432472129, ''),
 (10, 'Asikart UserXTD', 'extension', 'https://raw.githubusercontent.com/asikart/userxtd/staging/update.xml', 1, 1432472129, ''),
 (11, 'SEBLOD 3.x Core Updates', 'extension', 'http://update.seblod.com/pkg_cck.xml', 1, 1432472129, '');
->>>>>>> origin/master
 
 -- --------------------------------------------------------
 
@@ -5691,6 +5704,7 @@ INSERT INTO `qfupd_viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 (9, 'Accès tutoré', 0, '[12]'),
 (10, 'Accès tuteur (en attente de validation)', 0, '[11]');
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 --
 -- Index pour les tables exportées
@@ -7027,7 +7041,8 @@ ALTER TABLE `qfupd_user_notes`
 ALTER TABLE `qfupd_viewlevels`
   MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=11;
 =======
+=======
+>>>>>>> origin/master
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
->>>>>>> origin/master
