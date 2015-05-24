@@ -1,23 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.4.1.1
 -- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Dim 24 Mai 2015 à 19:39
--- Version du serveur :  5.6.17
--- Version de PHP :  5.5.12
+-- Client :  localhost
+-- Généré le :  Dim 24 Mai 2015 à 21:05
+-- Version du serveur :  5.5.42
+-- Version de PHP :  5.6.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- Base de données :  `tib`
+-- Base de données :  `TIB`
 --
 
 -- --------------------------------------------------------
@@ -26,20 +20,16 @@ SET time_zone = "+00:00";
 -- Structure de la table `qfupd_assets`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_assets` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `qfupd_assets` (
+  `id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
   `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set parent.',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
   `level` int(10) unsigned NOT NULL COMMENT 'The cached level in the nested tree.',
   `name` varchar(50) NOT NULL COMMENT 'The unique name for the asset.\n',
   `title` varchar(100) NOT NULL COMMENT 'The descriptive title for the asset.',
-  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_asset_name` (`name`),
-  KEY `idx_lft_rgt` (`lft`,`rgt`),
-  KEY `idx_parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=254 ;
+  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.'
+) ENGINE=InnoDB AUTO_INCREMENT=254 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_assets`
@@ -71,7 +61,7 @@ INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (23, 1, 161, 162, 1, 'com_templates', 'com_templates', '{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (24, 1, 163, 166, 1, 'com_users', 'com_users', '{"core.admin":[],"core.manage":[],"core.create":{"10":1},"core.delete":{"10":1},"core.edit":{"10":1},"core.edit.state":[]}'),
 (26, 1, 167, 168, 1, 'com_wrapper', 'com_wrapper', '{}'),
-(27, 8, 18, 37, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(27, 8, 18, 39, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (28, 3, 4, 5, 2, 'com_banners.category.3', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (29, 7, 14, 15, 2, 'com_contact.category.4', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (30, 19, 152, 153, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
@@ -121,7 +111,7 @@ INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (76, 27, 23, 24, 3, 'com_content.article.3', 'Confirmation d''ajout cours', '{"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'),
 (77, 27, 25, 26, 3, 'com_content.article.4', 'Confirmation inscription cours :', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
 (82, 27, 27, 28, 3, 'com_content.article.5', 'Mon profil', '{"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'),
-(92, 8, 38, 59, 2, 'com_content.category.8', 'Users', '{"core.create":{"1":0},"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
+(92, 8, 40, 59, 2, 'com_content.category.8', 'Users', '{"core.create":{"1":0},"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (93, 8, 60, 61, 2, 'com_content.category.9', 'User Groups', '{"core.create":{"1":0},"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (132, 1, 205, 216, 1, 'com_userxtd', 'com_userxtd', '{"core.admin":[],"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
 (133, 132, 206, 207, 2, 'com_userxtd.category.10', 'Informations générales', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[],"core.edit.own":[]}'),
@@ -195,21 +185,21 @@ INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 (201, 182, 313, 314, 5, 'com_cck.form.28', 'User Grp Basic', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
 (202, 171, 283, 284, 5, 'com_cck.form.30', 'Article Grp Images & Links', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
 (203, 169, 260, 261, 4, 'com_cck.form.35', 'Button Grp (Form)', '{"core.create":[],"core.create.max.parent":{"8":0},"core.create.max.parent.author":{"8":0},"core.create.max.author":{"8":0},"core.delete":[],"core.delete.own":[],"core.edit":[],"core.edit.own":[]}'),
-(212, 92, 39, 40, 3, 'com_content.article.11', 'JOGUET', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(213, 92, 41, 42, 3, 'com_content.article.12', 'IGUE', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(214, 92, 43, 44, 3, 'com_content.article.13', 'HUART', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(215, 92, 45, 46, 3, 'com_content.article.14', 'GAYAT', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(216, 92, 47, 48, 3, 'com_content.article.15', 'DUCHEMIN', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(218, 92, 49, 50, 3, 'com_content.article.16', 'BRIZION', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(219, 92, 51, 52, 3, 'com_content.article.17', 'MARINIER', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(212, 92, 41, 42, 3, 'com_content.article.11', 'JOGUET', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(213, 92, 43, 44, 3, 'com_content.article.12', 'IGUE', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(214, 92, 45, 46, 3, 'com_content.article.13', 'HUART', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(215, 92, 47, 48, 3, 'com_content.article.14', 'GAYAT', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(216, 92, 49, 50, 3, 'com_content.article.15', 'DUCHEMIN', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(218, 92, 51, 52, 3, 'com_content.article.16', 'BRIZION', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(219, 92, 53, 54, 3, 'com_content.article.17', 'MARINIER', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
 (241, 27, 31, 32, 3, 'com_content.article.39', 'Présentation des tuteurs', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(245, 92, 53, 54, 3, 'com_content.article.40', 'Test', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(245, 92, 55, 56, 3, 'com_content.article.40', 'Test', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
 (246, 27, 33, 34, 3, 'com_content.article.41', 'Ressources', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (249, 27, 35, 36, 3, 'com_content.article.44', 'Contactez-nous', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}'),
 (250, 18, 146, 147, 2, 'com_modules.module.106', 'Footer droit', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
 (251, 18, 148, 149, 2, 'com_modules.module.107', 'Footer gauche', '{"core.delete":[],"core.edit":[],"core.edit.state":[],"module.edit.frontend":[]}'),
-(252, 92, 55, 56, 3, 'com_content.article.45', 'tuteur', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
-(253, 92, 57, 58, 3, 'com_content.article.46', 'azerty', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}');
+(252, 92, 57, 58, 3, 'com_content.article.45', 'tuteur', '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1},"core.edit.own":[]}'),
+(253, 27, 37, 38, 3, 'com_content.article.46', 'FAQ', '{"core.delete":[],"core.edit":[],"core.edit.state":[]}');
 
 -- --------------------------------------------------------
 
@@ -217,12 +207,10 @@ INSERT INTO `qfupd_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `t
 -- Structure de la table `qfupd_associations`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_associations` (
+CREATE TABLE `qfupd_associations` (
   `id` int(11) NOT NULL COMMENT 'A reference to the associated item.',
   `context` varchar(50) NOT NULL COMMENT 'The context of the associated item.',
-  `key` char(32) NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.',
-  PRIMARY KEY (`context`,`id`),
-  KEY `idx_key` (`key`)
+  `key` char(32) NOT NULL COMMENT 'The key for the association computed from an md5 on associated ids.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -231,8 +219,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_associations` (
 -- Structure de la table `qfupd_banners`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_banners` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_banners` (
+  `id` int(11) NOT NULL,
   `cid` int(11) NOT NULL DEFAULT '0',
   `type` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL DEFAULT '',
@@ -265,14 +253,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_banners` (
   `created_by_alias` varchar(255) NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
-  `version` int(10) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `idx_state` (`state`),
-  KEY `idx_own_prefix` (`own_prefix`),
-  KEY `idx_metakey_prefix` (`metakey_prefix`),
-  KEY `idx_banner_catid` (`catid`),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `version` int(10) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -280,8 +262,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_banners` (
 -- Structure de la table `qfupd_banner_clients`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_banner_clients` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_banner_clients` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
   `contact` varchar(255) NOT NULL DEFAULT '',
   `email` varchar(255) NOT NULL DEFAULT '',
@@ -294,11 +276,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_banner_clients` (
   `metakey_prefix` varchar(255) NOT NULL DEFAULT '',
   `purchase_type` tinyint(4) NOT NULL DEFAULT '-1',
   `track_clicks` tinyint(4) NOT NULL DEFAULT '-1',
-  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1',
-  PRIMARY KEY (`id`),
-  KEY `idx_own_prefix` (`own_prefix`),
-  KEY `idx_metakey_prefix` (`metakey_prefix`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `track_impressions` tinyint(4) NOT NULL DEFAULT '-1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -306,15 +285,11 @@ CREATE TABLE IF NOT EXISTS `qfupd_banner_clients` (
 -- Structure de la table `qfupd_banner_tracks`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_banner_tracks` (
+CREATE TABLE `qfupd_banner_tracks` (
   `track_date` datetime NOT NULL,
   `track_type` int(10) unsigned NOT NULL,
   `banner_id` int(10) unsigned NOT NULL,
-  `count` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`track_date`,`track_type`,`banner_id`),
-  KEY `idx_track_date` (`track_date`),
-  KEY `idx_track_type` (`track_type`),
-  KEY `idx_banner_id` (`banner_id`)
+  `count` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -323,8 +298,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_banner_tracks` (
 -- Structure de la table `qfupd_categories`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_categories` (
+  `id` int(11) NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
@@ -350,16 +325,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_categories` (
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `language` char(7) NOT NULL,
-  `version` int(10) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `cat_idx` (`extension`,`published`,`access`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_path` (`path`),
-  KEY `idx_left_right` (`lft`,`rgt`),
-  KEY `idx_alias` (`alias`),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+  `version` int(10) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_categories`
@@ -386,8 +353,8 @@ INSERT INTO `qfupd_categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `le
 -- Structure de la table `qfupd_cck_core`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core` (
+  `id` int(11) NOT NULL,
   `cck` varchar(50) NOT NULL,
   `pk` int(11) NOT NULL,
   `pkb` int(11) NOT NULL,
@@ -397,11 +364,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core` (
   `parent_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `date_time` datetime NOT NULL,
-  `app` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_cck` (`cck`),
-  KEY `idx_pk` (`pk`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=61 ;
+  `app` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core`
@@ -436,8 +400,7 @@ INSERT INTO `qfupd_cck_core` (`id`, `cck`, `pk`, `pkb`, `storage_location`, `sto
 (50, ' ', 0, 0, '', '', 0, 0, 0, '0000-00-00 00:00:00', ''),
 (55, 'article', 39, 0, 'joomla_article', '', 820, 2, 0, '2015-05-22 16:17:19', ''),
 (56, 'user', 821, 40, 'joomla_user', '', 821, 0, 0, '2015-05-23 18:41:19', ''),
-(59, 'user', 824, 45, 'joomla_user', '', 824, 0, 0, '2015-05-24 12:58:01', ''),
-(60, 'user', 825, 46, 'joomla_user', '', 825, 0, 0, '2015-05-24 15:17:52', '');
+(59, 'user', 824, 45, 'joomla_user', '', 824, 0, 0, '2015-05-24 12:58:01', '');
 
 -- --------------------------------------------------------
 
@@ -445,18 +408,15 @@ INSERT INTO `qfupd_cck_core` (`id`, `cck`, `pk`, `pkb`, `storage_location`, `sto
 -- Structure de la table `qfupd_cck_core_activities`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_activities` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_activities` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
   `description` text NOT NULL,
-  `published` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_category` (`folder`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `published` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -464,15 +424,12 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_activities` (
 -- Structure de la table `qfupd_cck_core_downloads`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_downloads` (
+CREATE TABLE `qfupd_cck_core_downloads` (
   `id` int(11) NOT NULL,
   `field` varchar(50) NOT NULL,
   `collection` varchar(50) NOT NULL,
   `x` int(11) NOT NULL,
-  `hits` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`field`,`collection`,`x`),
-  KEY `idx_contentid` (`id`),
-  KEY `idx_item` (`field`)
+  `hits` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -481,8 +438,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_downloads` (
 -- Structure de la table `qfupd_cck_core_fields`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_fields` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_fields` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
@@ -527,12 +484,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_fields` (
   `storage_params` varchar(2048) NOT NULL,
   `storages` varchar(2048) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_type` (`type`),
-  KEY `idx_folder` (`folder`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=100540 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=100540 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_fields`
@@ -1032,7 +985,7 @@ INSERT INTO `qfupd_cck_core_fields` (`id`, `title`, `name`, `folder`, `type`, `d
 (497, 'Category Hits', 'cat_hits', 11, 'text', '', 1, 'Hits', ' ', 3, '', '', '', '', '', 0, 50, 32, 0, 0, 0, 0, '', 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 1, '', '', 'standard', 'joomla_category', '#__categories', 'hits', '', '', '', 0, '0000-00-00 00:00:00'),
 (498, 'Tab Profile (Panel)', 'tab_profile', 3, 'tabs', '', 1, 'Profile', ' ', 3, '', '', '', '', '', 0, 255, 32, 0, 0, 0, 0, '', 1, '', '', '', '', 0, 0, 0, 0, 0, 0, 1, '', '', 'none', '', '', 'tab_profile', '', '', '', 0, '0000-00-00 00:00:00'),
 (5003, 'promotion', 'promotion', 29, 'select_simple', '', 1, '', ' ', 3, '', '', 'L1', 'L1||L2||L3', '{"options":[]}', 0, 255, 32, 0, 0, 0, 0, '', 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 1, '', '', 'standard', 'joomla_user', '#__users', 'promotion', '', '', '', 0, '0000-00-00 00:00:00'),
-(5004, 'role', 'role', 29, 'select_simple', '', 1, 'Rôle', ' ', 3, '', '', 'Tutoré=12', 'Tutoré=12||Tuteur=11', '{"options":[]}', 0, 255, 32, 0, 0, 0, 0, '', 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 1, '', '', 'standard', 'joomla_user', '#__users', 'groups', '', '', '', 0, '0000-00-00 00:00:00'),
+(5004, 'role', 'role', 29, 'select_simple', '', 1, '', ' ', 3, '', '', 'Tutoré=12', 'Tutoré=12||Tuteur=11', '{"options":[]}', 0, 255, 32, 0, 0, 0, 0, '', 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 1, '', '', 'standard', 'joomla_user', '#__users', 'groups', '', '', '', 0, '0000-00-00 00:00:00'),
 (5005, 'helped_subject', 'helped_subject', 29, 'select_multiple', '', 1, 'Matière(s) où vous voulez aider', ' ', 3, '', '', 'Aucune', 'Aucune||Mathématiques||Informatique', '{"options":[]}', 0, 255, 32, 0, 0, 0, 0, ',', 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 1, '', '', 'standard', 'joomla_user', '#__users', 'helped_subject', '', '', '', 0, '0000-00-00 00:00:00'),
 (100502, 'Div Start', 'div_start', 3, 'div', '', 1, '', ' ', 1, '', '', '', '', '', 0, 255, 32, 0, 0, 0, 0, '', 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 1, '', '', 'none', '', '', 'div_start', '', '', '', 0, '0000-00-00 00:00:00'),
 (100503, 'Div In Between', 'div_in_between', 3, 'div', '', 1, '', ' ', 1, '', '', '', '', '', 0, 255, 32, 0, 0, 0, 0, '', 1, '', '', '', '', 0, 0, 0, 0, 0, 0, 1, '', '', 'none', '', '', 'div_in_between', '', '', '', 0, '0000-00-00 00:00:00'),
@@ -1077,8 +1030,8 @@ INSERT INTO `qfupd_cck_core_fields` (`id`, `title`, `name`, `folder`, `type`, `d
 -- Structure de la table `qfupd_cck_core_folders`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_folders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_folders` (
+  `id` int(11) NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `path` varchar(1024) NOT NULL,
@@ -1098,10 +1051,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_folders` (
   `home` tinyint(3) NOT NULL DEFAULT '0',
   `published` tinyint(4) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_folders`
@@ -1139,20 +1090,16 @@ INSERT INTO `qfupd_cck_core_folders` (`id`, `asset_id`, `parent_id`, `path`, `ti
 -- Structure de la table `qfupd_cck_core_objects`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_objects` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_objects` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `component` varchar(50) NOT NULL,
   `context` varchar(50) NOT NULL,
   `options` text NOT NULL,
   `vars` varchar(255) NOT NULL,
-  `view` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_component` (`component`),
-  KEY `idx_view` (`view`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+  `view` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_objects`
@@ -1170,10 +1117,9 @@ INSERT INTO `qfupd_cck_core_objects` (`id`, `title`, `name`, `component`, `conte
 -- Structure de la table `qfupd_cck_core_preferences`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_preferences` (
+CREATE TABLE `qfupd_cck_core_preferences` (
   `userid` int(11) NOT NULL,
-  `options` text NOT NULL,
-  PRIMARY KEY (`userid`)
+  `options` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1182,8 +1128,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_preferences` (
 -- Structure de la table `qfupd_cck_core_searchs`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_searchs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_searchs` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `alias` varchar(50) NOT NULL,
@@ -1203,15 +1149,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_searchs` (
   `stylesheets` varchar(5) NOT NULL,
   `version` int(11) NOT NULL DEFAULT '1',
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_folder` (`folder`),
-  KEY `idx_template_search` (`template_search`),
-  KEY `idx_template_filter` (`template_filter`),
-  KEY `idx_template_list` (`template_list`),
-  KEY `idx_template_item` (`template_item`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_searchs`
@@ -1220,8 +1159,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_searchs` (
 INSERT INTO `qfupd_cck_core_searchs` (`id`, `title`, `name`, `alias`, `folder`, `content`, `template_search`, `template_filter`, `template_list`, `template_item`, `description`, `access`, `published`, `options`, `location`, `sef_route`, `storage_location`, `stylesheets`, `version`, `checked_out`, `checked_out_time`) VALUES
 (1, 'Articles', 'articles', '', 10, 1, 10, 10, 11, 10, '', 1, 1, '', 'site', '', 'joomla_article', '', 1, 0, '0000-00-00 00:00:00'),
 (5, 'Categories', 'categories', '', 11, 1, 10, 10, 11, 10, '', 1, 1, '', 'site', '', 'joomla_category', '', 1, 0, '0000-00-00 00:00:00'),
-(8, 'Users', 'users', '', 13, 1, 34, 10, 41, 40, '', 1, 1, '{"limit":"0","cache":"0","cache_per_user":"0","stages_optional":"","cache2":"0","pagination":"","debug":"","sef":"","prepare_content":"","auto_redirect":"0","ordering":"","show_list_title":"1","tag_list_title":"h2","class_list_title":"","show_list_desc":"1","show_list":"1","show_form":"1","show_items_number":"0","label_items_number":"Results","class_items_number":"total","show_pages_number":"1","show_pagination":"0","class_pagination":"pagination","callback_pagination":"","message_style_no_access":"error","action_no_access":"redirection","message_no_access":"","redirection_url_no_access":"index.php?option=com_users&view=login","message_style":"message","action":"0","message":"","show_list_desc_no_result":"1"}', 'site', '', 'joomla_user', '', 34, 0, '0000-00-00 00:00:00'),
-(10, 'User Group', 'user_group', '', 1, 1, 45, 10, 46, 10, '', 1, 1, '{"limit":"0","cache":"0","cache_per_user":"0","stages_optional":"","cache2":"0","pagination":"","debug":"","sef":"","prepare_content":"","auto_redirect":"0","ordering":"","show_list_title":"1","tag_list_title":"h2","class_list_title":"","show_list_desc":"1","show_list":"1","show_form":"1","show_items_number":"0","label_items_number":"Results","class_items_number":"total","show_pages_number":"1","show_pagination":"0","class_pagination":"pagination","callback_pagination":"","message_style_no_access":"error","action_no_access":"redirection","message_no_access":"","redirection_url_no_access":"index.php?option=com_users&view=login","message_style":"message","action":"0","message":"","show_list_desc_no_result":"1"}', '', '', 'joomla_user_group', '', 6, 0, '0000-00-00 00:00:00');
+(8, 'Users', 'users', '', 13, 1, 34, 10, 41, 40, '', 1, 1, '{"limit":"0","cache":"0","cache_per_user":"0","stages_optional":"","cache2":"0","pagination":"","debug":"","sef":"","prepare_content":"","auto_redirect":"0","ordering":"","show_list_title":"1","tag_list_title":"h2","class_list_title":"","show_list_desc":"1","show_list":"1","show_form":"1","show_items_number":"0","label_items_number":"Results","class_items_number":"total","show_pages_number":"1","show_pagination":"0","class_pagination":"pagination","callback_pagination":"","message_style_no_access":"error","action_no_access":"redirection","message_no_access":"","redirection_url_no_access":"index.php?option=com_users&view=login","message_style":"message","action":"0","message":"","show_list_desc_no_result":"1"}', 'site', '', 'joomla_user', '', 33, 0, '0000-00-00 00:00:00'),
+(10, 'User Group', 'user_group', '', 14, 0, 45, 10, 0, 10, '', 1, 1, '{"limit":"0","cache":"0","cache_per_user":"0","stages_optional":"","cache2":"0","pagination":"","debug":"","sef":"","prepare_content":"","auto_redirect":"0","ordering":"","show_list_title":"1","tag_list_title":"h2","class_list_title":"","show_list_desc":"1","show_list":"1","show_form":"1","show_items_number":"0","label_items_number":"Results","class_items_number":"total","show_pages_number":"1","show_pagination":"0","class_pagination":"pagination","callback_pagination":"","message_style_no_access":"error","action_no_access":"redirection","message_no_access":"","redirection_url_no_access":"index.php?option=com_users&view=login","message_style":"message","action":"0","message":"","show_list_desc_no_result":"1"}', '', '', 'joomla_user_group', '', 1, 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1229,7 +1168,7 @@ INSERT INTO `qfupd_cck_core_searchs` (`id`, `title`, `name`, `alias`, `folder`, 
 -- Structure de la table `qfupd_cck_core_search_field`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_search_field` (
+CREATE TABLE `qfupd_cck_core_search_field` (
   `searchid` int(11) NOT NULL,
   `fieldid` int(11) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1263,10 +1202,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_search_field` (
   `computation_options` varchar(1024) NOT NULL COMMENT 'search',
   `conditional` varchar(2048) NOT NULL COMMENT 'search',
   `conditional_options` text NOT NULL COMMENT 'search',
-  `position` varchar(50) NOT NULL COMMENT 'search,list,item',
-  PRIMARY KEY (`searchid`,`fieldid`,`client`),
-  KEY `searchid` (`searchid`),
-  KEY `fieldid` (`fieldid`)
+  `position` varchar(50) NOT NULL COMMENT 'search,list,item'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1293,14 +1229,11 @@ INSERT INTO `qfupd_cck_core_search_field` (`searchid`, `fieldid`, `client`, `ord
 (8, 308, 'item', 1, 'clear', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'heading', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
 (8, 308, 'list', 1, 'clear', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'column-a'),
 (8, 308, 'order', 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'ASC', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
-(8, 308, 'search', 2, 'Nom des tuteurs en cours de validation', 'value', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
+(8, 308, 'search', 2, '', 'value', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
 (8, 100502, 'search', 3, '', '', '', '', '', '', '', '', '', '', '', '', '', ' btn-toolbar', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
 (8, 100504, 'search', 5, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
 (8, 100539, 'search', 4, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
-(10, 1, 'search', 1, '', 'hidden', '', '', '', '', '', '', '', '', '', 'user_group', '', '', '', 'exact', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
-(10, 302, 'search', 3, 'Titre', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
-(10, 100538, 'search', 2, '', 'form_filter', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
-(10, 100539, 'search', 4, '', 'toolbar_button', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody');
+(10, 1, 'search', 1, '', 'hidden', '', '', '', '', '', '', '', '', '', 'user_group', '', '', '', 'exact', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody');
 
 -- --------------------------------------------------------
 
@@ -1308,7 +1241,7 @@ INSERT INTO `qfupd_cck_core_search_field` (`searchid`, `fieldid`, `client`, `ord
 -- Structure de la table `qfupd_cck_core_search_position`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_search_position` (
+CREATE TABLE `qfupd_cck_core_search_position` (
   `searchid` int(11) NOT NULL,
   `position` varchar(50) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1317,10 +1250,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_search_position` (
   `variation_options` text NOT NULL,
   `width` varchar(50) NOT NULL,
   `height` varchar(50) NOT NULL,
-  `css` varchar(255) NOT NULL,
-  PRIMARY KEY (`searchid`,`position`,`client`),
-  KEY `position` (`position`),
-  KEY `searchid` (`searchid`)
+  `css` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1346,7 +1276,6 @@ INSERT INTO `qfupd_cck_core_search_position` (`searchid`, `position`, `client`, 
 (8, 'mainbody', 'order', '', '', '', '', '', ''),
 (8, 'mainbody', 'search', '', '', '', '', '', ''),
 (10, 'clear', 'search', '', '', '', '', '', ''),
-(10, 'hidden', 'list', '', '', '', '', '', ''),
 (10, 'mainbody', 'search', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
@@ -1355,8 +1284,8 @@ INSERT INTO `qfupd_cck_core_search_position` (`searchid`, `position`, `client`, 
 -- Structure de la table `qfupd_cck_core_sites`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_sites` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_sites` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
   `aliases` varchar(512) NOT NULL,
@@ -1370,10 +1299,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_sites` (
   `description` varchar(5120) NOT NULL,
   `published` tinyint(4) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1381,8 +1308,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_sites` (
 -- Structure de la table `qfupd_cck_core_templates`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_templates` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_templates` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
@@ -1391,11 +1318,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_templates` (
   `featured` tinyint(4) NOT NULL DEFAULT '0',
   `published` tinyint(4) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_folder` (`folder`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_templates`
@@ -1412,8 +1336,8 @@ INSERT INTO `qfupd_cck_core_templates` (`id`, `title`, `name`, `folder`, `mode`,
 -- Structure de la table `qfupd_cck_core_types`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_types` (
+  `id` int(11) NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -1441,15 +1365,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_types` (
   `created_date` datetime NOT NULL,
   `created_user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `modified_date` datetime NOT NULL,
-  `modified_user_id` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `idx_folder` (`folder`),
-  KEY `idx_template_admin` (`template_admin`),
-  KEY `idx_template_site` (`template_site`),
-  KEY `idx_template_content` (`template_content`),
-  KEY `idx_template_intro` (`template_intro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
+  `modified_user_id` int(10) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_types`
@@ -1458,7 +1375,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_types` (
 INSERT INTO `qfupd_cck_core_types` (`id`, `asset_id`, `title`, `name`, `alias`, `folder`, `template_admin`, `template_site`, `template_content`, `template_intro`, `description`, `indexed`, `published`, `options_admin`, `options_site`, `options_content`, `options_intro`, `location`, `parent`, `storage_location`, `stylesheets`, `version`, `checked_out`, `checked_out_time`, `access`, `created_date`, `created_user_id`, `modified_date`, `modified_user_id`) VALUES
 (1, 191, 'Article', 'article', '', 10, 10, 10, 10, 10, '', '', 1, '', '{"redirection":"form_edition"}', '', '', '', '', 'joomla_article', '', 2, 0, '0000-00-00 00:00:00', 3, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
 (5, 192, 'Category', 'category', '', 11, 26, 10, 10, 10, '', 'none', 1, '{"message_style":"message","message":"","data_integrity_excluded":"","message_style_no_access":"error","action_no_access":"redirection","message_no_access":"","redirection_url_no_access":"index.php?option=com_users&view=login","stages":"1","validation_position":"","validation_scroll":"","validation_color":"","validation_background_color":""}', '{"redirection":"form_edition"}', '', '', '', '', 'joomla_category', '', 3, 0, '0000-00-00 00:00:00', 3, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
-(8, 193, 'User', 'user', '', 13, 31, 32, 33, 10, '', 'none', 1, '{"message_style":"message","message":"","data_integrity_excluded":"","message_style_no_access":"error","action_no_access":"redirection","message_no_access":"","redirection_url_no_access":"index.php?option=com_users&view=login","stages":"1","validation_position":"","validation_scroll":"","validation_color":"","validation_background_color":""}', '{"message_style":"0","redirection":"url","message":"","redirection_itemid":"101","redirection_url":"index.php?option=com_content&view=article&id=2","data_integrity_excluded":"","show_form_title":"0","tag_form_title":"h1","class_form_title":"Inscription","show_form_desc":"1","message_style_no_access":"error","action_no_access":"redirection","message_no_access":"","redirection_url_no_access":"index.php?option=com_users&view=login","stages":"1","validation_position":"","validation_scroll":"","validation_color":"","validation_background_color":""}', '{"title":"","typo":"1","sef":""}', '{"title":"","typo":"1","sef":""}', '', '', 'joomla_user', '', 189, 0, '0000-00-00 00:00:00', 3, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
+(8, 193, 'User', 'user', '', 13, 31, 32, 33, 10, '', 'none', 1, '{"message_style":"message","message":"","data_integrity_excluded":"","message_style_no_access":"error","action_no_access":"redirection","message_no_access":"","redirection_url_no_access":"index.php?option=com_users&view=login","stages":"1","validation_position":"","validation_scroll":"","validation_color":"","validation_background_color":""}', '{"message_style":"0","redirection":"url","message":"","redirection_itemid":"101","redirection_url":"index.php?option=com_content&view=article&id=2","data_integrity_excluded":"","show_form_title":"0","tag_form_title":"h1","class_form_title":"Inscription","show_form_desc":"1","message_style_no_access":"error","action_no_access":"redirection","message_no_access":"","redirection_url_no_access":"index.php?option=com_users&view=login","stages":"1","validation_position":"","validation_scroll":"","validation_color":"","validation_background_color":""}', '{"title":"","typo":"1","sef":""}', '{"title":"","typo":"1","sef":""}', '', '', 'joomla_user', '', 179, 0, '0000-00-00 00:00:00', 3, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
 (11, 194, 'User Group', 'user_group', '', 14, 10, 10, 10, 10, '', '', 1, '', '', '', '', '', '', 'joomla_user_group', '', 2, 0, '0000-00-00 00:00:00', 3, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
 (20, 195, 'Article Grp Publishing', 'article_grp_publishing', '', 10, 10, 10, 10, 10, '', '', 0, '', '', '', '', '', '', 'none', '', 2, 0, '0000-00-00 00:00:00', 3, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
 (21, 196, 'Article Grp Basic', 'article_grp_basic', '', 10, 10, 10, 10, 10, '', '', 0, '', '', '', '', '', '', 'none', '', 2, 0, '0000-00-00 00:00:00', 3, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
@@ -1476,7 +1393,7 @@ INSERT INTO `qfupd_cck_core_types` (`id`, `asset_id`, `title`, `name`, `alias`, 
 -- Structure de la table `qfupd_cck_core_type_field`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_type_field` (
+CREATE TABLE `qfupd_cck_core_type_field` (
   `typeid` int(11) NOT NULL,
   `fieldid` int(11) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1506,10 +1423,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_type_field` (
   `computation_options` varchar(1024) NOT NULL COMMENT 'admin,site',
   `conditional` varchar(2048) NOT NULL COMMENT 'admin,site',
   `conditional_options` text NOT NULL COMMENT 'admin,site',
-  `position` varchar(50) NOT NULL COMMENT 'admin,site,intro,content',
-  PRIMARY KEY (`typeid`,`fieldid`,`client`),
-  KEY `typeid` (`typeid`),
-  KEY `fieldid` (`fieldid`)
+  `position` varchar(50) NOT NULL COMMENT 'admin,site,intro,content'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1707,8 +1621,8 @@ INSERT INTO `qfupd_cck_core_type_field` (`typeid`, `fieldid`, `client`, `orderin
 (8, 100534, 'admin', 25, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
 (8, 100534, 'content', 14, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
 (8, 100534, 'site', 11, '', '', '', 'required', '', '', '{"alert":""}', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
+(8, 100536, 'content', 16, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
 (8, 100538, 'admin', 10, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
-(8, 100538, 'content', 16, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
 (11, 389, 'admin', 4, '', 'value', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, 'cck_workflow', '{"location":"","action":"edit"}', '', '', '', '', 'mainbody'),
 (11, 390, 'admin', 3, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
 (11, 476, 'admin', 2, 'Group', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 0, 1, '', '', '', '', '', '', 'mainbody'),
@@ -1882,7 +1796,7 @@ INSERT INTO `qfupd_cck_core_type_field` (`typeid`, `fieldid`, `client`, `orderin
 -- Structure de la table `qfupd_cck_core_type_position`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_type_position` (
+CREATE TABLE `qfupd_cck_core_type_position` (
   `typeid` int(11) NOT NULL,
   `position` varchar(50) NOT NULL,
   `client` varchar(50) NOT NULL,
@@ -1891,10 +1805,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_type_position` (
   `variation_options` text NOT NULL,
   `width` varchar(50) NOT NULL,
   `height` varchar(50) NOT NULL,
-  `css` varchar(255) NOT NULL,
-  PRIMARY KEY (`typeid`,`position`,`client`),
-  KEY `typeid` (`typeid`),
-  KEY `position` (`position`)
+  `css` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1924,7 +1835,7 @@ INSERT INTO `qfupd_cck_core_type_position` (`typeid`, `position`, `client`, `leg
 (8, 'clear', 'site', '', '', '', '', '', ''),
 (8, 'mainbody', 'admin', '', '', '', '', '', ''),
 (8, 'mainbody', 'content', 'Votre profil', '', '', '', '', ''),
-(8, 'mainbody', 'site', '', '', '{"background_color":"none","border_color":"#dedede","border_size":"0","border_style":"solid","border_radius":"5","position_padding":"","legend_align":"left","legend_fieldname":"","field_orientation":"vertical","field_width":"100%","field_label":"","field_label_position":"left","field_label_align":"left","field_label_width":"145px","field_label_color":"","field_label_padding":"","field_focus_border_color":"#888888"}', '', '', ''),
+(8, 'mainbody', 'site', 'Inscription', '', '{"background_color":"none","border_color":"#dedede","border_size":"0","border_style":"solid","border_radius":"5","position_padding":"","legend_align":"left","legend_fieldname":"","field_orientation":"vertical","field_width":"100%","field_label":"","field_label_position":"left","field_label_align":"left","field_label_width":"145px","field_label_color":"","field_label_padding":"","field_focus_border_color":"#888888"}', '', '', ''),
 (11, 'clear', 'admin', '', '', '', '', '', ''),
 (11, 'mainbody', 'admin', '', '', '', '', '', ''),
 (20, 'clear', 'admin', '', '', '', '', '', ''),
@@ -1970,8 +1881,8 @@ INSERT INTO `qfupd_cck_core_type_position` (`typeid`, `position`, `client`, `leg
 -- Structure de la table `qfupd_cck_core_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_core_versions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_core_versions` (
+  `id` int(11) NOT NULL,
   `e_id` int(11) NOT NULL DEFAULT '0',
   `e_title` varchar(50) NOT NULL,
   `e_name` varchar(50) NOT NULL,
@@ -1988,10 +1899,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_core_versions` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `note` varchar(255) NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `type_id_version` (`e_id`,`e_type`,`e_version`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=529 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=527 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_core_versions`
@@ -2056,10 +1965,6 @@ INSERT INTO `qfupd_cck_core_versions` (`id`, `e_id`, `e_title`, `e_name`, `e_typ
 (519, 8, 'User', 'user', 'type', 176, 0x7b226964223a2238222c2261737365745f6964223a22313933222c227469746c65223a2255736572222c226e616d65223a2275736572222c22616c696173223a22222c22666f6c646572223a223133222c2274656d706c6174655f61646d696e223a223331222c2274656d706c6174655f73697465223a223332222c2274656d706c6174655f636f6e74656e74223a223333222c2274656d706c6174655f696e74726f223a223130222c226465736372697074696f6e223a22222c22696e6465786564223a226e6f6e65222c227075626c6973686564223a2231222c226f7074696f6e735f61646d696e223a227b5c226d6573736167655f7374796c655c223a5c226d6573736167655c222c5c226d6573736167655c223a5c225c222c5c22646174615f696e746567726974795f6578636c756465645c223a5c225c222c5c226d6573736167655f7374796c655f6e6f5f6163636573735c223a5c226572726f725c222c5c22616374696f6e5f6e6f5f6163636573735c223a5c227265646972656374696f6e5c222c5c226d6573736167655f6e6f5f6163636573735c223a5c225c222c5c227265646972656374696f6e5f75726c5f6e6f5f6163636573735c223a5c22696e6465782e7068703f6f7074696f6e3d636f6d5f757365727326766965773d6c6f67696e5c222c5c227374616765735c223a5c22315c222c5c2276616c69646174696f6e5f706f736974696f6e5c223a5c225c222c5c2276616c69646174696f6e5f7363726f6c6c5c223a5c225c222c5c2276616c69646174696f6e5f636f6c6f725c223a5c225c222c5c2276616c69646174696f6e5f6261636b67726f756e645f636f6c6f725c223a5c225c227d222c226f7074696f6e735f73697465223a227b5c226d6573736167655f7374796c655c223a5c22305c222c5c227265646972656374696f6e5c223a5c2275726c5c222c5c226d6573736167655c223a5c225c222c5c227265646972656374696f6e5f6974656d69645c223a5c223130315c222c5c227265646972656374696f6e5f75726c5c223a5c22696e6465782e7068703f6f7074696f6e3d636f6d5f636f6e74656e7426766965773d61727469636c652669643d325c222c5c22646174615f696e746567726974795f6578636c756465645c223a5c225c222c5c2273686f775f666f726d5f7469746c655c223a5c22305c222c5c227461675f666f726d5f7469746c655c223a5c2268315c222c5c22636c6173735f666f726d5f7469746c655c223a5c22496e736372697074696f6e5c222c5c2273686f775f666f726d5f646573635c223a5c22315c222c5c226d6573736167655f7374796c655f6e6f5f6163636573735c223a5c226572726f725c222c5c22616374696f6e5f6e6f5f6163636573735c223a5c227265646972656374696f6e5c222c5c226d6573736167655f6e6f5f6163636573735c223a5c225c222c5c227265646972656374696f6e5f75726c5f6e6f5f6163636573735c223a5c22696e6465782e7068703f6f7074696f6e3d636f6d5f757365727326766965773d6c6f67696e5c222c5c227374616765735c223a5c22315c222c5c2276616c69646174696f6e5f706f736974696f6e5c223a5c225c222c5c2276616c69646174696f6e5f7363726f6c6c5c223a5c225c222c5c2276616c69646174696f6e5f636f6c6f725c223a5c225c222c5c2276616c69646174696f6e5f6261636b67726f756e645f636f6c6f725c223a5c225c227d222c226f7074696f6e735f636f6e74656e74223a227b5c227469746c655c223a5c225c222c5c227479706f5c223a5c22315c222c5c227365665c223a5c225c227d222c226f7074696f6e735f696e74726f223a227b5c227469746c655c223a5c225c222c5c227479706f5c223a5c22315c222c5c227365665c223a5c225c227d222c226c6f636174696f6e223a22222c22706172656e74223a22222c2273746f726167655f6c6f636174696f6e223a226a6f6f6d6c615f75736572222c227374796c65736865657473223a22222c2276657273696f6e223a22313736222c22636865636b65645f6f7574223a22383230222c22636865636b65645f6f75745f74696d65223a22323031352d30352d32342030303a33303a3132222c22616363657373223a2233222c22637265617465645f64617465223a22303030302d30302d30302030303a30303a3030222c22637265617465645f757365725f6964223a2230222c226d6f6469666965645f64617465223a22303030302d30302d30302030303a30303a3030222c226d6f6469666965645f757365725f6964223a2230222c2272756c6573223a227b5c22636f72652e6372656174655c223a7b5c22315c223a312c5c22325c223a307d2c5c22636f72652e6372656174652e6d61782e706172656e745c223a7b5c22385c223a307d2c5c22636f72652e6372656174652e6d61782e706172656e742e617574686f725c223a7b5c22385c223a307d2c5c22636f72652e6372656174652e6d61782e617574686f725c223a7b5c22385c223a307d2c5c22636f72652e64656c6574655c223a5b5d2c5c22636f72652e64656c6574652e6f776e5c223a5b5d2c5c22636f72652e656469745c223a7b5c22345c223a307d2c5c22636f72652e656469742e6f776e5c223a7b5c22325c223a317d7d227d, '{"fields":{"1":"41","2":"31","3":"0","4":"23"}}', 0x7b226669656c6473223a5b7b22747970656964223a2238222c226669656c646964223a22333039222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2231222c226c6162656c223a224964656e74696669616e74222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333131222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2232222c226c6162656c223a224d6f74206465207061737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333132222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2233222c226c6162656c223a22436f6e6669726d6174696f6e204d6f74206465207061737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22636f6e6669726d222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c222c5c226669656c645c223a5c22757365725f70617373776f72645c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343233222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2234222c226c6162656c223a2247656e7265222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343235222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2235222c226c6162656c223a225072c3a96e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333038222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2236222c226c6162656c223a224e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333130222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2237222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22656d61696c222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343232222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2238222c226c6162656c223a22436f6e6669726d6174696f6e20456d61696c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22636f6e6669726d222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c222c5c226669656c645c223a5c22757365725f656d61696c5c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343736222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2239222c226c6162656c223a2241737369676e656420557365722047726f757073222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333231222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223130222c226c6162656c223a22266e6273703b222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a2232222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343830222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223131222c226c6162656c223a2250726f66696c65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353032222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223132222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22207370616e36222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343730222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223133222c226c6162656c223a2244617465206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343731222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223134222c226c6162656c223a224c696575206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343237222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223135222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353033222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223136222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343238222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223137222c226c6162656c223a2241647265737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343330222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223138222c226c6162656c223a2256696c6c65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343331222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223139222c226c6162656c223a22436f646520706f7374616c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343332222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223230222c226c6162656c223a2252c3a967696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343333222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223231222c226c6162656c223a2250617973222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343334222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223232222c226c6162656c223a2254c3a96cc3a970686f6e65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343335222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223233222c226c6162656c223a225349746520496e7465726e6574222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343236222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223234222c226c6162656c223a22412070726f706f73206465206d6f69222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353334222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223235222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303033222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223236222c226c6162656c223a2250726f6d6f74696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303034222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223237222c226c6162656c223a2252c3b46c65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353333222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223238222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303035222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223239222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353034222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223330222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343938222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223331222c226c6162656c223a22436f6d707465222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353035222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223332222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22207370616e36222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333634222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223333222c226c6162656c223a2252656365766f697220656d61696c2064752053797374c3a86d65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333232222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223334222c226c6162656c223a22426c6f7175657220636574207574696c69736174657572222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333632222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223335222c226c6162656c223a2244617465206427696e6372697074696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333633222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223336222c226c6162656c223a2244617465206465206c61206465726e69c3a8726520766973697465222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343337222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223337222c226c6162656c223a2244617465206465206c61206465726e69c3a872652072c3a9696e697469616c69736174696f6e222c22766172696174696f6e223a2268696464656e222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343338222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223338222c226c6162656c223a2252c3a9696e697469616c69736174696f6e204d6f74206465207061737365222c22766172696174696f6e223a2268696464656e222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a2263636b5f776f726b666c6f77222c227265737472696374696f6e5f6f7074696f6e73223a227b5c226c6f636174696f6e5c223a5c225c222c5c22616374696f6e5c223a5c22656469745c227d222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333635222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223339222c226c6162656c223a22222c22766172696174696f6e223a2268696464656e222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a2263636b5f776f726b666c6f77222c227265737472696374696f6e5f6f7074696f6e73223a227b5c226c6f636174696f6e5c223a5c225c222c5c22616374696f6e5c223a5c22656469745c227d222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353037222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223430222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343831222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223431222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d5d2c22706f736974696f6e73223a5b7b22747970656964223a2238222c22706f736974696f6e223a22636c656172222c22636c69656e74223a2261646d696e222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d2c7b22747970656964223a2238222c22706f736974696f6e223a226d61696e626f6479222c22636c69656e74223a2261646d696e222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, 0x7b226669656c6473223a5b7b22747970656964223a2238222c226669656c646964223a22343736222c22636c69656e74223a2273697465222c226f72646572696e67223a2231222c226c6162656c223a224163636f756e74222c22766172696174696f6e223a2276616c7565222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2233222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333039222c22636c69656e74223a2273697465222c226f72646572696e67223a2232222c226c6162656c223a224964656e74696669616e74222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333131222c22636c69656e74223a2273697465222c226f72646572696e67223a2233222c226c6162656c223a224d6f74206465207061737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333132222c22636c69656e74223a2273697465222c226f72646572696e67223a2234222c226c6162656c223a22436f6e6669726d6174696f6e204d6f74206465207061737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22636f6e6669726d222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c222c5c226669656c645c223a5c22757365725f70617373776f72645c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343233222c22636c69656e74223a2273697465222c226f72646572696e67223a2235222c226c6162656c223a2247656e7265222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343235222c22636c69656e74223a2273697465222c226f72646572696e67223a2236222c226c6162656c223a225072c3a96e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333038222c22636c69656e74223a2273697465222c226f72646572696e67223a2237222c226c6162656c223a224e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333130222c22636c69656e74223a2273697465222c226f72646572696e67223a2238222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22656d61696c222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343232222c22636c69656e74223a2273697465222c226f72646572696e67223a2239222c226c6162656c223a22436f6e6669726d6174696f6e20456d61696c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22636f6e6669726d222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c222c5c226669656c645c223a5c22757365725f656d61696c5c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343938222c22636c69656e74223a2273697465222c226f72646572696e67223a223130222c226c6162656c223a22222c22766172696174696f6e223a2276616c7565222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2233222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353334222c22636c69656e74223a2273697465222c226f72646572696e67223a223131222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303033222c22636c69656e74223a2273697465222c226f72646572696e67223a223132222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303034222c22636c69656e74223a2273697465222c226f72646572696e67223a223133222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353333222c22636c69656e74223a2273697465222c226f72646572696e67223a223134222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303035222c22636c69656e74223a2273697465222c226f72646572696e67223a223135222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343831222c22636c69656e74223a2273697465222c226f72646572696e67223a223136222c226c6162656c223a22222c22766172696174696f6e223a2276616c7565222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2233222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343238222c22636c69656e74223a2273697465222c226f72646572696e67223a223137222c226c6162656c223a2241647265737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343330222c22636c69656e74223a2273697465222c226f72646572696e67223a223138222c226c6162656c223a2256696c6c65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343331222c22636c69656e74223a2273697465222c226f72646572696e67223a223139222c226c6162656c223a22436f646520706f7374616c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343332222c22636c69656e74223a2273697465222c226f72646572696e67223a223230222c226c6162656c223a2252c3a967696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343333222c22636c69656e74223a2273697465222c226f72646572696e67223a223231222c226c6162656c223a2250617973222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343334222c22636c69656e74223a2273697465222c226f72646572696e67223a223232222c226c6162656c223a2254c3a96cc3a970686f6e65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343730222c22636c69656e74223a2273697465222c226f72646572696e67223a223233222c226c6162656c223a2244617465206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343731222c22636c69656e74223a2273697465222c226f72646572696e67223a223234222c226c6162656c223a224c696575206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343237222c22636c69656e74223a2273697465222c226f72646572696e67223a223235222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343236222c22636c69656e74223a2273697465222c226f72646572696e67223a223236222c226c6162656c223a22412070726f706f73206465206d6f69222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343335222c22636c69656e74223a2273697465222c226f72646572696e67223a223237222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353032222c22636c69656e74223a2273697465222c226f72646572696e67223a223238222c226c6162656c223a22222c22766172696174696f6e223a2276616c7565222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a222062746e2d746f6f6c626172222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343837222c22636c69656e74223a2273697465222c226f72646572696e67223a223239222c226c6162656c223a22456e726567697374726572222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a226e6f6e65222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343930222c22636c69656e74223a2273697465222c226f72646572696e67223a223330222c226c6162656c223a22416e6e756c6572222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a226e6f6e65222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353034222c22636c69656e74223a2273697465222c226f72646572696e67223a223331222c226c6162656c223a22222c22766172696174696f6e223a2268696464656e222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d5d2c22706f736974696f6e73223a5b7b22747970656964223a2238222c22706f736974696f6e223a22636c656172222c22636c69656e74223a2273697465222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d2c7b22747970656964223a2238222c22706f736974696f6e223a226d61696e626f6479222c22636c69656e74223a2273697465222c226c6567656e64223a22496e736372697074696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a227b5c226261636b67726f756e645f636f6c6f725c223a5c226e6f6e655c222c5c22626f726465725f636f6c6f725c223a5c22236465646564655c222c5c22626f726465725f73697a655c223a5c22305c222c5c22626f726465725f7374796c655c223a5c22736f6c69645c222c5c22626f726465725f7261646975735c223a5c22355c222c5c22706f736974696f6e5f70616464696e675c223a5c225c222c5c226c6567656e645f616c69676e5c223a5c226c6566745c222c5c226c6567656e645f6669656c646e616d655c223a5c225c222c5c226669656c645f6f7269656e746174696f6e5c223a5c22766572746963616c5c222c5c226669656c645f77696474685c223a5c22313030255c222c5c226669656c645f6c6162656c5c223a5c225c222c5c226669656c645f6c6162656c5f706f736974696f6e5c223a5c226c6566745c222c5c226669656c645f6c6162656c5f616c69676e5c223a5c226c6566745c222c5c226669656c645f6c6162656c5f77696474685c223a5c2231343570785c222c5c226669656c645f6c6162656c5f636f6c6f725c223a5c225c222c5c226669656c645f6c6162656c5f70616464696e675c223a5c225c222c5c226669656c645f666f6375735f626f726465725f636f6c6f725c223a5c22233838383838385c227d222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, 0x7b226669656c6473223a5b5d2c22706f736974696f6e73223a5b7b22747970656964223a2238222c22706f736974696f6e223a22636c656172222c22636c69656e74223a22696e74726f222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, 0x7b226669656c6473223a5b7b22747970656964223a2238222c226669656c646964223a22333039222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2231222c226c6162656c223a224964656e74696669616e74222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343237222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2232222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343235222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2233222c226c6162656c223a225072c3a96e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333038222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2234222c226c6162656c223a224e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343233222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2235222c226c6162656c223a2247656e7265222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333130222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2236222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343238222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2237222c226c6162656c223a2241647265737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343330222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2238222c226c6162656c223a2256696c6c65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343331222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2239222c226c6162656c223a22436f646520706f7374616c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343332222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223130222c226c6162656c223a2252c3a967696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343333222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223131222c226c6162656c223a2250617973222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343335222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223132222c226c6162656c223a225369746520496e7465726e6574222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343236222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223133222c226c6162656c223a22412070726f706f73206465206d6f69222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353334222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223134222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303033222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223135222c226c6162656c223a2250726f6d6f74696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353336222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223136222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353333222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223137222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303035222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223138222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343730222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223139222c226c6162656c223a2244617465206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343731222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223230222c226c6162656c223a224c696575206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343334222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223231222c226c6162656c223a2254c3a96cc3a970686f6e65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333632222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223232222c226c6162656c223a2244617465206427696e736372697074696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333633222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223233222c226c6162656c223a224465726e69c3a8726520766973697465222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d5d2c22706f736974696f6e73223a5b7b22747970656964223a2238222c22706f736974696f6e223a22636c656172222c22636c69656e74223a22636f6e74656e74222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d2c7b22747970656964223a2238222c22706f736974696f6e223a226d61696e626f6479222c22636c69656e74223a22636f6e74656e74222c226c6567656e64223a22566f7472652070726f66696c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, NULL, '2015-05-24 00:33:35', 820, '', 0, '0000-00-00 00:00:00');
 INSERT INTO `qfupd_cck_core_versions` (`id`, `e_id`, `e_title`, `e_name`, `e_type`, `e_version`, `e_core`, `e_more`, `e_more1`, `e_more2`, `e_more3`, `e_more4`, `e_more5`, `date_time`, `user_id`, `note`, `checked_out`, `checked_out_time`) VALUES
 (526, 8, 'Users', 'users', 'search', 27, 0x7b226964223a2238222c227469746c65223a225573657273222c226e616d65223a227573657273222c22616c696173223a22222c22666f6c646572223a223133222c22636f6e74656e74223a2231222c2274656d706c6174655f736561726368223a223334222c2274656d706c6174655f66696c746572223a223130222c2274656d706c6174655f6c697374223a223431222c2274656d706c6174655f6974656d223a223430222c226465736372697074696f6e223a22222c22616363657373223a2231222c227075626c6973686564223a2231222c226f7074696f6e73223a227b5c226c696d69745c223a5c22305c222c5c2263616368655c223a5c22305c222c5c2263616368655f7065725f757365725c223a5c22305c222c5c227374616765735f6f7074696f6e616c5c223a5c225c222c5c226361636865325c223a5c22305c222c5c22706167696e6174696f6e5c223a5c225c222c5c2264656275675c223a5c225c222c5c227365665c223a5c225c222c5c22707265706172655f636f6e74656e745c223a5c225c222c5c226175746f5f72656469726563745c223a5c22305c222c5c226f72646572696e675c223a5c225c222c5c2273686f775f6c6973745f7469746c655c223a5c22315c222c5c227461675f6c6973745f7469746c655c223a5c2268325c222c5c22636c6173735f6c6973745f7469746c655c223a5c225c222c5c2273686f775f6c6973745f646573635c223a5c22315c222c5c2273686f775f6c6973745c223a5c22315c222c5c2273686f775f666f726d5c223a5c22315c222c5c2273686f775f6974656d735f6e756d6265725c223a5c22305c222c5c226c6162656c5f6974656d735f6e756d6265725c223a5c22526573756c74735c222c5c22636c6173735f6974656d735f6e756d6265725c223a5c22746f74616c5c222c5c2273686f775f70616765735f6e756d6265725c223a5c22315c222c5c2273686f775f706167696e6174696f6e5c223a5c22305c222c5c22636c6173735f706167696e6174696f6e5c223a5c22706167696e6174696f6e5c222c5c2263616c6c6261636b5f706167696e6174696f6e5c223a5c225c222c5c226d6573736167655f7374796c655f6e6f5f6163636573735c223a5c226572726f725c222c5c22616374696f6e5f6e6f5f6163636573735c223a5c227265646972656374696f6e5c222c5c226d6573736167655f6e6f5f6163636573735c223a5c225c222c5c227265646972656374696f6e5f75726c5f6e6f5f6163636573735c223a5c22696e6465782e7068703f6f7074696f6e3d636f6d5f757365727326766965773d6c6f67696e5c222c5c226d6573736167655f7374796c655c223a5c226d6573736167655c222c5c22616374696f6e5c223a5c22305c222c5c226d6573736167655c223a5c225c222c5c2273686f775f6c6973745f646573635f6e6f5f726573756c745c223a5c22315c227d222c226c6f636174696f6e223a2273697465222c227365665f726f757465223a22222c2273746f726167655f6c6f636174696f6e223a226a6f6f6d6c615f75736572222c227374796c65736865657473223a22222c2276657273696f6e223a223237222c22636865636b65645f6f7574223a22383230222c22636865636b65645f6f75745f74696d65223a22323031352d30352d32342031333a31323a3235227d, '{"fields":{"1":"5","2":"0","3":"1","4":"1","5":"1"}}', 0x7b226669656c6473223a5b7b227365617263686964223a2238222c226669656c646964223a2231222c22636c69656e74223a22736561726368222c226f72646572696e67223a2231222c226c6162656c223a22222c22766172696174696f6e223a2268696464656e222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a2275736572222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c226d617463685f636f6c6c656374696f6e223a22222c226d617463685f6d6f6465223a226578616374222c226d617463685f6f7074696f6e73223a22222c226d617463685f76616c7565223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b227365617263686964223a2238222c226669656c646964223a22333038222c22636c69656e74223a22736561726368222c226f72646572696e67223a2232222c226c6162656c223a22222c22766172696174696f6e223a2276616c7565222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c226d617463685f636f6c6c656374696f6e223a22222c226d617463685f6d6f6465223a22222c226d617463685f6f7074696f6e73223a22222c226d617463685f76616c7565223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b227365617263686964223a2238222c226669656c646964223a22313030353032222c22636c69656e74223a22736561726368222c226f72646572696e67223a2233222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a222062746e2d746f6f6c626172222c226d617463685f636f6c6c656374696f6e223a22222c226d617463685f6d6f6465223a22222c226d617463685f6f7074696f6e73223a22222c226d617463685f76616c7565223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b227365617263686964223a2238222c226669656c646964223a22323934222c22636c69656e74223a22736561726368222c226f72646572696e67223a2234222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a226e6f6e65222c226d61726b75705f636c617373223a22222c226d617463685f636f6c6c656374696f6e223a22222c226d617463685f6d6f6465223a22222c226d617463685f6f7074696f6e73223a22222c226d617463685f76616c7565223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b227365617263686964223a2238222c226669656c646964223a22313030353034222c22636c69656e74223a22736561726368222c226f72646572696e67223a2235222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c226d617463685f636f6c6c656374696f6e223a22222c226d617463685f6d6f6465223a22222c226d617463685f6f7074696f6e73223a22222c226d617463685f76616c7565223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d5d2c22706f736974696f6e73223a5b7b227365617263686964223a2238222c22706f736974696f6e223a22636c656172222c22636c69656e74223a22736561726368222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d2c7b227365617263686964223a2238222c22706f736974696f6e223a226d61696e626f6479222c22636c69656e74223a22736561726368222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, 0x7b226669656c6473223a5b5d2c22706f736974696f6e73223a5b5d7d, 0x7b226669656c6473223a5b7b227365617263686964223a2238222c226669656c646964223a22333038222c22636c69656e74223a226c697374222c226f72646572696e67223a2231222c226c6162656c223a22636c656172222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c226d617463685f636f6c6c656374696f6e223a22222c226d617463685f6d6f6465223a22222c226d617463685f6f7074696f6e73223a22222c226d617463685f76616c7565223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a22636f6c756d6e2d61227d5d2c22706f736974696f6e73223a5b7b227365617263686964223a2238222c22706f736974696f6e223a22636f6c756d6e2d61222c22636c69656e74223a226c697374222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d2c7b227365617263686964223a2238222c22706f736974696f6e223a2268696464656e222c22636c69656e74223a226c697374222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, 0x7b226669656c6473223a5b7b227365617263686964223a2238222c226669656c646964223a22333038222c22636c69656e74223a226974656d222c226f72646572696e67223a2231222c226c6162656c223a22636c656172222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c226d617463685f636f6c6c656374696f6e223a22222c226d617463685f6d6f6465223a22222c226d617463685f6f7074696f6e73223a22222c226d617463685f76616c7565223a22222c227479706f223a2268656164696e67222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d5d2c22706f736974696f6e73223a5b7b227365617263686964223a2238222c22706f736974696f6e223a22636c656172222c22636c69656e74223a226974656d222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d2c7b227365617263686964223a2238222c22706f736974696f6e223a226d61696e626f6479222c22636c69656e74223a226974656d222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, 0x7b226669656c6473223a5b7b227365617263686964223a2238222c226669656c646964223a22333038222c22636c69656e74223a226f72646572222c226f72646572696e67223a2231222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c226d617463685f636f6c6c656374696f6e223a22222c226d617463685f6d6f6465223a22415343222c226d617463685f6f7074696f6e73223a22222c226d617463685f76616c7565223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d5d2c22706f736974696f6e73223a5b7b227365617263686964223a2238222c22706f736974696f6e223a226d61696e626f6479222c22636c69656e74223a226f72646572222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, '2015-05-24 13:12:53', 820, '', 0, '0000-00-00 00:00:00');
-INSERT INTO `qfupd_cck_core_versions` (`id`, `e_id`, `e_title`, `e_name`, `e_type`, `e_version`, `e_core`, `e_more`, `e_more1`, `e_more2`, `e_more3`, `e_more4`, `e_more5`, `date_time`, `user_id`, `note`, `checked_out`, `checked_out_time`) VALUES
-(527, 8, 'User', 'user', 'type', 179, 0x7b226964223a2238222c2261737365745f6964223a22313933222c227469746c65223a2255736572222c226e616d65223a2275736572222c22616c696173223a22222c22666f6c646572223a223133222c2274656d706c6174655f61646d696e223a223331222c2274656d706c6174655f73697465223a223332222c2274656d706c6174655f636f6e74656e74223a223333222c2274656d706c6174655f696e74726f223a223130222c226465736372697074696f6e223a22222c22696e6465786564223a226e6f6e65222c227075626c6973686564223a2231222c226f7074696f6e735f61646d696e223a227b5c226d6573736167655f7374796c655c223a5c226d6573736167655c222c5c226d6573736167655c223a5c225c222c5c22646174615f696e746567726974795f6578636c756465645c223a5c225c222c5c226d6573736167655f7374796c655f6e6f5f6163636573735c223a5c226572726f725c222c5c22616374696f6e5f6e6f5f6163636573735c223a5c227265646972656374696f6e5c222c5c226d6573736167655f6e6f5f6163636573735c223a5c225c222c5c227265646972656374696f6e5f75726c5f6e6f5f6163636573735c223a5c22696e6465782e7068703f6f7074696f6e3d636f6d5f757365727326766965773d6c6f67696e5c222c5c227374616765735c223a5c22315c222c5c2276616c69646174696f6e5f706f736974696f6e5c223a5c225c222c5c2276616c69646174696f6e5f7363726f6c6c5c223a5c225c222c5c2276616c69646174696f6e5f636f6c6f725c223a5c225c222c5c2276616c69646174696f6e5f6261636b67726f756e645f636f6c6f725c223a5c225c227d222c226f7074696f6e735f73697465223a227b5c226d6573736167655f7374796c655c223a5c22305c222c5c227265646972656374696f6e5c223a5c2275726c5c222c5c226d6573736167655c223a5c225c222c5c227265646972656374696f6e5f6974656d69645c223a5c223130315c222c5c227265646972656374696f6e5f75726c5c223a5c22696e6465782e7068703f6f7074696f6e3d636f6d5f636f6e74656e7426766965773d61727469636c652669643d325c222c5c22646174615f696e746567726974795f6578636c756465645c223a5c225c222c5c2273686f775f666f726d5f7469746c655c223a5c22305c222c5c227461675f666f726d5f7469746c655c223a5c2268315c222c5c22636c6173735f666f726d5f7469746c655c223a5c22496e736372697074696f6e5c222c5c2273686f775f666f726d5f646573635c223a5c22315c222c5c226d6573736167655f7374796c655f6e6f5f6163636573735c223a5c226572726f725c222c5c22616374696f6e5f6e6f5f6163636573735c223a5c227265646972656374696f6e5c222c5c226d6573736167655f6e6f5f6163636573735c223a5c225c222c5c227265646972656374696f6e5f75726c5f6e6f5f6163636573735c223a5c22696e6465782e7068703f6f7074696f6e3d636f6d5f757365727326766965773d6c6f67696e5c222c5c227374616765735c223a5c22315c222c5c2276616c69646174696f6e5f706f736974696f6e5c223a5c225c222c5c2276616c69646174696f6e5f7363726f6c6c5c223a5c225c222c5c2276616c69646174696f6e5f636f6c6f725c223a5c225c222c5c2276616c69646174696f6e5f6261636b67726f756e645f636f6c6f725c223a5c225c227d222c226f7074696f6e735f636f6e74656e74223a227b5c227469746c655c223a5c225c222c5c227479706f5c223a5c22315c222c5c227365665c223a5c225c227d222c226f7074696f6e735f696e74726f223a227b5c227469746c655c223a5c225c222c5c227479706f5c223a5c22315c222c5c227365665c223a5c225c227d222c226c6f636174696f6e223a22222c22706172656e74223a22222c2273746f726167655f6c6f636174696f6e223a226a6f6f6d6c615f75736572222c227374796c65736865657473223a22222c2276657273696f6e223a22313739222c22636865636b65645f6f7574223a22383230222c22636865636b65645f6f75745f74696d65223a22323031352d30352d32342031353a33353a3437222c22616363657373223a2233222c22637265617465645f64617465223a22303030302d30302d30302030303a30303a3030222c22637265617465645f757365725f6964223a2230222c226d6f6469666965645f64617465223a22303030302d30302d30302030303a30303a3030222c226d6f6469666965645f757365725f6964223a2230222c2272756c6573223a227b5c22636f72652e6372656174655c223a7b5c22315c223a312c5c22325c223a307d2c5c22636f72652e6372656174652e6d61782e706172656e745c223a7b5c22385c223a307d2c5c22636f72652e6372656174652e6d61782e706172656e742e617574686f725c223a7b5c22385c223a307d2c5c22636f72652e6372656174652e6d61782e617574686f725c223a7b5c22385c223a307d2c5c22636f72652e64656c6574655c223a5b5d2c5c22636f72652e64656c6574652e6f776e5c223a5b5d2c5c22636f72652e656469745c223a7b5c22345c223a307d2c5c22636f72652e656469742e6f776e5c223a7b5c22325c223a317d7d227d, '{"fields":{"1":"40","2":"31","3":"0","4":"23"}}', 0x7b226669656c6473223a5b7b22747970656964223a2238222c226669656c646964223a22333039222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2231222c226c6162656c223a224964656e74696669616e74222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333131222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2232222c226c6162656c223a224d6f74206465207061737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333132222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2233222c226c6162656c223a22436f6e6669726d6174696f6e204d6f74206465207061737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22636f6e6669726d222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c222c5c226669656c645c223a5c22757365725f70617373776f72645c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343233222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2234222c226c6162656c223a2247656e7265222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343235222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2235222c226c6162656c223a225072c3a96e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333038222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2236222c226c6162656c223a224e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333130222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2237222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22656d61696c222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343232222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2238222c226c6162656c223a22436f6e6669726d6174696f6e20456d61696c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22636f6e6669726d222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c222c5c226669656c645c223a5c22757365725f656d61696c5c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343736222c22636c69656e74223a2261646d696e222c226f72646572696e67223a2239222c226c6162656c223a2241737369676e656420557365722047726f757073222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353338222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223130222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343830222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223131222c226c6162656c223a2250726f66696c65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353032222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223132222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22207370616e36222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343730222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223133222c226c6162656c223a2244617465206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343731222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223134222c226c6162656c223a224c696575206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343237222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223135222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353033222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223136222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343238222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223137222c226c6162656c223a2241647265737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343330222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223138222c226c6162656c223a2256696c6c65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343331222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223139222c226c6162656c223a22436f646520706f7374616c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343332222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223230222c226c6162656c223a2252c3a967696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343333222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223231222c226c6162656c223a2250617973222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343334222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223232222c226c6162656c223a2254c3a96cc3a970686f6e65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343335222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223233222c226c6162656c223a225349746520496e7465726e6574222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343236222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223234222c226c6162656c223a22412070726f706f73206465206d6f69222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353334222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223235222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303033222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223236222c226c6162656c223a2250726f6d6f74696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353333222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223237222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303035222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223238222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353034222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223239222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343938222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223330222c226c6162656c223a22436f6d707465222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353035222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223331222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22207370616e36222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333634222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223332222c226c6162656c223a2252656365766f697220656d61696c2064752053797374c3a86d65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333232222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223333222c226c6162656c223a22426c6f7175657220636574207574696c69736174657572222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333632222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223334222c226c6162656c223a2244617465206427696e6372697074696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333633222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223335222c226c6162656c223a2244617465206465206c61206465726e69c3a8726520766973697465222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343337222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223336222c226c6162656c223a2244617465206465206c61206465726e69c3a872652072c3a9696e697469616c69736174696f6e222c22766172696174696f6e223a2268696464656e222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343338222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223337222c226c6162656c223a2252c3a9696e697469616c69736174696f6e204d6f74206465207061737365222c22766172696174696f6e223a2268696464656e222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a2263636b5f776f726b666c6f77222c227265737472696374696f6e5f6f7074696f6e73223a227b5c226c6f636174696f6e5c223a5c225c222c5c22616374696f6e5c223a5c22656469745c227d222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333635222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223338222c226c6162656c223a22222c22766172696174696f6e223a2268696464656e222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a2263636b5f776f726b666c6f77222c227265737472696374696f6e5f6f7074696f6e73223a227b5c226c6f636174696f6e5c223a5c225c222c5c22616374696f6e5c223a5c22656469745c227d222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353037222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223339222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343831222c22636c69656e74223a2261646d696e222c226f72646572696e67223a223430222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d5d2c22706f736974696f6e73223a5b7b22747970656964223a2238222c22706f736974696f6e223a22636c656172222c22636c69656e74223a2261646d696e222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d2c7b22747970656964223a2238222c22706f736974696f6e223a226d61696e626f6479222c22636c69656e74223a2261646d696e222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, 0x7b226669656c6473223a5b7b22747970656964223a2238222c226669656c646964223a22343736222c22636c69656e74223a2273697465222c226f72646572696e67223a2231222c226c6162656c223a224163636f756e74222c22766172696174696f6e223a2276616c7565222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2233222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333039222c22636c69656e74223a2273697465222c226f72646572696e67223a2232222c226c6162656c223a224964656e74696669616e74222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333131222c22636c69656e74223a2273697465222c226f72646572696e67223a2233222c226c6162656c223a224d6f74206465207061737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333132222c22636c69656e74223a2273697465222c226f72646572696e67223a2234222c226c6162656c223a22436f6e6669726d6174696f6e204d6f74206465207061737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22636f6e6669726d222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c222c5c226669656c645c223a5c22757365725f70617373776f72645c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343233222c22636c69656e74223a2273697465222c226f72646572696e67223a2235222c226c6162656c223a2247656e7265222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343235222c22636c69656e74223a2273697465222c226f72646572696e67223a2236222c226c6162656c223a225072c3a96e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333038222c22636c69656e74223a2273697465222c226f72646572696e67223a2237222c226c6162656c223a224e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333130222c22636c69656e74223a2273697465222c226f72646572696e67223a2238222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22656d61696c222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343232222c22636c69656e74223a2273697465222c226f72646572696e67223a2239222c226c6162656c223a22436f6e6669726d6174696f6e20456d61696c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22636f6e6669726d222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c222c5c226669656c645c223a5c22757365725f656d61696c5c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343938222c22636c69656e74223a2273697465222c226f72646572696e67223a223130222c226c6162656c223a22222c22766172696174696f6e223a2276616c7565222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2233222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353334222c22636c69656e74223a2273697465222c226f72646572696e67223a223131222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303033222c22636c69656e74223a2273697465222c226f72646572696e67223a223132222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303034222c22636c69656e74223a2273697465222c226f72646572696e67223a223133222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353333222c22636c69656e74223a2273697465222c226f72646572696e67223a223134222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303035222c22636c69656e74223a2273697465222c226f72646572696e67223a223135222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a227265717569726564222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a227b5c22616c6572745c223a5c225c227d222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343831222c22636c69656e74223a2273697465222c226f72646572696e67223a223136222c226c6162656c223a22222c22766172696174696f6e223a2276616c7565222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2233222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343238222c22636c69656e74223a2273697465222c226f72646572696e67223a223137222c226c6162656c223a2241647265737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343330222c22636c69656e74223a2273697465222c226f72646572696e67223a223138222c226c6162656c223a2256696c6c65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343331222c22636c69656e74223a2273697465222c226f72646572696e67223a223139222c226c6162656c223a22436f646520706f7374616c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343332222c22636c69656e74223a2273697465222c226f72646572696e67223a223230222c226c6162656c223a2252c3a967696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343333222c22636c69656e74223a2273697465222c226f72646572696e67223a223231222c226c6162656c223a2250617973222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343334222c22636c69656e74223a2273697465222c226f72646572696e67223a223232222c226c6162656c223a2254c3a96cc3a970686f6e65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343730222c22636c69656e74223a2273697465222c226f72646572696e67223a223233222c226c6162656c223a2244617465206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343731222c22636c69656e74223a2273697465222c226f72646572696e67223a223234222c226c6162656c223a224c696575206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343237222c22636c69656e74223a2273697465222c226f72646572696e67223a223235222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343236222c22636c69656e74223a2273697465222c226f72646572696e67223a223236222c226c6162656c223a22412070726f706f73206465206d6f69222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343335222c22636c69656e74223a2273697465222c226f72646572696e67223a223237222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353032222c22636c69656e74223a2273697465222c226f72646572696e67223a223238222c226c6162656c223a22222c22766172696174696f6e223a2276616c7565222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a222062746e2d746f6f6c626172222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343837222c22636c69656e74223a2273697465222c226f72646572696e67223a223239222c226c6162656c223a22456e726567697374726572222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a226e6f6e65222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343930222c22636c69656e74223a2273697465222c226f72646572696e67223a223330222c226c6162656c223a22416e6e756c6572222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a226e6f6e65222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353034222c22636c69656e74223a2273697465222c226f72646572696e67223a223331222c226c6162656c223a22222c22766172696174696f6e223a2268696464656e222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d5d2c22706f736974696f6e73223a5b7b22747970656964223a2238222c22706f736974696f6e223a22636c656172222c22636c69656e74223a2273697465222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d2c7b22747970656964223a2238222c22706f736974696f6e223a226d61696e626f6479222c22636c69656e74223a2273697465222c226c6567656e64223a22496e736372697074696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a227b5c226261636b67726f756e645f636f6c6f725c223a5c226e6f6e655c222c5c22626f726465725f636f6c6f725c223a5c22236465646564655c222c5c22626f726465725f73697a655c223a5c22305c222c5c22626f726465725f7374796c655c223a5c22736f6c69645c222c5c22626f726465725f7261646975735c223a5c22355c222c5c22706f736974696f6e5f70616464696e675c223a5c225c222c5c226c6567656e645f616c69676e5c223a5c226c6566745c222c5c226c6567656e645f6669656c646e616d655c223a5c225c222c5c226669656c645f6f7269656e746174696f6e5c223a5c22766572746963616c5c222c5c226669656c645f77696474685c223a5c22313030255c222c5c226669656c645f6c6162656c5c223a5c225c222c5c226669656c645f6c6162656c5f706f736974696f6e5c223a5c226c6566745c222c5c226669656c645f6c6162656c5f616c69676e5c223a5c226c6566745c222c5c226669656c645f6c6162656c5f77696474685c223a5c2231343570785c222c5c226669656c645f6c6162656c5f636f6c6f725c223a5c225c222c5c226669656c645f6c6162656c5f70616464696e675c223a5c225c222c5c226669656c645f666f6375735f626f726465725f636f6c6f725c223a5c22233838383838385c227d222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, 0x7b226669656c6473223a5b5d2c22706f736974696f6e73223a5b7b22747970656964223a2238222c22706f736974696f6e223a22636c656172222c22636c69656e74223a22696e74726f222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, 0x7b226669656c6473223a5b7b22747970656964223a2238222c226669656c646964223a22333039222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2231222c226c6162656c223a224964656e74696669616e74222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343237222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2232222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343235222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2233222c226c6162656c223a225072c3a96e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333038222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2234222c226c6162656c223a224e6f6d222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343233222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2235222c226c6162656c223a2247656e7265222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333130222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2236222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343238222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2237222c226c6162656c223a2241647265737365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343330222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2238222c226c6162656c223a2256696c6c65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343331222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a2239222c226c6162656c223a22436f646520706f7374616c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343332222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223130222c226c6162656c223a2252c3a967696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343333222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223131222c226c6162656c223a2250617973222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343335222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223132222c226c6162656c223a225369746520496e7465726e6574222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343236222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223133222c226c6162656c223a22412070726f706f73206465206d6f69222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353334222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223134222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303033222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223135222c226c6162656c223a2250726f6d6f74696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353336222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223136222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22313030353333222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223137222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a2235303035222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223138222c226c6162656c223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343730222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223139222c226c6162656c223a2244617465206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343731222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223230222c226c6162656c223a224c696575206465206e61697373616e6365222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22343334222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223231222c226c6162656c223a2254c3a96cc3a970686f6e65222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333632222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223232222c226c6162656c223a2244617465206427696e736372697074696f6e222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d2c7b22747970656964223a2238222c226669656c646964223a22333633222c22636c69656e74223a22636f6e74656e74222c226f72646572696e67223a223233222c226c6162656c223a224465726e69c3a8726520766973697465222c22766172696174696f6e223a22222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d5d2c22706f736974696f6e73223a5b7b22747970656964223a2238222c22706f736974696f6e223a22636c656172222c22636c69656e74223a22636f6e74656e74222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d2c7b22747970656964223a2238222c22706f736974696f6e223a226d61696e626f6479222c22636c69656e74223a22636f6e74656e74222c226c6567656e64223a22566f7472652070726f66696c222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, NULL, '2015-05-24 15:38:14', 820, '', 0, '0000-00-00 00:00:00');
-INSERT INTO `qfupd_cck_core_versions` (`id`, `e_id`, `e_title`, `e_name`, `e_type`, `e_version`, `e_core`, `e_more`, `e_more1`, `e_more2`, `e_more3`, `e_more4`, `e_more5`, `date_time`, `user_id`, `note`, `checked_out`, `checked_out_time`) VALUES
-(528, 10, 'User Group', 'user_group', 'search', 1, 0x7b226964223a223130222c227469746c65223a22557365722047726f7570222c226e616d65223a22757365725f67726f7570222c22616c696173223a22222c22666f6c646572223a223134222c22636f6e74656e74223a2230222c2274656d706c6174655f736561726368223a223435222c2274656d706c6174655f66696c746572223a223130222c2274656d706c6174655f6c697374223a2230222c2274656d706c6174655f6974656d223a223130222c226465736372697074696f6e223a22222c22616363657373223a2231222c227075626c6973686564223a2231222c226f7074696f6e73223a227b5c226c696d69745c223a5c22305c222c5c2263616368655c223a5c22305c222c5c2263616368655f7065725f757365725c223a5c22305c222c5c227374616765735f6f7074696f6e616c5c223a5c225c222c5c226361636865325c223a5c22305c222c5c22706167696e6174696f6e5c223a5c225c222c5c2264656275675c223a5c225c222c5c227365665c223a5c225c222c5c22707265706172655f636f6e74656e745c223a5c225c222c5c226175746f5f72656469726563745c223a5c22305c222c5c226f72646572696e675c223a5c225c222c5c2273686f775f6c6973745f7469746c655c223a5c22315c222c5c227461675f6c6973745f7469746c655c223a5c2268325c222c5c22636c6173735f6c6973745f7469746c655c223a5c225c222c5c2273686f775f6c6973745f646573635c223a5c22315c222c5c2273686f775f6c6973745c223a5c22315c222c5c2273686f775f666f726d5c223a5c22315c222c5c2273686f775f6974656d735f6e756d6265725c223a5c22305c222c5c226c6162656c5f6974656d735f6e756d6265725c223a5c22526573756c74735c222c5c22636c6173735f6974656d735f6e756d6265725c223a5c22746f74616c5c222c5c2273686f775f70616765735f6e756d6265725c223a5c22315c222c5c2273686f775f706167696e6174696f6e5c223a5c22305c222c5c22636c6173735f706167696e6174696f6e5c223a5c22706167696e6174696f6e5c222c5c2263616c6c6261636b5f706167696e6174696f6e5c223a5c225c222c5c226d6573736167655f7374796c655f6e6f5f6163636573735c223a5c226572726f725c222c5c22616374696f6e5f6e6f5f6163636573735c223a5c227265646972656374696f6e5c222c5c226d6573736167655f6e6f5f6163636573735c223a5c225c222c5c227265646972656374696f6e5f75726c5f6e6f5f6163636573735c223a5c22696e6465782e7068703f6f7074696f6e3d636f6d5f757365727326766965773d6c6f67696e5c222c5c226d6573736167655f7374796c655c223a5c226d6573736167655c222c5c22616374696f6e5c223a5c22305c222c5c226d6573736167655c223a5c225c222c5c2273686f775f6c6973745f646573635f6e6f5f726573756c745c223a5c22315c227d222c226c6f636174696f6e223a22222c227365665f726f757465223a22222c2273746f726167655f6c6f636174696f6e223a226a6f6f6d6c615f757365725f67726f7570222c227374796c65736865657473223a22222c2276657273696f6e223a2231222c22636865636b65645f6f7574223a22383230222c22636865636b65645f6f75745f74696d65223a22323031352d30352d32342031363a30363a3537227d, '{"fields":{"1":"1","2":"0","3":"0","4":"0","5":"0"}}', 0x7b226669656c6473223a5b7b227365617263686964223a223130222c226669656c646964223a2231222c22636c69656e74223a22736561726368222c226f72646572696e67223a2231222c226c6162656c223a22222c22766172696174696f6e223a2268696464656e222c22766172696174696f6e5f6f76657272696465223a22222c227265717569726564223a22222c2272657175697265645f616c657274223a22222c2276616c69646174696f6e223a22222c2276616c69646174696f6e5f6f7074696f6e73223a22222c226c696e6b223a22222c226c696e6b5f6f7074696f6e73223a22222c226c697665223a22222c226c6976655f6f7074696f6e73223a22222c226c6976655f76616c7565223a22757365725f67726f7570222c226d61726b7570223a22222c226d61726b75705f636c617373223a22222c226d617463685f636f6c6c656374696f6e223a22222c226d617463685f6d6f6465223a226578616374222c226d617463685f6f7074696f6e73223a22222c226d617463685f76616c7565223a22222c227479706f223a22222c227479706f5f6c6162656c223a2230222c227479706f5f6f7074696f6e73223a22222c227374616765223a2230222c22616363657373223a2231222c227265737472696374696f6e223a22222c227265737472696374696f6e5f6f7074696f6e73223a22222c22636f6d7075746174696f6e223a22222c22636f6d7075746174696f6e5f6f7074696f6e73223a22222c22636f6e646974696f6e616c223a22222c22636f6e646974696f6e616c5f6f7074696f6e73223a22222c22706f736974696f6e223a226d61696e626f6479227d5d2c22706f736974696f6e73223a5b7b227365617263686964223a223130222c22706f736974696f6e223a22636c656172222c22636c69656e74223a22736561726368222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d2c7b227365617263686964223a223130222c22706f736974696f6e223a226d61696e626f6479222c22636c69656e74223a22736561726368222c226c6567656e64223a22222c22766172696174696f6e223a22222c22766172696174696f6e5f6f7074696f6e73223a22222c227769647468223a22222c22686569676874223a22222c22637373223a22227d5d7d, 0x7b226669656c6473223a5b5d2c22706f736974696f6e73223a5b5d7d, 0x7b226669656c6473223a5b5d2c22706f736974696f6e73223a5b5d7d, 0x7b226669656c6473223a5b5d2c22706f736974696f6e73223a5b5d7d, 0x7b226669656c6473223a5b5d2c22706f736974696f6e73223a5b5d7d, '2015-05-24 16:07:37', 820, '', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -2067,14 +1972,13 @@ INSERT INTO `qfupd_cck_core_versions` (`id`, `e_id`, `e_title`, `e_name`, `e_typ
 -- Structure de la table `qfupd_cck_more_countries`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_more_countries` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_more_countries` (
+  `id` int(11) NOT NULL,
   `name_en` varchar(255) NOT NULL,
   `name_fr` varchar(255) NOT NULL,
   `code2` varchar(5) NOT NULL,
-  `code3` varchar(5) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=247 ;
+  `code3` varchar(5) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_cck_more_countries`
@@ -2334,8 +2238,8 @@ INSERT INTO `qfupd_cck_more_countries` (`id`, `name_en`, `name_fr`, `code2`, `co
 -- Structure de la table `qfupd_cck_more_processings`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_more_processings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_more_processings` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL DEFAULT '1',
@@ -2345,9 +2249,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_more_processings` (
   `published` tinyint(3) NOT NULL DEFAULT '0',
   `scriptfile` text NOT NULL,
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
-  `checked_out_time` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `checked_out_time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2355,16 +2258,14 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_more_processings` (
 -- Structure de la table `qfupd_cck_more_sessions`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_more_sessions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_cck_more_sessions` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `extension` varchar(50) NOT NULL,
   `folder` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `options` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_extension` (`extension`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `options` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2372,7 +2273,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_more_sessions` (
 -- Structure de la table `qfupd_cck_store_item_users`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_cck_store_item_users` (
+CREATE TABLE `qfupd_cck_store_item_users` (
   `id` int(11) NOT NULL,
   `cck` varchar(50) NOT NULL,
   `gender` varchar(255) NOT NULL,
@@ -2389,8 +2290,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_cck_store_item_users` (
   `phone` varchar(255) NOT NULL,
   `website` varchar(255) NOT NULL,
   `birthdate` datetime NOT NULL,
-  `birthplace` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `birthplace` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2406,8 +2306,7 @@ INSERT INTO `qfupd_cck_store_item_users` (`id`, `cck`, `gender`, `last_name`, `f
 (819, 'user', 'M', '', 'Alexandre', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', ''),
 (820, 'user', 'F', '', 'Ophélie', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', ''),
 (821, 'user', 'H', '', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', ''),
-(824, 'user', 'H', '', 'tuteur', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', ''),
-(825, 'user', 'H', '', 'azerty', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', '');
+(824, 'user', 'H', '', 'tuteur', '', '', '', '', '', '', '', '', '', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -2415,8 +2314,8 @@ INSERT INTO `qfupd_cck_store_item_users` (`id`, `cck`, `gender`, `last_name`, `f
 -- Structure de la table `qfupd_contact_details`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_contact_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_contact_details` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `con_position` varchar(255) DEFAULT NULL,
@@ -2458,17 +2357,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_contact_details` (
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `version` int(10) unsigned NOT NULL DEFAULT '1',
-  `hits` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`published`),
-  KEY `idx_catid` (`catid`),
-  KEY `idx_createdby` (`created_by`),
-  KEY `idx_featured_catid` (`featured`,`catid`),
-  KEY `idx_language` (`language`),
-  KEY `idx_xreference` (`xreference`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `hits` int(10) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2476,8 +2366,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_contact_details` (
 -- Structure de la table `qfupd_content`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_content` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_content` (
+  `id` int(10) unsigned NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -2506,42 +2396,33 @@ CREATE TABLE IF NOT EXISTS `qfupd_content` (
   `metadata` text NOT NULL,
   `featured` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Set if article is featured.',
   `language` char(7) NOT NULL COMMENT 'The language code for the article.',
-  `xreference` varchar(50) NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`state`),
-  KEY `idx_catid` (`catid`),
-  KEY `idx_createdby` (`created_by`),
-  KEY `idx_featured_catid` (`featured`,`catid`),
-  KEY `idx_language` (`language`),
-  KEY `idx_xreference` (`xreference`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
+  `xreference` varchar(50) NOT NULL COMMENT 'A reference to enable linkages to external data sets.'
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_content`
 --
 
 INSERT INTO `qfupd_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`) VALUES
-(1, 61, 'Comment débuter ?', 'comment-debuter', '<p style="text-align: justify;">La création d''un site web avec Joomla est simple, le déploiement de ce site exemple vous y aidera. <br />Les quelques principes de base présentés ci-dessous vous guideront dans la compréhension de ce logiciel.</p><h3>Qu''est-ce qu''un Système de Gestion de Contenu ?</h3><p style="text-align: justify;">Un   système de gestion de contenu (SGC ou CMS de l''anglais Content  Management System) est un logiciel qui vous permet de créer  et gérer  des pages Web facilement, séparant la création des contenus de la  gestion technique nécessaire à une diffusion sur le web.</p><p style="text-align: justify;">Le  contenu rédactionnel est stocké et restitué par une base de données, l''aspect (police, taille, couleur, emplacement, etc.) est géré par un  template (habillage du site). Le logiciel Joomla permet d''unir ces deux  structures de manière conviviale et de les rendre accessibles au plus  grand nombre d''utilisateurs.</p><h3>Deux interfaces</h3><p>Un site Joomla est structuré en deux parties distinctes : la partie visible du site appelée «Frontal» de <em>Frontend</em> en anglais et, la partie d''administration pure appelée «Administration» de <em>Administrator</em>.</p><h3 style="text-align: justify;">Administration</h3><p style="text-align: justify;">Vous pouvez accéder à l''administration en cliquant sur le sur le lien «Administration» présent dans le module de menu «Menu membre» visible après vous être connecté sur le site ou, en  ajoutant  <em>/administrator</em> dans l''URL après le nom de domaine (exemple : www.mon-domaine.com/administrator).</p><p style="text-align: justify;">Utilisez le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Frontal</h3><p style="text-align: justify;">Si votre profil possède les droits suffisants, vous pouvez créer des articles et les éditer depuis l''interface frontale du site.</p><p style="text-align: justify;">Connectez-vous par le module «Connexion» en utilisant le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Créer un article en frontal</h3><p style="text-align: justify;">Lorsque vous êtes connecté, un nouveau menu nommé «Menu Membres» apparaît. Cliquez sur le lien  «Créer un article» pour afficher l''éditeur de texte et d''insertion de médias.</p><p style="text-align: justify;">Pour enregistrer l''article, vous devez spécifier à quelle catégorie il appartient ainsi que son statut de publication. Pour le modifier, cliquez sur l''icône d''édition <img src="media/system/images/edit.png" border="0" alt="Editer un article" width="18" height="18" style="vertical-align: middle;" />.</p><p style="text-align: justify;">Vous pouvez travailler sur des articles non publiés ou de publication programmée dans le temps et, dans le cadre d''un travail collaboratif, ne les rendre visibles qu''à un groupe d''utilisateurs donnés avant de les rendre publics.</p><h3>En savoir plus</h3><p>Une pleine utilisation de Joomla requiert certaines connaissances approfondies que vous pourrez acquérir dans la <a href="http://docs.joomla.org/" target="_blank">documentation officielle de Joomla</a> ou sur le <a href="http://aide.joomla.fr/" target="_blank">site d''aide francophone</a> et dans le <a href="http://forum.joomla.org/" target="_blank">forum officiel</a> ou le <a href="http://forum.joomla.fr/" target="_blank">forum francophone</a>.</p>', '', 1, 2, '2013-11-16 00:00:00', 802, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2013-11-16 00:00:00', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 7, '', '', 1, 144, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(2, 75, 'Présentation du Tutorat', 'presentation-du-tutorat', '<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial;">Bienvenue sur le site du tutorat informatique de l’Université François Rabelais de Blois. </h1>\r\n<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial; min-height: 14px;"> </h1>\r\n<p>Le tutorat a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.</p>\r\n<p>Le tutorat propose un agenda en ligne pour rencontrer les tuteurs afin de s’inscrire aux différents cours proposés. Un forum et une bibliothèque sont à disposition pour chaque étudiant inscrit. Dès votre connexion, vous pourrez de plus, accéder à une page statistique ainsi qu’une page bilan.</p>\r\n<p>Ce soutien est destiné à toutes personnes voulant aider ou qui ressentent le besoin d’être aidé dans sa scolarité en Informatique et Mathématiques. </p>\r\n<p>Si vous avez des questions ou pour plus d’informations, vous pouvez toujours nous contacter via les liens prévus à cet effet.</p>\r\n<h2> </h2>', '', 1, 2, '2015-04-15 18:51:20', 802, '', '2015-04-15 18:57:39', 802, 0, '0000-00-00 00:00:00', '2015-04-15 18:51:20', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 7, 6, '', '', 1, 509, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(3, 76, 'Confirmation d''ajout cours', 'confirmation-d-ajout-cours', '<h2> </h2>', '', 1, 2, '2015-04-16 13:41:18', 802, '', '2015-04-16 13:45:34', 802, 0, '0000-00-00 00:00:00', '2015-04-16 13:41:18', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 2, 5, '', '', 1, 7, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(4, 77, 'Confirmation inscription cours :', 'confirmation-inscription-cours', '<p>Votre inscription à bien été prise en compte. Un E-MAIL de confirmation vous a été envoyé.</p>', '', 1, 2, '2015-04-16 13:51:11', 802, '', '2015-04-16 13:51:11', 0, 802, '2015-05-12 10:09:31', '2015-04-16 13:51:11', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 4, '', '', 1, 7, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(1, 61, 'Comment débuter ?', 'comment-debuter', '<p style="text-align: justify;">La création d''un site web avec Joomla est simple, le déploiement de ce site exemple vous y aidera. <br />Les quelques principes de base présentés ci-dessous vous guideront dans la compréhension de ce logiciel.</p><h3>Qu''est-ce qu''un Système de Gestion de Contenu ?</h3><p style="text-align: justify;">Un   système de gestion de contenu (SGC ou CMS de l''anglais Content  Management System) est un logiciel qui vous permet de créer  et gérer  des pages Web facilement, séparant la création des contenus de la  gestion technique nécessaire à une diffusion sur le web.</p><p style="text-align: justify;">Le  contenu rédactionnel est stocké et restitué par une base de données, l''aspect (police, taille, couleur, emplacement, etc.) est géré par un  template (habillage du site). Le logiciel Joomla permet d''unir ces deux  structures de manière conviviale et de les rendre accessibles au plus  grand nombre d''utilisateurs.</p><h3>Deux interfaces</h3><p>Un site Joomla est structuré en deux parties distinctes : la partie visible du site appelée «Frontal» de <em>Frontend</em> en anglais et, la partie d''administration pure appelée «Administration» de <em>Administrator</em>.</p><h3 style="text-align: justify;">Administration</h3><p style="text-align: justify;">Vous pouvez accéder à l''administration en cliquant sur le sur le lien «Administration» présent dans le module de menu «Menu membre» visible après vous être connecté sur le site ou, en  ajoutant  <em>/administrator</em> dans l''URL après le nom de domaine (exemple : www.mon-domaine.com/administrator).</p><p style="text-align: justify;">Utilisez le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Frontal</h3><p style="text-align: justify;">Si votre profil possède les droits suffisants, vous pouvez créer des articles et les éditer depuis l''interface frontale du site.</p><p style="text-align: justify;">Connectez-vous par le module «Connexion» en utilisant le nom d''utilisateur et le mot de passe créés lors de l''installation de Joomla.</p><h3>Créer un article en frontal</h3><p style="text-align: justify;">Lorsque vous êtes connecté, un nouveau menu nommé «Menu Membres» apparaît. Cliquez sur le lien  «Créer un article» pour afficher l''éditeur de texte et d''insertion de médias.</p><p style="text-align: justify;">Pour enregistrer l''article, vous devez spécifier à quelle catégorie il appartient ainsi que son statut de publication. Pour le modifier, cliquez sur l''icône d''édition <img src="media/system/images/edit.png" border="0" alt="Editer un article" width="18" height="18" style="vertical-align: middle;" />.</p><p style="text-align: justify;">Vous pouvez travailler sur des articles non publiés ou de publication programmée dans le temps et, dans le cadre d''un travail collaboratif, ne les rendre visibles qu''à un groupe d''utilisateurs donnés avant de les rendre publics.</p><h3>En savoir plus</h3><p>Une pleine utilisation de Joomla requiert certaines connaissances approfondies que vous pourrez acquérir dans la <a href="http://docs.joomla.org/" target="_blank">documentation officielle de Joomla</a> ou sur le <a href="http://aide.joomla.fr/" target="_blank">site d''aide francophone</a> et dans le <a href="http://forum.joomla.org/" target="_blank">forum officiel</a> ou le <a href="http://forum.joomla.fr/" target="_blank">forum francophone</a>.</p>', '', 1, 2, '2013-11-16 00:00:00', 802, '', '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', '2013-11-16 00:00:00', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 8, '', '', 1, 143, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(2, 75, 'Présentation du Tutorat', 'presentation-du-tutorat', '<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial;">Bienvenue sur le site du tutorat informatique de l’Université François Rabelais de Blois. </h1>\r\n<h1 style="margin: 0px; line-height: normal; font-family: Helvetica; -webkit-text-stroke-color: #000000; -webkit-text-stroke-width: initial; min-height: 14px;"> </h1>\r\n<p>Le tutorat a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.</p>\r\n<p>Le tutorat propose un agenda en ligne pour rencontrer les tuteurs afin de s’inscrire aux différents cours proposés. Un forum et une bibliothèque sont à disposition pour chaque étudiant inscrit. Dès votre connexion, vous pourrez de plus, accéder à une page statistique ainsi qu’une page bilan.</p>\r\n<p>Ce soutien est destiné à toutes personnes voulant aider ou qui ressentent le besoin d’être aidé dans sa scolarité en Informatique et Mathématiques. </p>\r\n<p>Si vous avez des questions ou pour plus d’informations, vous pouvez toujours nous contacter via les liens prévus à cet effet.</p>\r\n<h2> </h2>', '', 1, 2, '2015-04-15 18:51:20', 802, '', '2015-04-15 18:57:39', 802, 0, '0000-00-00 00:00:00', '2015-04-15 18:51:20', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 7, 7, '', '', 1, 500, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(3, 76, 'Confirmation d''ajout cours', 'confirmation-d-ajout-cours', '<h2> </h2>', '', 1, 2, '2015-04-16 13:41:18', 802, '', '2015-04-16 13:45:34', 802, 0, '0000-00-00 00:00:00', '2015-04-16 13:41:18', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"0","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 2, 6, '', '', 1, 7, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(4, 77, 'Confirmation inscription cours :', 'confirmation-inscription-cours', '<p>Votre inscription à bien été prise en compte. Un E-MAIL de confirmation vous a été envoyé.</p>', '', 1, 2, '2015-04-16 13:51:11', 802, '', '2015-04-16 13:51:11', 0, 802, '2015-05-12 10:09:31', '2015-04-16 13:51:11', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 5, '', '', 1, 7, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 (5, 82, 'Mon profil', 'profil', '', '', -2, 2, '2015-05-12 10:14:49', 802, '', '2015-05-12 10:26:51', 802, 0, '0000-00-00 00:00:00', '2015-05-12 10:14:49', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 2, 2, '', '', 1, 1, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(6, 158, 'Comment devenir tuteur ?', 'devenir-tuteur', '<p>Le seul pré-requis est que vous devez être un étudiant en deuxième ou troisième année de licence Informatique.</p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;"> </p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Vous devez d''abord vous inscrire en tant que tuteur sur la page d''inscription du site.</p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Ensuite, envoyez un mail au responsable de première année de licence avec une lettre de motivation, ou allez directement le voir à l''Université pour lui dire que vous êtes intéressés pour devenir tuteur.</p>\r\n<h2 style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;"> </h2>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Celui-ci regardera votre dossier et votre motivation, puis validera ou refusera votre demande en modifiant votre rôle de tuteur (en cours de validation) en vrai tuteur.</p>', '', 1, 2, '2015-05-17 17:14:14', 803, '', '2015-05-24 17:05:51', 820, 0, '0000-00-00 00:00:00', '2015-05-17 17:14:14', '0000-00-00 00:00:00', '{}', '{}', '{}', 7, 3, '', '', 1, 27, '{}', 0, '*', ''),
-(11, 212, 'JOGUET', 'joguet', '::cck::17::/cck::', '', 1, 8, '2015-05-18 23:35:12', 814, '', '2015-05-18 23:35:12', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:35:12', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 9, '', '', 2, 1, '{}', 0, '*', ''),
-(12, 213, 'IGUE', 'igue', '::cck::18::/cck::', '', 1, 8, '2015-05-18 23:44:53', 815, '', '2015-05-18 23:44:53', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:44:53', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 8, '', '', 2, 0, '{}', 0, '*', ''),
-(13, 214, 'HUART', 'huart', '::cck::19::/cck::', '', 1, 8, '2015-05-18 23:57:38', 816, '', '2015-05-18 23:57:38', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:57:38', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 7, '', '', 2, 0, '{}', 0, '*', ''),
-(14, 215, 'GAYAT', 'gayat', '::cck::20::/cck::', '', 1, 8, '2015-05-18 23:59:47', 817, '', '2015-05-19 00:00:30', 803, 0, '0000-00-00 00:00:00', '2015-05-18 23:59:47', '0000-00-00 00:00:00', '{}', '{}', '{}', 2, 6, '', '', 2, 0, '{}', 0, '*', ''),
-(15, 216, 'DUCHEMIN', 'duchemin', '::cck::21::/cck::', '', 1, 8, '2015-05-19 00:02:06', 818, '', '2015-05-19 00:02:06', 0, 0, '0000-00-00 00:00:00', '2015-05-19 00:02:06', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 5, '', '', 2, 5, '{}', 0, '*', ''),
-(16, 218, 'BRIZION', 'brizion', '::cck::22::/cck::', '', 1, 8, '2015-05-19 00:39:25', 819, '', '2015-05-19 00:42:42', 818, 0, '0000-00-00 00:00:00', '2015-05-19 00:39:25', '0000-00-00 00:00:00', '{}', '{}', '{}', 2, 4, '', '', 2, 0, '{}', 0, '*', ''),
-(17, 219, 'MARINIER', 'marinier', '::cck::23::/cck::', '', 1, 8, '2015-05-19 00:41:34', 820, '', '2015-05-19 00:42:12', 818, 0, '0000-00-00 00:00:00', '2015-05-19 00:41:34', '0000-00-00 00:00:00', '{}', '{}', '{}', 2, 3, '', '', 2, 29, '{}', 0, '*', ''),
-(39, 241, 'Présentation des tuteurs', 'presentation-des-tuteurs', '::cck::55::/cck::<br />::introtext::::/introtext::<br />::fulltext::::/fulltext::', '::cck::55::/cck::', 1, 2, '2015-05-22 16:17:19', 820, '', '2015-05-22 16:17:19', 0, 0, '0000-00-00 00:00:00', '2015-05-22 16:17:19', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":"","urlatext":"","targeta":"","urlb":"","urlbtext":"","targetb":"","urlc":"","urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_intro":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":""}', 1, 2, '', '', 1, 3, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(40, 245, 'Test', 'test', '::cck::56::/cck::', '', 1, 8, '2015-05-23 18:41:19', 821, '', '2015-05-23 18:41:19', 0, 0, '0000-00-00 00:00:00', '2015-05-23 18:41:19', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 2, '', '', 2, 0, '{}', 0, '*', ''),
-(41, 246, 'Ressources', 'ressources', '<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.</p>\r\n<p> </p>\r\n<h4>Analyse :</h4>\r\n<p> </p>\r\n<h5><strong>TD :</strong></h5>\r\n<p><a title="TD1 analyse" href="images/pdf/analyse/TD1.pdf" target="_blank">Télécharger TD1.pdf</a></p>\r\n<p><a title="TD1 corrigé" href="images/pdf/analyse/TD1-corrige.pdf" target="_blank">Télécharger TD1-corrige.pdf</a></p>\r\n<p><a title="TD2" href="images/pdf/analyse/TD2.pdf" target="_blank">Télécharger TD2.pdf</a></p>\r\n<p><a title="TD2 corrige" href="images/pdf/analyse/TD2-corrige.pdf" target="_blank">Télécharger TD2-corrige.pdf</a></p>\r\n<p><a title="TD3 et corrigé" href="images/pdf/analyse/TD3-et-corrige.pdf" target="_blank">Télécharger TD3-et-corrige.pdf</a></p>\r\n<p> </p>\r\n<h5><strong>Devoirs :</strong></h5>\r\n<p><a title="Examen Tutorat Analyse 2015" href="images/pdf/analyse/controle-tutorat-2015.pdf" target="_blank">Télécharger Examen Tutorat Analyse 2015</a></p>\r\n<p><a title="Correction Examen Tutorat Analyse 2015" href="images/pdf/analyse/correction-controle-2015.pdf" target="_blank">Télécharger Correction Examen Tutorat Analyse 2015</a></p>\r\n<p> </p>\r\n<h4>Informatique :</h4>\r\n<p> </p>\r\n<h5><strong>Fiches de révision :</strong></h5>\r\n<p><a title="Fiche JAVA" href="images/pdf/informatique/fiche-de-revision-java.pdf" target="_blank">Télécharger Fiche Révision Java</a></p>\r\n<p> </p>\r\n<h5><strong>Devoirs :</strong></h5>\r\n<p><a title="Test algo 2015 L1" href="images/pdf/informatique/controle-tutorat.pdf" target="_blank">Télécharger Test Tutorat L1 2015</a></p>', '', 1, 2, '2015-05-23 18:45:41', 818, '', '2015-05-23 19:07:14', 818, 0, '0000-00-00 00:00:00', '2015-05-23 18:45:41', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 13, 1, '', '', 1, 19, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(44, 249, 'Contactez-nous', 'contactez-nous', '<p>Si tu as des questions concernant le tutorat tu peux joindre le responsable aux coordonnées suivant :</p>\r\n<p style="text-align: center;"> <strong>M. Jean-Yves Antoine</strong></p>\r\n<p style="text-align: center;"><strong>3 Place Jean Jaurès, 41000 Blois</strong></p>\r\n<p style="text-align: center;"><strong>Bâtiment C, étage 3, bureau 7</strong></p>\r\n<p style="text-align: center;"><strong>Email : <a href="mailto:jean-yves.antoine@univ-tours.fr">jean-yves.antoine@univ-tours.fr</a></strong></p>\r\n<p style="text-align: center;"><strong>Email : <a href="mailto:responsable.tutorat@gmail.com">responsable.tutorat@gmail.com</a></strong></p>\r\n<p style="text-align: center;"> </p>\r\n\r\n<p style="text-align: center;"> <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1345.4066373445617!2d1.336488626983634!3d47.590873883504635!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa0d9b378d47ecc0b!2sd%C3%A9partement+informatique+de+l&#39;universit%C3%A9+Fran%C3%A7ois+Rabelais+Tours+Blois!5e0!3m2!1sfr!2sfr!4v1432459638516" width="600" height="450" frameborder="0" style="border:0"></iframe></p>\r\n\r\n\r\n<p>Tu peux aussi poser toutes tes questions sur le <a title="lien forum" href="index.php/forum" target="_blank">forum des étudiants de licence informatique</a>.</p>', '', 1, 2, '2015-05-24 08:57:58', 818, '', '2015-05-24 11:45:23', 818, 0, '0000-00-00 00:00:00', '2015-05-24 08:57:58', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 17, 0, '', '', 1, 31, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
-(45, 252, 'tuteur', 'tuteur', '::cck::59::/cck::', '', 1, 8, '2015-05-24 12:58:01', 824, '', '2015-05-24 12:58:01', 0, 0, '0000-00-00 00:00:00', '2015-05-24 12:58:01', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 1, '', '', 2, 3, '{}', 0, '*', ''),
-(46, 253, 'azerty', 'azerty', '::cck::60::/cck::', '', 1, 8, '2015-05-24 15:17:52', 825, '', '2015-05-24 15:17:52', 0, 0, '0000-00-00 00:00:00', '2015-05-24 15:17:52', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 0, '', '', 2, 0, '{}', 0, '*', '');
+(6, 158, 'Comment devenir tuteur ?', 'devenir-tuteur', '<p>Le seul pré-requis est que vous devez être un étudiant en deuxième ou troisième année de licence Informatique.</p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;"> </p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Vous devez d''abord vous inscrire en tant que tutoré qui est mis par défaut sur la page inscription du site.</p>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Ensuite, envoyer un mail au responsable de L1 avec une lettre de motivation ou allez directement le voir pour lui dire que vous êtes intéressés pour devenir tuteur.</p>\r\n<h2 style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;"> </h2>\r\n<p style="font-size: 12.1599998474121px; line-height: 15.8080005645752px;">Celui-ci regardera votre dossier et votre motivation, puis validera (ou non) votre demande en modifiant votre rôle de tutoré en tuteur.</p>', '', 1, 2, '2015-05-17 17:14:14', 803, '', '2015-05-20 18:09:53', 820, 0, '0000-00-00 00:00:00', '2015-05-17 17:14:14', '0000-00-00 00:00:00', '{}', '{}', '{}', 5, 4, '', '', 1, 20, '{}', 0, '*', ''),
+(11, 212, 'JOGUET', 'joguet', '::cck::17::/cck::', '', 1, 8, '2015-05-18 23:35:12', 814, '', '2015-05-18 23:35:12', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:35:12', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 10, '', '', 2, 1, '{}', 0, '*', ''),
+(12, 213, 'IGUE', 'igue', '::cck::18::/cck::', '', 1, 8, '2015-05-18 23:44:53', 815, '', '2015-05-18 23:44:53', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:44:53', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 9, '', '', 2, 0, '{}', 0, '*', ''),
+(13, 214, 'HUART', 'huart', '::cck::19::/cck::', '', 1, 8, '2015-05-18 23:57:38', 816, '', '2015-05-18 23:57:38', 0, 0, '0000-00-00 00:00:00', '2015-05-18 23:57:38', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 8, '', '', 2, 0, '{}', 0, '*', ''),
+(14, 215, 'GAYAT', 'gayat', '::cck::20::/cck::', '', 1, 8, '2015-05-18 23:59:47', 817, '', '2015-05-19 00:00:30', 803, 0, '0000-00-00 00:00:00', '2015-05-18 23:59:47', '0000-00-00 00:00:00', '{}', '{}', '{}', 2, 7, '', '', 2, 0, '{}', 0, '*', ''),
+(15, 216, 'DUCHEMIN', 'duchemin', '::cck::21::/cck::', '', 1, 8, '2015-05-19 00:02:06', 818, '', '2015-05-19 00:02:06', 0, 0, '0000-00-00 00:00:00', '2015-05-19 00:02:06', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 6, '', '', 2, 5, '{}', 0, '*', ''),
+(16, 218, 'BRIZION', 'brizion', '::cck::22::/cck::', '', 1, 8, '2015-05-19 00:39:25', 819, '', '2015-05-19 00:42:42', 818, 0, '0000-00-00 00:00:00', '2015-05-19 00:39:25', '0000-00-00 00:00:00', '{}', '{}', '{}', 2, 5, '', '', 2, 0, '{}', 0, '*', ''),
+(17, 219, 'MARINIER', 'marinier', '::cck::23::/cck::', '', 1, 8, '2015-05-19 00:41:34', 820, '', '2015-05-19 00:42:12', 818, 0, '0000-00-00 00:00:00', '2015-05-19 00:41:34', '0000-00-00 00:00:00', '{}', '{}', '{}', 2, 4, '', '', 2, 16, '{}', 0, '*', ''),
+(39, 241, 'Présentation des tuteurs', 'presentation-des-tuteurs', '::cck::55::/cck::<br />::introtext::::/introtext::<br />::fulltext::::/fulltext::', '::cck::55::/cck::', 1, 2, '2015-05-22 16:17:19', 820, '', '2015-05-22 16:17:19', 0, 0, '0000-00-00 00:00:00', '2015-05-22 16:17:19', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":"","urlatext":"","targeta":"","urlb":"","urlbtext":"","targetb":"","urlc":"","urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_intro":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":""}', 1, 3, '', '', 1, 2, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(40, 245, 'Test', 'test', '::cck::56::/cck::', '', 1, 8, '2015-05-23 18:41:19', 821, '', '2015-05-23 18:41:19', 0, 0, '0000-00-00 00:00:00', '2015-05-23 18:41:19', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 3, '', '', 2, 0, '{}', 0, '*', ''),
+(41, 246, 'Ressources', 'ressources', '<p>Sur cette page vous trouverez des supports de cours, TD, devoirs ainsi que leurs corrections.</p>\r\n<p> </p>\r\n<h4>Analyse :</h4>\r\n<p> </p>\r\n<h5><strong>TD :</strong></h5>\r\n<p><a title="TD1 analyse" href="images/pdf/analyse/TD1.pdf" target="_blank">Télécharger TD1.pdf</a></p>\r\n<p><a title="TD1 corrigé" href="images/pdf/analyse/TD1-corrige.pdf" target="_blank">Télécharger TD1-corrige.pdf</a></p>\r\n<p><a title="TD2" href="images/pdf/analyse/TD2.pdf" target="_blank">Télécharger TD2.pdf</a></p>\r\n<p><a title="TD2 corrige" href="images/pdf/analyse/TD2-corrige.pdf" target="_blank">Télécharger TD2-corrige.pdf</a></p>\r\n<p><a title="TD3 et corrigé" href="images/pdf/analyse/TD3-et-corrige.pdf" target="_blank">Télécharger TD3-et-corrige.pdf</a></p>\r\n<p> </p>\r\n<h5><strong>Devoirs :</strong></h5>\r\n<p><a title="Examen Tutorat Analyse 2015" href="images/pdf/analyse/controle-tutorat-2015.pdf" target="_blank">Télécharger Examen Tutorat Analyse 2015</a></p>\r\n<p><a title="Correction Examen Tutorat Analyse 2015" href="images/pdf/analyse/correction-controle-2015.pdf" target="_blank">Télécharger Correction Examen Tutorat Analyse 2015</a></p>\r\n<p> </p>\r\n<h4>Informatique :</h4>\r\n<p> </p>\r\n<h5><strong>Fiches de révision :</strong></h5>\r\n<p><a title="Fiche JAVA" href="images/pdf/informatique/fiche-de-revision-java.pdf" target="_blank">Télécharger Fiche Révision Java</a></p>\r\n<p> </p>\r\n<h5><strong>Devoirs :</strong></h5>\r\n<p><a title="Test algo 2015 L1" href="images/pdf/informatique/controle-tutorat.pdf" target="_blank">Télécharger Test Tutorat L1 2015</a></p>', '', 1, 2, '2015-05-23 18:45:41', 818, '', '2015-05-23 19:07:14', 818, 0, '0000-00-00 00:00:00', '2015-05-23 18:45:41', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 13, 2, '', '', 1, 20, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(44, 249, 'Contactez-nous', 'contactez-nous', '<p>Si tu as des questions concernant le tutorat tu peux joindre le responsable aux coordonnées suivant :</p>\r\n<p style="text-align: center;"> <strong>M. Jean-Yves Antoine</strong></p>\r\n<p style="text-align: center;"><strong>3 Place Jean Jaurès, 41000 Blois</strong></p>\r\n<p style="text-align: center;"><strong>Bâtiment C, étage 3, bureau 7</strong></p>\r\n<p style="text-align: center;"><strong>Email : <a href="mailto:jean-yves.antoine@univ-tours.fr">jean-yves.antoine@univ-tours.fr</a></strong></p>\r\n<p style="text-align: center;"><strong>Email : <a href="mailto:responsable.tutorat@gmail.com">responsable.tutorat@gmail.com</a></strong></p>\r\n<p style="text-align: center;"> </p>\r\n\r\n<p style="text-align: center;"> <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1345.4066373445617!2d1.336488626983634!3d47.590873883504635!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa0d9b378d47ecc0b!2sd%C3%A9partement+informatique+de+l&#39;universit%C3%A9+Fran%C3%A7ois+Rabelais+Tours+Blois!5e0!3m2!1sfr!2sfr!4v1432459638516" width="600" height="450" frameborder="0" style="border:0"></iframe></p>\r\n\r\n\r\n<p>Tu peux aussi poser toutes tes questions sur le <a title="lien forum" href="index.php/forum" target="_blank">forum des étudiants de licence informatique</a>.</p>', '', 1, 2, '2015-05-24 08:57:58', 818, '', '2015-05-24 11:45:23', 818, 0, '0000-00-00 00:00:00', '2015-05-24 08:57:58', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 17, 1, '', '', 1, 30, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(45, 252, 'tuteur', 'tuteur', '::cck::59::/cck::', '', 1, 8, '2015-05-24 12:58:01', 824, '', '2015-05-24 12:58:01', 0, 0, '0000-00-00 00:00:00', '2015-05-24 12:58:01', '0000-00-00 00:00:00', '{}', '{}', '{}', 1, 0, '', '', 2, 0, '{}', 0, '*', ''),
+(46, 253, 'FAQ', 'faq', '<h4> </h4>\r\n<h4>Inscription et gestion du profil :</h4>\r\n<p><strong><a title="inscrire tutorat" href="images/pdf/faq/inscrire-tutorat.pdf" target="_blank">Comment s''inscrire au tutorat ?</a></strong></p>\r\n<p> </p>\r\n<h4><strong>Agenda :</strong></h4>\r\n<p><strong><a title="Voir prochains cours" href="images/pdf/faq/agenda/visualiser-cours.pdf" target="_blank">Comment consulter les prochains cours de tutorat ?</a></strong></p>\r\n<p><strong><a title="Inscrire cours" href="images/pdf/faq/agenda/inscrire-cours.pdf" target="_blank">Comment m''inscrire à un cours du tutorat ?</a></strong></p>\r\n<p><strong><a title="ajout cours" href="images/pdf/faq/agenda/ajout-cours.pdf" target="_blank">Comment ajouter un nouveau cours ?</a></strong></p>\r\n<p> </p>\r\n<h4>Forum :</h4>\r\n<p><strong><a title="new topic forum" href="images/pdf/faq/forum/new-topic.pdf" target="_blank">Comment créer un nouveau topic sur le forum ?</a></strong></p>\r\n<p><strong><a title="discussion forum" href="images/pdf/faq/forum/discussion.pdf" target="_blank">Comment participer à un conversation sur le forum ?</a></strong></p>', '', 1, 2, '2015-05-24 19:02:13', 818, '', '2015-05-24 19:03:55', 818, 818, '2015-05-24 19:03:55', '2015-05-24 19:02:13', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 4, 0, '', '', 1, 4, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', '');
 
 -- --------------------------------------------------------
 
@@ -2549,19 +2430,13 @@ INSERT INTO `qfupd_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `f
 -- Structure de la table `qfupd_contentitem_tag_map`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_contentitem_tag_map` (
+CREATE TABLE `qfupd_contentitem_tag_map` (
   `type_alias` varchar(255) NOT NULL DEFAULT '',
   `core_content_id` int(10) unsigned NOT NULL COMMENT 'PK from the core content table',
   `content_item_id` int(11) NOT NULL COMMENT 'PK from the content type table',
   `tag_id` int(10) unsigned NOT NULL COMMENT 'PK from the tag table',
   `tag_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Date of most recent save for this tag-item',
-  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table',
-  UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`),
-  KEY `idx_tag_type` (`tag_id`,`type_id`),
-  KEY `idx_date_id` (`tag_date`,`tag_id`),
-  KEY `idx_tag` (`tag_id`),
-  KEY `idx_type` (`type_id`),
-  KEY `idx_core_content_id` (`core_content_id`)
+  `type_id` mediumint(8) NOT NULL COMMENT 'PK from the content_type table'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Maps items from content tables to tags';
 
 --
@@ -2577,10 +2452,9 @@ INSERT INTO `qfupd_contentitem_tag_map` (`type_alias`, `core_content_id`, `conte
 -- Structure de la table `qfupd_content_frontpage`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_content_frontpage` (
+CREATE TABLE `qfupd_content_frontpage` (
   `content_id` int(11) NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`content_id`)
+  `ordering` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2589,12 +2463,11 @@ CREATE TABLE IF NOT EXISTS `qfupd_content_frontpage` (
 -- Structure de la table `qfupd_content_rating`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_content_rating` (
+CREATE TABLE `qfupd_content_rating` (
   `content_id` int(11) NOT NULL DEFAULT '0',
   `rating_sum` int(10) unsigned NOT NULL DEFAULT '0',
   `rating_count` int(10) unsigned NOT NULL DEFAULT '0',
-  `lastip` varchar(50) NOT NULL DEFAULT '',
-  PRIMARY KEY (`content_id`)
+  `lastip` varchar(50) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2603,18 +2476,16 @@ CREATE TABLE IF NOT EXISTS `qfupd_content_rating` (
 -- Structure de la table `qfupd_content_types`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_content_types` (
-  `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_content_types` (
+  `type_id` int(10) unsigned NOT NULL,
   `type_title` varchar(255) NOT NULL DEFAULT '',
   `type_alias` varchar(255) NOT NULL DEFAULT '',
   `table` varchar(255) NOT NULL DEFAULT '',
   `rules` text NOT NULL,
   `field_mappings` text NOT NULL,
   `router` varchar(255) NOT NULL DEFAULT '',
-  `content_history_options` varchar(5120) DEFAULT NULL COMMENT 'JSON string for com_contenthistory options',
-  PRIMARY KEY (`type_id`),
-  KEY `idx_alias` (`type_alias`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+  `content_history_options` varchar(5120) DEFAULT NULL COMMENT 'JSON string for com_contenthistory options'
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_content_types`
@@ -2641,7 +2512,7 @@ INSERT INTO `qfupd_content_types` (`type_id`, `type_title`, `type_alias`, `table
 -- Structure de la table `qfupd_core_log_searches`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_core_log_searches` (
+CREATE TABLE `qfupd_core_log_searches` (
   `search_term` varchar(128) NOT NULL DEFAULT '',
   `hits` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2652,8 +2523,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_core_log_searches` (
 -- Structure de la table `qfupd_extensions`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_extensions` (
-  `extension_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_extensions` (
+  `extension_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `type` varchar(20) NOT NULL,
   `element` varchar(100) NOT NULL,
@@ -2669,12 +2540,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_extensions` (
   `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ordering` int(11) DEFAULT '0',
-  `state` int(11) DEFAULT '0',
-  PRIMARY KEY (`extension_id`),
-  KEY `element_clientid` (`element`,`client_id`),
-  KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
-  KEY `extension` (`type`,`element`,`folder`,`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10273 ;
+  `state` int(11) DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=10273 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_extensions`
@@ -2948,8 +2815,8 @@ INSERT INTO `qfupd_extensions` (`extension_id`, `name`, `type`, `element`, `fold
 -- Structure de la table `qfupd_finder_filters`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_filters` (
-  `filter_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_finder_filters` (
+  `filter_id` int(10) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
@@ -2962,9 +2829,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_filters` (
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `map_count` int(10) unsigned NOT NULL DEFAULT '0',
   `data` text NOT NULL,
-  `params` mediumtext,
-  PRIMARY KEY (`filter_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `params` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2972,8 +2838,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_filters` (
 -- Structure de la table `qfupd_finder_links`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links` (
-  `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_finder_links` (
+  `link_id` int(10) unsigned NOT NULL,
   `url` varchar(255) NOT NULL,
   `route` varchar(255) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -2991,15 +2857,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links` (
   `list_price` double unsigned NOT NULL DEFAULT '0',
   `sale_price` double unsigned NOT NULL DEFAULT '0',
   `type_id` int(11) NOT NULL,
-  `object` mediumblob NOT NULL,
-  PRIMARY KEY (`link_id`),
-  KEY `idx_type` (`type_id`),
-  KEY `idx_title` (`title`),
-  KEY `idx_md5` (`md5sum`),
-  KEY `idx_url` (`url`(75)),
-  KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`),
-  KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `object` mediumblob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3007,13 +2866,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links` (
 -- Structure de la table `qfupd_finder_links_terms0`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms0` (
+CREATE TABLE `qfupd_finder_links_terms0` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3022,13 +2878,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms0` (
 -- Structure de la table `qfupd_finder_links_terms1`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms1` (
+CREATE TABLE `qfupd_finder_links_terms1` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3037,13 +2890,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms1` (
 -- Structure de la table `qfupd_finder_links_terms2`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms2` (
+CREATE TABLE `qfupd_finder_links_terms2` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3052,13 +2902,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms2` (
 -- Structure de la table `qfupd_finder_links_terms3`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms3` (
+CREATE TABLE `qfupd_finder_links_terms3` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3067,13 +2914,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms3` (
 -- Structure de la table `qfupd_finder_links_terms4`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms4` (
+CREATE TABLE `qfupd_finder_links_terms4` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3082,13 +2926,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms4` (
 -- Structure de la table `qfupd_finder_links_terms5`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms5` (
+CREATE TABLE `qfupd_finder_links_terms5` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3097,13 +2938,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms5` (
 -- Structure de la table `qfupd_finder_links_terms6`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms6` (
+CREATE TABLE `qfupd_finder_links_terms6` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3112,13 +2950,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms6` (
 -- Structure de la table `qfupd_finder_links_terms7`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms7` (
+CREATE TABLE `qfupd_finder_links_terms7` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3127,13 +2962,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms7` (
 -- Structure de la table `qfupd_finder_links_terms8`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms8` (
+CREATE TABLE `qfupd_finder_links_terms8` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3142,13 +2974,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms8` (
 -- Structure de la table `qfupd_finder_links_terms9`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms9` (
+CREATE TABLE `qfupd_finder_links_terms9` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3157,13 +2986,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_terms9` (
 -- Structure de la table `qfupd_finder_links_termsa`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsa` (
+CREATE TABLE `qfupd_finder_links_termsa` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3172,13 +2998,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsa` (
 -- Structure de la table `qfupd_finder_links_termsb`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsb` (
+CREATE TABLE `qfupd_finder_links_termsb` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3187,13 +3010,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsb` (
 -- Structure de la table `qfupd_finder_links_termsc`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsc` (
+CREATE TABLE `qfupd_finder_links_termsc` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3202,13 +3022,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsc` (
 -- Structure de la table `qfupd_finder_links_termsd`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsd` (
+CREATE TABLE `qfupd_finder_links_termsd` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3217,13 +3034,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsd` (
 -- Structure de la table `qfupd_finder_links_termse`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termse` (
+CREATE TABLE `qfupd_finder_links_termse` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3232,13 +3046,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termse` (
 -- Structure de la table `qfupd_finder_links_termsf`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsf` (
+CREATE TABLE `qfupd_finder_links_termsf` (
   `link_id` int(10) unsigned NOT NULL,
   `term_id` int(10) unsigned NOT NULL,
-  `weight` float unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`term_id`),
-  KEY `idx_term_weight` (`term_id`,`weight`),
-  KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`)
+  `weight` float unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3247,20 +3058,14 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_links_termsf` (
 -- Structure de la table `qfupd_finder_taxonomy`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_taxonomy` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_finder_taxonomy` (
+  `id` int(10) unsigned NOT NULL,
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   `state` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `access` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ordering` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `parent_id` (`parent_id`),
-  KEY `state` (`state`),
-  KEY `ordering` (`ordering`),
-  KEY `access` (`access`),
-  KEY `idx_parent_published` (`parent_id`,`state`,`access`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `ordering` tinyint(1) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_finder_taxonomy`
@@ -3275,12 +3080,9 @@ INSERT INTO `qfupd_finder_taxonomy` (`id`, `parent_id`, `title`, `state`, `acces
 -- Structure de la table `qfupd_finder_taxonomy_map`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_taxonomy_map` (
+CREATE TABLE `qfupd_finder_taxonomy_map` (
   `link_id` int(10) unsigned NOT NULL,
-  `node_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`link_id`,`node_id`),
-  KEY `link_id` (`link_id`),
-  KEY `node_id` (`node_id`)
+  `node_id` int(10) unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3289,8 +3091,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_taxonomy_map` (
 -- Structure de la table `qfupd_finder_terms`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_terms` (
-  `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_finder_terms` (
+  `term_id` int(10) unsigned NOT NULL,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
   `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -3298,13 +3100,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_terms` (
   `weight` float unsigned NOT NULL DEFAULT '0',
   `soundex` varchar(75) NOT NULL,
   `links` int(10) NOT NULL DEFAULT '0',
-  `language` char(3) NOT NULL DEFAULT '',
-  PRIMARY KEY (`term_id`),
-  UNIQUE KEY `idx_term` (`term`),
-  KEY `idx_term_phrase` (`term`,`phrase`),
-  KEY `idx_stem_phrase` (`stem`,`phrase`),
-  KEY `idx_soundex_phrase` (`soundex`,`phrase`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `language` char(3) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3312,11 +3109,9 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_terms` (
 -- Structure de la table `qfupd_finder_terms_common`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_terms_common` (
+CREATE TABLE `qfupd_finder_terms_common` (
   `term` varchar(75) NOT NULL,
-  `language` varchar(3) NOT NULL,
-  KEY `idx_word_lang` (`term`,`language`),
-  KEY `idx_lang` (`language`)
+  `language` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3546,16 +3341,14 @@ INSERT INTO `qfupd_finder_terms_common` (`term`, `language`) VALUES
 -- Structure de la table `qfupd_finder_tokens`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens` (
+CREATE TABLE `qfupd_finder_tokens` (
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
   `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `phrase` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `weight` float unsigned NOT NULL DEFAULT '1',
   `context` tinyint(1) unsigned NOT NULL DEFAULT '2',
-  `language` char(3) NOT NULL DEFAULT '',
-  KEY `idx_word` (`term`),
-  KEY `idx_context` (`context`)
+  `language` char(3) NOT NULL DEFAULT ''
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3564,7 +3357,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens` (
 -- Structure de la table `qfupd_finder_tokens_aggregate`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens_aggregate` (
+CREATE TABLE `qfupd_finder_tokens_aggregate` (
   `term_id` int(10) unsigned NOT NULL,
   `map_suffix` char(1) NOT NULL,
   `term` varchar(75) NOT NULL,
@@ -3575,9 +3368,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens_aggregate` (
   `context` tinyint(1) unsigned NOT NULL DEFAULT '2',
   `context_weight` float unsigned NOT NULL,
   `total_weight` float unsigned NOT NULL,
-  `language` char(3) NOT NULL DEFAULT '',
-  KEY `token` (`term`),
-  KEY `keyword_id` (`term_id`)
+  `language` char(3) NOT NULL DEFAULT ''
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -3586,13 +3377,11 @@ CREATE TABLE IF NOT EXISTS `qfupd_finder_tokens_aggregate` (
 -- Structure de la table `qfupd_finder_types`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_finder_types` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_finder_types` (
+  `id` int(10) unsigned NOT NULL,
   `title` varchar(100) NOT NULL,
-  `mime` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `title` (`title`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  `mime` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_finder_types`
@@ -3611,13 +3400,12 @@ INSERT INTO `qfupd_finder_types` (`id`, `title`, `mime`) VALUES
 -- Structure de la table `qfupd_icagenda`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda` (
+  `id` int(10) unsigned NOT NULL,
   `version` varchar(255) DEFAULT NULL,
   `releasedate` varchar(255) DEFAULT NULL,
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_icagenda`
@@ -3632,8 +3420,8 @@ INSERT INTO `qfupd_icagenda` (`id`, `version`, `releasedate`, `params`) VALUES
 -- Structure de la table `qfupd_icagenda_category`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_category` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_category` (
+  `id` int(11) unsigned NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3641,9 +3429,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_category` (
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
-  `desc` mediumtext NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `desc` mediumtext NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_icagenda_category`
@@ -3659,8 +3446,8 @@ INSERT INTO `qfupd_icagenda_category` (`id`, `ordering`, `state`, `checked_out`,
 -- Structure de la table `qfupd_icagenda_customfields`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_customfields` (
+  `id` int(11) unsigned NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3680,9 +3467,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields` (
   `created_by` int(10) unsigned NOT NULL DEFAULT '0',
   `created_by_alias` varchar(255) NOT NULL DEFAULT '',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `modified_by` int(10) unsigned NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3690,16 +3476,15 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields` (
 -- Structure de la table `qfupd_icagenda_customfields_data`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields_data` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_customfields_data` (
+  `id` int(11) unsigned NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `slug` varchar(255) NOT NULL,
   `parent_form` int(11) NOT NULL DEFAULT '0',
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `value` varchar(255) NOT NULL,
-  `language` varchar(10) NOT NULL DEFAULT '*',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `language` varchar(10) NOT NULL DEFAULT '*'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3707,8 +3492,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_customfields_data` (
 -- Structure de la table `qfupd_icagenda_events`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_events` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_events` (
+  `id` int(11) unsigned NOT NULL,
   `asset_id` int(10) NOT NULL DEFAULT '0',
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
@@ -3753,9 +3538,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_events` (
   `shortdesc` text NOT NULL,
   `desc` mediumtext NOT NULL,
   `metadesc` text NOT NULL,
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+  `params` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_icagenda_events`
@@ -3784,8 +3568,8 @@ INSERT INTO `qfupd_icagenda_events` (`id`, `asset_id`, `ordering`, `state`, `app
 -- Structure de la table `qfupd_icagenda_feature`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_feature` (
+  `id` int(11) unsigned NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3795,9 +3579,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature` (
   `desc` mediumtext NOT NULL,
   `icon` varchar(255) NOT NULL,
   `icon_alt` varchar(255) NOT NULL,
-  `show_filter` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `show_filter` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3805,12 +3588,11 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature` (
 -- Structure de la table `qfupd_icagenda_feature_xref`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature_xref` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_feature_xref` (
+  `id` int(11) unsigned NOT NULL,
   `event_id` int(11) NOT NULL,
-  `feature_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `feature_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3818,8 +3600,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_feature_xref` (
 -- Structure de la table `qfupd_icagenda_registration`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_icagenda_registration` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_icagenda_registration` (
+  `id` int(11) unsigned NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `checked_out` int(11) NOT NULL,
@@ -3834,9 +3616,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_icagenda_registration` (
   `period` tinyint(1) NOT NULL DEFAULT '0',
   `people` int(2) NOT NULL,
   `notes` mediumtext NOT NULL,
-  `custom_fields` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `custom_fields` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_icagenda_registration`
@@ -3856,15 +3637,11 @@ INSERT INTO `qfupd_icagenda_registration` (`id`, `ordering`, `state`, `checked_o
 -- Structure de la table `qfupd_kunena_aliases`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_aliases` (
+CREATE TABLE `qfupd_kunena_aliases` (
   `alias` varchar(255) NOT NULL,
   `type` varchar(10) NOT NULL,
   `item` varchar(32) NOT NULL,
-  `state` tinyint(4) NOT NULL DEFAULT '0',
-  UNIQUE KEY `alias` (`alias`),
-  KEY `state` (`state`),
-  KEY `item` (`item`),
-  KEY `type` (`type`)
+  `state` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -3904,8 +3681,8 @@ INSERT INTO `qfupd_kunena_aliases` (`alias`, `type`, `item`, `state`) VALUES
 -- Structure de la table `qfupd_kunena_announcement`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_announcement` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_announcement` (
+  `id` int(3) NOT NULL,
   `title` tinytext NOT NULL,
   `created_by` int(11) NOT NULL DEFAULT '0',
   `sdescription` text NOT NULL,
@@ -3913,9 +3690,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_announcement` (
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `published` tinyint(1) NOT NULL DEFAULT '0',
   `ordering` tinyint(4) NOT NULL DEFAULT '0',
-  `showdate` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `showdate` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3923,21 +3699,16 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_announcement` (
 -- Structure de la table `qfupd_kunena_attachments`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_attachments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_attachments` (
+  `id` int(11) NOT NULL,
   `mesid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
   `hash` char(32) DEFAULT NULL,
   `size` int(11) DEFAULT NULL,
   `folder` varchar(255) NOT NULL,
   `filetype` varchar(20) NOT NULL,
-  `filename` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `mesid` (`mesid`),
-  KEY `userid` (`userid`),
-  KEY `hash` (`hash`),
-  KEY `filename` (`filename`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `filename` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3945,8 +3716,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_attachments` (
 -- Structure de la table `qfupd_kunena_categories`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_categories` (
+  `id` int(11) NOT NULL,
   `parent_id` int(11) DEFAULT '0',
   `name` tinytext,
   `alias` varchar(255) NOT NULL,
@@ -3977,12 +3748,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_categories` (
   `last_topic_id` int(11) NOT NULL DEFAULT '0',
   `last_post_id` int(11) NOT NULL DEFAULT '0',
   `last_post_time` int(11) NOT NULL DEFAULT '0',
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `parent_id` (`parent_id`),
-  KEY `category_access` (`accesstype`,`access`),
-  KEY `published_pubaccess_id` (`published`,`pub_access`,`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_categories`
@@ -3999,10 +3766,9 @@ INSERT INTO `qfupd_kunena_categories` (`id`, `parent_id`, `name`, `alias`, `icon
 -- Structure de la table `qfupd_kunena_configuration`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_configuration` (
+CREATE TABLE `qfupd_kunena_configuration` (
   `id` int(11) NOT NULL DEFAULT '0',
-  `params` text,
-  PRIMARY KEY (`id`)
+  `params` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4018,16 +3784,12 @@ INSERT INTO `qfupd_kunena_configuration` (`id`, `params`) VALUES
 -- Structure de la table `qfupd_kunena_keywords`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_keywords` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_keywords` (
+  `id` int(11) NOT NULL,
   `name` varchar(40) NOT NULL,
   `public_count` int(11) NOT NULL,
-  `total_count` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `public_count` (`public_count`),
-  KEY `total_count` (`total_count`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `total_count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4035,13 +3797,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_keywords` (
 -- Structure de la table `qfupd_kunena_keywords_map`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_keywords_map` (
+CREATE TABLE `qfupd_kunena_keywords_map` (
   `keyword_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `topic_id` int(11) NOT NULL,
-  UNIQUE KEY `keyword_user_topic` (`keyword_id`,`user_id`,`topic_id`),
-  KEY `user_id` (`user_id`),
-  KEY `topic_user` (`topic_id`,`user_id`)
+  `topic_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4050,8 +3809,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_keywords_map` (
 -- Structure de la table `qfupd_kunena_messages`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_messages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_messages` (
+  `id` int(11) NOT NULL,
   `parent` int(11) DEFAULT '0',
   `thread` int(11) DEFAULT '0',
   `catid` int(11) NOT NULL DEFAULT '0',
@@ -4069,17 +3828,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_messages` (
   `moved` tinyint(4) DEFAULT '0',
   `modified_by` int(7) DEFAULT NULL,
   `modified_time` int(11) DEFAULT NULL,
-  `modified_reason` tinytext,
-  PRIMARY KEY (`id`),
-  KEY `thread` (`thread`),
-  KEY `ip` (`ip`),
-  KEY `userid` (`userid`),
-  KEY `time` (`time`),
-  KEY `locked` (`locked`),
-  KEY `hold_time` (`hold`,`time`),
-  KEY `parent_hits` (`parent`,`hits`),
-  KEY `catid_parent` (`catid`,`parent`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `modified_reason` tinytext
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_messages`
@@ -4095,10 +3845,9 @@ INSERT INTO `qfupd_kunena_messages` (`id`, `parent`, `thread`, `catid`, `name`, 
 -- Structure de la table `qfupd_kunena_messages_text`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_messages_text` (
+CREATE TABLE `qfupd_kunena_messages_text` (
   `mesid` int(11) NOT NULL DEFAULT '0',
-  `message` text NOT NULL,
-  PRIMARY KEY (`mesid`)
+  `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4115,14 +3864,12 @@ INSERT INTO `qfupd_kunena_messages_text` (`mesid`, `message`) VALUES
 -- Structure de la table `qfupd_kunena_polls`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_polls` (
+  `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `threadid` int(11) NOT NULL,
-  `polltimetolive` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `threadid` (`threadid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `polltimetolive` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4130,14 +3877,12 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls` (
 -- Structure de la table `qfupd_kunena_polls_options`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls_options` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_polls_options` (
+  `id` int(11) NOT NULL,
   `pollid` int(11) DEFAULT NULL,
   `text` varchar(100) DEFAULT NULL,
-  `votes` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pollid` (`pollid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `votes` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4145,13 +3890,12 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls_options` (
 -- Structure de la table `qfupd_kunena_polls_users`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls_users` (
+CREATE TABLE `qfupd_kunena_polls_users` (
   `pollid` int(11) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
   `votes` int(11) DEFAULT NULL,
   `lasttime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `lastvote` int(11) DEFAULT NULL,
-  UNIQUE KEY `pollid` (`pollid`,`userid`)
+  `lastvote` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4160,14 +3904,13 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_polls_users` (
 -- Structure de la table `qfupd_kunena_ranks`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_ranks` (
-  `rank_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_ranks` (
+  `rank_id` mediumint(8) unsigned NOT NULL,
   `rank_title` varchar(255) NOT NULL DEFAULT '',
   `rank_min` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `rank_special` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `rank_image` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`rank_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `rank_image` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_ranks`
@@ -4191,14 +3934,12 @@ INSERT INTO `qfupd_kunena_ranks` (`rank_id`, `rank_title`, `rank_min`, `rank_spe
 -- Structure de la table `qfupd_kunena_sessions`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_sessions` (
+CREATE TABLE `qfupd_kunena_sessions` (
   `userid` int(11) NOT NULL DEFAULT '0',
   `allowed` text,
   `lasttime` int(11) NOT NULL DEFAULT '0',
   `readtopics` text,
-  `currvisit` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`userid`),
-  KEY `currvisit` (`currvisit`)
+  `currvisit` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4217,14 +3958,13 @@ INSERT INTO `qfupd_kunena_sessions` (`userid`, `allowed`, `lasttime`, `readtopic
 -- Structure de la table `qfupd_kunena_smileys`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_smileys` (
-  `id` int(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_smileys` (
+  `id` int(4) NOT NULL,
   `code` varchar(12) NOT NULL DEFAULT '',
   `location` varchar(50) NOT NULL DEFAULT '',
   `greylocation` varchar(60) NOT NULL DEFAULT '',
-  `emoticonbar` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
+  `emoticonbar` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_smileys`
@@ -4304,14 +4044,11 @@ INSERT INTO `qfupd_kunena_smileys` (`id`, `code`, `location`, `greylocation`, `e
 -- Structure de la table `qfupd_kunena_thankyou`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_thankyou` (
+CREATE TABLE `qfupd_kunena_thankyou` (
   `postid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `targetuserid` int(11) NOT NULL,
-  `time` datetime NOT NULL,
-  UNIQUE KEY `postid` (`postid`,`userid`),
-  KEY `userid` (`userid`),
-  KEY `targetuserid` (`targetuserid`)
+  `time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4320,8 +4057,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_thankyou` (
 -- Structure de la table `qfupd_kunena_topics`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_topics` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_topics` (
+  `id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL DEFAULT '0',
   `subject` tinytext,
   `icon_id` int(11) NOT NULL DEFAULT '0',
@@ -4343,18 +4080,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_topics` (
   `last_post_userid` int(11) NOT NULL DEFAULT '0',
   `last_post_message` text,
   `last_post_guest_name` tinytext,
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `category_id` (`category_id`),
-  KEY `locked` (`locked`),
-  KEY `hold` (`hold`),
-  KEY `posts` (`posts`),
-  KEY `hits` (`hits`),
-  KEY `first_post_userid` (`first_post_userid`),
-  KEY `last_post_userid` (`last_post_userid`),
-  KEY `first_post_time` (`first_post_time`),
-  KEY `last_post_time` (`last_post_time`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_topics`
@@ -4370,7 +4097,7 @@ INSERT INTO `qfupd_kunena_topics` (`id`, `category_id`, `subject`, `icon_id`, `l
 -- Structure de la table `qfupd_kunena_users`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_users` (
+CREATE TABLE `qfupd_kunena_users` (
   `userid` int(11) NOT NULL DEFAULT '0',
   `view` varchar(8) NOT NULL DEFAULT '',
   `signature` text,
@@ -4408,13 +4135,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_users` (
   `rank` tinyint(4) NOT NULL DEFAULT '0',
   `hideEmail` tinyint(1) NOT NULL DEFAULT '1',
   `showOnline` tinyint(1) NOT NULL DEFAULT '1',
-  `thankyou` int(11) DEFAULT '0',
-  PRIMARY KEY (`userid`),
-  KEY `group_id` (`group_id`),
-  KEY `posts` (`posts`),
-  KEY `uhits` (`uhits`),
-  KEY `banned` (`banned`),
-  KEY `moderator` (`moderator`)
+  `thankyou` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4471,8 +4192,8 @@ INSERT INTO `qfupd_kunena_users` (`userid`, `view`, `signature`, `moderator`, `b
 -- Structure de la table `qfupd_kunena_users_banned`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_users_banned` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_users_banned` (
+  `id` int(11) NOT NULL,
   `userid` int(11) DEFAULT NULL,
   `ip` varchar(128) DEFAULT NULL,
   `blocked` tinyint(4) NOT NULL DEFAULT '0',
@@ -4484,13 +4205,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_users_banned` (
   `modified_by` int(11) DEFAULT NULL,
   `modified_time` datetime DEFAULT NULL,
   `comments` text,
-  `params` text,
-  PRIMARY KEY (`id`),
-  KEY `userid` (`userid`),
-  KEY `ip` (`ip`),
-  KEY `expiration` (`expiration`),
-  KEY `created_time` (`created_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `params` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4498,16 +4214,13 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_users_banned` (
 -- Structure de la table `qfupd_kunena_user_categories`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_categories` (
+CREATE TABLE `qfupd_kunena_user_categories` (
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `role` tinyint(4) NOT NULL DEFAULT '0',
   `allreadtime` datetime DEFAULT NULL,
   `subscribed` tinyint(4) NOT NULL DEFAULT '0',
-  `params` text NOT NULL,
-  PRIMARY KEY (`user_id`,`category_id`),
-  KEY `category_subscribed` (`category_id`,`subscribed`),
-  KEY `role` (`role`)
+  `params` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4516,15 +4229,12 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_categories` (
 -- Structure de la table `qfupd_kunena_user_read`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_read` (
+CREATE TABLE `qfupd_kunena_user_read` (
   `user_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `message_id` int(11) NOT NULL,
-  `time` int(11) NOT NULL,
-  UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`),
-  KEY `category_user_id` (`category_id`,`user_id`),
-  KEY `time` (`time`)
+  `time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4541,7 +4251,7 @@ INSERT INTO `qfupd_kunena_user_read` (`user_id`, `topic_id`, `category_id`, `mes
 -- Structure de la table `qfupd_kunena_user_topics`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_topics` (
+CREATE TABLE `qfupd_kunena_user_topics` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `topic_id` int(11) NOT NULL DEFAULT '0',
   `category_id` int(11) NOT NULL,
@@ -4550,13 +4260,7 @@ CREATE TABLE IF NOT EXISTS `qfupd_kunena_user_topics` (
   `owner` tinyint(4) NOT NULL DEFAULT '0',
   `favorite` tinyint(4) NOT NULL DEFAULT '0',
   `subscribed` tinyint(4) NOT NULL DEFAULT '0',
-  `params` text NOT NULL,
-  UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`),
-  KEY `topic_id` (`topic_id`),
-  KEY `posts` (`posts`),
-  KEY `owner` (`owner`),
-  KEY `favorite` (`favorite`),
-  KEY `subscribed` (`subscribed`)
+  `params` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4573,16 +4277,15 @@ INSERT INTO `qfupd_kunena_user_topics` (`user_id`, `topic_id`, `category_id`, `p
 -- Structure de la table `qfupd_kunena_version`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_kunena_version` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_kunena_version` (
+  `id` int(11) NOT NULL,
   `version` varchar(20) NOT NULL,
   `versiondate` date NOT NULL,
   `installdate` date NOT NULL,
   `build` varchar(20) NOT NULL,
   `versionname` varchar(40) DEFAULT NULL,
-  `state` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `state` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_kunena_version`
@@ -4598,8 +4301,8 @@ INSERT INTO `qfupd_kunena_version` (`id`, `version`, `versiondate`, `installdate
 -- Structure de la table `qfupd_languages`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_languages` (
-  `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_languages` (
+  `lang_id` int(11) unsigned NOT NULL,
   `lang_code` char(7) NOT NULL,
   `title` varchar(50) NOT NULL,
   `title_native` varchar(50) NOT NULL,
@@ -4611,14 +4314,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_languages` (
   `sitename` varchar(1024) NOT NULL DEFAULT '',
   `published` int(11) NOT NULL DEFAULT '0',
   `access` int(10) unsigned NOT NULL DEFAULT '0',
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`lang_id`),
-  UNIQUE KEY `idx_sef` (`sef`),
-  UNIQUE KEY `idx_image` (`image`),
-  UNIQUE KEY `idx_langcode` (`lang_code`),
-  KEY `idx_access` (`access`),
-  KEY `idx_ordering` (`ordering`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `ordering` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_languages`
@@ -4634,8 +4331,8 @@ INSERT INTO `qfupd_languages` (`lang_id`, `lang_code`, `title`, `title_native`, 
 -- Structure de la table `qfupd_menu`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_menu` (
+  `id` int(11) NOT NULL,
   `menutype` varchar(24) NOT NULL COMMENT 'The type of menu this item belongs to. FK to #__menu_types.menutype',
   `title` varchar(255) NOT NULL COMMENT 'The display title of the menu item.',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'The SEF alias of the menu item.',
@@ -4658,110 +4355,101 @@ CREATE TABLE IF NOT EXISTS `qfupd_menu` (
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
   `home` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Indicates if this menu item is the home or default page.',
   `language` char(7) NOT NULL DEFAULT '',
-  `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`,`language`),
-  KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
-  KEY `idx_menutype` (`menutype`),
-  KEY `idx_left_right` (`lft`,`rgt`),
-  KEY `idx_alias` (`alias`),
-  KEY `idx_path` (`path`(255)),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=240 ;
+  `client_id` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=239 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_menu`
 --
 
 INSERT INTO `qfupd_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `link`, `type`, `published`, `parent_id`, `level`, `component_id`, `checked_out`, `checked_out_time`, `browserNav`, `access`, `img`, `template_style_id`, `params`, `lft`, `rgt`, `home`, `language`, `client_id`) VALUES
-(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 175, 0, '*', 0),
+(1, '', 'Menu_Item_Root', 'root', '', '', '', '', 1, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', 0, 173, 0, '*', 0),
 (2, 'menu', 'com_banners', 'Banners', '', 'Banners', 'index.php?option=com_banners', 'component', 0, 1, 1, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 13, 22, 0, '*', 1),
 (3, 'menu', 'com_banners', 'Banners', '', 'Banners/Banners', 'index.php?option=com_banners', 'component', 0, 2, 2, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners', 0, '', 14, 15, 0, '*', 1),
 (4, 'menu', 'com_banners_categories', 'Categories', '', 'Banners/Categories', 'index.php?option=com_categories&extension=com_banners', 'component', 0, 2, 2, 6, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners-cat', 0, '', 16, 17, 0, '*', 1),
 (5, 'menu', 'com_banners_clients', 'Clients', '', 'Banners/Clients', 'index.php?option=com_banners&view=clients', 'component', 0, 2, 2, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners-clients', 0, '', 18, 19, 0, '*', 1),
 (6, 'menu', 'com_banners_tracks', 'Tracks', '', 'Banners/Tracks', 'index.php?option=com_banners&view=tracks', 'component', 0, 2, 2, 4, 0, '0000-00-00 00:00:00', 0, 0, 'class:banners-tracks', 0, '', 20, 21, 0, '*', 1),
-(7, 'menu', 'com_contact', 'Contacts', '', 'Contacts', 'index.php?option=com_contact', 'component', 0, 1, 1, 8, 0, '0000-00-00 00:00:00', 0, 0, 'class:contact', 0, '', 47, 52, 0, '*', 1),
-(8, 'menu', 'com_contact', 'Contacts', '', 'Contacts/Contacts', 'index.php?option=com_contact', 'component', 0, 7, 2, 8, 0, '0000-00-00 00:00:00', 0, 0, 'class:contact', 0, '', 48, 49, 0, '*', 1),
-(9, 'menu', 'com_contact_categories', 'Categories', '', 'Contacts/Categories', 'index.php?option=com_categories&extension=com_contact', 'component', 0, 7, 2, 6, 0, '0000-00-00 00:00:00', 0, 0, 'class:contact-cat', 0, '', 50, 51, 0, '*', 1),
-(10, 'menu', 'com_messages', 'Messaging', '', 'Messaging', 'index.php?option=com_messages', 'component', 0, 1, 1, 15, 0, '0000-00-00 00:00:00', 0, 0, 'class:messages', 0, '', 53, 58, 0, '*', 1),
-(11, 'menu', 'com_messages_add', 'New Private Message', '', 'Messaging/New Private Message', 'index.php?option=com_messages&task=message.add', 'component', 0, 10, 2, 15, 0, '0000-00-00 00:00:00', 0, 0, 'class:messages-add', 0, '', 54, 55, 0, '*', 1),
-(12, 'menu', 'com_messages_read', 'Read Private Message', '', 'Messaging/Read Private Message', 'index.php?option=com_messages', 'component', 0, 10, 2, 15, 0, '0000-00-00 00:00:00', 0, 0, 'class:messages-read', 0, '', 56, 57, 0, '*', 1),
-(13, 'menu', 'com_newsfeeds', 'News Feeds', '', 'News Feeds', 'index.php?option=com_newsfeeds', 'component', 0, 1, 1, 17, 0, '0000-00-00 00:00:00', 0, 0, 'class:newsfeeds', 0, '', 59, 64, 0, '*', 1),
-(14, 'menu', 'com_newsfeeds_feeds', 'Feeds', '', 'News Feeds/Feeds', 'index.php?option=com_newsfeeds', 'component', 0, 13, 2, 17, 0, '0000-00-00 00:00:00', 0, 0, 'class:newsfeeds', 0, '', 60, 61, 0, '*', 1),
-(15, 'menu', 'com_newsfeeds_categories', 'Categories', '', 'News Feeds/Categories', 'index.php?option=com_categories&extension=com_newsfeeds', 'component', 0, 13, 2, 6, 0, '0000-00-00 00:00:00', 0, 0, 'class:newsfeeds-cat', 0, '', 62, 63, 0, '*', 1),
-(16, 'menu', 'com_redirect', 'Redirect', '', 'Redirect', 'index.php?option=com_redirect', 'component', 0, 1, 1, 24, 0, '0000-00-00 00:00:00', 0, 0, 'class:redirect', 0, '', 65, 66, 0, '*', 1),
-(17, 'menu', 'com_search', 'Basic Search', '', 'Basic Search', 'index.php?option=com_search', 'component', 0, 1, 1, 19, 0, '0000-00-00 00:00:00', 0, 0, 'class:search', 0, '', 67, 68, 0, '*', 1),
-(18, 'menu', 'com_finder', 'Smart Search', '', 'Smart Search', 'index.php?option=com_finder', 'component', 0, 1, 1, 27, 0, '0000-00-00 00:00:00', 0, 0, 'class:finder', 0, '', 69, 70, 0, '*', 1),
-(19, 'menu', 'com_joomlaupdate', 'Joomla! Update', '', 'Joomla! Update', 'index.php?option=com_joomlaupdate', 'component', 1, 1, 1, 28, 0, '0000-00-00 00:00:00', 0, 0, 'class:joomlaupdate', 0, '', 71, 72, 0, '*', 1),
-(20, 'main', 'com_tags', 'Tags', '', 'Tags', 'index.php?option=com_tags', 'component', 0, 1, 1, 29, 0, '0000-00-00 00:00:00', 0, 1, 'class:tags', 0, '', 73, 74, 0, '', 1),
-(21, 'main', 'com_postinstall', 'Post-installation messages', '', 'Post-installation messages', 'index.php?option=com_postinstall', 'component', 0, 1, 1, 32, 0, '0000-00-00 00:00:00', 0, 1, 'class:postinstall', 0, '', 75, 76, 0, '*', 1),
+(7, 'menu', 'com_contact', 'Contacts', '', 'Contacts', 'index.php?option=com_contact', 'component', 0, 1, 1, 8, 0, '0000-00-00 00:00:00', 0, 0, 'class:contact', 0, '', 45, 50, 0, '*', 1),
+(8, 'menu', 'com_contact', 'Contacts', '', 'Contacts/Contacts', 'index.php?option=com_contact', 'component', 0, 7, 2, 8, 0, '0000-00-00 00:00:00', 0, 0, 'class:contact', 0, '', 46, 47, 0, '*', 1),
+(9, 'menu', 'com_contact_categories', 'Categories', '', 'Contacts/Categories', 'index.php?option=com_categories&extension=com_contact', 'component', 0, 7, 2, 6, 0, '0000-00-00 00:00:00', 0, 0, 'class:contact-cat', 0, '', 48, 49, 0, '*', 1),
+(10, 'menu', 'com_messages', 'Messaging', '', 'Messaging', 'index.php?option=com_messages', 'component', 0, 1, 1, 15, 0, '0000-00-00 00:00:00', 0, 0, 'class:messages', 0, '', 51, 56, 0, '*', 1),
+(11, 'menu', 'com_messages_add', 'New Private Message', '', 'Messaging/New Private Message', 'index.php?option=com_messages&task=message.add', 'component', 0, 10, 2, 15, 0, '0000-00-00 00:00:00', 0, 0, 'class:messages-add', 0, '', 52, 53, 0, '*', 1),
+(12, 'menu', 'com_messages_read', 'Read Private Message', '', 'Messaging/Read Private Message', 'index.php?option=com_messages', 'component', 0, 10, 2, 15, 0, '0000-00-00 00:00:00', 0, 0, 'class:messages-read', 0, '', 54, 55, 0, '*', 1),
+(13, 'menu', 'com_newsfeeds', 'News Feeds', '', 'News Feeds', 'index.php?option=com_newsfeeds', 'component', 0, 1, 1, 17, 0, '0000-00-00 00:00:00', 0, 0, 'class:newsfeeds', 0, '', 57, 62, 0, '*', 1),
+(14, 'menu', 'com_newsfeeds_feeds', 'Feeds', '', 'News Feeds/Feeds', 'index.php?option=com_newsfeeds', 'component', 0, 13, 2, 17, 0, '0000-00-00 00:00:00', 0, 0, 'class:newsfeeds', 0, '', 58, 59, 0, '*', 1),
+(15, 'menu', 'com_newsfeeds_categories', 'Categories', '', 'News Feeds/Categories', 'index.php?option=com_categories&extension=com_newsfeeds', 'component', 0, 13, 2, 6, 0, '0000-00-00 00:00:00', 0, 0, 'class:newsfeeds-cat', 0, '', 60, 61, 0, '*', 1),
+(16, 'menu', 'com_redirect', 'Redirect', '', 'Redirect', 'index.php?option=com_redirect', 'component', 0, 1, 1, 24, 0, '0000-00-00 00:00:00', 0, 0, 'class:redirect', 0, '', 63, 64, 0, '*', 1),
+(17, 'menu', 'com_search', 'Basic Search', '', 'Basic Search', 'index.php?option=com_search', 'component', 0, 1, 1, 19, 0, '0000-00-00 00:00:00', 0, 0, 'class:search', 0, '', 65, 66, 0, '*', 1),
+(18, 'menu', 'com_finder', 'Smart Search', '', 'Smart Search', 'index.php?option=com_finder', 'component', 0, 1, 1, 27, 0, '0000-00-00 00:00:00', 0, 0, 'class:finder', 0, '', 67, 68, 0, '*', 1),
+(19, 'menu', 'com_joomlaupdate', 'Joomla! Update', '', 'Joomla! Update', 'index.php?option=com_joomlaupdate', 'component', 1, 1, 1, 28, 0, '0000-00-00 00:00:00', 0, 0, 'class:joomlaupdate', 0, '', 69, 70, 0, '*', 1),
+(20, 'main', 'com_tags', 'Tags', '', 'Tags', 'index.php?option=com_tags', 'component', 0, 1, 1, 29, 0, '0000-00-00 00:00:00', 0, 1, 'class:tags', 0, '', 71, 72, 0, '', 1),
+(21, 'main', 'com_postinstall', 'Post-installation messages', '', 'Post-installation messages', 'index.php?option=com_postinstall', 'component', 0, 1, 1, 32, 0, '0000-00-00 00:00:00', 0, 1, 'class:postinstall', 0, '', 73, 74, 0, '*', 1),
 (101, 'mainmenu', 'Accueil', 'accueil', '', 'accueil', 'index.php?option=com_content&view=article&id=2', 'component', 1, 1, 1, 22, 820, '2015-05-22 11:38:19', 0, 1, '', 0, '{"show_title":"0","link_titles":"","show_intro":"","info_block_position":"0","show_category":"0","link_category":"0","show_parent_category":"0","link_parent_category":"0","show_author":"0","link_author":"0","show_create_date":"0","show_modify_date":"0","show_publish_date":"0","show_item_navigation":"0","show_vote":"","show_icons":"0","show_print_icon":"0","show_email_icon":"0","show_hits":"0","show_tags":"0","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"0","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 23, 24, 1, '*', 0),
-(102, 'mainmenu', 'Profil', 'profil', '', 'profil', 'index.php?option=com_users&view=profile', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"1","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 43, 46, 0, '*', 0),
+(102, 'mainmenu', 'Profil', 'profil', '', 'profil', 'index.php?option=com_users&view=profile', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"0","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 43, 44, 0, '*', 0),
 (103, 'usermenu', 'Administration', '2013-11-16-23-26-41', '', '2013-11-16-23-26-41', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/administrator/', 'url', 1, 1, 1, 23, 0, '0000-00-00 00:00:00', 0, 6, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 3, 4, 0, '*', 0),
 (104, 'usermenu', 'Créer un article', 'creer-un-article', '', 'creer-un-article', 'index.php?option=com_content&view=form&layout=edit', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 3, '', 0, '{"enable_category":"0","catid":"2","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 5, 6, 0, '*', 0),
 (106, 'usermenu', 'Paramètres du template', 'parametres-du-template', '', 'parametres-du-template', 'index.php?option=com_config&view=templates&controller=config.display.templates', 'component', 1, 1, 1, 23, 0, '0000-00-00 00:00:00', 0, 6, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 9, 10, 0, '*', 0),
 (107, 'usermenu', 'Paramètres du site', 'parametre-du-site', '', 'parametre-du-site', 'index.php?option=com_config&view=config&controller=config.display.config', 'component', 1, 1, 1, 23, 0, '0000-00-00 00:00:00', 0, 6, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 11, 12, 0, '*', 0),
-(140, 'kunenamenu', 'forum', 'forum', '', 'forum', 'index.php?option=com_kunena&view=home&defaultmenu=142', 'component', 1, 1, 1, 10012, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"catids":0}', 77, 94, 0, '*', 0),
-(141, 'kunenamenu', 'Index', 'index', '', 'forum/index', 'index.php?option=com_kunena&view=category&layout=list', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 78, 79, 0, '*', 0),
-(142, 'kunenamenu', 'Sujets récents', 'messagesrecents', '', 'forum/messagesrecents', 'index.php?option=com_kunena&view=topics&mode=replies', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"topics_catselection":"","topics_categories":"","topics_time":720}', 80, 81, 0, '*', 0),
-(143, 'kunenamenu', 'Nouveau sujet', 'nouveausujet', '', 'forum/nouveausujet', 'index.php?option=com_kunena&view=topic&layout=create', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 82, 83, 0, '*', 0),
-(144, 'kunenamenu', 'Pas de réponse', 'sansreponse', '', 'forum/sansreponse', 'index.php?option=com_kunena&view=topics&mode=noreplies', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"topics_catselection":"","topics_categories":"","topics_time":-1}', 84, 85, 0, '*', 0),
-(145, 'kunenamenu', 'Mes sujets', 'mesrecents', '', 'forum/mesrecents', 'index.php?option=com_kunena&view=topics&layout=user&mode=default', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"topics_catselection":"2","topics_categories":"0","topics_time":-1}', 86, 87, 0, '*', 0),
-(146, 'kunenamenu', 'Profil', 'profil', '', 'forum/profil', 'index.php?option=com_kunena&view=user', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"integration":1}', 88, 89, 0, '*', 0),
-(147, 'kunenamenu', 'Aide', 'aide', '', 'forum/aide', 'index.php?option=com_kunena&view=misc', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 3, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"body":"Cette page d''aide est un élément de menu à l''intérieur du [b] Menu Kunena [\\/b], qui permet une navigation facile dans votre forum.\\n\\nVous pouvez utiliser le Gestionnaire de Menu Joomla pour modifier des éléments dans ce menu. Veuillez vous rendre dans [b] L''Administration [\\/b] >> [b] Menus [\\/b] >> [b] Kunena Menu [\\/b] >> [b] Aide [\\/b] pour modifier ou supprimer cet élément de menu.\\n\\nDans ce menu, vous pouvez utiliser du texte simple, BBCode ou HTML. Si vous souhaitez lier l''article dans cette page, vous pouvez utiliser du BBCode l''article (avec Numéro d''article): [code] [article = full] 123 [\\/ article] [\\/ code]\\n\\nSi vous souhaitez créer votre propre menu pour Kunena, veuillez  créer une [b] Page d''accueil [\\/ b] pour commencer. Dans cette page vous pouvez ainsi sélectionner un élément de menu par défaut, qui s''affichera lorsque vous entrerez dans Kunena.","body_format":"bbcode"}', 90, 91, 0, '*', 0),
-(148, 'kunenamenu', 'Recherche', 'recherche', '', 'forum/recherche', 'index.php?option=com_kunena&view=search', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 92, 93, 0, '*', 0),
+(140, 'kunenamenu', 'forum', 'forum', '', 'forum', 'index.php?option=com_kunena&view=home&defaultmenu=142', 'component', 1, 1, 1, 10012, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"catids":0}', 75, 92, 0, '*', 0),
+(141, 'kunenamenu', 'Index', 'index', '', 'forum/index', 'index.php?option=com_kunena&view=category&layout=list', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 76, 77, 0, '*', 0),
+(142, 'kunenamenu', 'Sujets récents', 'messagesrecents', '', 'forum/messagesrecents', 'index.php?option=com_kunena&view=topics&mode=replies', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"topics_catselection":"","topics_categories":"","topics_time":720}', 78, 79, 0, '*', 0),
+(143, 'kunenamenu', 'Nouveau sujet', 'nouveausujet', '', 'forum/nouveausujet', 'index.php?option=com_kunena&view=topic&layout=create', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 80, 81, 0, '*', 0),
+(144, 'kunenamenu', 'Pas de réponse', 'sansreponse', '', 'forum/sansreponse', 'index.php?option=com_kunena&view=topics&mode=noreplies', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"topics_catselection":"","topics_categories":"","topics_time":-1}', 82, 83, 0, '*', 0),
+(145, 'kunenamenu', 'Mes sujets', 'mesrecents', '', 'forum/mesrecents', 'index.php?option=com_kunena&view=topics&layout=user&mode=default', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"topics_catselection":"2","topics_categories":"0","topics_time":-1}', 84, 85, 0, '*', 0),
+(146, 'kunenamenu', 'Profil', 'profil', '', 'forum/profil', 'index.php?option=com_kunena&view=user', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"integration":1}', 86, 87, 0, '*', 0),
+(147, 'kunenamenu', 'Aide', 'aide', '', 'forum/aide', 'index.php?option=com_kunena&view=misc', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 3, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0,"body":"Cette page d''aide est un élément de menu à l''intérieur du [b] Menu Kunena [\\/b], qui permet une navigation facile dans votre forum.\\n\\nVous pouvez utiliser le Gestionnaire de Menu Joomla pour modifier des éléments dans ce menu. Veuillez vous rendre dans [b] L''Administration [\\/b] >> [b] Menus [\\/b] >> [b] Kunena Menu [\\/b] >> [b] Aide [\\/b] pour modifier ou supprimer cet élément de menu.\\n\\nDans ce menu, vous pouvez utiliser du texte simple, BBCode ou HTML. Si vous souhaitez lier l''article dans cette page, vous pouvez utiliser du BBCode l''article (avec Numéro d''article): [code] [article = full] 123 [\\/ article] [\\/ code]\\n\\nSi vous souhaitez créer votre propre menu pour Kunena, veuillez  créer une [b] Page d''accueil [\\/ b] pour commencer. Dans cette page vous pouvez ainsi sélectionner un élément de menu par défaut, qui s''affichera lorsque vous entrerez dans Kunena.","body_format":"bbcode"}', 88, 89, 0, '*', 0),
+(148, 'kunenamenu', 'Recherche', 'recherche', '', 'forum/recherche', 'index.php?option=com_kunena&view=search', 'component', 1, 140, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":0,"page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 90, 91, 0, '*', 0),
 (149, 'mainmenu', 'forum', 'kunena-2015-03-28', '', 'kunena-2015-03-28', 'index.php?Itemid=140', 'alias', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"aliasoptions":"140","menu-anchor_title":"","menu-anchor_css":"","menu_image":""}', 37, 38, 0, '*', 0),
 (150, 'mainmenu', 'Agenda', 'agenda', '', 'agenda', 'index.php?option=com_icagenda&view=list', 'component', 1, 1, 1, 10001, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"template":"ic_rounded","time":"","orderby":"","datesDisplay":"","features_incl_excl":"1","features_any_all":"1","displayCatDesc_menu":"global","number":"5","format":"0","date_separator":"","limitGlobal":"1","limit":"","m_width":"100%","m_height":"300px","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 25, 30, 0, '*', 0),
 (151, 'mainmenu', 'Ajouter un cours', 'ajouter-un-cours', '', 'agenda/ajouter-un-cours', 'index.php?option=com_icagenda&view=submit', 'component', -2, 150, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"template":"default","orderby_catlist":"alpha","default_catlist":"","submit_imageDisplay":"","submit_imageMaxSize":"","submit_periodDisplay":"","submit_weekdaysDisplay":"","submit_datesDisplay":"","submit_shortdescDisplay":"","submit_descDisplay":"","submit_metadescDisplay":"","submit_venueDisplay":"","submit_emailDisplay":"","submit_phoneDisplay":"","submit_websiteDisplay":"","submit_customfieldsDisplay":"","submit_fileDisplay":"","submit_gmapDisplay":"","submit_regoptionsDisplay":"","submit_captcha":"","submitReturn":"","submitReturn_Article":"","submitReturn_Url":"","char_limit_short_description":"","char_limit_meta_description":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 26, 27, 0, '*', 0),
 (152, 'mainmenu', 'Ajouter un cours', 'ajouter-cours', '', 'agenda/ajouter-cours', 'index.php?option=com_icagenda&view=submit', 'component', 1, 150, 2, 10001, 0, '0000-00-00 00:00:00', 0, 8, '', 0, '{"template":"ic_rounded","orderby_catlist":"alpha","default_catlist":"","submit_imageDisplay":"","submit_imageMaxSize":"","submit_periodDisplay":"","submit_weekdaysDisplay":"","submit_datesDisplay":"","submit_shortdescDisplay":"","submit_descDisplay":"","submit_metadescDisplay":"","submit_venueDisplay":"","submit_emailDisplay":"","submit_phoneDisplay":"","submit_websiteDisplay":"","submit_customfieldsDisplay":"","submit_fileDisplay":"","submit_gmapDisplay":"","submit_regoptionsDisplay":"","submit_captcha":"","submitReturn":"","submitReturn_Article":"","submitReturn_Url":"","char_limit_short_description":"","char_limit_meta_description":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 28, 29, 0, '*', 0),
 (153, 'mainmenu', 'Ressources', 's-entraider', '', 's-entraider', 'index.php?option=com_content&view=article&id=41', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 9, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 39, 40, 0, '*', 0),
-(154, 'mainmenu', 'Inscription', 'inscription', '', 'inscription', 'index.php?option=com_users&view=registration', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 5, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"1","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 41, 42, 0, '*', 0),
-(155, 'usermenu', 'Contact', 'contact', '', 'contact', 'index.php?option=com_content&view=article&id=44', 'component', -2, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 141, 142, 0, '*', 0),
-(156, 'liens', 'ENT', '2015-03-28-16-37-04', '', '2015-03-28-16-37-04', 'http://ent.univ-tours.fr/uPortal/render.userLayoutRootNode.uP;jsessionid=0497A75FCE4BD84A56526F7F8CDBC974', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 1, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 95, 96, 0, '*', 0),
-(157, 'liens', 'Zimbra', '2015-03-28-16-41-02', '', '2015-03-28-16-41-02', 'http://webmailetu-zimbra.univ-tours.fr/zimbra/?loginOp=logout', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 1, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 97, 98, 0, '*', 0),
-(158, 'liens', 'Bibliothèques Blois', '2015-03-28-16-43-09', '', '2015-03-28-16-43-09', 'http://biblio.ville-blois.fr', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 1, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 99, 100, 0, '*', 0),
-(159, 'liens', 'Crous', '2015-03-28-16-43-45', '', '2015-03-28-16-43-45', 'http://www.crous-orleans-tours.fr', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 1, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 101, 102, 0, '*', 0),
-(160, 'liens', 'Université François Rabelais', '2015-03-28-16-45-12', '', '2015-03-28-16-45-12', 'http://www.univ-tours.fr', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 103, 104, 0, '*', 0),
+(154, 'mainmenu', 'Inscription', 'inscription', '', 'inscription', 'index.php?option=com_users&view=registration', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 5, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 41, 42, 0, '*', 0),
+(155, 'usermenu', 'Contact', 'contact', '', 'contact', 'index.php?option=com_content&view=article&id=44', 'component', -2, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 139, 140, 0, '*', 0),
+(156, 'liens', 'ENT', '2015-03-28-16-37-04', '', '2015-03-28-16-37-04', 'http://ent.univ-tours.fr/uPortal/render.userLayoutRootNode.uP;jsessionid=0497A75FCE4BD84A56526F7F8CDBC974', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 1, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 93, 94, 0, '*', 0),
+(157, 'liens', 'Zimbra', '2015-03-28-16-41-02', '', '2015-03-28-16-41-02', 'http://webmailetu-zimbra.univ-tours.fr/zimbra/?loginOp=logout', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 1, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 95, 96, 0, '*', 0),
+(158, 'liens', 'Bibliothèques Blois', '2015-03-28-16-43-09', '', '2015-03-28-16-43-09', 'http://biblio.ville-blois.fr', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 1, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 97, 98, 0, '*', 0),
+(159, 'liens', 'Crous', '2015-03-28-16-43-45', '', '2015-03-28-16-43-45', 'http://www.crous-orleans-tours.fr', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 1, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 99, 100, 0, '*', 0),
+(160, 'liens', 'Université François Rabelais', '2015-03-28-16-45-12', '', '2015-03-28-16-45-12', 'http://www.univ-tours.fr', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1}', 101, 102, 0, '*', 0),
 (161, 'usermenu', 'Ajouter un cours', 'ajouter-un-cours', '', 'ajouter-un-cours', 'index.php?option=com_icagenda&view=submit', 'component', 1, 1, 1, 10001, 0, '0000-00-00 00:00:00', 0, 8, '', 0, '{"template":"default","orderby_catlist":"alpha","default_catlist":"","submit_imageDisplay":"","submit_imageMaxSize":"","submit_periodDisplay":"","submit_weekdaysDisplay":"","submit_datesDisplay":"","submit_shortdescDisplay":"","submit_descDisplay":"","submit_metadescDisplay":"","submit_venueDisplay":"","submit_emailDisplay":"","submit_phoneDisplay":"","submit_websiteDisplay":"","submit_customfieldsDisplay":"","submit_fileDisplay":"","submit_gmapDisplay":"","submit_regoptionsDisplay":"","submit_captcha":"","submitReturn":"","submitReturn_Article":"","submitReturn_Url":"","char_limit_short_description":"","char_limit_meta_description":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 7, 8, 0, '*', 0),
-(172, 'main', 'COM_KUNENA', 'com-kunena', '', 'com-kunena', 'index.php?option=com_kunena', 'component', 0, 1, 1, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-logo-white.png', 0, '', 105, 128, 0, '', 1),
-(173, 'main', 'COM_KUNENA_DASHBOARD', 'com-kunena-dashboard', '', 'com-kunena/com-kunena-dashboard', 'index.php?option=com_kunena&view=cpanel', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-logo-white.png', 0, '', 106, 107, 0, '', 1),
-(174, 'main', 'COM_KUNENA_CATEGORY_MANAGER', 'com-kunena-category-manager', '', 'com-kunena/com-kunena-category-manager', 'index.php?option=com_kunena&view=categories', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-categories.png', 0, '', 108, 109, 0, '', 1),
-(175, 'main', 'COM_KUNENA_USER_MANAGER', 'com-kunena-user-manager', '', 'com-kunena/com-kunena-user-manager', 'index.php?option=com_kunena&view=users', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-users.png', 0, '', 110, 111, 0, '', 1),
-(176, 'main', 'COM_KUNENA_FILE_MANAGER', 'com-kunena-file-manager', '', 'com-kunena/com-kunena-file-manager', 'index.php?option=com_kunena&view=attachments', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-files.png', 0, '', 112, 113, 0, '', 1),
-(177, 'main', 'COM_KUNENA_EMOTICON_MANAGER', 'com-kunena-emoticon-manager', '', 'com-kunena/com-kunena-emoticon-manager', 'index.php?option=com_kunena&view=smilies', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-smileys.png', 0, '', 114, 115, 0, '', 1),
-(178, 'main', 'COM_KUNENA_RANK_MANAGER', 'com-kunena-rank-manager', '', 'com-kunena/com-kunena-rank-manager', 'index.php?option=com_kunena&view=ranks', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-ranks.png', 0, '', 116, 117, 0, '', 1),
-(179, 'main', 'COM_KUNENA_TEMPLATE_MANAGER', 'com-kunena-template-manager', '', 'com-kunena/com-kunena-template-manager', 'index.php?option=com_kunena&view=templates', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-templates.png', 0, '', 118, 119, 0, '', 1),
-(180, 'main', 'COM_KUNENA_CONFIGURATION', 'com-kunena-configuration', '', 'com-kunena/com-kunena-configuration', 'index.php?option=com_kunena&view=config', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-prune.png', 0, '', 120, 121, 0, '', 1),
-(181, 'main', 'COM_KUNENA_PLUGIN_MANAGER', 'com-kunena-plugin-manager', '', 'com-kunena/com-kunena-plugin-manager', 'index.php?option=com_kunena&view=plugins', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-plugins.png', 0, '', 122, 123, 0, '', 1),
-(182, 'main', 'COM_KUNENA_FORUM_TOOLS', 'com-kunena-forum-tools', '', 'com-kunena/com-kunena-forum-tools', 'index.php?option=com_kunena&view=tools', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-config.png', 0, '', 124, 125, 0, '', 1),
-(183, 'main', 'COM_KUNENA_TRASH_MANAGER', 'com-kunena-trash-manager', '', 'com-kunena/com-kunena-trash-manager', 'index.php?option=com_kunena&view=trash', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-trash.png', 0, '', 126, 127, 0, '', 1),
+(172, 'main', 'COM_KUNENA', 'com-kunena', '', 'com-kunena', 'index.php?option=com_kunena', 'component', 0, 1, 1, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-logo-white.png', 0, '', 103, 126, 0, '', 1),
+(173, 'main', 'COM_KUNENA_DASHBOARD', 'com-kunena-dashboard', '', 'com-kunena/com-kunena-dashboard', 'index.php?option=com_kunena&view=cpanel', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-logo-white.png', 0, '', 104, 105, 0, '', 1),
+(174, 'main', 'COM_KUNENA_CATEGORY_MANAGER', 'com-kunena-category-manager', '', 'com-kunena/com-kunena-category-manager', 'index.php?option=com_kunena&view=categories', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-categories.png', 0, '', 106, 107, 0, '', 1),
+(175, 'main', 'COM_KUNENA_USER_MANAGER', 'com-kunena-user-manager', '', 'com-kunena/com-kunena-user-manager', 'index.php?option=com_kunena&view=users', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-users.png', 0, '', 108, 109, 0, '', 1),
+(176, 'main', 'COM_KUNENA_FILE_MANAGER', 'com-kunena-file-manager', '', 'com-kunena/com-kunena-file-manager', 'index.php?option=com_kunena&view=attachments', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-files.png', 0, '', 110, 111, 0, '', 1),
+(177, 'main', 'COM_KUNENA_EMOTICON_MANAGER', 'com-kunena-emoticon-manager', '', 'com-kunena/com-kunena-emoticon-manager', 'index.php?option=com_kunena&view=smilies', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-smileys.png', 0, '', 112, 113, 0, '', 1),
+(178, 'main', 'COM_KUNENA_RANK_MANAGER', 'com-kunena-rank-manager', '', 'com-kunena/com-kunena-rank-manager', 'index.php?option=com_kunena&view=ranks', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-ranks.png', 0, '', 114, 115, 0, '', 1),
+(179, 'main', 'COM_KUNENA_TEMPLATE_MANAGER', 'com-kunena-template-manager', '', 'com-kunena/com-kunena-template-manager', 'index.php?option=com_kunena&view=templates', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-templates.png', 0, '', 116, 117, 0, '', 1),
+(180, 'main', 'COM_KUNENA_CONFIGURATION', 'com-kunena-configuration', '', 'com-kunena/com-kunena-configuration', 'index.php?option=com_kunena&view=config', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-prune.png', 0, '', 118, 119, 0, '', 1),
+(181, 'main', 'COM_KUNENA_PLUGIN_MANAGER', 'com-kunena-plugin-manager', '', 'com-kunena/com-kunena-plugin-manager', 'index.php?option=com_kunena&view=plugins', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-plugins.png', 0, '', 120, 121, 0, '', 1),
+(182, 'main', 'COM_KUNENA_FORUM_TOOLS', 'com-kunena-forum-tools', '', 'com-kunena/com-kunena-forum-tools', 'index.php?option=com_kunena&view=tools', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-config.png', 0, '', 122, 123, 0, '', 1),
+(183, 'main', 'COM_KUNENA_TRASH_MANAGER', 'com-kunena-trash-manager', '', 'com-kunena/com-kunena-trash-manager', 'index.php?option=com_kunena&view=trash', 'component', 0, 172, 2, 10012, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_kunena/media/icons/favicons/kunena-trash.png', 0, '', 124, 125, 0, '', 1),
 (184, 'mainmenu', 'Tuteurs', 'tuteurs', '', 'tuteurs', 'index.php?option=com_content&view=article&id=6', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"","link_titles":"","show_intro":"0","info_block_position":"","show_category":"0","link_category":"","show_parent_category":"0","link_parent_category":"","show_author":"0","link_author":"","show_create_date":"0","show_modify_date":"0","show_publish_date":"0","show_item_navigation":"0","show_vote":"","show_icons":"0","show_print_icon":"","show_email_icon":"","show_hits":"0","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 31, 36, 0, '*', 0),
 (185, 'usermenu', 'Votre profil', 'votre-profil', '', 'votre-profil', 'index.php?option=com_users&view=profile', 'component', 1, 1, 1, 25, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 1, 2, 0, '*', 0),
-(206, 'main', 'COM_USERXTD', 'com-userxtd', '', 'com-userxtd', 'index.php?option=com_userxtd', 'component', 0, 1, 1, 10134, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 129, 138, 0, '', 1),
-(207, 'main', 'jcategory', 'jcategory', '', 'com-userxtd/jcategory', 'index.php?option=com_categories&extension=com_userxtd', 'component', 0, 206, 2, 10134, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 130, 131, 0, '', 1),
-(208, 'main', 'com_userxtd_fields', 'com-userxtd-fields', '', 'com-userxtd/com-userxtd-fields', 'index.php?option=com_userxtd&view=fields', 'component', 0, 206, 2, 10134, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 132, 133, 0, '', 1),
-(209, 'main', 'com_userxtd_profiles', 'com-userxtd-profiles', '', 'com-userxtd/com-userxtd-profiles', 'index.php?option=com_userxtd&view=profiles', 'component', 0, 206, 2, 10134, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 134, 135, 0, '', 1),
-(210, 'main', 'com_userxtd_users', 'com-userxtd-users', '', 'com-userxtd/com-userxtd-users', 'index.php?option=com_userxtd&view=users', 'component', 0, 206, 2, 10134, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 136, 137, 0, '', 1),
+(206, 'main', 'COM_USERXTD', 'com-userxtd', '', 'com-userxtd', 'index.php?option=com_userxtd', 'component', 0, 1, 1, 10134, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 127, 136, 0, '', 1),
+(207, 'main', 'jcategory', 'jcategory', '', 'com-userxtd/jcategory', 'index.php?option=com_categories&extension=com_userxtd', 'component', 0, 206, 2, 10134, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 128, 129, 0, '', 1),
+(208, 'main', 'com_userxtd_fields', 'com-userxtd-fields', '', 'com-userxtd/com-userxtd-fields', 'index.php?option=com_userxtd&view=fields', 'component', 0, 206, 2, 10134, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 130, 131, 0, '', 1),
+(209, 'main', 'com_userxtd_profiles', 'com-userxtd-profiles', '', 'com-userxtd/com-userxtd-profiles', 'index.php?option=com_userxtd&view=profiles', 'component', 0, 206, 2, 10134, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 132, 133, 0, '', 1),
+(210, 'main', 'com_userxtd_users', 'com-userxtd-users', '', 'com-userxtd/com-userxtd-users', 'index.php?option=com_userxtd&view=users', 'component', 0, 206, 2, 10134, 0, '0000-00-00 00:00:00', 0, 1, 'class:component', 0, '', 134, 135, 0, '', 1),
 (211, 'mainmenu', 'Devenir tuteur', 'devenir-tuteur', '', 'tuteurs/devenir-tuteur', 'index.php?option=com_users&view=registration', 'component', -2, 184, 2, 25, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 32, 33, 0, '*', 0),
 (212, 'mainmenu', 'Présentation des tuteurs', 'presentation-des-tuteurs', '', 'tuteurs/presentation-des-tuteurs', 'index.php?option=com_content&view=article&id=39', 'component', 1, 184, 2, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 34, 35, 0, '*', 0),
-(213, 'mainmenu', 'Validation tuteurs', 'validation-tuteurs', '', 'validation-tuteurs', 'index.php?option=com_cck&view=list&search=users&task=search', 'component', 1, 1, 1, 10142, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_list_title":"0","tag_list_title":"h2","class_list_title":"","show_list_desc":"","list_desc":"","show_form":"","show_list":"","auto_redirect":"","limit2":"0","ordering":"newest","order_by":"","show_items_number":"","show_items_number_label":"Results","class_items_number":"total","show_pages_number":"","show_pagination":"","class_pagination":"pagination","urlvars":"","live":"","variation":"","search2":"","raw_rendering":"0","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 139, 140, 0, '*', 0),
-(214, 'main', 'COM_ICAGENDA_MENU', 'com-icagenda-menu', '', 'com-icagenda-menu', 'index.php?option=com_icagenda', 'component', 0, 1, 1, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/iconicagenda16.png', 0, '', 143, 162, 0, '', 1),
-(215, 'main', 'COM_ICAGENDA_TITLE_ICAGENDA', 'com-icagenda-title-icagenda', '', 'com-icagenda-menu/com-icagenda-title-icagenda', 'index.php?option=com_icagenda&view=icagenda', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/iconicagenda16.png', 0, '', 144, 145, 0, '', 1),
-(216, 'main', 'COM_ICAGENDA_MENU_CATEGORIES', 'com-icagenda-menu-categories', '', 'com-icagenda-menu/com-icagenda-menu-categories', 'index.php?option=com_icagenda&view=categories', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/all_cats-16.png', 0, '', 146, 147, 0, '', 1),
-(217, 'main', 'COM_ICAGENDA_EVENTS', 'com-icagenda-events', '', 'com-icagenda-menu/com-icagenda-events', 'index.php?option=com_icagenda&view=events', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/all_events-16.png', 0, '', 148, 149, 0, '', 1),
-(218, 'main', 'COM_ICAGENDA_REGISTRATION', 'com-icagenda-registration', '', 'com-icagenda-menu/com-icagenda-registration', 'index.php?option=com_icagenda&view=registrations', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/registration-16.png', 0, '', 150, 151, 0, '', 1),
-(219, 'main', 'COM_ICAGENDA_MAIL', 'com-icagenda-mail', '', 'com-icagenda-menu/com-icagenda-mail', 'index.php?option=com_icagenda&view=mail&layout=edit', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/newsletter-16.png', 0, '', 152, 153, 0, '', 1),
-(220, 'main', 'COM_ICAGENDA_MENU_CUSTOMFIELDS', 'com-icagenda-menu-customfields', '', 'com-icagenda-menu/com-icagenda-menu-customfields', 'index.php?option=com_icagenda&view=customfields', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/customfields-16.png', 0, '', 154, 155, 0, '', 1),
-(221, 'main', 'COM_ICAGENDA_MENU_FEATURES', 'com-icagenda-menu-features', '', 'com-icagenda-menu/com-icagenda-menu-features', 'index.php?option=com_icagenda&view=features', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/features-16.png', 0, '', 156, 157, 0, '', 1),
-(222, 'main', 'COM_ICAGENDA_THEMES', 'com-icagenda-themes', '', 'com-icagenda-menu/com-icagenda-themes', 'index.php?option=com_icagenda&view=themes', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/themes-16.png', 0, '', 158, 159, 0, '', 1),
-(223, 'main', 'COM_ICAGENDA_INFO', 'com-icagenda-info', '', 'com-icagenda-menu/com-icagenda-info', 'index.php?option=com_icagenda&view=info', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/info-16.png', 0, '', 160, 161, 0, '', 1),
-(224, 'main', 'SEBLOD', 'SEBLOD 3.x', '', 'SEBLOD 3.x', 'index.php?option=com_cck', 'component', 0, 1, 1, 10142, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_cck/assets/images/16/icon-16-seblod.png', 0, '', 163, 164, 0, '', 1),
-(234, 'usermenu', 'Sondage', 'sondage', '', 'sondage', 'index.php?option=com_wrapper&view=wrapper', 'component', 1, 1, 1, 2, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"url":"https:\\/\\/docs.google.com\\/forms\\/d\\/1ZBXwRlrYKiGSLMLnUM-cJ0uS0msUhTUUAGjjL0LQRDo\\/viewform","scrolling":"auto","width":"100%","height":"500","height_auto":"0","add_scheme":"1","frameborder":"1","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 165, 166, 0, '*', 0),
-(235, 'mainmenu', 'Contactez-nous', 'contactez-nous', '', 'contactez-nous', 'index.php?option=com_content&view=article&id=44', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 167, 168, 0, '*', 0),
-(236, 'footer-droit', 'Contactez-nous', 'contactfooter', '', 'contactfooter', 'index.php?option=com_content&view=article&id=44', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 169, 170, 0, '*', 0),
-(237, 'footer-droit', 'FAQ', 'faq', '', 'faq', 'index.php?option=com_content&view=article&id=1', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 171, 172, 0, '*', 0),
-(238, 'footer-gauche', 'Retrouvez-nous sur Facebook :', '2015-05-24-11-55-00', '', '2015-05-24-11-55-00', 'https://www.facebook.com/', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 1, 1, '', 0, '{"menu-anchor_title":"Retrouvez-nous sur Facebook :","menu-anchor_css":"","menu_image":"images\\/reseaux-sociaux\\/facebook-circle-color.png","menu_text":0}', 173, 174, 0, '*', 0),
-(239, 'mainmenu', 'Modifier votre profil', 'modifier-votre-profil', '', 'profil/modifier-votre-profil', 'index.php?option=com_users&view=profile&layout=edit', 'component', 1, 102, 2, 25, 0, '0000-00-00 00:00:00', 0, 2, '', 0, '{"menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":0,"page_title":"","show_page_heading":"1","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 44, 45, 0, '*', 0);
+(213, 'mainmenu', 'Validation tuteurs', 'validation-tuteur', '', 'validation-tuteur', 'index.php?option=com_cck&view=list&search=users&task=search', 'component', 1, 1, 1, 10142, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_list_title":"0","tag_list_title":"h2","class_list_title":"","show_list_desc":"","list_desc":"","show_form":"","show_list":"","auto_redirect":"","limit2":"0","ordering":"newest","order_by":"","show_items_number":"","show_items_number_label":"Results","class_items_number":"total","show_pages_number":"","show_pagination":"","class_pagination":"pagination","urlvars":"","live":"","variation":"","search2":"","raw_rendering":"0","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 137, 138, 0, '*', 0),
+(214, 'main', 'COM_ICAGENDA_MENU', 'com-icagenda-menu', '', 'com-icagenda-menu', 'index.php?option=com_icagenda', 'component', 0, 1, 1, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/iconicagenda16.png', 0, '', 141, 160, 0, '', 1),
+(215, 'main', 'COM_ICAGENDA_TITLE_ICAGENDA', 'com-icagenda-title-icagenda', '', 'com-icagenda-menu/com-icagenda-title-icagenda', 'index.php?option=com_icagenda&view=icagenda', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/iconicagenda16.png', 0, '', 142, 143, 0, '', 1),
+(216, 'main', 'COM_ICAGENDA_MENU_CATEGORIES', 'com-icagenda-menu-categories', '', 'com-icagenda-menu/com-icagenda-menu-categories', 'index.php?option=com_icagenda&view=categories', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/all_cats-16.png', 0, '', 144, 145, 0, '', 1),
+(217, 'main', 'COM_ICAGENDA_EVENTS', 'com-icagenda-events', '', 'com-icagenda-menu/com-icagenda-events', 'index.php?option=com_icagenda&view=events', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/all_events-16.png', 0, '', 146, 147, 0, '', 1),
+(218, 'main', 'COM_ICAGENDA_REGISTRATION', 'com-icagenda-registration', '', 'com-icagenda-menu/com-icagenda-registration', 'index.php?option=com_icagenda&view=registrations', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/registration-16.png', 0, '', 148, 149, 0, '', 1),
+(219, 'main', 'COM_ICAGENDA_MAIL', 'com-icagenda-mail', '', 'com-icagenda-menu/com-icagenda-mail', 'index.php?option=com_icagenda&view=mail&layout=edit', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/newsletter-16.png', 0, '', 150, 151, 0, '', 1),
+(220, 'main', 'COM_ICAGENDA_MENU_CUSTOMFIELDS', 'com-icagenda-menu-customfields', '', 'com-icagenda-menu/com-icagenda-menu-customfields', 'index.php?option=com_icagenda&view=customfields', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/customfields-16.png', 0, '', 152, 153, 0, '', 1),
+(221, 'main', 'COM_ICAGENDA_MENU_FEATURES', 'com-icagenda-menu-features', '', 'com-icagenda-menu/com-icagenda-menu-features', 'index.php?option=com_icagenda&view=features', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/features-16.png', 0, '', 154, 155, 0, '', 1),
+(222, 'main', 'COM_ICAGENDA_THEMES', 'com-icagenda-themes', '', 'com-icagenda-menu/com-icagenda-themes', 'index.php?option=com_icagenda&view=themes', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/themes-16.png', 0, '', 156, 157, 0, '', 1),
+(223, 'main', 'COM_ICAGENDA_INFO', 'com-icagenda-info', '', 'com-icagenda-menu/com-icagenda-info', 'index.php?option=com_icagenda&view=info', 'component', 0, 214, 2, 10001, 0, '0000-00-00 00:00:00', 0, 1, '../media/com_icagenda/images/info-16.png', 0, '', 158, 159, 0, '', 1),
+(224, 'main', 'SEBLOD', 'SEBLOD 3.x', '', 'SEBLOD 3.x', 'index.php?option=com_cck', 'component', 0, 1, 1, 10142, 0, '0000-00-00 00:00:00', 0, 1, 'components/com_cck/assets/images/16/icon-16-seblod.png', 0, '', 161, 162, 0, '', 1),
+(234, 'usermenu', 'Sondage', 'sondage', '', 'sondage', 'index.php?option=com_wrapper&view=wrapper', 'component', 1, 1, 1, 2, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"url":"https:\\/\\/docs.google.com\\/forms\\/d\\/1ZBXwRlrYKiGSLMLnUM-cJ0uS0msUhTUUAGjjL0LQRDo\\/viewform","scrolling":"auto","width":"100%","height":"500","height_auto":"0","add_scheme":"1","frameborder":"1","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 163, 164, 0, '*', 0),
+(235, 'mainmenu', 'Contactez-nous', 'contactez-nous', '', 'contactez-nous', 'index.php?option=com_content&view=article&id=44', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 165, 166, 0, '*', 0),
+(236, 'footer-droit', 'Contactez-nous', 'contactfooter', '', 'contactfooter', 'index.php?option=com_content&view=article&id=44', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 167, 168, 0, '*', 0),
+(237, 'footer-droit', 'FAQ', 'faq', '', 'faq', 'index.php?option=com_content&view=article&id=46', 'component', 1, 1, 1, 22, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"show_title":"","link_titles":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_vote":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","show_tags":"","show_noauth":"","urls_position":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_text":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 169, 170, 0, '*', 0),
+(238, 'footer-gauche', 'Retrouvez-nous sur Facebook :', '2015-05-24-11-55-00', '', '2015-05-24-11-55-00', 'https://www.facebook.com/', 'url', 1, 1, 1, 0, 0, '0000-00-00 00:00:00', 1, 1, '', 0, '{"menu-anchor_title":"Retrouvez-nous sur Facebook :","menu-anchor_css":"","menu_image":"images\\/reseaux-sociaux\\/facebook-circle-color.png","menu_text":0}', 171, 172, 0, '*', 0);
 
 -- --------------------------------------------------------
 
@@ -4769,14 +4457,12 @@ INSERT INTO `qfupd_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `l
 -- Structure de la table `qfupd_menu_types`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_menu_types` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_menu_types` (
+  `id` int(10) unsigned NOT NULL,
   `menutype` varchar(24) NOT NULL,
   `title` varchar(48) NOT NULL,
-  `description` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_menutype` (`menutype`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `description` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_menu_types`
@@ -4796,8 +4482,8 @@ INSERT INTO `qfupd_menu_types` (`id`, `menutype`, `title`, `description`) VALUES
 -- Structure de la table `qfupd_messages`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_messages` (
-  `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_messages` (
+  `message_id` int(10) unsigned NOT NULL,
   `user_id_from` int(10) unsigned NOT NULL DEFAULT '0',
   `user_id_to` int(10) unsigned NOT NULL DEFAULT '0',
   `folder_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -4805,10 +4491,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_messages` (
   `state` tinyint(1) NOT NULL DEFAULT '0',
   `priority` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `subject` varchar(255) NOT NULL DEFAULT '',
-  `message` text NOT NULL,
-  PRIMARY KEY (`message_id`),
-  KEY `useridto_state` (`user_id_to`,`state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `message` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4816,11 +4500,10 @@ CREATE TABLE IF NOT EXISTS `qfupd_messages` (
 -- Structure de la table `qfupd_messages_cfg`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_messages_cfg` (
+CREATE TABLE `qfupd_messages_cfg` (
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `cfg_name` varchar(100) NOT NULL DEFAULT '',
-  `cfg_value` varchar(255) NOT NULL DEFAULT '',
-  UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`)
+  `cfg_value` varchar(255) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -4829,8 +4512,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_messages_cfg` (
 -- Structure de la table `qfupd_modules`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_modules` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_modules` (
+  `id` int(11) NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(100) NOT NULL DEFAULT '',
   `note` varchar(255) NOT NULL DEFAULT '',
@@ -4847,12 +4530,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_modules` (
   `showtitle` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `params` text NOT NULL,
   `client_id` tinyint(4) NOT NULL DEFAULT '0',
-  `language` char(7) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `published` (`published`,`access`),
-  KEY `newsfeeds` (`module`,`published`),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=108 ;
+  `language` char(7) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_modules`
@@ -4900,10 +4579,9 @@ INSERT INTO `qfupd_modules` (`id`, `asset_id`, `title`, `note`, `content`, `orde
 -- Structure de la table `qfupd_modules_menu`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_modules_menu` (
+CREATE TABLE `qfupd_modules_menu` (
   `moduleid` int(11) NOT NULL DEFAULT '0',
-  `menuid` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`moduleid`,`menuid`)
+  `menuid` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -4954,9 +4632,9 @@ INSERT INTO `qfupd_modules_menu` (`moduleid`, `menuid`) VALUES
 -- Structure de la table `qfupd_newsfeeds`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_newsfeeds` (
+CREATE TABLE `qfupd_newsfeeds` (
   `catid` int(11) NOT NULL DEFAULT '0',
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(100) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `link` varchar(200) NOT NULL DEFAULT '',
@@ -4984,16 +4662,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_newsfeeds` (
   `description` text NOT NULL,
   `version` int(10) unsigned NOT NULL DEFAULT '1',
   `hits` int(10) unsigned NOT NULL DEFAULT '0',
-  `images` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`published`),
-  KEY `idx_catid` (`catid`),
-  KEY `idx_createdby` (`created_by`),
-  KEY `idx_language` (`language`),
-  KEY `idx_xreference` (`xreference`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `images` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -5001,13 +4671,12 @@ CREATE TABLE IF NOT EXISTS `qfupd_newsfeeds` (
 -- Structure de la table `qfupd_overrider`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_overrider` (
-  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `qfupd_overrider` (
+  `id` int(10) NOT NULL COMMENT 'Primary Key',
   `constant` varchar(255) NOT NULL,
   `string` text NOT NULL,
-  `file` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `file` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -5015,8 +4684,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_overrider` (
 -- Structure de la table `qfupd_postinstall_messages`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_postinstall_messages` (
-  `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_postinstall_messages` (
+  `postinstall_message_id` bigint(20) unsigned NOT NULL,
   `extension_id` bigint(20) NOT NULL DEFAULT '700' COMMENT 'FK to #__extensions',
   `title_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for the title',
   `description_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for description',
@@ -5029,9 +4698,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_postinstall_messages` (
   `condition_file` varchar(255) DEFAULT NULL COMMENT 'RAD URI to file holding display condition method',
   `condition_method` varchar(255) DEFAULT NULL COMMENT 'Display condition method, must return boolean',
   `version_introduced` varchar(50) NOT NULL DEFAULT '3.2.0' COMMENT 'Version when this message was introduced',
-  `enabled` tinyint(3) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`postinstall_message_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+  `enabled` tinyint(3) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_postinstall_messages`
@@ -5054,8 +4722,8 @@ INSERT INTO `qfupd_postinstall_messages` (`postinstall_message_id`, `extension_i
 -- Structure de la table `qfupd_redirect_links`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_redirect_links` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_redirect_links` (
+  `id` int(10) unsigned NOT NULL,
   `old_url` varchar(255) NOT NULL,
   `new_url` varchar(255) DEFAULT NULL,
   `referer` varchar(150) NOT NULL,
@@ -5064,11 +4732,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_redirect_links` (
   `published` tinyint(4) NOT NULL,
   `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `header` smallint(3) NOT NULL DEFAULT '301',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_link_old` (`old_url`),
-  KEY `idx_link_modifed` (`modified_date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+  `header` smallint(3) NOT NULL DEFAULT '301'
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_redirect_links`
@@ -5085,10 +4750,9 @@ INSERT INTO `qfupd_redirect_links` (`id`, `old_url`, `new_url`, `referer`, `comm
 (8, 'http://localhost:8888/Site-Tutorat-Informatique2-master-2/', '', 'http://localhost:8888/Site-Tutorat-Informatique2-master-2/', '', 1, 0, '2015-05-19 13:23:40', '0000-00-00 00:00:00', 301),
 (9, 'http://localhost:8888/Site-Tutorat-Informatique2-master-2/index.php', '', 'http://localhost:8888/Site-Tutorat-Informatique2-master-2/index.php', '', 1, 0, '2015-05-19 13:23:56', '0000-00-00 00:00:00', 301),
 (10, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/component/cck/', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php?option=com_cck&view=form&layout=edit&type=user&Itemid=154', '', 2, 0, '2015-05-21 23:29:48', '0000-00-00 00:00:00', 301),
-(11, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/component/content/article?id=article&thanks=user', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/component/content/article?id=2&thanks=user', '', 2, 0, '2015-05-22 14:32:34', '0000-00-00 00:00:00', 301),
+(11, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/component/content/article?id=article&thanks=user', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/component/content/article?id=2&thanks=user', '', 1, 0, '2015-05-22 14:32:34', '0000-00-00 00:00:00', 301),
 (12, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/tuteurs/presentation-des-tuteurs', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/validation-tuteur', '', 1, 0, '2015-05-22 16:04:46', '0000-00-00 00:00:00', 301),
-(13, 'http://localhost:8888/Site-Tutorat-Informatique2/index.php/component/content/article?id=article&thanks=user', '', 'http://localhost:8888/Site-Tutorat-Informatique2/index.php/component/content/article?id=2&thanks=user', '', 1, 0, '2015-05-23 18:41:38', '0000-00-00 00:00:00', 301),
-(14, 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php/validation-tuteurs', '', 'http://localhost/site-tutorat/Site-Tutorat-Informatique2/index.php', '', 3, 0, '2015-05-24 16:25:15', '0000-00-00 00:00:00', 301);
+(13, 'http://localhost:8888/Site-Tutorat-Informatique2/index.php/component/content/article?id=article&thanks=user', '', 'http://localhost:8888/Site-Tutorat-Informatique2/index.php/component/content/article?id=2&thanks=user', '', 1, 0, '2015-05-23 18:41:38', '0000-00-00 00:00:00', 301);
 
 -- --------------------------------------------------------
 
@@ -5096,10 +4760,9 @@ INSERT INTO `qfupd_redirect_links` (`id`, `old_url`, `new_url`, `referer`, `comm
 -- Structure de la table `qfupd_schemas`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_schemas` (
+CREATE TABLE `qfupd_schemas` (
   `extension_id` int(11) NOT NULL,
-  `version_id` varchar(20) NOT NULL,
-  PRIMARY KEY (`extension_id`,`version_id`)
+  `version_id` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5117,17 +4780,14 @@ INSERT INTO `qfupd_schemas` (`extension_id`, `version_id`) VALUES
 -- Structure de la table `qfupd_session`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_session` (
+CREATE TABLE `qfupd_session` (
   `session_id` varchar(200) NOT NULL DEFAULT '',
   `client_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `guest` tinyint(4) unsigned DEFAULT '1',
   `time` varchar(14) DEFAULT '',
   `data` mediumtext,
   `userid` int(11) DEFAULT '0',
-  `username` varchar(150) DEFAULT '',
-  PRIMARY KEY (`session_id`),
-  KEY `userid` (`userid`),
-  KEY `time` (`time`)
+  `username` varchar(150) DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5135,8 +4795,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_session` (
 --
 
 INSERT INTO `qfupd_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('28mv87vo3qb54lbeqbafhgdoe5', 0, 0, '1432488964', '__default|a:9:{s:15:"session.counter";i:20;s:19:"session.timer.start";i:1432488194;s:18:"session.timer.last";i:1432488952;s:17:"session.timer.now";i:1432488959;s:22:"session.client.browser";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":1:{s:5:"users";O:8:"stdClass":1:{s:5:"login";O:8:"stdClass":1:{s:4:"form";O:8:"stdClass":2:{s:4:"data";a:0:{}s:6:"return";s:67:"index.php?option=com_cck&view=form&layout=edit&type=user&Itemid=154";}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":52:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"820";s:4:"name";s:8:"MARINIER";s:8:"username";s:15:"opheliemarinier";s:5:"email";s:26:"ophelie.marinier@gmail.com";s:8:"password";s:60:"$2y$10$vjoKE71aLqzDKBCWaG5.YOjgVyl88L.4gxhaM6VSk5APwGWNoudGu";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:41:34";s:13:"lastvisitDate";s:19:"2015-05-24 17:23:13";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:0:"";s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";s:10:"session_id";N;s:12:"where_clause";s:11:"user_id=820";s:2:"ip";s:3:"::1";s:3:"cck";s:4:"user";s:6:"gender";s:1:"F";s:9:"last_name";s:0:"";s:10:"first_name";s:8:"Ophélie";s:8:"about_me";s:0:"";s:6:"avatar";s:0:"";s:8:"address1";s:0:"";s:8:"address2";s:0:"";s:4:"city";s:0:"";s:11:"postal_code";s:0:"";s:6:"region";s:0:"";s:7:"country";s:0:"";s:5:"phone";s:0:"";s:7:"website";s:0:"";s:9:"birthdate";s:19:"0000-00-00 00:00:00";s:10:"birthplace";s:0:"";}s:13:"session.token";s:32:"554abc4c1e6be252a64d32702ac250d1";s:25:"cck_hash_seblod_form_user";s:32:"ec9fae79511cc0912ba529bc47a46948";}', 820, 'opheliemarinier'),
-('m8q1ktrvbd48stt36ccq0ua6o5', 1, 0, '1432489123', '__default|a:8:{s:15:"session.counter";i:90;s:19:"session.timer.start";i:1432487157;s:18:"session.timer.last";i:1432489118;s:17:"session.timer.now";i:1432489120;s:22:"session.client.browser";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":4:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:0:"";}s:9:"com_menus";O:8:"stdClass":2:{s:4:"edit";O:8:"stdClass":1:{s:4:"item";O:8:"stdClass":4:{s:2:"id";a:0:{}s:4:"data";N;s:4:"type";N;s:4:"link";N;}}s:5:"items";O:8:"stdClass":3:{s:8:"menutype";s:8:"mainmenu";s:10:"limitstart";i:0;s:4:"list";a:4:{s:9:"direction";s:3:"asc";s:5:"limit";s:2:"20";s:8:"ordering";s:5:"a.lft";s:5:"start";d:0;}}}s:4:"item";O:8:"stdClass":1:{s:6:"filter";O:8:"stdClass":1:{s:8:"menutype";s:8:"mainmenu";}}s:7:"com_cck";O:8:"stdClass":1:{s:4:"edit";O:8:"stdClass":1:{s:4:"type";O:8:"stdClass":3:{s:2:"id";a:0:{}s:4:"data";N;s:6:"client";N;}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":36:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"820";s:4:"name";s:8:"MARINIER";s:8:"username";s:15:"opheliemarinier";s:5:"email";s:26:"ophelie.marinier@gmail.com";s:8:"password";s:60:"$2y$10$vjoKE71aLqzDKBCWaG5.YOjgVyl88L.4gxhaM6VSk5APwGWNoudGu";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:41:34";s:13:"lastvisitDate";s:19:"2015-05-24 16:24:31";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:0:"";s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";s:10:"session_id";N;s:12:"where_clause";s:11:"user_id=820";s:2:"ip";s:3:"::1";}s:13:"session.token";s:32:"f37da07b8367222a7a87a8ea54e9b673";}', 820, 'opheliemarinier');
+('3768a459bff8de8513630cd5c7b3a7bb', 0, 0, '1432494300', '__default|a:8:{s:15:"session.counter";i:10;s:19:"session.timer.start";i:1432493632;s:18:"session.timer.last";i:1432494239;s:17:"session.timer.now";i:1432494298;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":1:{s:5:"users";O:8:"stdClass":1:{s:5:"login";O:8:"stdClass":1:{s:4:"form";O:8:"stdClass":2:{s:6:"return";s:57:"index.php?option=com_content&view=article&id=2&Itemid=101";s:4:"data";a:0:{}}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":33:{s:9:"\\0\\0\\0isRoot";b:0;s:2:"id";s:3:"821";s:4:"name";s:4:"Test";s:8:"username";s:4:"Test";s:5:"email";s:23:"duchemin_laure@yahoo.fr";s:8:"password";s:60:"$2y$10$Oc8xh79Ef5dGdJrRMwWLOOnIURLOz2cpU0Yff/vcRs2PEROx5HD/q";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-23 18:41:19";s:13:"lastvisitDate";s:19:"2015-05-24 08:50:50";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:12;s:2:"12";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:3:{i:0;i:1;i:1;i:2;i:2;i:12;}s:14:"\\0\\0\\0_authLevels";a:4:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:9;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:5:"Bac S";s:9:"promotion";s:2:"L2";s:4:"role";s:0:"";s:14:"helped_subject";s:6:"Aucune";s:17:"need_help_subject";s:14:"Mathématiques";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";}s:13:"session.token";s:32:"fdb0be92abb2138f4ca05aa37ef07eb0";}', 821, 'Test'),
+('d8ee8f12633d4f8adf0d6aa43714d2ff', 1, 0, '1432494236', '__default|a:9:{s:15:"session.counter";i:51;s:19:"session.timer.start";i:1432491695;s:18:"session.timer.last";i:1432494234;s:17:"session.timer.now";i:1432494235;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.65 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":5:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:0:"";}s:13:"com_installer";O:8:"stdClass":2:{s:7:"message";s:0:"";s:17:"extension_message";s:0:"";}s:9:"com_menus";O:8:"stdClass":2:{s:5:"items";O:8:"stdClass":3:{s:8:"menutype";s:12:"footer-droit";s:10:"limitstart";i:0;s:4:"list";a:4:{s:9:"direction";s:3:"asc";s:5:"limit";s:2:"20";s:8:"ordering";s:5:"a.lft";s:5:"start";d:0;}}s:4:"edit";O:8:"stdClass":1:{s:4:"item";O:8:"stdClass":4:{s:2:"id";a:0:{}s:4:"data";N;s:4:"type";N;s:4:"link";N;}}}s:14:"com_categories";O:8:"stdClass":1:{s:10:"categories";O:8:"stdClass":1:{s:6:"filter";O:8:"stdClass":1:{s:9:"extension";s:9:"com_users";}}}s:11:"com_content";O:8:"stdClass":1:{s:4:"edit";O:8:"stdClass":1:{s:7:"article";O:8:"stdClass":2:{s:4:"data";N;s:2:"id";a:1:{i:0;i:46;}}}}}s:9:"separator";s:1:".";}s:4:"user";O:5:"JUser":52:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"818";s:4:"name";s:8:"DUCHEMIN";s:8:"username";s:13:"laureduchemin";s:5:"email";s:24:"duchemin_laure@gmail.com";s:8:"password";s:60:"$2y$10$fEtZDBctT8s7dZTSm.lr2.nXDqL3MDdN9EeygQhOp/dRAhY8J/zGC";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-19 00:02:06";s:13:"lastvisitDate";s:19:"2015-05-24 18:21:21";s:10:"activation";s:0:"";s:6:"params";s:2:"{}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":2:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}s:9:"separator";s:1:".";}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:7:"diplome";s:0:"";s:9:"promotion";s:0:"";s:4:"role";s:0:"";s:14:"helped_subject";s:0:"";s:17:"need_help_subject";s:0:"";s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";s:10:"session_id";N;s:12:"where_clause";s:11:"user_id=818";s:2:"ip";s:3:"::1";s:3:"cck";s:4:"user";s:6:"gender";s:1:"F";s:9:"last_name";s:0:"";s:10:"first_name";s:5:"Laure";s:8:"about_me";s:0:"";s:6:"avatar";s:0:"";s:8:"address1";s:0:"";s:8:"address2";s:0:"";s:4:"city";s:0:"";s:11:"postal_code";s:0:"";s:6:"region";s:0:"";s:7:"country";s:0:"";s:5:"phone";s:0:"";s:7:"website";s:0:"";s:9:"birthdate";s:19:"0000-00-00 00:00:00";s:10:"birthplace";s:0:"";}s:13:"session.token";s:32:"110d6dfc35ec690ae246d13583f46ba6";s:20:"cck_hash_seblod_form";s:32:"7b3a7033a02403cf472265e08968cd93";}', 818, 'laureduchemin');
 
 -- --------------------------------------------------------
 
@@ -5144,8 +4804,8 @@ INSERT INTO `qfupd_session` (`session_id`, `client_id`, `guest`, `time`, `data`,
 -- Structure de la table `qfupd_tags`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_tags` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_tags` (
+  `id` int(10) unsigned NOT NULL,
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
   `rgt` int(11) NOT NULL DEFAULT '0',
@@ -5174,16 +4834,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_tags` (
   `language` char(7) NOT NULL,
   `version` int(10) unsigned NOT NULL DEFAULT '1',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `tag_idx` (`published`,`access`),
-  KEY `idx_access` (`access`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_path` (`path`),
-  KEY `idx_left_right` (`lft`,`rgt`),
-  KEY `idx_alias` (`alias`),
-  KEY `idx_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_tags`
@@ -5199,17 +4851,14 @@ INSERT INTO `qfupd_tags` (`id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `tit
 -- Structure de la table `qfupd_template_styles`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_template_styles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_template_styles` (
+  `id` int(10) unsigned NOT NULL,
   `template` varchar(50) NOT NULL DEFAULT '',
   `client_id` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `home` char(7) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL DEFAULT '',
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_template` (`template`),
-  KEY `idx_home` (`home`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_template_styles`
@@ -5245,8 +4894,7 @@ INSERT INTO `qfupd_template_styles` (`id`, `template`, `client_id`, `home`, `tit
 (41, 'seb_table', 0, '0', 'seb_table - users (list)', '{"rendering_css_class":"","rendering_item_attributes":"","cck_client_item":"0","class_table":"category zebra table","table_header":"0","class_table_tr_even":"cat-list-row%i","table_layout":"","class_table_tr_odd":"cat-list-row%i","position_margin":"10"}'),
 (43, 'seb_table', 0, '0', 'seb_table - user_group (list)', '{"rendering_css_class":"","rendering_item_attributes":"","cck_client_item":"0","class_table":"category zebra table","table_header":"0","class_table_tr_even":"cat-list-row%i","table_layout":"","class_table_tr_odd":"cat-list-row%i","position_margin":"10"}'),
 (44, 'seb_table', 0, '0', 'seb_table - user_group (list)', '{"rendering_css_class":"","rendering_item_attributes":"","cck_client_item":"0","class_table":"category zebra table","table_header":"0","class_table_tr_even":"cat-list-row%i","table_layout":"","class_table_tr_odd":"cat-list-row%i","position_margin":"10"}'),
-(45, 'seb_one', 0, '0', 'seb_one - user_group (search)', '{"rendering_css_class":"","rendering_item_attributes":"","field_label":"1","field_description":"0","variation_default":"seb_css3","position_force_height":"1","position_margin":"8","position_header":"0","position_header_variation":"","position_left":"0","position_left_variation":"","position_top":"1","position_top_variation":"","position_sidebody_a":"0","position_sidebody_b":"0","position_bottom":"1","position_bottom_variation":"","position_right":"400","position_right_variation":"","position_footer":"0","position_footer_variation":"","debug":"0"}'),
-(46, 'seb_table', 0, '0', 'seb_table - user_group (list)', '{"rendering_css_class":"","rendering_item_attributes":"","cck_client_item":"0","class_table":"category zebra table","table_header":"0","class_table_tr_even":"cat-list-row%i","table_layout":"","class_table_tr_odd":"cat-list-row%i","position_margin":"10"}');
+(45, 'seb_one', 0, '0', 'seb_one - user_group (search)', '{"rendering_css_class":"","rendering_item_attributes":"","field_label":"1","field_description":"0","variation_default":"seb_css3","position_force_height":"1","position_margin":"8","position_header":"0","position_header_variation":"","position_left":"0","position_left_variation":"","position_top":"1","position_top_variation":"","position_sidebody_a":"0","position_sidebody_b":"0","position_bottom":"1","position_bottom_variation":"","position_right":"400","position_right_variation":"","position_footer":"0","position_footer_variation":"","debug":"0"}');
 
 -- --------------------------------------------------------
 
@@ -5254,15 +4902,11 @@ INSERT INTO `qfupd_template_styles` (`id`, `template`, `client_id`, `home`, `tit
 -- Structure de la table `qfupd_ucm_base`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_ucm_base` (
+CREATE TABLE `qfupd_ucm_base` (
   `ucm_id` int(10) unsigned NOT NULL,
   `ucm_item_id` int(10) NOT NULL,
   `ucm_type_id` int(11) NOT NULL,
-  `ucm_language_id` int(11) NOT NULL,
-  PRIMARY KEY (`ucm_id`),
-  KEY `idx_ucm_item_id` (`ucm_item_id`),
-  KEY `idx_ucm_type_id` (`ucm_type_id`),
-  KEY `idx_ucm_language_id` (`ucm_language_id`)
+  `ucm_language_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -5271,8 +4915,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_ucm_base` (
 -- Structure de la table `qfupd_ucm_content`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_ucm_content` (
-  `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_ucm_content` (
+  `core_content_id` int(10) unsigned NOT NULL,
   `core_type_alias` varchar(255) NOT NULL DEFAULT '' COMMENT 'FK to the content types table',
   `core_title` varchar(255) NOT NULL,
   `core_alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -5303,21 +4947,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_ucm_content` (
   `core_metadesc` text NOT NULL,
   `core_catid` int(10) unsigned NOT NULL DEFAULT '0',
   `core_xreference` varchar(50) NOT NULL COMMENT 'A reference to enable linkages to external data sets.',
-  `core_type_id` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`core_content_id`),
-  KEY `tag_idx` (`core_state`,`core_access`),
-  KEY `idx_access` (`core_access`),
-  KEY `idx_alias` (`core_alias`),
-  KEY `idx_language` (`core_language`),
-  KEY `idx_title` (`core_title`),
-  KEY `idx_modified_time` (`core_modified_time`),
-  KEY `idx_created_time` (`core_created_time`),
-  KEY `idx_content_type` (`core_type_alias`),
-  KEY `idx_core_modified_user_id` (`core_modified_user_id`),
-  KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`),
-  KEY `idx_core_created_user_id` (`core_created_user_id`),
-  KEY `idx_core_type_id` (`core_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contains core content data in name spaced fields' AUTO_INCREMENT=1 ;
+  `core_type_id` int(10) unsigned DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contains core content data in name spaced fields';
 
 -- --------------------------------------------------------
 
@@ -5325,8 +4956,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_ucm_content` (
 -- Structure de la table `qfupd_ucm_history`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_ucm_history` (
-  `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_ucm_history` (
+  `version_id` int(10) unsigned NOT NULL,
   `ucm_item_id` int(10) unsigned NOT NULL,
   `ucm_type_id` int(10) unsigned NOT NULL,
   `version_note` varchar(255) NOT NULL DEFAULT '' COMMENT 'Optional version name',
@@ -5335,11 +4966,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_ucm_history` (
   `character_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Number of characters in this version.',
   `sha1_hash` varchar(50) NOT NULL DEFAULT '' COMMENT 'SHA1 hash of the version_data column.',
   `version_data` mediumtext NOT NULL COMMENT 'json-encoded string of version data',
-  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep',
-  PRIMARY KEY (`version_id`),
-  KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
-  KEY `idx_save_date` (`save_date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=91 ;
+  `keep_forever` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=auto delete; 1=keep'
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_ucm_history`
@@ -5400,9 +5028,10 @@ INSERT INTO `qfupd_ucm_history` (`version_id`, `ucm_item_id`, `ucm_type_id`, `ve
 (85, 44, 1, '', '2015-05-24 11:44:40', 818, 3079, 'ac81225509a6c4384e1611a763db2af06c237ed7', '{"id":44,"asset_id":"249","title":"Contactez-nous","alias":"contactez-nous","introtext":"<p>Si tu as des questions concernant le tutorat tu peux joindre le responsable aux coordonn\\u00e9es suivant :<\\/p>\\r\\n<p style=\\"text-align: center;\\">\\u00a0<strong>M. Jean-Yves Antoine<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>3 Place Jean Jaur\\u00e8s, 41000 Blois<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>B\\u00e2timent C, \\u00e9tage 3, bureau 7<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>Email : <a href=\\"mailto:jean-yves.antoine@univ-tours.fr\\">jean-yves.antoine@univ-tours.fr<\\/a><\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>Email : <a href=\\"mailto:responsable.tutorat@gmail.com\\">jean-yves.antoine@univ-tours.fr<\\/a><\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\">\\u00a0<\\/p>\\r\\n\\r\\n<p style=\\"text-align: center;\\">\\u00a0<iframe src=\\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m14!1m8!1m3!1d1345.4066373445617!2d1.336488626983634!3d47.590873883504635!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa0d9b378d47ecc0b!2sd%C3%A9partement+informatique+de+l&#39;universit%C3%A9+Fran%C3%A7ois+Rabelais+Tours+Blois!5e0!3m2!1sfr!2sfr!4v1432459638516\\" width=\\"600\\" height=\\"450\\" frameborder=\\"0\\" style=\\"border:0\\"><\\/iframe><\\/p>\\r\\n\\r\\n\\r\\n<p>Tu peux aussi poser toutes tes questions sur le <a title=\\"lien forum\\" href=\\"index.php\\/forum\\" target=\\"_blank\\">forum des \\u00e9tudiants de licence informatique<\\/a>.<\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-24 08:57:58","created_by":"818","created_by_alias":"","modified":"2015-05-24 11:44:40","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-24 11:43:10","publish_up":"2015-05-24 08:57:58","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":16,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"26","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
 (86, 44, 1, '', '2015-05-24 11:45:23', 818, 3077, '0d75b2f99c8d920edd98aeb1fd21b2400b5c0d90', '{"id":44,"asset_id":"249","title":"Contactez-nous","alias":"contactez-nous","introtext":"<p>Si tu as des questions concernant le tutorat tu peux joindre le responsable aux coordonn\\u00e9es suivant :<\\/p>\\r\\n<p style=\\"text-align: center;\\">\\u00a0<strong>M. Jean-Yves Antoine<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>3 Place Jean Jaur\\u00e8s, 41000 Blois<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>B\\u00e2timent C, \\u00e9tage 3, bureau 7<\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>Email : <a href=\\"mailto:jean-yves.antoine@univ-tours.fr\\">jean-yves.antoine@univ-tours.fr<\\/a><\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\"><strong>Email : <a href=\\"mailto:responsable.tutorat@gmail.com\\">responsable.tutorat@gmail.com<\\/a><\\/strong><\\/p>\\r\\n<p style=\\"text-align: center;\\">\\u00a0<\\/p>\\r\\n\\r\\n<p style=\\"text-align: center;\\">\\u00a0<iframe src=\\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m14!1m8!1m3!1d1345.4066373445617!2d1.336488626983634!3d47.590873883504635!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa0d9b378d47ecc0b!2sd%C3%A9partement+informatique+de+l&#39;universit%C3%A9+Fran%C3%A7ois+Rabelais+Tours+Blois!5e0!3m2!1sfr!2sfr!4v1432459638516\\" width=\\"600\\" height=\\"450\\" frameborder=\\"0\\" style=\\"border:0\\"><\\/iframe><\\/p>\\r\\n\\r\\n\\r\\n<p>Tu peux aussi poser toutes tes questions sur le <a title=\\"lien forum\\" href=\\"index.php\\/forum\\" target=\\"_blank\\">forum des \\u00e9tudiants de licence informatique<\\/a>.<\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-24 08:57:58","created_by":"818","created_by_alias":"","modified":"2015-05-24 11:45:23","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-24 11:44:40","publish_up":"2015-05-24 08:57:58","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":17,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"27","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
 (87, 45, 1, '', '2015-05-24 12:58:01', 820, 542, '831f9eb981bcce35a5b0eaea16dfcc1f0b4a4fee', '{"id":45,"asset_id":252,"title":"tuteur","alias":"tuteur","introtext":"::cck::59::\\/cck::","fulltext":"","state":"1","catid":"8","created":"2015-05-24 12:58:01","created_by":824,"created_by_alias":null,"modified":"2015-05-24 12:58:01","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2015-05-24 12:58:01","publish_down":null,"images":"{}","urls":"{}","attribs":"{}","version":1,"ordering":null,"metakey":null,"metadesc":null,"access":"2","hits":null,"metadata":"{}","featured":null,"language":"*","xreference":null}', 0),
-(88, 46, 1, '', '2015-05-24 15:17:52', 0, 542, 'e06520ee9f24a7dbf8a659cf4921973e31e8dd6d', '{"id":46,"asset_id":253,"title":"azerty","alias":"azerty","introtext":"::cck::60::\\/cck::","fulltext":"","state":"1","catid":"8","created":"2015-05-24 15:17:52","created_by":825,"created_by_alias":null,"modified":"2015-05-24 15:17:52","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2015-05-24 15:17:52","publish_down":null,"images":"{}","urls":"{}","attribs":"{}","version":1,"ordering":null,"metakey":null,"metadesc":null,"access":"2","hits":null,"metadata":"{}","featured":null,"language":"*","xreference":null}', 0),
-(89, 6, 1, '', '2015-05-24 15:30:32', 820, 1648, '5fdae1d7dd33c64e232fb6698e10aec7672d7191', '{"id":6,"asset_id":"158","title":"Comment devenir tuteur ?","alias":"devenir-tuteur","introtext":"<p>Le seul pr\\u00e9-requis est que vous devez \\u00eatre un \\u00e9tudiant en deuxi\\u00e8me ou troisi\\u00e8me ann\\u00e9e de licence Informatique.<\\/p>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">\\u00a0<\\/p>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">Vous devez d''abord vous inscrire en tant que tuteur\\u00a0sur la page d''inscription du site.<\\/p>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">Ensuite, envoyez un mail au responsable de premi\\u00e8re ann\\u00e9e de licence avec une lettre de motivation, ou allez directement le voir \\u00e0 l''Universit\\u00e9 pour lui dire que vous \\u00eates int\\u00e9ress\\u00e9s pour devenir tuteur.<\\/p>\\r\\n<h2 style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">\\u00a0<\\/h2>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">Celui-ci regardera votre dossier et votre motivation, puis validera ou refusera votre demande en modifiant votre r\\u00f4le de tutor\\u00e9 en tuteur.<\\/p>","fulltext":"","state":"1","catid":"2","created":"2015-05-17 17:14:14","created_by":"803","created_by_alias":"","modified":"2015-05-24 15:30:32","modified_by":"820","checked_out":"820","checked_out_time":"2015-05-24 15:28:44","publish_up":"2015-05-17 17:14:14","publish_down":"0000-00-00 00:00:00","images":"{}","urls":"{}","attribs":"{}","version":6,"ordering":"3","metakey":"","metadesc":"","access":"1","hits":"22","metadata":"{}","featured":"0","language":"*","xreference":""}', 0),
-(90, 6, 1, '', '2015-05-24 17:05:51', 820, 1673, 'ee5854612fb2033c5e9978094a86c91d22fd9301', '{"id":6,"asset_id":"158","title":"Comment devenir tuteur ?","alias":"devenir-tuteur","introtext":"<p>Le seul pr\\u00e9-requis est que vous devez \\u00eatre un \\u00e9tudiant en deuxi\\u00e8me ou troisi\\u00e8me ann\\u00e9e de licence Informatique.<\\/p>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">\\u00a0<\\/p>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">Vous devez d''abord vous inscrire en tant que tuteur\\u00a0sur la page d''inscription du site.<\\/p>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">Ensuite, envoyez un mail au responsable de premi\\u00e8re ann\\u00e9e de licence avec une lettre de motivation, ou allez directement le voir \\u00e0 l''Universit\\u00e9 pour lui dire que vous \\u00eates int\\u00e9ress\\u00e9s pour devenir tuteur.<\\/p>\\r\\n<h2 style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">\\u00a0<\\/h2>\\r\\n<p style=\\"font-size: 12.1599998474121px; line-height: 15.8080005645752px;\\">Celui-ci regardera votre dossier et votre motivation, puis validera ou refusera votre demande en modifiant votre r\\u00f4le de tuteur (en cours de validation) en vrai tuteur.<\\/p>","fulltext":"","state":"1","catid":"2","created":"2015-05-17 17:14:14","created_by":"803","created_by_alias":"","modified":"2015-05-24 17:05:51","modified_by":"820","checked_out":"820","checked_out_time":"2015-05-24 17:05:17","publish_up":"2015-05-17 17:14:14","publish_down":"0000-00-00 00:00:00","images":"{}","urls":"{}","attribs":"{}","version":7,"ordering":"3","metakey":"","metadesc":"","access":"1","hits":"26","metadata":"{}","featured":"0","language":"*","xreference":""}', 0);
+(88, 46, 1, '', '2015-05-24 19:02:13', 818, 2767, '5c9a6f4b51479fd85f5bff59a1248263a2c9467b', '{"id":46,"asset_id":253,"title":"FAQ","alias":"faq","introtext":"<h4>Inscription et gestion du profil :<\\/h4>\\r\\n<p><strong><a title=\\"inscrire tutorat\\" href=\\"images\\/pdf\\/faq\\/inscrire-tutorat.pdf\\" target=\\"_blank\\">Comment s''inscrire au tutorat ?<\\/a><\\/strong><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4><strong>Agenda :<\\/strong><\\/h4>\\r\\n<p><a title=\\"Voir prochains cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/visualiser-cours.pdf\\" target=\\"_blank\\">Comment consulter les prochains cours de tutorat ?<\\/a><\\/p>\\r\\n<p><a title=\\"Inscrire cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/inscrire-cours.pdf\\" target=\\"_blank\\">Comment m''inscrire \\u00e0 un cours du tutorat ?<\\/a><\\/p>\\r\\n<p><a title=\\"ajout cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/ajout-cours.pdf\\" target=\\"_blank\\">Comment ajouter un nouveau cours ?<\\/a><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Forum :<\\/h4>\\r\\n<p><a title=\\"new topic forum\\" href=\\"images\\/pdf\\/faq\\/forum\\/new-topic.pdf\\" target=\\"_blank\\">Comment cr\\u00e9er un nouveau topic sur le forum ?<\\/a><\\/p>\\r\\n<p><a title=\\"discussion forum\\" href=\\"images\\/pdf\\/faq\\/forum\\/discussion.pdf\\" target=\\"_blank\\">Comment participer \\u00e0 un conversation sur le forum ?<\\/a><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-24 19:02:13","created_by":"818","created_by_alias":"","modified":"2015-05-24 19:02:13","modified_by":null,"checked_out":null,"checked_out_time":null,"publish_up":"2015-05-24 19:02:13","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":1,"ordering":null,"metakey":"","metadesc":"","access":"1","hits":null,"metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
+(89, 46, 1, '', '2015-05-24 19:03:21', 818, 2840, 'd8a07b7b1d689c09b5336648cd44d1b1c1ac3e95', '{"id":46,"asset_id":"253","title":"FAQ","alias":"faq","introtext":"<h4>Inscription et gestion du profil :<\\/h4>\\r\\n<p><strong><a title=\\"inscrire tutorat\\" href=\\"images\\/pdf\\/faq\\/inscrire-tutorat.pdf\\" target=\\"_blank\\">Comment s''inscrire au tutorat ?<\\/a><\\/strong><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4><strong>Agenda :<\\/strong><\\/h4>\\r\\n<p><strong><a title=\\"Voir prochains cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/visualiser-cours.pdf\\" target=\\"_blank\\">Comment consulter les prochains cours de tutorat ?<\\/a><\\/strong><\\/p>\\r\\n<p><a title=\\"Inscrire cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/inscrire-cours.pdf\\" target=\\"_blank\\">Comment m''inscrire \\u00e0 un cours du tutorat ?<\\/a><\\/p>\\r\\n<p><a title=\\"ajout cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/ajout-cours.pdf\\" target=\\"_blank\\">Comment ajouter un nouveau cours ?<\\/a><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Forum :<\\/h4>\\r\\n<p><strong><a title=\\"new topic forum\\" href=\\"images\\/pdf\\/faq\\/forum\\/new-topic.pdf\\" target=\\"_blank\\">Comment cr\\u00e9er un nouveau topic sur le forum ?<\\/a><\\/strong><\\/p>\\r\\n<p><strong><a title=\\"discussion forum\\" href=\\"images\\/pdf\\/faq\\/forum\\/discussion.pdf\\" target=\\"_blank\\">Comment participer \\u00e0 un conversation sur le forum ?<\\/a><\\/strong><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-24 19:02:13","created_by":"818","created_by_alias":"","modified":"2015-05-24 19:03:21","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-24 19:03:01","publish_up":"2015-05-24 19:02:13","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":2,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"1","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
+(90, 46, 1, '', '2015-05-24 19:03:39', 818, 2876, '38266a080daa6f8efecd09cb43142b729b0e3de8', '{"id":46,"asset_id":"253","title":"FAQ","alias":"faq","introtext":"<h4>Inscription et gestion du profil :<\\/h4>\\r\\n<p><strong><a title=\\"inscrire tutorat\\" href=\\"images\\/pdf\\/faq\\/inscrire-tutorat.pdf\\" target=\\"_blank\\">Comment s''inscrire au tutorat ?<\\/a><\\/strong><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4><strong>Agenda :<\\/strong><\\/h4>\\r\\n<p><strong><a title=\\"Voir prochains cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/visualiser-cours.pdf\\" target=\\"_blank\\">Comment consulter les prochains cours de tutorat ?<\\/a><\\/strong><\\/p>\\r\\n<p><strong><a title=\\"Inscrire cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/inscrire-cours.pdf\\" target=\\"_blank\\">Comment m''inscrire \\u00e0 un cours du tutorat ?<\\/a><\\/strong><\\/p>\\r\\n<p><strong><a title=\\"ajout cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/ajout-cours.pdf\\" target=\\"_blank\\">Comment ajouter un nouveau cours ?<\\/a><\\/strong><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Forum :<\\/h4>\\r\\n<p><strong><a title=\\"new topic forum\\" href=\\"images\\/pdf\\/faq\\/forum\\/new-topic.pdf\\" target=\\"_blank\\">Comment cr\\u00e9er un nouveau topic sur le forum ?<\\/a><\\/strong><\\/p>\\r\\n<p><strong><a title=\\"discussion forum\\" href=\\"images\\/pdf\\/faq\\/forum\\/discussion.pdf\\" target=\\"_blank\\">Comment participer \\u00e0 un conversation sur le forum ?<\\/a><\\/strong><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-24 19:02:13","created_by":"818","created_by_alias":"","modified":"2015-05-24 19:03:39","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-24 19:03:21","publish_up":"2015-05-24 19:02:13","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":3,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"2","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0),
+(91, 46, 1, '', '2015-05-24 19:03:55', 818, 2896, '0813a8fb70f3d8538625243565a77e7d807396f9', '{"id":46,"asset_id":"253","title":"FAQ","alias":"faq","introtext":"<h4>\\u00a0<\\/h4>\\r\\n<h4>Inscription et gestion du profil :<\\/h4>\\r\\n<p><strong><a title=\\"inscrire tutorat\\" href=\\"images\\/pdf\\/faq\\/inscrire-tutorat.pdf\\" target=\\"_blank\\">Comment s''inscrire au tutorat ?<\\/a><\\/strong><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4><strong>Agenda :<\\/strong><\\/h4>\\r\\n<p><strong><a title=\\"Voir prochains cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/visualiser-cours.pdf\\" target=\\"_blank\\">Comment consulter les prochains cours de tutorat ?<\\/a><\\/strong><\\/p>\\r\\n<p><strong><a title=\\"Inscrire cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/inscrire-cours.pdf\\" target=\\"_blank\\">Comment m''inscrire \\u00e0 un cours du tutorat ?<\\/a><\\/strong><\\/p>\\r\\n<p><strong><a title=\\"ajout cours\\" href=\\"images\\/pdf\\/faq\\/agenda\\/ajout-cours.pdf\\" target=\\"_blank\\">Comment ajouter un nouveau cours ?<\\/a><\\/strong><\\/p>\\r\\n<p>\\u00a0<\\/p>\\r\\n<h4>Forum :<\\/h4>\\r\\n<p><strong><a title=\\"new topic forum\\" href=\\"images\\/pdf\\/faq\\/forum\\/new-topic.pdf\\" target=\\"_blank\\">Comment cr\\u00e9er un nouveau topic sur le forum ?<\\/a><\\/strong><\\/p>\\r\\n<p><strong><a title=\\"discussion forum\\" href=\\"images\\/pdf\\/faq\\/forum\\/discussion.pdf\\" target=\\"_blank\\">Comment participer \\u00e0 un conversation sur le forum ?<\\/a><\\/strong><\\/p>","fulltext":"","state":1,"catid":"2","created":"2015-05-24 19:02:13","created_by":"818","created_by_alias":"","modified":"2015-05-24 19:03:55","modified_by":"818","checked_out":"818","checked_out_time":"2015-05-24 19:03:39","publish_up":"2015-05-24 19:02:13","publish_down":"0000-00-00 00:00:00","images":"{\\"image_intro\\":\\"\\",\\"float_intro\\":\\"\\",\\"image_intro_alt\\":\\"\\",\\"image_intro_caption\\":\\"\\",\\"image_fulltext\\":\\"\\",\\"float_fulltext\\":\\"\\",\\"image_fulltext_alt\\":\\"\\",\\"image_fulltext_caption\\":\\"\\"}","urls":"{\\"urla\\":false,\\"urlatext\\":\\"\\",\\"targeta\\":\\"\\",\\"urlb\\":false,\\"urlbtext\\":\\"\\",\\"targetb\\":\\"\\",\\"urlc\\":false,\\"urlctext\\":\\"\\",\\"targetc\\":\\"\\"}","attribs":"{\\"show_title\\":\\"\\",\\"link_titles\\":\\"\\",\\"show_tags\\":\\"\\",\\"show_intro\\":\\"\\",\\"info_block_position\\":\\"\\",\\"show_category\\":\\"\\",\\"link_category\\":\\"\\",\\"show_parent_category\\":\\"\\",\\"link_parent_category\\":\\"\\",\\"show_author\\":\\"\\",\\"link_author\\":\\"\\",\\"show_create_date\\":\\"\\",\\"show_modify_date\\":\\"\\",\\"show_publish_date\\":\\"\\",\\"show_item_navigation\\":\\"\\",\\"show_icons\\":\\"\\",\\"show_print_icon\\":\\"\\",\\"show_email_icon\\":\\"\\",\\"show_vote\\":\\"\\",\\"show_hits\\":\\"\\",\\"show_noauth\\":\\"\\",\\"urls_position\\":\\"\\",\\"alternative_readmore\\":\\"\\",\\"article_layout\\":\\"\\",\\"show_publishing_options\\":\\"\\",\\"show_article_options\\":\\"\\",\\"show_urls_images_backend\\":\\"\\",\\"show_urls_images_frontend\\":\\"\\"}","version":4,"ordering":"0","metakey":"","metadesc":"","access":"1","hits":"3","metadata":"{\\"robots\\":\\"\\",\\"author\\":\\"\\",\\"rights\\":\\"\\",\\"xreference\\":\\"\\"}","featured":"0","language":"*","xreference":""}', 0);
 
 -- --------------------------------------------------------
 
@@ -5410,8 +5039,8 @@ INSERT INTO `qfupd_ucm_history` (`version_id`, `ucm_item_id`, `ucm_type_id`, `ve
 -- Structure de la table `qfupd_updates`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_updates` (
-  `update_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_updates` (
+  `update_id` int(11) NOT NULL,
   `update_site_id` int(11) DEFAULT '0',
   `extension_id` int(11) DEFAULT '0',
   `name` varchar(100) DEFAULT '',
@@ -5424,52 +5053,15 @@ CREATE TABLE IF NOT EXISTS `qfupd_updates` (
   `data` text NOT NULL,
   `detailsurl` text NOT NULL,
   `infourl` text NOT NULL,
-  `extra_query` varchar(1000) DEFAULT '',
-  PRIMARY KEY (`update_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Available Updates' AUTO_INCREMENT=38 ;
+  `extra_query` varchar(1000) DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Available Updates';
 
 --
 -- Contenu de la table `qfupd_updates`
 --
 
 INSERT INTO `qfupd_updates` (`update_id`, `update_site_id`, `extension_id`, `name`, `description`, `element`, `type`, `folder`, `client_id`, `version`, `data`, `detailsurl`, `infourl`, `extra_query`) VALUES
-(1, 3, 0, 'Norwegian Bokmal', '', 'pkg_nb-NO', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/nb-NO_details.xml', '', ''),
-(2, 3, 0, 'Norwegian Nynorsk', '', 'pkg_nn-NO', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/nn-NO_details.xml', '', ''),
-(3, 3, 0, 'Persian', '', 'pkg_fa-IR', 'package', '', 0, '3.4.1.2', '', 'http://update.joomla.org/language/details3/fa-IR_details.xml', '', ''),
-(4, 3, 0, 'Polish', '', 'pkg_pl-PL', 'package', '', 0, '3.4.1.3', '', 'http://update.joomla.org/language/details3/pl-PL_details.xml', '', ''),
-(5, 3, 0, 'Portuguese', '', 'pkg_pt-PT', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/pt-PT_details.xml', '', ''),
-(6, 3, 0, 'Russian', '', 'pkg_ru-RU', 'package', '', 0, '3.4.1.2', '', 'http://update.joomla.org/language/details3/ru-RU_details.xml', '', ''),
-(7, 3, 0, 'Slovak', '', 'pkg_sk-SK', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/sk-SK_details.xml', '', ''),
-(8, 3, 0, 'Swedish', '', 'pkg_sv-SE', 'package', '', 0, '3.4.1.3', '', 'http://update.joomla.org/language/details3/sv-SE_details.xml', '', ''),
-(9, 3, 0, 'Syriac', '', 'pkg_sy-IQ', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/sy-IQ_details.xml', '', ''),
-(10, 3, 0, 'Tamil', '', 'pkg_ta-IN', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/ta-IN_details.xml', '', ''),
-(11, 3, 0, 'Thai', '', 'pkg_th-TH', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/th-TH_details.xml', '', ''),
-(12, 3, 0, 'Turkish', '', 'pkg_tr-TR', 'package', '', 0, '3.4.1.3', '', 'http://update.joomla.org/language/details3/tr-TR_details.xml', '', ''),
-(13, 3, 0, 'Ukrainian', '', 'pkg_uk-UA', 'package', '', 0, '3.3.3.15', '', 'http://update.joomla.org/language/details3/uk-UA_details.xml', '', ''),
-(14, 3, 0, 'Uyghur', '', 'pkg_ug-CN', 'package', '', 0, '3.3.0.1', '', 'http://update.joomla.org/language/details3/ug-CN_details.xml', '', ''),
-(15, 3, 0, 'Albanian', '', 'pkg_sq-AL', 'package', '', 0, '3.1.1.1', '', 'http://update.joomla.org/language/details3/sq-AL_details.xml', '', ''),
-(16, 3, 0, 'Hindi', '', 'pkg_hi-IN', 'package', '', 0, '3.3.6.1', '', 'http://update.joomla.org/language/details3/hi-IN_details.xml', '', ''),
-(17, 3, 0, 'Portuguese Brazil', '', 'pkg_pt-BR', 'package', '', 0, '3.4.1.3', '', 'http://update.joomla.org/language/details3/pt-BR_details.xml', '', ''),
-(18, 3, 0, 'Serbian Latin', '', 'pkg_sr-YU', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/sr-YU_details.xml', '', ''),
-(19, 3, 0, 'Spanish', '', 'pkg_es-ES', 'package', '', 0, '3.4.1.2', '', 'http://update.joomla.org/language/details3/es-ES_details.xml', '', ''),
-(20, 3, 0, 'Bosnian', '', 'pkg_bs-BA', 'package', '', 0, '3.4.0.1', '', 'http://update.joomla.org/language/details3/bs-BA_details.xml', '', ''),
-(21, 3, 0, 'Serbian Cyrillic', '', 'pkg_sr-RS', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/sr-RS_details.xml', '', ''),
-(22, 3, 0, 'Vietnamese', '', 'pkg_vi-VN', 'package', '', 0, '3.2.1.1', '', 'http://update.joomla.org/language/details3/vi-VN_details.xml', '', ''),
-(23, 3, 0, 'Bahasa Indonesia', '', 'pkg_id-ID', 'package', '', 0, '3.3.0.2', '', 'http://update.joomla.org/language/details3/id-ID_details.xml', '', ''),
-(24, 3, 0, 'Finnish', '', 'pkg_fi-FI', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/fi-FI_details.xml', '', ''),
-(25, 3, 0, 'Swahili', '', 'pkg_sw-KE', 'package', '', 0, '3.4.1.1', '', 'http://update.joomla.org/language/details3/sw-KE_details.xml', '', ''),
-(26, 3, 0, 'Montenegrin', '', 'pkg_srp-ME', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/srp-ME_details.xml', '', ''),
-(27, 3, 0, 'EnglishCA', '', 'pkg_en-CA', 'package', '', 0, '3.3.6.1', '', 'http://update.joomla.org/language/details3/en-CA_details.xml', '', ''),
-(28, 3, 0, 'FrenchCA', '', 'pkg_fr-CA', 'package', '', 0, '3.3.6.1', '', 'http://update.joomla.org/language/details3/fr-CA_details.xml', '', ''),
-(29, 3, 0, 'Welsh', '', 'pkg_cy-GB', 'package', '', 0, '3.3.0.1', '', 'http://update.joomla.org/language/details3/cy-GB_details.xml', '', ''),
-(30, 3, 0, 'Sinhala', '', 'pkg_si-LK', 'package', '', 0, '3.3.1.1', '', 'http://update.joomla.org/language/details3/si-LK_details.xml', '', ''),
-(31, 5, 0, 'Kunena Latest Module', '', 'mod_kunenalatest', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenalatest.xml', '', ''),
-(32, 5, 0, 'Kunena Login Module', '', 'mod_kunenalogin', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenalogin.xml', '', ''),
-(33, 5, 0, 'Kunena Search Module', '', 'mod_kunenasearch', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenasearch.xml', '', ''),
-(34, 5, 0, 'Kunena Statistics Module', '', 'mod_kunenastats', 'module', '', 0, '3.0.1', '', 'http://update.kunena.org/3.0/mod_kunenastats.xml', '', ''),
-(35, 5, 0, 'Content - Kunena Discuss', '', 'kunenadiscuss', 'plugin', 'content', 0, '3.0.7', '', 'http://update.kunena.org/3.0/plg_content_kunenadiscuss.xml', '', ''),
-(36, 5, 0, 'Search - Kunena', '', 'kunena', 'plugin', 'search', 0, '3.0.1', '', 'http://update.kunena.org/3.0/plg_search_kunena.xml', '', ''),
-(37, 11, 10233, 'SEBLOD 3.x (App Builder & CCK)', 'SEBLOD 3.x Core', 'pkg_cck', 'package', '', 0, '3.6.2', '', 'http://update.seblod.com/pkg_cck.xml', 'http://www.seblod.com/', '');
+(1, 11, 10233, 'SEBLOD 3.x (App Builder & CCK)', 'SEBLOD 3.x Core', 'pkg_cck', 'package', '', 0, '3.6.2', '', 'http://update.seblod.com/pkg_cck.xml', 'http://www.seblod.com/', '');
 
 -- --------------------------------------------------------
 
@@ -5477,30 +5069,29 @@ INSERT INTO `qfupd_updates` (`update_id`, `update_site_id`, `extension_id`, `nam
 -- Structure de la table `qfupd_update_sites`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_update_sites` (
-  `update_site_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_update_sites` (
+  `update_site_id` int(11) NOT NULL,
   `name` varchar(100) DEFAULT '',
   `type` varchar(20) DEFAULT '',
   `location` text NOT NULL,
   `enabled` int(11) DEFAULT '0',
   `last_check_timestamp` bigint(20) DEFAULT '0',
-  `extra_query` varchar(1000) DEFAULT '',
-  PRIMARY KEY (`update_site_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Update Sites' AUTO_INCREMENT=13 ;
+  `extra_query` varchar(1000) DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='Update Sites';
 
 --
 -- Contenu de la table `qfupd_update_sites`
 --
 
 INSERT INTO `qfupd_update_sites` (`update_site_id`, `name`, `type`, `location`, `enabled`, `last_check_timestamp`, `extra_query`) VALUES
-(1, 'Joomla! Core', 'collection', 'http://update.joomla.org/core/list.xml', 1, 1432483531, ''),
-(2, 'Joomla! Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1432483531, ''),
-(3, 'Accredited Joomla! Translations', 'collection', 'http://update.joomla.org/language/translationlist_3.xml', 1, 1432483529, ''),
-(4, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 1432483529, ''),
-(5, 'Kunena 3.0 Update Site', 'collection', 'http://update.kunena.org/3.0/list.xml', 1, 1432483529, ''),
-(8, 'WebInstaller Update Site', 'extension', 'http://appscdn.joomla.org/webapps/jedapps/webinstaller.xml', 1, 1432483529, ''),
-(10, 'Asikart UserXTD', 'extension', 'https://raw.githubusercontent.com/asikart/userxtd/staging/update.xml', 1, 1432483529, ''),
-(11, 'SEBLOD 3.x Core Updates', 'extension', 'http://update.seblod.com/pkg_cck.xml', 1, 1432483529, '');
+(1, 'Joomla! Core', 'collection', 'http://update.joomla.org/core/list.xml', 1, 1432491704, ''),
+(2, 'Joomla! Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1432491704, ''),
+(3, 'Accredited Joomla! Translations', 'collection', 'http://update.joomla.org/language/translationlist_3.xml', 1, 0, ''),
+(4, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 0, ''),
+(5, 'Kunena 3.0 Update Site', 'collection', 'http://update.kunena.org/3.0/list.xml', 1, 0, ''),
+(8, 'WebInstaller Update Site', 'extension', 'http://appscdn.joomla.org/webapps/jedapps/webinstaller.xml', 1, 1432491702, ''),
+(10, 'Asikart UserXTD', 'extension', 'https://raw.githubusercontent.com/asikart/userxtd/staging/update.xml', 1, 1432491702, ''),
+(11, 'SEBLOD 3.x Core Updates', 'extension', 'http://update.seblod.com/pkg_cck.xml', 1, 1432491702, '');
 
 -- --------------------------------------------------------
 
@@ -5508,10 +5099,9 @@ INSERT INTO `qfupd_update_sites` (`update_site_id`, `name`, `type`, `location`, 
 -- Structure de la table `qfupd_update_sites_extensions`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_update_sites_extensions` (
+CREATE TABLE `qfupd_update_sites_extensions` (
   `update_site_id` int(11) NOT NULL DEFAULT '0',
-  `extension_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`update_site_id`,`extension_id`)
+  `extension_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Links extensions to update sites';
 
 --
@@ -5535,18 +5125,13 @@ INSERT INTO `qfupd_update_sites_extensions` (`update_site_id`, `extension_id`) V
 -- Structure de la table `qfupd_usergroups`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_usergroups` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `qfupd_usergroups` (
+  `id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Adjacency List Reference Id',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
-  `title` varchar(100) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`),
-  KEY `idx_usergroup_title_lookup` (`title`),
-  KEY `idx_usergroup_adjacency_lookup` (`parent_id`),
-  KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+  `title` varchar(100) NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_usergroups`
@@ -5568,8 +5153,8 @@ INSERT INTO `qfupd_usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUES
 -- Structure de la table `qfupd_users`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_users` (
-  `id` int(100) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_users` (
+  `id` int(100) NOT NULL,
   `name` varchar(100) NOT NULL DEFAULT '',
   `username` varchar(100) NOT NULL DEFAULT '',
   `email` varchar(100) NOT NULL DEFAULT '',
@@ -5589,13 +5174,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_users` (
   `resetCount` int(11) NOT NULL DEFAULT '0' COMMENT 'Count of password resets since lastResetTime',
   `otpKey` varchar(1000) NOT NULL DEFAULT '' COMMENT 'Two factor authentication encrypted keys',
   `otep` varchar(1000) NOT NULL DEFAULT '' COMMENT 'One time emergency passwords',
-  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login',
-  PRIMARY KEY (`id`),
-  KEY `idx_name` (`name`),
-  KEY `idx_block` (`block`),
-  KEY `username` (`username`),
-  KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=826 ;
+  `requireReset` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'Require user to reset password on next login'
+) ENGINE=InnoDB AUTO_INCREMENT=825 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_users`
@@ -5606,12 +5186,11 @@ INSERT INTO `qfupd_users` (`id`, `name`, `username`, `email`, `password`, `diplo
 (815, 'IGUE', 'salimigue', 'limsamohamed@gmail.com', '$2y$10$Pb53xAib/vilP/K5K8F8We1k.ddRcbnQ2k7.1MfsibtJDY6C1SWwm', '', '', '', '', '', 0, 0, '2015-05-18 23:44:53', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (816, 'HUART', 'tristanhuart', 'letudianteninfo@gmail.com', '$2y$10$iTn7jeeUDb6T89J.ieMMWu.2ZBYV/mdayYJXAEvyX315OaoMd7sd6', '', '', '', '', '', 0, 0, '2015-05-18 23:57:38', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (817, 'GAYAT', 'theotimegayat', 'theotime.gayat@gmail.com', '$2y$10$X6fGl4E3V0T1Lm0PBFDu2OUPpHmTo4nT1ShXCLz08883M7DYOWu6.', '', '', '', '', '', 0, 0, '2015-05-18 23:59:47', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
-(818, 'DUCHEMIN', 'laureduchemin', 'duchemin_laure@gmail.com', '$2y$10$fEtZDBctT8s7dZTSm.lr2.nXDqL3MDdN9EeygQhOp/dRAhY8J/zGC', '', '', '', '', '', 0, 0, '2015-05-19 00:02:06', '2015-05-24 11:42:42', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
+(818, 'DUCHEMIN', 'laureduchemin', 'duchemin_laure@gmail.com', '$2y$10$fEtZDBctT8s7dZTSm.lr2.nXDqL3MDdN9EeygQhOp/dRAhY8J/zGC', '', '', '', '', '', 0, 0, '2015-05-19 00:02:06', '2015-05-24 18:53:52', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
 (819, 'BRIZION', 'alexandrebrizion', 'harleq1.private@gmail.com', '$2y$10$bbIzyjOLCLgWFC6X/i0u4OiQLLFTMT2GOxNDx6dB4FOVWeDjXskxC', '', '', '', '', '', 0, 0, '2015-05-19 00:39:25', '2015-05-23 17:39:46', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
-(820, 'MARINIER', 'opheliemarinier', 'ophelie.marinier@gmail.com', '$2y$10$vjoKE71aLqzDKBCWaG5.YOjgVyl88L.4gxhaM6VSk5APwGWNoudGu', '', '', '', '', '', 0, 0, '2015-05-19 00:41:34', '2015-05-24 17:29:13', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
-(821, 'Test', 'Test', 'duchemin_laure@yahoo.fr', '$2y$10$Oc8xh79Ef5dGdJrRMwWLOOnIURLOz2cpU0Yff/vcRs2PEROx5HD/q', 'Bac S', 'L2', '', 'Aucune', 'Mathématiques', 0, 0, '2015-05-23 18:41:19', '2015-05-24 08:50:50', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
-(824, 'tuteur', 'tuteur', 'tuteur@tuteur.fr', '$2y$10$E7gs4zicuXGdhn2rRmkvquXgU9jTjad1pwPH4RRWhYPsM7haT1wCa', '', 'L1', '', 'Aucune', 'Aucune', 0, 0, '2015-05-24 12:58:01', '2015-05-24 16:04:01', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
-(825, 'azerty', 'azerty', 'azerty@azerty.fr', '$2y$10$n4vkSKQaATA0T/P9DeTMR.MxwE/NC6sTr2.ZypSpg8qRkNsInO7F.', 'azerty', 'L2', '', 'Informatique', 'Aucune', 0, 0, '2015-05-24 15:17:52', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
+(820, 'MARINIER', 'opheliemarinier', 'ophelie.marinier@gmail.com', '$2y$10$vjoKE71aLqzDKBCWaG5.YOjgVyl88L.4gxhaM6VSk5APwGWNoudGu', '', '', '', '', '', 0, 0, '2015-05-19 00:41:34', '2015-05-24 13:15:28', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
+(821, 'Test', 'Test', 'duchemin_laure@yahoo.fr', '$2y$10$Oc8xh79Ef5dGdJrRMwWLOOnIURLOz2cpU0Yff/vcRs2PEROx5HD/q', 'Bac S', 'L2', '', 'Aucune', 'Mathématiques', 0, 0, '2015-05-23 18:41:19', '2015-05-24 18:53:57', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0),
+(824, 'tuteur', 'tuteur', 'tuteur@tuteur.fr', '$2y$10$E7gs4zicuXGdhn2rRmkvquXgU9jTjad1pwPH4RRWhYPsM7haT1wCa', '', 'L1', '', 'Aucune', 'Aucune', 0, 0, '2015-05-24 12:58:01', '0000-00-00 00:00:00', '', '{}', '0000-00-00 00:00:00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -5619,8 +5198,8 @@ INSERT INTO `qfupd_users` (`id`, `name`, `username`, `email`, `password`, `diplo
 -- Structure de la table `qfupd_userxtd_fields`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_userxtd_fields` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_userxtd_fields` (
+  `id` int(11) unsigned NOT NULL,
   `asset_id` int(11) NOT NULL,
   `catid` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -5642,14 +5221,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_userxtd_fields` (
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `access` int(10) unsigned NOT NULL,
   `language` char(7) NOT NULL,
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_createdby` (`catid`),
-  KEY `idx_language` (`language`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `cat_index` (`published`,`access`,`catid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_userxtd_fields`
@@ -5682,8 +5255,8 @@ INSERT INTO `qfupd_userxtd_fields` (`id`, `asset_id`, `catid`, `title`, `label`,
 -- Structure de la table `qfupd_userxtd_profiles`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_userxtd_profiles` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_userxtd_profiles` (
+  `id` int(11) unsigned NOT NULL,
   `user_id` int(11) NOT NULL,
   `key` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,
@@ -5692,15 +5265,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_userxtd_profiles` (
   `ordering` int(11) NOT NULL,
   `access` int(10) unsigned NOT NULL,
   `language` char(7) NOT NULL,
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_access` (`access`),
-  KEY `idx_language` (`language`),
-  KEY `cat_index` (`access`),
-  KEY `idx_value` (`value`),
-  KEY `user_id` (`user_id`),
-  KEY `key` (`key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=151 ;
+  `params` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_userxtd_profiles`
@@ -5744,20 +5310,15 @@ INSERT INTO `qfupd_userxtd_profiles` (`id`, `user_id`, `key`, `value`, `created`
 -- Structure de la table `qfupd_user_keys`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_user_keys` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_user_keys` (
+  `id` int(10) unsigned NOT NULL,
   `user_id` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `series` varchar(255) NOT NULL,
   `invalid` tinyint(4) NOT NULL,
   `time` varchar(200) NOT NULL,
-  `uastring` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `series` (`series`),
-  UNIQUE KEY `series_2` (`series`),
-  UNIQUE KEY `series_3` (`series`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `uastring` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_user_keys`
@@ -5772,8 +5333,8 @@ INSERT INTO `qfupd_user_keys` (`id`, `user_id`, `token`, `series`, `invalid`, `t
 -- Structure de la table `qfupd_user_notes`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_user_notes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `qfupd_user_notes` (
+  `id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `subject` varchar(100) NOT NULL DEFAULT '',
@@ -5787,11 +5348,8 @@ CREATE TABLE IF NOT EXISTS `qfupd_user_notes` (
   `modified_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `review_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `publish_up` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `idx_user_id` (`user_id`),
-  KEY `idx_category_id` (`catid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `publish_down` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -5799,12 +5357,11 @@ CREATE TABLE IF NOT EXISTS `qfupd_user_notes` (
 -- Structure de la table `qfupd_user_profiles`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_user_profiles` (
+CREATE TABLE `qfupd_user_profiles` (
   `user_id` int(11) NOT NULL,
   `profile_key` varchar(100) NOT NULL,
   `profile_value` text NOT NULL,
-  `ordering` int(11) NOT NULL DEFAULT '0',
-  UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`)
+  `ordering` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Simple user profile storage table';
 
 -- --------------------------------------------------------
@@ -5813,10 +5370,9 @@ CREATE TABLE IF NOT EXISTS `qfupd_user_profiles` (
 -- Structure de la table `qfupd_user_usergroup_map`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_user_usergroup_map` (
+CREATE TABLE `qfupd_user_usergroup_map` (
   `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__users.id',
-  `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__usergroups.id',
-  PRIMARY KEY (`user_id`,`group_id`)
+  `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign Key to #__usergroups.id'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5832,8 +5388,7 @@ INSERT INTO `qfupd_user_usergroup_map` (`user_id`, `group_id`) VALUES
 (819, 8),
 (820, 8),
 (821, 12),
-(824, 11),
-(825, 11);
+(824, 11);
 
 -- --------------------------------------------------------
 
@@ -5841,14 +5396,12 @@ INSERT INTO `qfupd_user_usergroup_map` (`user_id`, `group_id`) VALUES
 -- Structure de la table `qfupd_viewlevels`
 --
 
-CREATE TABLE IF NOT EXISTS `qfupd_viewlevels` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+CREATE TABLE `qfupd_viewlevels` (
+  `id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
   `title` varchar(100) NOT NULL DEFAULT '',
   `ordering` int(11) NOT NULL DEFAULT '0',
-  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_assetgroup_title_lookup` (`title`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.'
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `qfupd_viewlevels`
@@ -5865,6 +5418,1337 @@ INSERT INTO `qfupd_viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 (9, 'Accès tutoré', 0, '[12]'),
 (10, 'Accès tuteur (en attente de validation)', 0, '[11]');
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `qfupd_assets`
+--
+ALTER TABLE `qfupd_assets`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idx_asset_name` (`name`),
+  ADD KEY `idx_lft_rgt` (`lft`,`rgt`),
+  ADD KEY `idx_parent_id` (`parent_id`);
+
+--
+-- Index pour la table `qfupd_associations`
+--
+ALTER TABLE `qfupd_associations`
+  ADD PRIMARY KEY (`context`,`id`),
+  ADD KEY `idx_key` (`key`);
+
+--
+-- Index pour la table `qfupd_banners`
+--
+ALTER TABLE `qfupd_banners`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_state` (`state`),
+  ADD KEY `idx_own_prefix` (`own_prefix`),
+  ADD KEY `idx_metakey_prefix` (`metakey_prefix`),
+  ADD KEY `idx_banner_catid` (`catid`),
+  ADD KEY `idx_language` (`language`);
+
+--
+-- Index pour la table `qfupd_banner_clients`
+--
+ALTER TABLE `qfupd_banner_clients`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_own_prefix` (`own_prefix`),
+  ADD KEY `idx_metakey_prefix` (`metakey_prefix`);
+
+--
+-- Index pour la table `qfupd_banner_tracks`
+--
+ALTER TABLE `qfupd_banner_tracks`
+  ADD PRIMARY KEY (`track_date`,`track_type`,`banner_id`),
+  ADD KEY `idx_track_date` (`track_date`),
+  ADD KEY `idx_track_type` (`track_type`),
+  ADD KEY `idx_banner_id` (`banner_id`);
+
+--
+-- Index pour la table `qfupd_categories`
+--
+ALTER TABLE `qfupd_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cat_idx` (`extension`,`published`,`access`),
+  ADD KEY `idx_access` (`access`),
+  ADD KEY `idx_checkout` (`checked_out`),
+  ADD KEY `idx_path` (`path`),
+  ADD KEY `idx_left_right` (`lft`,`rgt`),
+  ADD KEY `idx_alias` (`alias`),
+  ADD KEY `idx_language` (`language`);
+
+--
+-- Index pour la table `qfupd_cck_core`
+--
+ALTER TABLE `qfupd_cck_core`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_cck` (`cck`),
+  ADD KEY `idx_pk` (`pk`);
+
+--
+-- Index pour la table `qfupd_cck_core_activities`
+--
+ALTER TABLE `qfupd_cck_core_activities`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD KEY `idx_category` (`folder`);
+
+--
+-- Index pour la table `qfupd_cck_core_downloads`
+--
+ALTER TABLE `qfupd_cck_core_downloads`
+  ADD PRIMARY KEY (`id`,`field`,`collection`,`x`),
+  ADD KEY `idx_contentid` (`id`),
+  ADD KEY `idx_item` (`field`);
+
+--
+-- Index pour la table `qfupd_cck_core_fields`
+--
+ALTER TABLE `qfupd_cck_core_fields`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD KEY `idx_type` (`type`),
+  ADD KEY `idx_folder` (`folder`);
+
+--
+-- Index pour la table `qfupd_cck_core_folders`
+--
+ALTER TABLE `qfupd_cck_core_folders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_parent_id` (`parent_id`);
+
+--
+-- Index pour la table `qfupd_cck_core_objects`
+--
+ALTER TABLE `qfupd_cck_core_objects`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD KEY `idx_component` (`component`),
+  ADD KEY `idx_view` (`view`);
+
+--
+-- Index pour la table `qfupd_cck_core_preferences`
+--
+ALTER TABLE `qfupd_cck_core_preferences`
+  ADD PRIMARY KEY (`userid`);
+
+--
+-- Index pour la table `qfupd_cck_core_searchs`
+--
+ALTER TABLE `qfupd_cck_core_searchs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD KEY `idx_folder` (`folder`),
+  ADD KEY `idx_template_search` (`template_search`),
+  ADD KEY `idx_template_filter` (`template_filter`),
+  ADD KEY `idx_template_list` (`template_list`),
+  ADD KEY `idx_template_item` (`template_item`);
+
+--
+-- Index pour la table `qfupd_cck_core_search_field`
+--
+ALTER TABLE `qfupd_cck_core_search_field`
+  ADD PRIMARY KEY (`searchid`,`fieldid`,`client`),
+  ADD KEY `searchid` (`searchid`),
+  ADD KEY `fieldid` (`fieldid`);
+
+--
+-- Index pour la table `qfupd_cck_core_search_position`
+--
+ALTER TABLE `qfupd_cck_core_search_position`
+  ADD PRIMARY KEY (`searchid`,`position`,`client`),
+  ADD KEY `position` (`position`),
+  ADD KEY `searchid` (`searchid`);
+
+--
+-- Index pour la table `qfupd_cck_core_sites`
+--
+ALTER TABLE `qfupd_cck_core_sites`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Index pour la table `qfupd_cck_core_templates`
+--
+ALTER TABLE `qfupd_cck_core_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD KEY `idx_folder` (`folder`);
+
+--
+-- Index pour la table `qfupd_cck_core_types`
+--
+ALTER TABLE `qfupd_cck_core_types`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD KEY `idx_folder` (`folder`),
+  ADD KEY `idx_template_admin` (`template_admin`),
+  ADD KEY `idx_template_site` (`template_site`),
+  ADD KEY `idx_template_content` (`template_content`),
+  ADD KEY `idx_template_intro` (`template_intro`);
+
+--
+-- Index pour la table `qfupd_cck_core_type_field`
+--
+ALTER TABLE `qfupd_cck_core_type_field`
+  ADD PRIMARY KEY (`typeid`,`fieldid`,`client`),
+  ADD KEY `typeid` (`typeid`),
+  ADD KEY `fieldid` (`fieldid`);
+
+--
+-- Index pour la table `qfupd_cck_core_type_position`
+--
+ALTER TABLE `qfupd_cck_core_type_position`
+  ADD PRIMARY KEY (`typeid`,`position`,`client`),
+  ADD KEY `typeid` (`typeid`),
+  ADD KEY `position` (`position`);
+
+--
+-- Index pour la table `qfupd_cck_core_versions`
+--
+ALTER TABLE `qfupd_cck_core_versions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `type_id_version` (`e_id`,`e_type`,`e_version`);
+
+--
+-- Index pour la table `qfupd_cck_more_countries`
+--
+ALTER TABLE `qfupd_cck_more_countries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_cck_more_processings`
+--
+ALTER TABLE `qfupd_cck_more_processings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_cck_more_sessions`
+--
+ALTER TABLE `qfupd_cck_more_sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_extension` (`extension`);
+
+--
+-- Index pour la table `qfupd_cck_store_item_users`
+--
+ALTER TABLE `qfupd_cck_store_item_users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_contact_details`
+--
+ALTER TABLE `qfupd_contact_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_access` (`access`),
+  ADD KEY `idx_checkout` (`checked_out`),
+  ADD KEY `idx_state` (`published`),
+  ADD KEY `idx_catid` (`catid`),
+  ADD KEY `idx_createdby` (`created_by`),
+  ADD KEY `idx_featured_catid` (`featured`,`catid`),
+  ADD KEY `idx_language` (`language`),
+  ADD KEY `idx_xreference` (`xreference`);
+
+--
+-- Index pour la table `qfupd_content`
+--
+ALTER TABLE `qfupd_content`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_access` (`access`),
+  ADD KEY `idx_checkout` (`checked_out`),
+  ADD KEY `idx_state` (`state`),
+  ADD KEY `idx_catid` (`catid`),
+  ADD KEY `idx_createdby` (`created_by`),
+  ADD KEY `idx_featured_catid` (`featured`,`catid`),
+  ADD KEY `idx_language` (`language`),
+  ADD KEY `idx_xreference` (`xreference`);
+
+--
+-- Index pour la table `qfupd_contentitem_tag_map`
+--
+ALTER TABLE `qfupd_contentitem_tag_map`
+  ADD UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`),
+  ADD KEY `idx_tag_type` (`tag_id`,`type_id`),
+  ADD KEY `idx_date_id` (`tag_date`,`tag_id`),
+  ADD KEY `idx_tag` (`tag_id`),
+  ADD KEY `idx_type` (`type_id`),
+  ADD KEY `idx_core_content_id` (`core_content_id`);
+
+--
+-- Index pour la table `qfupd_content_frontpage`
+--
+ALTER TABLE `qfupd_content_frontpage`
+  ADD PRIMARY KEY (`content_id`);
+
+--
+-- Index pour la table `qfupd_content_rating`
+--
+ALTER TABLE `qfupd_content_rating`
+  ADD PRIMARY KEY (`content_id`);
+
+--
+-- Index pour la table `qfupd_content_types`
+--
+ALTER TABLE `qfupd_content_types`
+  ADD PRIMARY KEY (`type_id`),
+  ADD KEY `idx_alias` (`type_alias`);
+
+--
+-- Index pour la table `qfupd_extensions`
+--
+ALTER TABLE `qfupd_extensions`
+  ADD PRIMARY KEY (`extension_id`),
+  ADD KEY `element_clientid` (`element`,`client_id`),
+  ADD KEY `element_folder_clientid` (`element`,`folder`,`client_id`),
+  ADD KEY `extension` (`type`,`element`,`folder`,`client_id`);
+
+--
+-- Index pour la table `qfupd_finder_filters`
+--
+ALTER TABLE `qfupd_finder_filters`
+  ADD PRIMARY KEY (`filter_id`);
+
+--
+-- Index pour la table `qfupd_finder_links`
+--
+ALTER TABLE `qfupd_finder_links`
+  ADD PRIMARY KEY (`link_id`),
+  ADD KEY `idx_type` (`type_id`),
+  ADD KEY `idx_title` (`title`),
+  ADD KEY `idx_md5` (`md5sum`),
+  ADD KEY `idx_url` (`url`(75)),
+  ADD KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`),
+  ADD KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms0`
+--
+ALTER TABLE `qfupd_finder_links_terms0`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms1`
+--
+ALTER TABLE `qfupd_finder_links_terms1`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms2`
+--
+ALTER TABLE `qfupd_finder_links_terms2`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms3`
+--
+ALTER TABLE `qfupd_finder_links_terms3`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms4`
+--
+ALTER TABLE `qfupd_finder_links_terms4`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms5`
+--
+ALTER TABLE `qfupd_finder_links_terms5`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms6`
+--
+ALTER TABLE `qfupd_finder_links_terms6`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms7`
+--
+ALTER TABLE `qfupd_finder_links_terms7`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms8`
+--
+ALTER TABLE `qfupd_finder_links_terms8`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_terms9`
+--
+ALTER TABLE `qfupd_finder_links_terms9`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termsa`
+--
+ALTER TABLE `qfupd_finder_links_termsa`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termsb`
+--
+ALTER TABLE `qfupd_finder_links_termsb`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termsc`
+--
+ALTER TABLE `qfupd_finder_links_termsc`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termsd`
+--
+ALTER TABLE `qfupd_finder_links_termsd`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termse`
+--
+ALTER TABLE `qfupd_finder_links_termse`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_links_termsf`
+--
+ALTER TABLE `qfupd_finder_links_termsf`
+  ADD PRIMARY KEY (`link_id`,`term_id`),
+  ADD KEY `idx_term_weight` (`term_id`,`weight`),
+  ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+
+--
+-- Index pour la table `qfupd_finder_taxonomy`
+--
+ALTER TABLE `qfupd_finder_taxonomy`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `parent_id` (`parent_id`),
+  ADD KEY `state` (`state`),
+  ADD KEY `ordering` (`ordering`),
+  ADD KEY `access` (`access`),
+  ADD KEY `idx_parent_published` (`parent_id`,`state`,`access`);
+
+--
+-- Index pour la table `qfupd_finder_taxonomy_map`
+--
+ALTER TABLE `qfupd_finder_taxonomy_map`
+  ADD PRIMARY KEY (`link_id`,`node_id`),
+  ADD KEY `link_id` (`link_id`),
+  ADD KEY `node_id` (`node_id`);
+
+--
+-- Index pour la table `qfupd_finder_terms`
+--
+ALTER TABLE `qfupd_finder_terms`
+  ADD PRIMARY KEY (`term_id`),
+  ADD UNIQUE KEY `idx_term` (`term`),
+  ADD KEY `idx_term_phrase` (`term`,`phrase`),
+  ADD KEY `idx_stem_phrase` (`stem`,`phrase`),
+  ADD KEY `idx_soundex_phrase` (`soundex`,`phrase`);
+
+--
+-- Index pour la table `qfupd_finder_terms_common`
+--
+ALTER TABLE `qfupd_finder_terms_common`
+  ADD KEY `idx_word_lang` (`term`,`language`),
+  ADD KEY `idx_lang` (`language`);
+
+--
+-- Index pour la table `qfupd_finder_tokens`
+--
+ALTER TABLE `qfupd_finder_tokens`
+  ADD KEY `idx_word` (`term`),
+  ADD KEY `idx_context` (`context`);
+
+--
+-- Index pour la table `qfupd_finder_tokens_aggregate`
+--
+ALTER TABLE `qfupd_finder_tokens_aggregate`
+  ADD KEY `token` (`term`),
+  ADD KEY `keyword_id` (`term_id`);
+
+--
+-- Index pour la table `qfupd_finder_types`
+--
+ALTER TABLE `qfupd_finder_types`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `title` (`title`);
+
+--
+-- Index pour la table `qfupd_icagenda`
+--
+ALTER TABLE `qfupd_icagenda`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_category`
+--
+ALTER TABLE `qfupd_icagenda_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_customfields`
+--
+ALTER TABLE `qfupd_icagenda_customfields`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_customfields_data`
+--
+ALTER TABLE `qfupd_icagenda_customfields_data`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_events`
+--
+ALTER TABLE `qfupd_icagenda_events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_feature`
+--
+ALTER TABLE `qfupd_icagenda_feature`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_feature_xref`
+--
+ALTER TABLE `qfupd_icagenda_feature_xref`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_icagenda_registration`
+--
+ALTER TABLE `qfupd_icagenda_registration`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_kunena_aliases`
+--
+ALTER TABLE `qfupd_kunena_aliases`
+  ADD UNIQUE KEY `alias` (`alias`),
+  ADD KEY `state` (`state`),
+  ADD KEY `item` (`item`),
+  ADD KEY `type` (`type`);
+
+--
+-- Index pour la table `qfupd_kunena_announcement`
+--
+ALTER TABLE `qfupd_kunena_announcement`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_kunena_attachments`
+--
+ALTER TABLE `qfupd_kunena_attachments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `mesid` (`mesid`),
+  ADD KEY `userid` (`userid`),
+  ADD KEY `hash` (`hash`),
+  ADD KEY `filename` (`filename`);
+
+--
+-- Index pour la table `qfupd_kunena_categories`
+--
+ALTER TABLE `qfupd_kunena_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `parent_id` (`parent_id`),
+  ADD KEY `category_access` (`accesstype`,`access`),
+  ADD KEY `published_pubaccess_id` (`published`,`pub_access`,`id`);
+
+--
+-- Index pour la table `qfupd_kunena_configuration`
+--
+ALTER TABLE `qfupd_kunena_configuration`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_kunena_keywords`
+--
+ALTER TABLE `qfupd_kunena_keywords`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD KEY `public_count` (`public_count`),
+  ADD KEY `total_count` (`total_count`);
+
+--
+-- Index pour la table `qfupd_kunena_keywords_map`
+--
+ALTER TABLE `qfupd_kunena_keywords_map`
+  ADD UNIQUE KEY `keyword_user_topic` (`keyword_id`,`user_id`,`topic_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `topic_user` (`topic_id`,`user_id`);
+
+--
+-- Index pour la table `qfupd_kunena_messages`
+--
+ALTER TABLE `qfupd_kunena_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `thread` (`thread`),
+  ADD KEY `ip` (`ip`),
+  ADD KEY `userid` (`userid`),
+  ADD KEY `time` (`time`),
+  ADD KEY `locked` (`locked`),
+  ADD KEY `hold_time` (`hold`,`time`),
+  ADD KEY `parent_hits` (`parent`,`hits`),
+  ADD KEY `catid_parent` (`catid`,`parent`);
+
+--
+-- Index pour la table `qfupd_kunena_messages_text`
+--
+ALTER TABLE `qfupd_kunena_messages_text`
+  ADD PRIMARY KEY (`mesid`);
+
+--
+-- Index pour la table `qfupd_kunena_polls`
+--
+ALTER TABLE `qfupd_kunena_polls`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `threadid` (`threadid`);
+
+--
+-- Index pour la table `qfupd_kunena_polls_options`
+--
+ALTER TABLE `qfupd_kunena_polls_options`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pollid` (`pollid`);
+
+--
+-- Index pour la table `qfupd_kunena_polls_users`
+--
+ALTER TABLE `qfupd_kunena_polls_users`
+  ADD UNIQUE KEY `pollid` (`pollid`,`userid`);
+
+--
+-- Index pour la table `qfupd_kunena_ranks`
+--
+ALTER TABLE `qfupd_kunena_ranks`
+  ADD PRIMARY KEY (`rank_id`);
+
+--
+-- Index pour la table `qfupd_kunena_sessions`
+--
+ALTER TABLE `qfupd_kunena_sessions`
+  ADD PRIMARY KEY (`userid`),
+  ADD KEY `currvisit` (`currvisit`);
+
+--
+-- Index pour la table `qfupd_kunena_smileys`
+--
+ALTER TABLE `qfupd_kunena_smileys`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_kunena_thankyou`
+--
+ALTER TABLE `qfupd_kunena_thankyou`
+  ADD UNIQUE KEY `postid` (`postid`,`userid`),
+  ADD KEY `userid` (`userid`),
+  ADD KEY `targetuserid` (`targetuserid`);
+
+--
+-- Index pour la table `qfupd_kunena_topics`
+--
+ALTER TABLE `qfupd_kunena_topics`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_id` (`category_id`),
+  ADD KEY `locked` (`locked`),
+  ADD KEY `hold` (`hold`),
+  ADD KEY `posts` (`posts`),
+  ADD KEY `hits` (`hits`),
+  ADD KEY `first_post_userid` (`first_post_userid`),
+  ADD KEY `last_post_userid` (`last_post_userid`),
+  ADD KEY `first_post_time` (`first_post_time`),
+  ADD KEY `last_post_time` (`last_post_time`);
+
+--
+-- Index pour la table `qfupd_kunena_users`
+--
+ALTER TABLE `qfupd_kunena_users`
+  ADD PRIMARY KEY (`userid`),
+  ADD KEY `group_id` (`group_id`),
+  ADD KEY `posts` (`posts`),
+  ADD KEY `uhits` (`uhits`),
+  ADD KEY `banned` (`banned`),
+  ADD KEY `moderator` (`moderator`);
+
+--
+-- Index pour la table `qfupd_kunena_users_banned`
+--
+ALTER TABLE `qfupd_kunena_users_banned`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userid` (`userid`),
+  ADD KEY `ip` (`ip`),
+  ADD KEY `expiration` (`expiration`),
+  ADD KEY `created_time` (`created_time`);
+
+--
+-- Index pour la table `qfupd_kunena_user_categories`
+--
+ALTER TABLE `qfupd_kunena_user_categories`
+  ADD PRIMARY KEY (`user_id`,`category_id`),
+  ADD KEY `category_subscribed` (`category_id`,`subscribed`),
+  ADD KEY `role` (`role`);
+
+--
+-- Index pour la table `qfupd_kunena_user_read`
+--
+ALTER TABLE `qfupd_kunena_user_read`
+  ADD UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`),
+  ADD KEY `category_user_id` (`category_id`,`user_id`),
+  ADD KEY `time` (`time`);
+
+--
+-- Index pour la table `qfupd_kunena_user_topics`
+--
+ALTER TABLE `qfupd_kunena_user_topics`
+  ADD UNIQUE KEY `user_topic_id` (`user_id`,`topic_id`),
+  ADD KEY `topic_id` (`topic_id`),
+  ADD KEY `posts` (`posts`),
+  ADD KEY `owner` (`owner`),
+  ADD KEY `favorite` (`favorite`),
+  ADD KEY `subscribed` (`subscribed`);
+
+--
+-- Index pour la table `qfupd_kunena_version`
+--
+ALTER TABLE `qfupd_kunena_version`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_languages`
+--
+ALTER TABLE `qfupd_languages`
+  ADD PRIMARY KEY (`lang_id`),
+  ADD UNIQUE KEY `idx_sef` (`sef`),
+  ADD UNIQUE KEY `idx_image` (`image`),
+  ADD UNIQUE KEY `idx_langcode` (`lang_code`),
+  ADD KEY `idx_access` (`access`),
+  ADD KEY `idx_ordering` (`ordering`);
+
+--
+-- Index pour la table `qfupd_menu`
+--
+ALTER TABLE `qfupd_menu`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`,`language`),
+  ADD KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
+  ADD KEY `idx_menutype` (`menutype`),
+  ADD KEY `idx_left_right` (`lft`,`rgt`),
+  ADD KEY `idx_alias` (`alias`),
+  ADD KEY `idx_path` (`path`(255)),
+  ADD KEY `idx_language` (`language`);
+
+--
+-- Index pour la table `qfupd_menu_types`
+--
+ALTER TABLE `qfupd_menu_types`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idx_menutype` (`menutype`);
+
+--
+-- Index pour la table `qfupd_messages`
+--
+ALTER TABLE `qfupd_messages`
+  ADD PRIMARY KEY (`message_id`),
+  ADD KEY `useridto_state` (`user_id_to`,`state`);
+
+--
+-- Index pour la table `qfupd_messages_cfg`
+--
+ALTER TABLE `qfupd_messages_cfg`
+  ADD UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`);
+
+--
+-- Index pour la table `qfupd_modules`
+--
+ALTER TABLE `qfupd_modules`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `published` (`published`,`access`),
+  ADD KEY `newsfeeds` (`module`,`published`),
+  ADD KEY `idx_language` (`language`);
+
+--
+-- Index pour la table `qfupd_modules_menu`
+--
+ALTER TABLE `qfupd_modules_menu`
+  ADD PRIMARY KEY (`moduleid`,`menuid`);
+
+--
+-- Index pour la table `qfupd_newsfeeds`
+--
+ALTER TABLE `qfupd_newsfeeds`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_access` (`access`),
+  ADD KEY `idx_checkout` (`checked_out`),
+  ADD KEY `idx_state` (`published`),
+  ADD KEY `idx_catid` (`catid`),
+  ADD KEY `idx_createdby` (`created_by`),
+  ADD KEY `idx_language` (`language`),
+  ADD KEY `idx_xreference` (`xreference`);
+
+--
+-- Index pour la table `qfupd_overrider`
+--
+ALTER TABLE `qfupd_overrider`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `qfupd_postinstall_messages`
+--
+ALTER TABLE `qfupd_postinstall_messages`
+  ADD PRIMARY KEY (`postinstall_message_id`);
+
+--
+-- Index pour la table `qfupd_redirect_links`
+--
+ALTER TABLE `qfupd_redirect_links`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idx_link_old` (`old_url`),
+  ADD KEY `idx_link_modifed` (`modified_date`);
+
+--
+-- Index pour la table `qfupd_schemas`
+--
+ALTER TABLE `qfupd_schemas`
+  ADD PRIMARY KEY (`extension_id`,`version_id`);
+
+--
+-- Index pour la table `qfupd_session`
+--
+ALTER TABLE `qfupd_session`
+  ADD PRIMARY KEY (`session_id`),
+  ADD KEY `userid` (`userid`),
+  ADD KEY `time` (`time`);
+
+--
+-- Index pour la table `qfupd_tags`
+--
+ALTER TABLE `qfupd_tags`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tag_idx` (`published`,`access`),
+  ADD KEY `idx_access` (`access`),
+  ADD KEY `idx_checkout` (`checked_out`),
+  ADD KEY `idx_path` (`path`),
+  ADD KEY `idx_left_right` (`lft`,`rgt`),
+  ADD KEY `idx_alias` (`alias`),
+  ADD KEY `idx_language` (`language`);
+
+--
+-- Index pour la table `qfupd_template_styles`
+--
+ALTER TABLE `qfupd_template_styles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_template` (`template`),
+  ADD KEY `idx_home` (`home`);
+
+--
+-- Index pour la table `qfupd_ucm_base`
+--
+ALTER TABLE `qfupd_ucm_base`
+  ADD PRIMARY KEY (`ucm_id`),
+  ADD KEY `idx_ucm_item_id` (`ucm_item_id`),
+  ADD KEY `idx_ucm_type_id` (`ucm_type_id`),
+  ADD KEY `idx_ucm_language_id` (`ucm_language_id`);
+
+--
+-- Index pour la table `qfupd_ucm_content`
+--
+ALTER TABLE `qfupd_ucm_content`
+  ADD PRIMARY KEY (`core_content_id`),
+  ADD KEY `tag_idx` (`core_state`,`core_access`),
+  ADD KEY `idx_access` (`core_access`),
+  ADD KEY `idx_alias` (`core_alias`),
+  ADD KEY `idx_language` (`core_language`),
+  ADD KEY `idx_title` (`core_title`),
+  ADD KEY `idx_modified_time` (`core_modified_time`),
+  ADD KEY `idx_created_time` (`core_created_time`),
+  ADD KEY `idx_content_type` (`core_type_alias`),
+  ADD KEY `idx_core_modified_user_id` (`core_modified_user_id`),
+  ADD KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`),
+  ADD KEY `idx_core_created_user_id` (`core_created_user_id`),
+  ADD KEY `idx_core_type_id` (`core_type_id`);
+
+--
+-- Index pour la table `qfupd_ucm_history`
+--
+ALTER TABLE `qfupd_ucm_history`
+  ADD PRIMARY KEY (`version_id`),
+  ADD KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`),
+  ADD KEY `idx_save_date` (`save_date`);
+
+--
+-- Index pour la table `qfupd_updates`
+--
+ALTER TABLE `qfupd_updates`
+  ADD PRIMARY KEY (`update_id`);
+
+--
+-- Index pour la table `qfupd_update_sites`
+--
+ALTER TABLE `qfupd_update_sites`
+  ADD PRIMARY KEY (`update_site_id`);
+
+--
+-- Index pour la table `qfupd_update_sites_extensions`
+--
+ALTER TABLE `qfupd_update_sites_extensions`
+  ADD PRIMARY KEY (`update_site_id`,`extension_id`);
+
+--
+-- Index pour la table `qfupd_usergroups`
+--
+ALTER TABLE `qfupd_usergroups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`),
+  ADD KEY `idx_usergroup_title_lookup` (`title`),
+  ADD KEY `idx_usergroup_adjacency_lookup` (`parent_id`),
+  ADD KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE;
+
+--
+-- Index pour la table `qfupd_users`
+--
+ALTER TABLE `qfupd_users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_name` (`name`),
+  ADD KEY `idx_block` (`block`),
+  ADD KEY `username` (`username`),
+  ADD KEY `email` (`email`);
+
+--
+-- Index pour la table `qfupd_userxtd_fields`
+--
+ALTER TABLE `qfupd_userxtd_fields`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_access` (`access`),
+  ADD KEY `idx_createdby` (`catid`),
+  ADD KEY `idx_language` (`language`),
+  ADD KEY `idx_checkout` (`checked_out`),
+  ADD KEY `cat_index` (`published`,`access`,`catid`);
+
+--
+-- Index pour la table `qfupd_userxtd_profiles`
+--
+ALTER TABLE `qfupd_userxtd_profiles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_access` (`access`),
+  ADD KEY `idx_language` (`language`),
+  ADD KEY `cat_index` (`access`),
+  ADD KEY `idx_value` (`value`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `key` (`key`);
+
+--
+-- Index pour la table `qfupd_user_keys`
+--
+ALTER TABLE `qfupd_user_keys`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `series` (`series`),
+  ADD UNIQUE KEY `series_2` (`series`),
+  ADD UNIQUE KEY `series_3` (`series`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Index pour la table `qfupd_user_notes`
+--
+ALTER TABLE `qfupd_user_notes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_user_id` (`user_id`),
+  ADD KEY `idx_category_id` (`catid`);
+
+--
+-- Index pour la table `qfupd_user_profiles`
+--
+ALTER TABLE `qfupd_user_profiles`
+  ADD UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`);
+
+--
+-- Index pour la table `qfupd_user_usergroup_map`
+--
+ALTER TABLE `qfupd_user_usergroup_map`
+  ADD PRIMARY KEY (`user_id`,`group_id`);
+
+--
+-- Index pour la table `qfupd_viewlevels`
+--
+ALTER TABLE `qfupd_viewlevels`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idx_assetgroup_title_lookup` (`title`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `qfupd_assets`
+--
+ALTER TABLE `qfupd_assets`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=254;
+--
+-- AUTO_INCREMENT pour la table `qfupd_banners`
+--
+ALTER TABLE `qfupd_banners`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_banner_clients`
+--
+ALTER TABLE `qfupd_banner_clients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_categories`
+--
+ALTER TABLE `qfupd_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core`
+--
+ALTER TABLE `qfupd_cck_core`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=60;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_activities`
+--
+ALTER TABLE `qfupd_cck_core_activities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_fields`
+--
+ALTER TABLE `qfupd_cck_core_fields`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100540;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_folders`
+--
+ALTER TABLE `qfupd_cck_core_folders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_objects`
+--
+ALTER TABLE `qfupd_cck_core_objects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_searchs`
+--
+ALTER TABLE `qfupd_cck_core_searchs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_sites`
+--
+ALTER TABLE `qfupd_cck_core_sites`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_templates`
+--
+ALTER TABLE `qfupd_cck_core_templates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_types`
+--
+ALTER TABLE `qfupd_cck_core_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_core_versions`
+--
+ALTER TABLE `qfupd_cck_core_versions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=527;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_more_countries`
+--
+ALTER TABLE `qfupd_cck_more_countries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=247;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_more_processings`
+--
+ALTER TABLE `qfupd_cck_more_processings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_cck_more_sessions`
+--
+ALTER TABLE `qfupd_cck_more_sessions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_contact_details`
+--
+ALTER TABLE `qfupd_contact_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_content`
+--
+ALTER TABLE `qfupd_content`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+--
+-- AUTO_INCREMENT pour la table `qfupd_content_types`
+--
+ALTER TABLE `qfupd_content_types`
+  MODIFY `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT pour la table `qfupd_extensions`
+--
+ALTER TABLE `qfupd_extensions`
+  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10273;
+--
+-- AUTO_INCREMENT pour la table `qfupd_finder_filters`
+--
+ALTER TABLE `qfupd_finder_filters`
+  MODIFY `filter_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_finder_links`
+--
+ALTER TABLE `qfupd_finder_links`
+  MODIFY `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_finder_taxonomy`
+--
+ALTER TABLE `qfupd_finder_taxonomy`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `qfupd_finder_terms`
+--
+ALTER TABLE `qfupd_finder_terms`
+  MODIFY `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_finder_types`
+--
+ALTER TABLE `qfupd_finder_types`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda`
+--
+ALTER TABLE `qfupd_icagenda`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_category`
+--
+ALTER TABLE `qfupd_icagenda_category`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_customfields`
+--
+ALTER TABLE `qfupd_icagenda_customfields`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_customfields_data`
+--
+ALTER TABLE `qfupd_icagenda_customfields_data`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_events`
+--
+ALTER TABLE `qfupd_icagenda_events`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_feature`
+--
+ALTER TABLE `qfupd_icagenda_feature`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_feature_xref`
+--
+ALTER TABLE `qfupd_icagenda_feature_xref`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_icagenda_registration`
+--
+ALTER TABLE `qfupd_icagenda_registration`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_announcement`
+--
+ALTER TABLE `qfupd_kunena_announcement`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_attachments`
+--
+ALTER TABLE `qfupd_kunena_attachments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_categories`
+--
+ALTER TABLE `qfupd_kunena_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_keywords`
+--
+ALTER TABLE `qfupd_kunena_keywords`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_messages`
+--
+ALTER TABLE `qfupd_kunena_messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_polls`
+--
+ALTER TABLE `qfupd_kunena_polls`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_polls_options`
+--
+ALTER TABLE `qfupd_kunena_polls_options`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_ranks`
+--
+ALTER TABLE `qfupd_kunena_ranks`
+  MODIFY `rank_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_smileys`
+--
+ALTER TABLE `qfupd_kunena_smileys`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=67;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_topics`
+--
+ALTER TABLE `qfupd_kunena_topics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_users_banned`
+--
+ALTER TABLE `qfupd_kunena_users_banned`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_kunena_version`
+--
+ALTER TABLE `qfupd_kunena_version`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_languages`
+--
+ALTER TABLE `qfupd_languages`
+  MODIFY `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_menu`
+--
+ALTER TABLE `qfupd_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=239;
+--
+-- AUTO_INCREMENT pour la table `qfupd_menu_types`
+--
+ALTER TABLE `qfupd_menu_types`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT pour la table `qfupd_messages`
+--
+ALTER TABLE `qfupd_messages`
+  MODIFY `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_modules`
+--
+ALTER TABLE `qfupd_modules`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=108;
+--
+-- AUTO_INCREMENT pour la table `qfupd_newsfeeds`
+--
+ALTER TABLE `qfupd_newsfeeds`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_overrider`
+--
+ALTER TABLE `qfupd_overrider`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key';
+--
+-- AUTO_INCREMENT pour la table `qfupd_postinstall_messages`
+--
+ALTER TABLE `qfupd_postinstall_messages`
+  MODIFY `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT pour la table `qfupd_redirect_links`
+--
+ALTER TABLE `qfupd_redirect_links`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT pour la table `qfupd_tags`
+--
+ALTER TABLE `qfupd_tags`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `qfupd_template_styles`
+--
+ALTER TABLE `qfupd_template_styles`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
+--
+-- AUTO_INCREMENT pour la table `qfupd_ucm_content`
+--
+ALTER TABLE `qfupd_ucm_content`
+  MODIFY `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_ucm_history`
+--
+ALTER TABLE `qfupd_ucm_history`
+  MODIFY `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=92;
+--
+-- AUTO_INCREMENT pour la table `qfupd_updates`
+--
+ALTER TABLE `qfupd_updates`
+  MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `qfupd_update_sites`
+--
+ALTER TABLE `qfupd_update_sites`
+  MODIFY `update_site_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT pour la table `qfupd_usergroups`
+--
+ALTER TABLE `qfupd_usergroups`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT pour la table `qfupd_users`
+--
+ALTER TABLE `qfupd_users`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=825;
+--
+-- AUTO_INCREMENT pour la table `qfupd_userxtd_fields`
+--
+ALTER TABLE `qfupd_userxtd_fields`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT pour la table `qfupd_userxtd_profiles`
+--
+ALTER TABLE `qfupd_userxtd_profiles`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=151;
+--
+-- AUTO_INCREMENT pour la table `qfupd_user_keys`
+--
+ALTER TABLE `qfupd_user_keys`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `qfupd_user_notes`
+--
+ALTER TABLE `qfupd_user_notes`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `qfupd_viewlevels`
+--
+ALTER TABLE `qfupd_viewlevels`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=11;
