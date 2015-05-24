@@ -1,4 +1,4 @@
-Ce site web a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.
+﻿Ce site web a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.
 
 
 *Pour prendre notre site Web et le mettre sur votre serveur, voici comment procéder* 
@@ -38,7 +38,7 @@ Vous pourrez modifier votre mot de passe une fois connecté.
 7. Création d'une base de données "tib" :
 Toujours à l'adresse "http://localhost/phpmyadmin" c'est -à- dire sur phpmyadmin
 Cliquer sur nouvelle base de données en haut à gauche
-   Il y a deux champs, dans le premier qui est vide écrire "tib"( nommer votre base "tib") 
+   Il y a deux champs, dans le premier qui est vide écrire "tib"( nommez votre base "tib") 
 Dans le menu déroulant avec écrit "Interclassement" choisir "utf8_general_ci" vers le bas de la liste. 
 Ensuite Valider, la base de données est créée. 
 
@@ -70,8 +70,15 @@ Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
 
 
 # BESOIN D'AIDE 
-Si vous avez des questions ou pour plus d’informations, vous pouvez toujours nous contacter à l'adresse suivante:
-responsable.tutorat@gmail.com'
+Si vous avez des questions ou pour plus d’informations, vous pouvez toujours contacter le Responsable de la première année de licence maths/info à l'adresse suivante:
+responsable.tutorat@gmail.com
+
+
+# INFORMATION POUR RESPONSABLE L1
+En tant que responsable de L1 vous avez accès à une adresse mail créée spécialement pour la gestion du tutorat.
+Voici donc l'adresse et le mot de passe :
+		responsable.tutorat@gmail.com
+		mdp : UniversiteBlois41
 
 
 Copyright: 
