@@ -40,8 +40,7 @@ Télécharger Mamp si vous êtes sur Mac Os X  et Lamp si vous êtes sur Linux.
 5. Lancer le logiciel Mamp/Lamp ou Wamp
 
 6. Ouvrir votre navigateur Web préféré, et taper l'adresse suivante "http://localhost/phpmyadmin". 
-**Par défaut: l'identidiant est "root" et  le password est "root"  pour Mac Os X et Linux **
-**et aucun password pour Windows**
+**Par défaut: l'identidiant est "root" et  le password est "root"  pour Mac Os X et Linux et aucun password pour Windows**
 Vous pourrez modifier votre mot de passe une fois connecté.
 
 7. Création d'une base de données "tib" :
@@ -60,18 +59,19 @@ Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
 
    *Pour les utilisateurs de Windows*
    
-    1. Ajouter les paramètres de votre base de données 
+    * Ajouter les paramètres de votre base de données 
    *Explication* :
-   (Remplacer : localhost, root, mdp et mabd par les paramètres de votre base de données )   
+    Remplacer : localhost, root, mdp et mabd par les paramètres de votre base de données   
 
    
-   
+    ```````````````
          $db_host = "localhost";      // <------ Adresse de la base de données (hote)
          $db_user = "root";  // <-------------- Utilisateur de la base de données
          $db_pass = "mdp";         // <--------- Mot de passe de la base de données
          $db =      "mabd";       // <--------- Nom de la base de données (tib) 
+    ```````````````
 
-    2.  enregistrer le fichier.
+    *  enregistrer le fichier.
   
 
 
