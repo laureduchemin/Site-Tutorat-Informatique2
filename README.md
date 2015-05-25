@@ -59,7 +59,8 @@ Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
 
    *Pour les utilisateurs de Windows*
    
-    * Ajouter les paramètres de votre base de données 
+    * Ajouter les paramètres de votre base de données
+    
    *Explication* :
     Remplacer : localhost, root, mdp et mabd par les paramètres de votre base de données   
 
