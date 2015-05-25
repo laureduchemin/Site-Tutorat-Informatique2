@@ -18,11 +18,11 @@ Télécharger Mamp si vous êtes sur Mac Os X  et Lamp si vous êtes sur Linux.
 
  # INSTALLATION DE GIT
 
-1. Sur Linux, nous devez suivre les commandes suivantes : https://git-scm.herokuapp.com/download/linux
+* Sur Linux, nous devez suivre les commandes suivantes : https://git-scm.herokuapp.com/download/linux
 
-2. Sur Mac, vous pouvez télécharger GitHub via l'adresse suivante : https://mac.github.com/
+* Sur Mac, vous pouvez télécharger GitHub via l'adresse suivante : https://mac.github.com/
 
-3. Sur Windows, vous pouvez télécharger GitHub via cette adresse : https://windows.github.com/
+* Sur Windows, vous pouvez télécharger GitHub via cette adresse : https://windows.github.com/
 
 
  # INSTALLATION DE TIB
@@ -47,9 +47,8 @@ https://github.com/laureduchemin/Site-Tutorat-Informatique2/archive/master.zip
 Vous pourrez modifier votre mot de passe une fois connecté.
 
 7. Création d'une base de données "tib" :
-Toujours à l'adresse "http://localhost/phpmyadmin" c'est -à- dire sur phpmyadmin
-Cliquer sur nouvelle base de données en haut à gauche
-   Il y a deux champs, dans le premier qui est vide écrire "tib"( nommez votre base "tib") 
+Toujours à l'adresse "http://localhost/phpmyadmin" c'est -à- dire sur phpmyadmin, cliquer sur nouvelle base de données en haut à gauche.
+  Il y a deux champs, dans le premier qui est vide écrire "tib"( nommez votre base "tib") 
 Dans le menu déroulant avec écrit "Interclassement" choisir "utf8_general_ci" vers le bas de la liste. 
 Ensuite Valider, la base de données est créée. 
 
@@ -59,7 +58,7 @@ Cliquer sur le nom de votre base de données tib dans le menu vertical à gauche
 Puis cliquer sur parcourir et aller chercher le fichier tib.sql disponible dans le sous repertoire BDD du répertoire nommé "Site-Tutorat-Informatique2"
 Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
 
-9.Ouvrir et modifier le fichier "Site-Tutorat-Informatique2\configuration.php" à l'aide d'un éditeur de texte comme "bloc-note" ou "notepad++" par le fichier configurationMac.php pour les utilisateurs de Mac ou Linux et  par le fichier configurationWindows.php pour les utilisateur de windows
+9. Ouvrir et modifier le fichier "Site-Tutorat-Informatique2\configuration.php" à l'aide d'un éditeur de texte comme "bloc-note" ou "notepad++" par le fichier configurationMac.php pour les utilisateurs de Mac ou Linux et  par le fichier configurationWindows.php pour les utilisateur de windows
 
    *Pour les utilisateurs de Windows*
    
@@ -92,7 +91,7 @@ Voici donc l'adresse et le mot de passe :
 
 Copyright: 
 
- * Copyright (C) 2015. Tous droits réservés *
+ * Copyright (C) 2015. Tous droits réservés 
 
 
 
