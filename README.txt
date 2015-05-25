@@ -4,7 +4,9 @@
 *Pour prendre notre site Web et le mettre sur votre serveur, voici comment procéder* 
 
 
-#INSTALLATION DES LOGICIELS REQUIS
+ #INSTALLATION D'UN SERVEUR WEB
+
+Vous devez obligatoirement avoir un serveur Web. Si vous en avez déjà un vous pouvez passer cette partie.
 
 1. Pour les utilisateurs de Windows, télécharger Mamp ou Wamp allez sur leur site respectif.
 Télécharger Mamp si vous êtes sur Mac Os X  et Lamp si vous êtes sur Linux.
@@ -13,17 +15,25 @@ Télécharger Mamp si vous êtes sur Mac Os X  et Lamp si vous êtes sur Linux.
 
 
 
+ #INSTALLATION DE GIT
 
- #INSTALLATION GENERALE
+1. Sur Linux, nous devez suivre les commandes suivantes : https://git-scm.herokuapp.com/download/linux
+
+2. Sur Mac, vous pouvez télécharger GitHub via l'adresse suivante : https://mac.github.com/
+
+3. Sur Windows, vous pouvez télécharger GitHub via cette adresse : https://windows.github.com/
 
 
-1.Télécharger l'archive du site web à l'adresse : 
+ #INSTALLATION DE TIB
+
+
+1. Télécharger l'archive du site web à l'adresse : 
 
 https://github.com/laureduchemin/Site-Tutorat-Informatique2/archive/master.zip
 
-2.Décompresser l'archive à l'aide de winrar ou winzip
+2. Décompresser l'archive à l'aide de winrar ou winzip
 
-3-Vous obtenez un répertoire nommé "Site-Tutorat-Informatique2". 
+3. Vous obtenez un répertoire nommé "Site-Tutorat-Informatique2". 
 
 4. Récupérer le fichier tib.sql disponible dans le sous repertoire BDD du répertoire nommé "Site-Tutorat-Informatique2".
  Ce fichier est indispensable au bon fonctionnement du site.
