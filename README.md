@@ -28,9 +28,7 @@ Télécharger Mamp si vous êtes sur Mac Os X  et Lamp si vous êtes sur Linux.
  # INSTALLATION DE TIB
 
 
-1. Télécharger l'archive du site web à l'adresse : 
-
-https://github.com/laureduchemin/Site-Tutorat-Informatique2/archive/master.zip
+1. [Télécharger l'archive du site web à l'adresse ici](https://github.com/laureduchemin/Site-Tutorat-Informatique2/archive/master.zip)
 
 2. Décompresser l'archive à l'aide de winrar ou winzip
 
@@ -62,7 +60,7 @@ Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
 
    *Pour les utilisateurs de Windows*
    
-   1. Ajouter les paramètres de votre base de données 
+    1. Ajouter les paramètres de votre base de données 
    *Explication* :
    (Remplacer : localhost, root, mdp et mabd par les paramètres de votre base de données )   
 
@@ -73,7 +71,7 @@ Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
          $db_pass = "mdp";         // <--------- Mot de passe de la base de données
          $db =      "mabd";       // <--------- Nom de la base de données (tib) 
 
-   2.  enregistrer le fichier.
+    2.  enregistrer le fichier.
   
 
 
