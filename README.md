@@ -4,14 +4,15 @@ Ce site web a pour objectif d’aider les étudiants dans leur réussite en lice
 *Pour prendre notre site Web et le mettre sur votre serveur, voici comment procéder* 
 
 
- # INSTALLATION D'UN SERVEUR WEB
+
+# INSTALLATION D'UN SERVEUR WEB
 
  Vous devez obligatoirement avoir un serveur Web. Si vous en avez déjà un vous pouvez passer cette partie.
 
-1. Pour les utilisateurs de Windows, télécharger Mamp ou Wamp allez sur leur site respectif.
+* Pour les utilisateurs de Windows, télécharger Mamp ou Wamp allez sur leur site respectif.
 Télécharger Mamp si vous êtes sur Mac Os X  et Lamp si vous êtes sur Linux.
 
-2. Installer le logiciel correspondant à votre système d'exploitation.
+* Installer le logiciel correspondant à votre système d'exploitation.
 
 
 
@@ -54,12 +55,9 @@ Ensuite Valider, la base de données est créée.
 
 8. Importation de la base de données:
 Dans la suite vous aurez à importer la base de données du site web.
-
 Cliquer sur le nom de votre base de données tib dans le menu vertical à gauche ensuite cliquez sur le bouton "importer" dans le menu horizontal en haut.
 Puis cliquer sur parcourir et aller chercher le fichier tib.sql disponible dans le sous repertoire BDD du répertoire nommé "Site-Tutorat-Informatique2"
 Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
-
-
 
 9.Ouvrir et modifier le fichier "Site-Tutorat-Informatique2\configuration.php" à l'aide d'un éditeur de texte comme "bloc-note" ou "notepad++" par le fichier configurationMac.php pour les utilisateurs de Mac ou Linux et  par le fichier configurationWindows.php pour les utilisateur de windows
 
@@ -93,6 +91,7 @@ Voici donc l'adresse et le mot de passe :
 
 
 Copyright: 
+
  * Copyright (C) 2015. Tous droits réservés *
 
 
