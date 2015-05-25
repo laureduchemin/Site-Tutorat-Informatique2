@@ -1,12 +1,12 @@
-﻿Ce site web a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.
+Ce site web a pour objectif d’aider les étudiants dans leur réussite en licence. Les tuteurs sont des étudiants en licence qui mettent leurs compétences mathématiques et informatiques au service des étudiants en difficultés.
 
 
 *Pour prendre notre site Web et le mettre sur votre serveur, voici comment procéder* 
 
 
- #INSTALLATION D'UN SERVEUR WEB
+ # INSTALLATION D'UN SERVEUR WEB
 
-Vous devez obligatoirement avoir un serveur Web. Si vous en avez déjà un vous pouvez passer cette partie.
+ Vous devez obligatoirement avoir un serveur Web. Si vous en avez déjà un vous pouvez passer cette partie.
 
 1. Pour les utilisateurs de Windows, télécharger Mamp ou Wamp allez sur leur site respectif.
 Télécharger Mamp si vous êtes sur Mac Os X  et Lamp si vous êtes sur Linux.
@@ -15,7 +15,7 @@ Télécharger Mamp si vous êtes sur Mac Os X  et Lamp si vous êtes sur Linux.
 
 
 
- #INSTALLATION DE GIT
+ # INSTALLATION DE GIT
 
 1. Sur Linux, nous devez suivre les commandes suivantes : https://git-scm.herokuapp.com/download/linux
 
@@ -24,7 +24,7 @@ Télécharger Mamp si vous êtes sur Mac Os X  et Lamp si vous êtes sur Linux.
 3. Sur Windows, vous pouvez télécharger GitHub via cette adresse : https://windows.github.com/
 
 
- #INSTALLATION DE TIB
+ # INSTALLATION DE TIB
 
 
 1. Télécharger l'archive du site web à l'adresse : 
@@ -64,7 +64,8 @@ Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
 9.Ouvrir et modifier le fichier "Site-Tutorat-Informatique2\configuration.php" à l'aide d'un éditeur de texte comme "bloc-note" ou "notepad++" par le fichier configurationMac.php pour les utilisateurs de Mac ou Linux et  par le fichier configurationWindows.php pour les utilisateur de windows
 
    *Pour les utilisateurs de Windows*
-     1. Ajouter les paramètres de votre base de données 
+   
+   1. Ajouter les paramètres de votre base de données 
    *Explication* :
    (Remplacer : localhost, root, mdp et mabd par les paramètres de votre base de données )   
 
@@ -75,7 +76,7 @@ Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
          $db_pass = "mdp";         // <--------- Mot de passe de la base de données
          $db =      "mabd";       // <--------- Nom de la base de données (tib) 
 
-      2.  enregistrer le fichier.
+   2.  enregistrer le fichier.
   
 
 
