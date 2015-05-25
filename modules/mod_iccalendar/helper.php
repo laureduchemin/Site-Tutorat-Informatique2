@@ -219,11 +219,25 @@ class modiCcalendarHelper
 			$userGroups = $user->groups;
 		}
 
-		$userAccess = implode(', ', $userLevels);
-
-		if (!in_array('8', $userGroups))
+		if ($userLevels == null)
 		{
-			$where.= ' AND '.$db->qn('e.access').' IN ('.$userAccess.')';
+			$userAccess = implode(', ', '');
+		}
+		else
+		{
+			$userAccess = implode(', ', $userLevels);
+		}
+		
+		if ($userGroups == null)
+		{
+			$where.= ' AND '.$db->qn('e.access');	
+		}
+		else
+		{
+			if (!in_array('8', $userGroups))
+			{
+				$where.= ' AND '.$db->qn('e.access').' IN ('.$userAccess.')';
+			}	
 		}
 
 		// Where
