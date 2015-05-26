@@ -74,7 +74,7 @@ Une fois fait, cliquer sur importer, votre base de données  est ainsi complet.
 
     *  enregistrer le fichier.
   
-10. Vous pouvez ensuite accèder au site en allant sur votre serveur, puis Localhost, puis 
+10. Vous pouvez ensuite accèder au site en allant sur votre serveur, puis Localhost, puis Site-Tutorat, puis Site-Tutorat-Informatique2
 
 # BESOIN D'AIDE 
 Si vous avez des questions ou pour plus d’informations, vous pouvez toujours contacter le Responsable de la première année de licence maths/info à l'adresse suivante:
