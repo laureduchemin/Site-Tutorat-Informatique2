@@ -84,12 +84,12 @@ responsable.tutorat@gmail.com
 # INFORMATION POUR RESPONSABLE L1
 En tant que responsable de L1 vous avez accès à une adresse mail créée spécialement pour la gestion du tutorat.
 Voici donc l'adresse et le mot de passe :
-     
-     ```````````````
+```````````````     
+    
 		responsable.tutorat@gmail.com
 		mdp : UniversiteBlois41
-     ```````````````
-		
+     
+```````````````		
 Et pour se connecter à l'administration du site l'identifiant est Reponsable et mdp: root41 
 
 
